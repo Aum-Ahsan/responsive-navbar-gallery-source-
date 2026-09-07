@@ -1,0 +1,2 @@
+import { NavbarShell,Pill } from "../shared/NavbarShell";
+export default function Navbar08(){return <NavbarShell className="border border-black/10 bg-[#f8f8f8] text-[#173f76]" logo={<span className="text-[32px] font-extrabold">Rigxr</span>} links={[{label:"Shows",caret:true},{label:"Locations"},{label:"VIP Perks",caret:true},{label:"Contact"}]} actions={<><button className="px-4 text-sm font-bold text-black">Sign in</button><Pill className="border-0 bg-[#224f88] text-white">Sign Up</Pill></>} desktopClassName="max-w-[1340px] justify-between" linkClassName="font-bold"/>}

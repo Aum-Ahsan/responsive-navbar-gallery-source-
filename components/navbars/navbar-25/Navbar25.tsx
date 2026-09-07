@@ -1,0 +1,2 @@
+import { NavbarShell } from "../shared/NavbarShell";
+export default function Navbar25(){return <NavbarShell logo={<div className="flex items-center gap-3"><span className="leaf-mark"/><b className="font-mono text-base">One and Only Drinks</b></div>} links={[{label:"Shop",active:true},{label:"Locations"},{label:"Our Expansion"},{label:"Sign out"}]} actions={<span className="size-12 rounded-full bg-white"/>} desktopClassName="max-w-[1360px] justify-between" linkClassName="font-bold [&.nav-active]:text-lime-500"/>}

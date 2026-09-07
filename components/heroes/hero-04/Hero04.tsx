@@ -1,0 +1,1 @@
+import HeroShell from "../shared/HeroShell";export default function Hero04(){return <HeroShell theme="ocean" eyebrow="Travel planning" title="The world is closer than it looks." body="A spacious travel hero designed for discovery, booking and itinerary experiences." primary="Explore places" secondary="Plan a trip" visual="orbit"/>}

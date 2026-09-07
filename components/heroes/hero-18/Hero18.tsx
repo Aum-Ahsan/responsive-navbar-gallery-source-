@@ -1,0 +1,1 @@
+import HeroShell from "../shared/HeroShell";export default function Hero18(){return <HeroShell theme="sky" eyebrow="Real estate" title="Find the place that feels right." body="A search-led property hero for real estate, rentals and accommodation platforms." primary="Search homes" secondary="List a property" visual="dashboard" bullets={["Verified listings","Local experts"]}/>}

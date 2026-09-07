@@ -1,0 +1,1 @@
+import HeroShell from "../shared/HeroShell";export default function Hero11(){return <HeroShell theme="midnight" layout="reverse" eyebrow="Event platform" title="Make every seat feel front row." body="An energetic event hero for ticketing, festivals, conferences and live experiences." primary="Find events" secondary="Host an event" visual="calendar"/>}

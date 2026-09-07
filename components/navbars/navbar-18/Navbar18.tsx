@@ -1,0 +1,2 @@
+import { ShoppingCart } from "lucide-react";import { NavbarShell,Pill } from "../shared/NavbarShell";
+export default function Navbar18(){return <NavbarShell logo={<span className="font-serif text-[36px] text-red-600">GrandMas</span>} links={[{label:"About"},{label:"Services"},{label:"Products"},{label:"More",caret:true}]} actions={<><ShoppingCart size={16}/><Pill className="min-w-[76px] border-0 bg-black px-4 py-2 text-xs text-white">Sign In</Pill></>} desktopClassName="max-w-[940px] justify-between" linkClassName="text-sm"/>}

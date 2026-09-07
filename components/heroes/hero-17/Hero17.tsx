@@ -1,0 +1,1 @@
+import HeroShell from "../shared/HeroShell";export default function Hero17(){return <HeroShell theme="rose" layout="center" eyebrow="Personal brand" title="Work worth remembering." body="An editorial portfolio hero for consultants, creators, designers and independent professionals." primary="View projects" secondary="About me" visual="gallery"/>}

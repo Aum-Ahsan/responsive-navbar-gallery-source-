@@ -1,0 +1,2 @@
+import { ShoppingCart } from "lucide-react";import { NavbarShell } from "../shared/NavbarShell";
+export default function Navbar24(){return <NavbarShell logo={<span className="w-12"/>} links={[{label:"Locations",active:true},{label:"Our Menu"},{label:"About Us"},{label:"Contact Us"}]} actions={<span className="relative grid size-12 place-items-center rounded-full bg-white text-black"><ShoppingCart/><b className="absolute -right-1 -top-2 text-xs">2</b></span>} desktopClassName="max-w-[1460px] justify-between" linkClassName="font-bold [&.nav-active]:text-purple-300"/>}

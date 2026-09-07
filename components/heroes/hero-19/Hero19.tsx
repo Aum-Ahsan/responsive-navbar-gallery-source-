@@ -1,0 +1,1 @@
+import HeroShell from "../shared/HeroShell";export default function Hero19(){return <HeroShell theme="sand" layout="reverse" eyebrow="Professional services" title="Strategy made practical." body="A composed consulting hero for legal, advisory, accounting and business services." primary="Book a consultation" secondary="Our expertise" visual="stats"/>}

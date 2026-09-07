@@ -1,0 +1,2 @@
+import { NavbarShell,Pill } from "../shared/NavbarShell";
+export default function Navbar27(){return <NavbarShell className="bg-[#1f5bb8] text-white" logo={<span className="text-[34px] font-bold">Photoroom</span>} links={[{label:"Company"}]} leftLinks={[{label:"Premium+"},{label:"Rooms"},{label:"Gift Photoroom"}]} centerLogo actions={<Pill>Download App</Pill>} desktopClassName="max-w-[1400px] justify-between" linkClassName="text-lg"/>}

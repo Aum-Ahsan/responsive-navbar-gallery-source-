@@ -1,0 +1,2 @@
+import { NavbarShell } from "../shared/NavbarShell";
+export default function Navbar10(){return <NavbarShell className="border border-black/10 bg-[#f8f8f8] text-black" logo={<span className="text-[29px] font-extrabold">The Types</span>} links={[{label:"About us"},{label:"About us"},{label:"Rent"}]} leftLinks={[{label:"Products"},{label:"Buy"},{label:"Buy"}]} centerLogo desktopClassName="max-w-[1400px] justify-between" linkClassName="text-sm"/>}

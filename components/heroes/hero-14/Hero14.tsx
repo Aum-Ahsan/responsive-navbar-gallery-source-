@@ -1,0 +1,1 @@
+import HeroShell from "../shared/HeroShell";export default function Hero14(){return <HeroShell theme="mint" layout="center" eyebrow="Sustainability" title="Progress that leaves less behind." body="A mission-led hero for climate technology, sustainable products and impact organizations." primary="See our impact" secondary="Read the report" visual="stats"/>}

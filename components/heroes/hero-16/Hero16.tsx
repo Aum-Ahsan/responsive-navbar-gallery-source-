@@ -1,0 +1,1 @@
+import HeroShell from "../shared/HeroShell";export default function Hero16(){return <HeroShell theme="violet" layout="reverse" eyebrow="Mobile app" title="Your day, beautifully organised." body="A polished app hero for personal productivity, scheduling and everyday utilities." primary="Download app" secondary="Explore features" visual="phone"/>}

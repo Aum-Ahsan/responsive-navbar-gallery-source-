@@ -1,0 +1,2 @@
+import { NavbarShell,Pill } from "../shared/NavbarShell";
+export default function Navbar22(){return <NavbarShell logo={<div className="flex items-center gap-2"><span className="bigdesigner-mark">B</span><b className="text-[27px]">BIGDESIGNER</b></div>} links={[{label:"About"},{label:"Packages"},{label:"Designers"},{label:"App"}]} actions={<Pill className="min-w-[103px] py-2.5 text-xs font-normal">Contact Us</Pill>} desktopClassName="max-w-[1260px] justify-between" linkClassName="text-base"/>}

@@ -1,0 +1,1 @@
+import HeroShell from "../shared/HeroShell";export default function Hero13(){return <HeroShell theme="sun" eyebrow="Food delivery" title="Good food, right on time." body="A bright commerce hero for restaurants, delivery, grocery and hospitality services." primary="Order now" secondary="Browse menu" visual="store"/>}

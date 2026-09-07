@@ -1,0 +1,2 @@
+import { NavbarShell,Pill } from "../shared/NavbarShell";
+export default function Navbar06(){return <NavbarShell logo={<div className="flex items-center gap-3"><span className="neo-orb"/><b className="text-[28px]">NeoVR</b></div>} links={[{label:"Home"},{label:"Service"},{label:"Store Hours"},{label:"Contact"}]} actions={<><Pill>Try for Free</Pill><Pill className="border-0 bg-gradient-to-r from-[#da18e3] to-[#8b00ef]">Sign in</Pill></>} desktopClassName="max-w-[1320px] justify-between" linkClassName="font-mono text-base"/>}

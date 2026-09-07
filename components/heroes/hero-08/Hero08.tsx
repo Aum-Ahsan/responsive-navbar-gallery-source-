@@ -1,0 +1,1 @@
+import HeroShell from "../shared/HeroShell";export default function Hero08(){return <HeroShell theme="violet" eyebrow="AI assistant" title="Turn every question into momentum." body="A focused AI product hero for intelligent assistants, automation and productivity software." primary="Try the assistant" secondary="See examples" visual="orbit"/>}

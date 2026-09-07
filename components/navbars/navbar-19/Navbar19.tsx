@@ -1,0 +1,2 @@
+import { NavbarShell } from "../shared/NavbarShell";
+export default function Navbar19(){return <NavbarShell logo={<span className="text-sm font-black tracking-[.12em]">MODERN WEAR</span>} links={[{label:"Shop",active:true},{label:"Locations"},{label:"Our Expansion"},{label:"Sign out"}]} desktopClassName="max-w-[1480px] justify-start gap-[22%]" linkClassName="font-bold [&.nav-active]:text-cyan-400"/>}

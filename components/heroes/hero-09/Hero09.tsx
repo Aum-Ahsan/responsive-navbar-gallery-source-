@@ -1,0 +1,1 @@
+import HeroShell from "../shared/HeroShell";export default function Hero09(){return <HeroShell theme="sand" layout="center" eyebrow="Interior design" title="Spaces made for real life." body="A warm service hero for architecture, interiors, property and home-improvement platforms." primary="Start a project" secondary="Explore spaces" visual="gallery"/>}

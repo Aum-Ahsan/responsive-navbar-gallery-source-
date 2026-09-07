@@ -1,0 +1,1 @@
+import HeroShell from "../shared/HeroShell";export default function Hero06(){return <HeroShell theme="rose" eyebrow="Fashion commerce" title="The new season starts with you." body="An editorial retail hero for fashion collections, beauty launches and lifestyle storefronts." primary="Shop collection" secondary="View lookbook" visual="store"/>}

@@ -1,0 +1,2 @@
+import { NavbarShell,Pill } from "../shared/NavbarShell";
+export default function Navbar09(){return <NavbarShell className="border border-black/10 bg-[#f8f8f8] text-black" logo={<span className="text-[28px] font-black">Full Paint</span>} links={[{label:"Home"},{label:"Features"},{label:"Pricing"},{label:"Contact"}]} actions={<Pill className="border-0 bg-[#b41874] font-serif font-normal text-white">Sign in</Pill>} desktopClassName="max-w-[1180px] justify-between"/>}

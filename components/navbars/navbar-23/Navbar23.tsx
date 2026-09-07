@@ -1,0 +1,2 @@
+import { NavbarShell } from "../shared/NavbarShell";
+export default function Navbar23(){return <NavbarShell logo={<div className="flex flex-col items-center text-white/10"><span className="text-4xl">♻</span><b className="text-[10px] leading-3">LOVE AND<br/>WEAR</b></div>} links={[]} actions={<button className="text-sm text-green-400">View my Cart</button>} desktopClassName="max-w-[1460px] justify-between"/>}

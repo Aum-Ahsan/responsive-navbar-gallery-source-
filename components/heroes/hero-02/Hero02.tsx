@@ -1,0 +1,1 @@
+import HeroShell from "../shared/HeroShell";export default function Hero02(){return <HeroShell theme="sun" layout="center" eyebrow="Creative studio" title="Ideas that refuse to blend in." body="A bold centered hero for agencies, portfolios and creative teams that need an immediate visual statement." primary="View our work" secondary="Meet the studio" visual="gallery"/>}

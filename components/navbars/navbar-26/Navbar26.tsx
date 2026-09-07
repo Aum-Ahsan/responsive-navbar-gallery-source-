@@ -1,0 +1,2 @@
+import { Search } from "lucide-react";import { NavbarShell } from "../shared/NavbarShell";
+export default function Navbar26(){return <NavbarShell className="rounded-[18px] border border-black/10 bg-white text-black" logo={<div className="flex items-center gap-3"><span className="home-mark"/><b className="text-[29px] tracking-[-.04em]">HOMESTYLE</b></div>} links={[{label:"About"},{label:"Floor Plans"},{label:"Images"},{label:"Contact"}]} actions={<Search size={24}/>} desktopClassName="max-w-[1360px] justify-between" linkClassName="text-xl"/>}

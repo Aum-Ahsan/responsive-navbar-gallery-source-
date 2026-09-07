@@ -1,0 +1,2 @@
+import { NavbarShell,Pill } from "../shared/NavbarShell";
+export default function Navbar07(){return <NavbarShell logo={<span className="text-[27px] font-black tracking-wide">Wallet&nbsp;&nbsp;US</span>} links={[{label:"Home",active:true},{label:"Pricing"},{label:"VIPS"},{label:"About Us"},{label:"Contact"}]} actions={<><Pill>Sign In</Pill><Pill filled>Sign Up</Pill></>} desktopClassName="max-w-[1300px] justify-between" linkClassName="rounded-full px-6 py-3 [&.nav-active]:bg-white [&.nav-active]:text-black [&:nth-child(2)]:bg-[#858585]"/>}

@@ -7,23 +7,27 @@ import { CarouselShell } from "../shared/CarouselShell";
 
 export default function Carousel29() {
 
-  const [ref, api] = useEmblaCarousel();
-  const [prog, setProg] = useState(0);
+  const [ref1, api1] = useEmblaCarousel({ loop: true });
+  const [ref2, api2] = useEmblaCarousel({ loop: true , axis:"y"});
   useEffect(() => {
-    if (!api) return;
-    const fn = () => setProg(Math.max(0, Math.min(1, api.scrollProgress())));
-    api.on('scroll', fn); fn();
-  }, [api]);
+    if (!api1 || !api2) return;
+    const sync = (main: any, target: any) => { target.scrollTo(main.selectedScrollSnap()); };
+    api1.on('select', () => sync(api1, api2));
+    api2.on('select', () => sync(api2, api1));
+  }, [api1, api2]);
   return (
-    <CarouselShell name="Progress Controlled" index={29}>
-      <div className="overflow-hidden mb-6" ref={ref}>
-        <div className="flex gap-4">
-          {["https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80","https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&q=80","https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=80","https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80","https://images.unsplash.com/photo-1473625247510-8ceb1760943f?w=800&q=80"].map((img, i) => <img key={i} src={img} className="flex-[0_0_80%] aspect-video object-cover rounded-2xl" />)}
+    <CarouselShell name="Bidirectional Track" index={29}>
+      <div className="flex gap-4 h-[400px]">
+        <div className="overflow-hidden w-1/2 h-full" ref={ref1}>
+          <div className="flex flex-col h-full">
+            {["https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80","https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&q=80","https://images.unsplash.com/photo-1608248593842-8021c6a818c0?w=800&q=80","https://images.unsplash.com/photo-1617897903246-719242758050?w=800&q=80","https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&q=80"].map((img, i) => <img key={i} src={img} className="flex-[0_0_100%] aspect-video object-cover rounded-2xl" />)}
+          </div>
         </div>
-      </div>
-      <div className="w-full max-w-md mx-auto h-2 bg-gray-200 rounded-full overflow-hidden relative">
-        
-        <div className="h-full bg-black transition-all duration-300" style={{width: `${prog * 100}%`}} />
+        <div className="overflow-hidden w-1/2 h-full cursor-pointer" ref={ref2}>
+          <div className="flex flex-col h-full gap-2">
+            {["https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80","https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&q=80","https://images.unsplash.com/photo-1608248593842-8021c6a818c0?w=800&q=80","https://images.unsplash.com/photo-1617897903246-719242758050?w=800&q=80","https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&q=80"].map((img, i) => <img key={i} src={img} className="flex-[0_0_100%] aspect-video object-cover rounded-2xl opacity-70 hover:opacity-100 transition-opacity" />)}
+          </div>
+        </div>
       </div>
     </CarouselShell>
   );

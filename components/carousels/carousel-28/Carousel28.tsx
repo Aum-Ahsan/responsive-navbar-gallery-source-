@@ -5,12 +5,12 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { CarouselShell } from "../shared/CarouselShell";
 
-export default function Carousel49() {
+export default function Carousel28() {
 
   const [curr, setCurr] = useState(0);
   const images = ["https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80","https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80","https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80","https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80","https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?w=800&q=80"];
   return (
-    <CarouselShell name="Split Transition" index={49}>
+    <CarouselShell name="Split Transition" index={28}>
       <div className="relative aspect-[21/9] w-full rounded-2xl overflow-hidden bg-black group" style={{ perspective: '1200px' }}>
         {images.map((img, i) => {
           let style: any = { opacity: i === curr ? 1 : 0, transition: 'all 1s ease-in-out', zIndex: i === curr ? 10 : 0 };

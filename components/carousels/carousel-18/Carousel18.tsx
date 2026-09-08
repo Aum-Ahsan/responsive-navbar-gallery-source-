@@ -7,39 +7,18 @@ import { CarouselShell } from "../shared/CarouselShell";
 
 export default function Carousel18() {
 
-  const [ref, api] = useEmblaCarousel({ loop: true });
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
-    if (!api) return;
-    setScrollSnaps(api.scrollSnapList());
-    const onScroll = () => setScrollProgress(api.scrollProgress());
-    api.on('scroll', onScroll);
-    onScroll();
-  }, [api]);
-
+  const [ref, api] = useEmblaCarousel({  });
+  
+  useEffect(() => { const fn = (e: WheelEvent) => { e.preventDefault(); e.deltaY > 0 ? api?.scrollNext() : api?.scrollPrev(); }; api?.rootNode().addEventListener('wheel', fn); return ()=>api?.rootNode().removeEventListener('wheel', fn); }, [api]);
   return (
-    <CarouselShell name="3D Coverflow" index={18} headerControls={<div className="flex gap-2"><button onClick={()=>api?.scrollPrev()} className="p-3 border rounded-full"><ChevronLeft/></button><button onClick={()=>api?.scrollNext()} className="p-3 border rounded-full"><ChevronRight/></button></div>}>
+    <CarouselShell name="Mouse Wheel Controlled" index={18} headerControls={<div className="flex gap-2"><button onClick={()=>api?.scrollPrev()} className="p-3 border rounded-full"><ChevronLeft/></button><button onClick={()=>api?.scrollNext()} className="p-3 border rounded-full"><ChevronRight/></button></div>}>
       <div className="overflow-hidden" ref={ref}>
-        <div className="flex gap-4" style={{ perspective: '1200px' }}>
-          {["https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80","https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&q=80","https://images.unsplash.com/photo-1608248593842-8021c6a818c0?w=800&q=80","https://images.unsplash.com/photo-1617897903246-719242758050?w=800&q=80","https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&q=80"].map((img, i) => {
-            const diff = scrollSnaps[i] - scrollProgress;
-            let transform = '';
-            let opacity = 1;
-            let zIndex = 10;
-            if ('coverflow' === 'scale') { transform = `scale(${1 - Math.abs(diff) * 0.5})`; opacity = 1 - Math.abs(diff); }
-            if ('coverflow' === 'coverflow') { transform = `rotateY(${diff * -60}deg) translateZ(${Math.abs(diff) * -300}px)`; zIndex = 100 - Math.abs(Math.round(diff*100)); }
-            if ('coverflow' === 'parallax') { transform = `translateX(${diff * 200}%)`; }
-            if ('coverflow' === 'depth') { transform = `translateZ(${Math.abs(diff) * -500}px) scale(${1 - Math.abs(diff)*0.2})`; opacity = 1 - Math.abs(diff); }
-            if ('coverflow' === 'tunnel') { transform = `translateZ(${diff * -1000}px) rotate(${diff * 45}deg)`; opacity = 1 - Math.abs(diff); }
-
-            return (
-              <div key={i} className="flex-[0_0_60%] min-w-0 aspect-[4/3] rounded-2xl overflow-hidden relative shadow-xl transition-transform duration-100 ease-out" style={{ transform, opacity, zIndex }}>
-                <img src={img} className="absolute inset-0 w-full h-full object-cover" />
-              </div>
-            );
-          })}
+        <div className="flex gap-4">
+          {["https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80","https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80","https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80","https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80","https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?w=800&q=80"].map((img, i) => (
+            <div key={i} className="flex-[0_0_100%] min-w-0 aspect-video bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
+              <img src={img} className="w-full h-full object-cover " />
+            </div>
+          ))}
         </div>
       </div>
     </CarouselShell>

@@ -7,26 +7,39 @@ import { CarouselShell } from "../shared/CarouselShell";
 
 export default function Carousel25() {
 
-  const [ref1, api1] = useEmblaCarousel({ loop: true });
-  const [ref2, api2] = useEmblaCarousel({ loop: true });
+  const [ref, api] = useEmblaCarousel({ loop: true });
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
   useEffect(() => {
-    if (!api1 || !api2) return;
-    const sync = (main: any, target: any) => { target.scrollTo(main.selectedScrollSnap()); };
-    api1.on('select', () => sync(api1, api2));
-    api2.on('select', () => sync(api2, api1));
-  }, [api1, api2]);
+    if (!api) return;
+    setScrollSnaps(api.scrollSnapList());
+    const onScroll = () => setScrollProgress(api.scrollProgress());
+    api.on('scroll', onScroll);
+    onScroll();
+  }, [api]);
+
   return (
-    <CarouselShell name="Thumbnail Controlled" index={25}>
-      <div className="flex flex-col gap-4">
-        <div className="overflow-hidden w-full" ref={ref1}>
-          <div className="flex">
-            {["https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80","https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80","https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80","https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80","https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?w=800&q=80"].map((img, i) => <img key={i} src={img} className="flex-[0_0_100%] aspect-video object-cover rounded-2xl" />)}
-          </div>
-        </div>
-        <div className="overflow-hidden w-full cursor-pointer" ref={ref2}>
-          <div className="flex gap-2">
-            {["https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80","https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80","https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80","https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80","https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?w=800&q=80"].map((img, i) => <img key={i} src={img} onClick={() => api1?.scrollTo(i)} className="w-32 aspect-video object-cover rounded-2xl opacity-70 hover:opacity-100 transition-opacity" />)}
-          </div>
+    <CarouselShell name="Depth / Z-Axis" index={25} headerControls={<div className="flex gap-2"><button onClick={()=>api?.scrollPrev()} className="p-3 border rounded-full"><ChevronLeft/></button><button onClick={()=>api?.scrollNext()} className="p-3 border rounded-full"><ChevronRight/></button></div>}>
+      <div className="overflow-hidden" ref={ref}>
+        <div className="flex gap-4" style={{ perspective: '1200px' }}>
+          {["https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80","https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&q=80","https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=80","https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80","https://images.unsplash.com/photo-1473625247510-8ceb1760943f?w=800&q=80"].map((img, i) => {
+            const diff = scrollSnaps[i] - scrollProgress;
+            let transform = '';
+            let opacity = 1;
+            let zIndex = 10;
+            if ('depth' === 'scale') { transform = `scale(${1 - Math.abs(diff) * 0.5})`; opacity = 1 - Math.abs(diff); }
+            if ('depth' === 'coverflow') { transform = `rotateY(${diff * -60}deg) translateZ(${Math.abs(diff) * -300}px)`; zIndex = 100 - Math.abs(Math.round(diff*100)); }
+            if ('depth' === 'parallax') { transform = `translateX(${diff * 200}%)`; }
+            if ('depth' === 'depth') { transform = `translateZ(${Math.abs(diff) * -500}px) scale(${1 - Math.abs(diff)*0.2})`; opacity = 1 - Math.abs(diff); }
+            if ('depth' === 'tunnel') { transform = `translateZ(${diff * -1000}px) rotate(${diff * 45}deg)`; opacity = 1 - Math.abs(diff); }
+
+            return (
+              <div key={i} className="flex-[0_0_60%] min-w-0 aspect-[4/3] rounded-2xl overflow-hidden relative shadow-xl transition-transform duration-100 ease-out" style={{ transform, opacity, zIndex }}>
+                <img src={img} className="absolute inset-0 w-full h-full object-cover" />
+              </div>
+            );
+          })}
         </div>
       </div>
     </CarouselShell>

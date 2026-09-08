@@ -7,16 +7,22 @@ import { CarouselShell } from "../shared/CarouselShell";
 
 export default function Carousel23() {
 
-  const [active, setActive] = useState(0);
+  const [rot, setRot] = useState(0);
+  const images = ["https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80","https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&q=80","https://images.unsplash.com/photo-1608248593842-8021c6a818c0?w=800&q=80","https://images.unsplash.com/photo-1617897903246-719242758050?w=800&q=80","https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&q=80"];
   return (
-    <CarouselShell name="Accordion" index={23}>
-      <div className="flex w-full h-[500px] gap-2">
-        {["https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80","https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&q=80","https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=80","https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80","https://images.unsplash.com/photo-1473625247510-8ceb1760943f?w=800&q=80"].map((img, i) => (
-          <div key={i} onClick={()=>setActive(i)} className={`cursor-pointer relative overflow-hidden rounded-2xl transition-all duration-700 ease-in-out ${i === active ? 'flex-[4]' : 'flex-[1]'}`}>
-            <img src={img} className="absolute inset-0 w-full h-full object-cover" />
-            <div className={`absolute inset-0 bg-black/40 transition-opacity ${i === active ? 'opacity-0' : 'opacity-100'}`}/>
-          </div>
-        ))}
+    <CarouselShell name="Cylinder" index={23}>
+      <div className="relative h-[600px] w-full flex items-center justify-center overflow-hidden" style={{perspective: '1000px'}} onClick={()=>setRot(r=>r+45)}>
+        <div className="relative w-64 h-64 transition-transform duration-1000" style={{transformStyle: 'preserve-3d', transform: `rotateY(${rot}deg) rotateX(15deg)`}}>
+          {images.map((img, i) => {
+            const angle = (i / images.length) * 360;
+            let transform = '';
+            if ('cylinder' === 'circle' || 'cylinder' === 'cylinder') transform = `rotateY(${angle}deg) translateZ(300px)`;
+            if ('cylinder' === 'orbit') transform = `rotateZ(${angle}deg) translateX(200px) rotateZ(-${angle}deg)`;
+            if ('cylinder' === 'fan') transform = `rotateZ(${(i - images.length/2) * 15}deg) translateY(-${Math.abs(i - images.length/2)*10}px)`;
+            return <img key={i} src={img} className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-xl" style={{transform}} />;
+          })}
+        </div>
+        <p className="absolute bottom-8 text-sm font-bold text-gray-500">Click anywhere to spin the cylinder</p>
       </div>
     </CarouselShell>
   );

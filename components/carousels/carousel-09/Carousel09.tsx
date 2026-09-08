@@ -5,20 +5,20 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { CarouselShell } from "../shared/CarouselShell";
 
-export default function Carousel46() {
+export default function Carousel09() {
 
   const [curr, setCurr] = useState(0);
   const images = ["https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80","https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80","https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80","https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80","https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?w=800&q=80"];
   return (
-    <CarouselShell name="Zoom Transition" index={46}>
+    <CarouselShell name="Crossfade" index={9}>
       <div className="relative aspect-[21/9] w-full rounded-2xl overflow-hidden bg-black group" style={{ perspective: '1200px' }}>
         {images.map((img, i) => {
           let style: any = { opacity: i === curr ? 1 : 0, transition: 'all 1s ease-in-out', zIndex: i === curr ? 10 : 0 };
-          if ('zoom' === 'flip') style = { transform: `rotateY(${i === curr ? 0 : 180}deg)`, ...style };
-          if ('zoom' === 'zoom') style = { transform: `scale(${i === curr ? 1 : 0.8})`, ...style };
-          if ('zoom' === 'mask') style = { clipPath: i === curr ? 'circle(150% at 50% 50%)' : 'circle(0% at 50% 50%)', ...style, opacity: 1, zIndex: i === curr ? 10 : 5 };
-          if ('zoom' === 'clip') style = { clipPath: i === curr ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' : 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)', ...style, opacity: 1, zIndex: i === curr ? 10 : 5 };
-          if ('zoom' === 'split') style = { clipPath: i === curr ? 'inset(0 0 0 0)' : 'inset(50% 0 50% 0)', ...style };
+          if ('crossfade' === 'flip') style = { transform: `rotateY(${i === curr ? 0 : 180}deg)`, ...style };
+          if ('crossfade' === 'zoom') style = { transform: `scale(${i === curr ? 1 : 1.5})`, ...style };
+          if ('crossfade' === 'mask') style = { clipPath: i === curr ? 'circle(150% at 50% 50%)' : 'circle(0% at 50% 50%)', ...style, opacity: 1, zIndex: i === curr ? 10 : 5 };
+          if ('crossfade' === 'clip') style = { clipPath: i === curr ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' : 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)', ...style, opacity: 1, zIndex: i === curr ? 10 : 5 };
+          if ('crossfade' === 'split') style = { clipPath: i === curr ? 'inset(0 0 0 0)' : 'inset(50% 0 50% 0)', ...style };
 
           return <img key={i} src={img} className="absolute inset-0 w-full h-full object-cover" style={style} />;
         })}

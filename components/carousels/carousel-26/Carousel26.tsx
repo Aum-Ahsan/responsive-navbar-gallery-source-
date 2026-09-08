@@ -7,27 +7,24 @@ import { CarouselShell } from "../shared/CarouselShell";
 
 export default function Carousel26() {
 
-  const [ref1, api1] = useEmblaCarousel({ loop: true });
-  const [ref2, api2] = useEmblaCarousel({ loop: true });
-  useEffect(() => {
-    if (!api1 || !api2) return;
-    const sync = (main: any, target: any) => { target.scrollTo(main.selectedScrollSnap()); };
-    api1.on('select', () => sync(api1, api2));
-    api2.on('select', () => sync(api2, api1));
-  }, [api1, api2]);
+  const [curr, setCurr] = useState(0);
+  const images = ["https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80","https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80","https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80","https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80","https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?w=800&q=80"];
   return (
-    <CarouselShell name="Synced Dual Track" index={26}>
-      <div className="flex flex-col gap-4">
-        <div className="overflow-hidden w-full" ref={ref1}>
-          <div className="flex">
-            {["https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80","https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&q=80","https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=80","https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80","https://images.unsplash.com/photo-1473625247510-8ceb1760943f?w=800&q=80"].map((img, i) => <img key={i} src={img} className="flex-[0_0_100%] aspect-video object-cover rounded-2xl" />)}
-          </div>
-        </div>
-        <div className="overflow-hidden w-1/2 h-full cursor-pointer" ref={ref2}>
-          <div className="flex gap-2">
-            {["https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80","https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&q=80","https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=80","https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80","https://images.unsplash.com/photo-1473625247510-8ceb1760943f?w=800&q=80"].map((img, i) => <img key={i} src={img} className="flex-[0_0_100%] aspect-video object-cover rounded-2xl opacity-70 hover:opacity-100 transition-opacity" />)}
-          </div>
-        </div>
+    <CarouselShell name="Zoom Transition" index={26}>
+      <div className="relative aspect-[21/9] w-full rounded-2xl overflow-hidden bg-black group" style={{ perspective: '1200px' }}>
+        {images.map((img, i) => {
+          const isActive = i === curr;
+          const style = {
+            opacity: isActive ? 1 : 0,
+            transform: `scale(${isActive ? 1 : 1.5})`,
+            transition: 'all 1.2s cubic-bezier(0.25, 1, 0.5, 1)',
+            zIndex: isActive ? 10 : 1
+          };
+
+          return <img key={i} src={img} className="absolute inset-0 w-full h-full object-cover" style={style} />;
+        })}
+        <button onClick={() => setCurr(c => (c - 1 + images.length) % images.length)} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 bg-white/20 backdrop-blur text-white rounded-full"><ChevronLeft/></button>
+        <button onClick={() => setCurr(c => (c + 1) % images.length)} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 bg-white/20 backdrop-blur text-white rounded-full"><ChevronRight/></button>
       </div>
     </CarouselShell>
   );

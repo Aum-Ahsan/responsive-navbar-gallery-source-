@@ -1,3 +1,8 @@
+declare module "cloudflare:workers" {
+  interface Env {
+    DB: import("@cloudflare/workers-types").D1Database;
+  }
+}
 import { env } from "cloudflare:workers";
 import { drizzle } from "drizzle-orm/d1";
 import * as schema from "./schema";

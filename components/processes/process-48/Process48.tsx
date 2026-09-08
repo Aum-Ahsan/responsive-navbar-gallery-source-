@@ -1,23 +1,23 @@
+"use client";
 import React, { useState, useEffect } from 'react';
+
+const script = [
+  '> npm run build',
+  '✔ Validating package.json...',
+  '✔ Resolving dependencies...',
+  '⚡ Compiling React components...',
+  '📦 Bundling assets...',
+  '✨ Build successful in 2.4s!',
+  '> npm run deploy',
+  '🚀 Uploading to edge network...',
+  '🌍 Live at https://example.com'
+];
 
 export default function Process48() {
   const [lines, setLines] = useState<string[]>([]);
   
-  const script = [
-    '> npm run build',
-    '✔ Validating package.json...',
-    '✔ Resolving dependencies...',
-    '⚡ Compiling React components...',
-    '📦 Bundling assets...',
-    '✨ Build successful in 2.4s!',
-    '> npm run deploy',
-    '🚀 Uploading to edge network...',
-    '🌍 Live at https://example.com'
-  ];
-
   useEffect(() => {
     let currentLine = 0;
-    setLines([]);
     const interval = setInterval(() => {
       if (currentLine < script.length) {
         setLines(prev => {
@@ -29,7 +29,10 @@ export default function Process48() {
         clearInterval(interval);
       }
     }, 800);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      setLines([]); // Reset lines on unmount if needed, though strictly not necessary.
+    };
   }, []);
 
   return (

@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { Target, Zap, Rocket, Award } from 'lucide-react';
 

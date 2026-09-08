@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { FileText, Search, Users, ShieldCheck } from 'lucide-react';
 

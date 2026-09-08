@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import { ShoppingBag, Truck, CheckCircle2 } from 'lucide-react';
 

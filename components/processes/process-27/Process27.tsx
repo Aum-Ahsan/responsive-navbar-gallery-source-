@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import { User, Shield, Bell, Check } from 'lucide-react';
 

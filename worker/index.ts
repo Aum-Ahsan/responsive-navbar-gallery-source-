@@ -31,16 +31,16 @@ const worker = {
 
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];
-      return handleImageOptimization(request, {
-        fetchAsset: (path) => env.ASSETS.fetch(new Request(new URL(path, request.url))),
+      return handleImageOptimization(request as any, {
+        fetchAsset: (path) => env.ASSETS.fetch(new Request(new URL(path, request.url)) as any) as any,
         transformImage: async (body, { width, format, quality }) => {
           const result = await env.IMAGES.input(body).transform(width > 0 ? { width } : {}).output({ format, quality });
-          return result.response();
+          return result.response() as any;
         },
-      }, allowedWidths);
+      }, allowedWidths) as any;
     }
 
-    return handler.fetch(request, env, ctx);
+    return handler.fetch(request as any, env as any, ctx as any) as any;
   },
 };
 

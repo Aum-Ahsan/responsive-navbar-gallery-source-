@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { Users, Filter, Target, Handshake } from 'lucide-react';
 

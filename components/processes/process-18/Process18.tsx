@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import { GitBranch, Box, FileText, Monitor, Check } from 'lucide-react';
 

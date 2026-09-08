@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import { Smartphone, Key, ShieldCheck } from 'lucide-react';
 

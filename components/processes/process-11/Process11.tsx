@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { RefreshCw, Zap, TrendingUp, ShieldCheck } from 'lucide-react';
 

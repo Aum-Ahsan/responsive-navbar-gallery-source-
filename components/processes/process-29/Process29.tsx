@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import { UploadCloud, File, Loader2, CheckCircle2 } from 'lucide-react';
 

@@ -14,7 +14,7 @@ export default function Process18() {
       <p className="text-lime-800 mb-10">Select your role to see your customized onboarding path.</p>
 
       {/* Decision Node */}
-      <div className="flex justify-center gap-6 mb-12">
+      <div className="flex flex-col sm:flex-row justify-center gap-6 mb-12">
         <button 
           onClick={() => setChoice('design')}
           className={`px-8 py-4 rounded-xl font-bold flex flex-col items-center gap-2 transition-all ${choice === 'design' ? 'bg-lime-500 text-white shadow-lg scale-105' : 'bg-white text-gray-700 hover:bg-lime-100'}`}

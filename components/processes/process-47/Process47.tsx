@@ -13,9 +13,9 @@ export default function Process47() {
     <div className="w-full max-w-4xl mx-auto p-8 font-sans my-10">
       <h2 className="text-3xl font-bold text-teal-900 mb-16 text-center">Diagonal Ascend</h2>
 
-      <div className="relative h-[600px] md:h-[500px]">
+      <div className="relative md:h-[500px]">
         {/* Diagonal Line */}
-        <div className="absolute left-1/2 md:left-[20%] top-0 bottom-0 w-1 bg-teal-100 transform -skew-x-12"></div>
+        <div className="hidden md:block absolute left-[20%] top-0 bottom-0 w-1 bg-teal-100 transform -skew-x-12"></div>
 
         {steps.map((step, idx) => {
           // Calculate diagonal position manually
@@ -25,8 +25,12 @@ export default function Process47() {
           return (
             <div 
               key={idx} 
-              className="absolute flex items-center gap-6 group hover:z-10"
-              style={{ left: `${leftOffset}%`, top: `${topOffset}%` }}
+              className={`relative md:absolute flex items-center gap-6 group hover:z-10 mb-6 md:mb-0
+                ${idx === 0 ? 'md:left-[20%] md:top-[0%]' : ''}
+                ${idx === 1 ? 'md:left-[35%] md:top-[25%]' : ''}
+                ${idx === 2 ? 'md:left-[50%] md:top-[50%]' : ''}
+                ${idx === 3 ? 'md:left-[65%] md:top-[75%]' : ''}
+              `}
             >
               <div className="w-16 h-16 rounded-2xl bg-teal-500 text-white flex items-center justify-center shadow-xl transform rotate-12 group-hover:rotate-0 transition-transform cursor-default">
                 <span className="text-2xl font-black transform -rotate-12 group-hover:rotate-0 transition-transform">0{idx + 1}</span>

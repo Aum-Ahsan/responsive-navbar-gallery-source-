@@ -11,8 +11,8 @@ export default function Process24() {
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-12 font-sans bg-white shadow-[0_20px_50px_rgba(0,0,0,0.05)] rounded-[2.5rem] my-10">
-      <div className="flex items-center justify-between mb-12">
+    <div className="w-full max-w-5xl mx-auto p-6 md:p-12 font-sans bg-white shadow-[0_20px_50px_rgba(0,0,0,0.05)] rounded-[2.5rem] my-10">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 mb-12">
         <h2 className="text-3xl font-bold text-gray-900">Application Pipeline</h2>
         <span className="bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-bold tracking-wider uppercase">In Progress</span>
       </div>

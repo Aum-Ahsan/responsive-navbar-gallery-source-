@@ -18,13 +18,14 @@ export default function Process01() {
         <p className="mt-4 text-gray-500">Click steps to advance progress horizontally</p>
       </div>
 
-      <div className="relative flex justify-between items-center mb-8">
-        <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-200 -translate-y-1/2 z-0 rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-blue-600 transition-all duration-500 ease-in-out" 
-            style={{ width: `${((activeStep - 1) / (steps.length - 1)) * 100}%` }}
-          />
-        </div>
+      <div className="w-full overflow-x-auto pb-6 -mx-4 px-4 md:mx-0 md:px-0 md:overflow-visible">
+        <div className="relative flex justify-between items-center mb-8 min-w-[600px] md:min-w-0">
+          <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-200 -translate-y-1/2 z-0 rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-blue-600 transition-all duration-500 ease-in-out" 
+              style={{ width: `${((activeStep - 1) / (steps.length - 1)) * 100}%` }}
+            />
+          </div>
 
         {steps.map((step) => (
           <div key={step.id} className="relative z-10 flex flex-col items-center">
@@ -42,8 +43,9 @@ export default function Process01() {
               <h3 className="font-semibold text-gray-900">{step.title}</h3>
               <p className="text-xs text-gray-500 mt-1 max-w-[120px]">{step.desc}</p>
             </div>
-          </div>
-        ))}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

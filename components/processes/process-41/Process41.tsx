@@ -11,7 +11,7 @@ export default function Process41() {
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-12 font-sans bg-gray-50 rounded-[2rem] my-10 border border-gray-200">
+    <div className="w-full max-w-4xl mx-auto p-4 sm:p-12 font-sans bg-gray-50 rounded-[2rem] my-10 border border-gray-200">
       <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">Hover Tooltip Process</h2>
 
       <div className="relative flex justify-between items-center px-4">
@@ -26,7 +26,7 @@ export default function Process41() {
             </div>
             
             {/* Label below */}
-            <div className="absolute top-14 left-1/2 -translate-x-1/2 font-semibold text-gray-600 group-hover:text-indigo-600 transition-colors mt-2 text-sm">
+            <div className="absolute top-14 left-1/2 -translate-x-1/2 font-semibold text-gray-600 group-hover:text-indigo-600 transition-colors mt-2 text-[10px] sm:text-sm">
               {step.title}
             </div>
 

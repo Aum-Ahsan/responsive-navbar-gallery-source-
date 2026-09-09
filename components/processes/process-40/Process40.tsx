@@ -11,7 +11,7 @@ export default function Process40() {
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-8 font-sans my-10">
+    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 font-sans my-10">
       <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">Expandable Cards</h2>
 
       <div className="flex flex-col md:flex-row h-[600px] md:h-[400px] gap-4">

@@ -15,7 +15,7 @@ export default function Process07() {
       <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Tab-Based Process</h2>
       
       <div className="flex flex-col md:flex-row bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-xl">
-        <div className="md:w-1/3 bg-gray-50 border-r border-gray-200 flex flex-col p-4 space-y-2">
+        <div className="md:w-1/3 bg-gray-50 border-b md:border-b-0 md:border-r border-gray-200 flex flex-col p-4 space-y-2">
           {tabs.map((tab, idx) => {
             const Icon = tab.icon;
             const isActive = activeTab === idx;

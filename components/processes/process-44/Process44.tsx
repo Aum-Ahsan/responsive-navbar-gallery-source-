@@ -17,7 +17,8 @@ export default function Process44() {
       {/* Thicker Grid lines */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.2)_2px,transparent_2px),linear-gradient(90deg,rgba(255,255,255,0.2)_2px,transparent_2px)] bg-[size:100px_100px]"></div>
 
-      <div className="relative z-10 border-2 border-white/50 p-6 h-[500px]">
+      <div className="overflow-x-auto hide-scrollbar relative z-10">
+        <div className="min-w-[600px] border-2 border-white/50 p-6 h-[500px]">
         
         {/* Title Block */}
         <div className="absolute bottom-6 right-6 border-2 border-white/50 bg-blue-900/80 p-4 backdrop-blur">
@@ -45,6 +46,7 @@ export default function Process44() {
             </div>
           </div>
         ))}
+        </div>
       </div>
     </div>
   );

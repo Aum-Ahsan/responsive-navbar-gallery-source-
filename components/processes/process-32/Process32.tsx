@@ -11,7 +11,7 @@ export default function Process32() {
   ];
 
   return (
-    <div className="w-full max-w-6xl mx-auto font-sans bg-white border border-gray-200 rounded-[2rem] overflow-hidden my-10 shadow-sm flex flex-col md:flex-row h-[500px]">
+    <div className="w-full max-w-6xl mx-auto font-sans bg-white border border-gray-200 rounded-[2rem] overflow-hidden my-10 shadow-sm flex flex-col md:flex-row h-auto md:h-[500px]">
       
       {/* Left Text Side */}
       <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center bg-gray-50 border-r border-gray-200 overflow-y-auto">
@@ -42,7 +42,7 @@ export default function Process32() {
       </div>
 
       {/* Right Visual Side */}
-      <div className="w-full md:w-1/2 relative bg-zinc-900 flex items-center justify-center overflow-hidden">
+      <div className="w-full md:w-1/2 min-h-[300px] md:min-h-0 relative bg-zinc-900 flex items-center justify-center overflow-hidden">
         {steps.map((step, idx) => (
           <div 
             key={idx} 

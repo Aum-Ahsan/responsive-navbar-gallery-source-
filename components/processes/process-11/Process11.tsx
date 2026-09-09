@@ -16,7 +16,7 @@ export default function Process11() {
         <p className="text-slate-600">A never-ending loop of constant improvement and refinement.</p>
       </div>
 
-      <div className="relative w-full max-w-2xl mx-auto h-[400px]">
+      <div className="relative w-full max-w-2xl mx-auto h-[400px] scale-75 md:scale-100 origin-center overflow-hidden md:overflow-visible">
         {/* Central Core */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-300 animate-[spin_10s_linear_infinite]">
           <RefreshCw size={120} strokeWidth={1} />

@@ -10,7 +10,7 @@ export default function Process39() {
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-8 font-sans my-10 overflow-hidden">
+    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 font-sans my-10 overflow-hidden">
       <h2 className="text-3xl font-bold text-gray-900 mb-8 px-4">Mobile Swipe Journey</h2>
       <p className="px-4 text-gray-500 mb-8">Try scrolling horizontally below (Shift+Scroll or swipe).</p>
 

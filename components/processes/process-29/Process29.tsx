@@ -12,8 +12,8 @@ export default function Process29() {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-10 font-sans">
-      <div className="bg-white border-2 border-sky-100 rounded-3xl p-10 text-center shadow-xl">
+    <div className="w-full max-w-2xl mx-auto p-4 sm:p-10 font-sans">
+      <div className="bg-white border-2 border-sky-100 rounded-3xl p-6 sm:p-10 text-center shadow-xl">
         <h2 className="text-2xl font-bold text-sky-950 mb-2">Upload Document</h2>
         <p className="text-gray-500 mb-8">Please upload your PDF for verification.</p>
 

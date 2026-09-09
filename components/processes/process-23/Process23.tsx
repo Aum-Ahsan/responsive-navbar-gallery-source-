@@ -13,12 +13,12 @@ export default function Process23() {
 
   return (
     <div className="w-full max-w-4xl mx-auto p-8 font-sans bg-orange-50 rounded-3xl my-10 border border-orange-100">
-      <div className="mb-10 flex justify-between items-center">
+      <div className="mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
         <div>
           <h2 className="text-2xl font-bold text-orange-950">Order Tracking</h2>
           <p className="text-orange-800/60 font-mono text-sm mt-1">#ORD-99382-X2</p>
         </div>
-        <div className="text-right">
+        <div className="text-left sm:text-right">
           <p className="text-sm font-bold text-orange-900">Estimated Delivery</p>
           <p className="text-2xl font-black text-orange-600">Today, 4:00 PM</p>
         </div>
@@ -34,11 +34,14 @@ export default function Process23() {
             const Icon = step.icon;
             return (
               <div key={idx} className="flex flex-row md:flex-col items-center md:text-center gap-4 md:gap-0">
-                {/* Mobile vertical line fallback */}
-                <div className="md:hidden w-1 h-full bg-orange-200 absolute left-6 -z-10"></div>
-                
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 border-4 border-orange-50 ${step.done ? 'bg-orange-500 text-white' : 'bg-white text-orange-300'}`}>
-                  <Icon size={20} />
+                <div className="relative">
+                  {/* Mobile vertical line */}
+                  {idx !== steps.length - 1 && (
+                    <div className="md:hidden absolute top-1/2 left-1/2 -translate-x-1/2 w-1 h-24 bg-orange-200 -z-10"></div>
+                  )}
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 border-4 border-orange-50 ${step.done ? 'bg-orange-500 text-white' : 'bg-white text-orange-300'}`}>
+                    <Icon size={20} />
+                  </div>
                 </div>
                 
                 <div className="md:mt-4 bg-white md:bg-transparent p-4 md:p-0 rounded-xl shadow-sm md:shadow-none border border-orange-100 md:border-transparent flex-1">

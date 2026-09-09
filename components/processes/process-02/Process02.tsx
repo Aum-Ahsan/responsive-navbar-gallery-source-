@@ -24,13 +24,13 @@ export default function Process02() {
               {step.status === 'active' && <span className="w-2 h-2 bg-white rounded-full"></span>}
             </span>
             
-            <div className={`p-5 rounded-xl border transition-all duration-300 ${
+            <div className={`p-4 sm:p-5 rounded-xl border transition-all duration-300 ${
               step.status === 'active' ? 'bg-blue-50 border-blue-100 shadow-md transform translate-x-2' : 
               'bg-white border-gray-100 shadow-sm hover:shadow-md'
             }`}>
-              <div className="flex justify-between items-center mb-2">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2 gap-1 sm:gap-0">
                 <h3 className={`text-lg font-bold ${step.status === 'upcoming' ? 'text-gray-400' : 'text-gray-900'}`}>{step.title}</h3>
-                <span className="text-xs font-semibold px-2 py-1 bg-gray-100 text-gray-600 rounded-md">{step.date}</span>
+                <span className="text-xs font-semibold px-2 py-1 bg-gray-100 text-gray-600 rounded-md w-fit">{step.date}</span>
               </div>
               <p className={`text-sm ${step.status === 'upcoming' ? 'text-gray-400' : 'text-gray-600'}`}>{step.desc}</p>
             </div>

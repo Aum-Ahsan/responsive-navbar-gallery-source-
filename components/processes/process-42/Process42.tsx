@@ -10,7 +10,7 @@ export default function Process42() {
   ]);
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-8 font-sans my-10 bg-white rounded-3xl border border-gray-200 shadow-sm">
+    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 font-sans my-10 bg-white rounded-3xl border border-gray-200 shadow-sm">
       <h2 className="text-3xl font-bold text-gray-900 mb-8">Kanban Workflow</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

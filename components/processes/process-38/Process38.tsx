@@ -14,7 +14,7 @@ export default function Process38() {
     <div className="w-full max-w-3xl mx-auto p-8 font-sans my-10">
       <h2 className="text-3xl font-bold text-center text-teal-950 mb-8">Process Carousel</h2>
 
-      <div className="relative bg-teal-50 rounded-[2rem] overflow-hidden shadow-lg border border-teal-100 aspect-video flex items-center justify-center text-center p-12">
+      <div className="relative bg-teal-50 rounded-[2rem] overflow-hidden shadow-lg border border-teal-100 aspect-square md:aspect-video flex items-center justify-center text-center p-4 sm:p-12">
         
         <button 
           onClick={() => setSlide(s => s === 0 ? steps.length - 1 : s - 1)}
@@ -23,12 +23,12 @@ export default function Process38() {
           <ChevronLeft />
         </button>
 
-        <div className="relative z-0 max-w-md">
-          <div className="text-8xl font-black text-teal-100 absolute -top-16 left-1/2 -translate-x-1/2 -z-10 select-none">
+        <div className="relative z-0 max-w-md px-12 sm:px-0">
+          <div className="text-6xl sm:text-8xl font-black text-teal-100 absolute -top-8 sm:-top-16 left-1/2 -translate-x-1/2 -z-10 select-none">
             {slide + 1}
           </div>
-          <h3 className="text-3xl font-bold text-teal-900 mb-4">{steps[slide].title}</h3>
-          <p className="text-teal-700 text-lg">{steps[slide].desc}</p>
+          <h3 className="text-xl sm:text-3xl font-bold text-teal-900 mb-2 sm:mb-4">{steps[slide].title}</h3>
+          <p className="text-teal-700 text-sm sm:text-lg">{steps[slide].desc}</p>
         </div>
 
         <button 

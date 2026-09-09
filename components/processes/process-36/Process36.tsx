@@ -9,7 +9,7 @@ export default function Process36() {
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-12 font-sans bg-zinc-900 text-white rounded-3xl my-10 border border-zinc-800">
+    <div className="w-full max-w-4xl mx-auto p-6 md:p-12 font-sans bg-zinc-900 text-white rounded-3xl my-10 border border-zinc-800">
       <h2 className="text-3xl font-bold mb-12 text-center text-zinc-100">Number Counter</h2>
 
       <div className="space-y-4">

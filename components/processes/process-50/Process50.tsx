@@ -17,7 +17,8 @@ export default function Process50() {
         <p className="text-emerald-700/70">Navigate the waypoints.</p>
       </div>
 
-      <div className="relative w-full h-[500px] mt-8">
+      <div className="overflow-x-auto pb-8 hide-scrollbar">
+        <div className="relative w-full min-w-[600px] md:min-w-0 h-[500px] mt-8">
         
         {/* Mock Map Background (Topographic lines) */}
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 30% 30%, transparent 20%, #10b981 21%, transparent 22%), radial-gradient(circle at 70% 70%, transparent 30%, #10b981 31%, transparent 32%), radial-gradient(circle at 50% 50%, transparent 40%, #10b981 41%, transparent 42%)', backgroundSize: '100% 100%' }}></div>
@@ -50,6 +51,7 @@ export default function Process50() {
             </div>
           </div>
         ))}
+        </div>
       </div>
     </div>
   );

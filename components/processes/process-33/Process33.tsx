@@ -26,14 +26,14 @@ export default function Process33() {
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
 
       {/* Content */}
-      <div className="absolute inset-x-0 bottom-0 p-8 md:p-12 flex flex-col md:flex-row justify-between items-end">
-        <div className="mb-8 md:mb-0">
+      <div className="absolute inset-x-0 bottom-0 p-6 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-0">
+        <div>
           <h2 className="text-5xl font-black text-white mb-2">{steps[active].title}</h2>
           <p className="text-gray-300 max-w-sm">A highly visual journey where the imagery speaks louder than words.</p>
         </div>
 
         {/* Controls */}
-        <div className="flex gap-2 bg-white/10 backdrop-blur-md p-2 rounded-2xl border border-white/20">
+        <div className="flex flex-wrap gap-2 bg-white/10 backdrop-blur-md p-2 rounded-2xl border border-white/20">
           {steps.map((step, idx) => (
             <button
               key={idx}

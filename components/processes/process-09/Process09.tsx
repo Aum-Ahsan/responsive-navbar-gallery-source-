@@ -20,7 +20,7 @@ export default function Process09() {
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-12 font-sans bg-gray-900 rounded-3xl text-white my-10">
+    <div className="w-full max-w-4xl mx-auto p-6 md:p-12 font-sans bg-gray-900 rounded-3xl text-white my-10 overflow-x-hidden">
       <h2 className="text-3xl font-bold mb-12 text-center text-gray-100">Continuous Progress Bar</h2>
       
       <div className="relative pt-8 pb-12">
@@ -46,7 +46,7 @@ export default function Process09() {
             <div className={`w-8 h-8 rounded-full border-4 flex items-center justify-center bg-gray-900 z-10 transition-colors duration-500 ${progress >= stage.pct ? 'border-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.5)]' : 'border-gray-700'}`}>
               {progress >= stage.pct && <div className="w-2 h-2 rounded-full bg-purple-400"></div>}
             </div>
-            <span className={`mt-3 text-sm font-semibold ${progress >= stage.pct ? 'text-purple-300' : 'text-gray-500'}`}>{stage.label}</span>
+            <span className={`mt-3 text-[10px] md:text-sm font-semibold text-center ${progress >= stage.pct ? 'text-purple-300' : 'text-gray-500'}`}>{stage.label}</span>
           </div>
         ))}
       </div>

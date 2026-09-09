@@ -11,7 +11,7 @@ export default function Process49() {
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-12 font-sans my-10 h-[600px] flex flex-col items-center">
+    <div className="w-full max-w-4xl mx-auto p-6 sm:p-12 font-sans my-10 h-[600px] flex flex-col items-center">
       <h2 className="text-3xl font-black text-gray-900 mb-16">3D Card Stack Process</h2>
 
       <div className="relative w-full max-w-md h-80 perspective-[1000px]">

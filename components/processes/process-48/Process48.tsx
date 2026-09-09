@@ -36,7 +36,7 @@ export default function Process48() {
   }, []);
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-6 font-mono my-10">
+    <div className="w-full max-w-3xl mx-auto p-4 sm:p-6 font-mono my-10">
       <h2 className="text-2xl font-bold text-gray-900 mb-6 font-sans">Execution Sequence</h2>
 
       <div className="bg-[#1e1e1e] rounded-xl overflow-hidden shadow-2xl">

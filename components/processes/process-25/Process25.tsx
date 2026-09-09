@@ -12,8 +12,8 @@ export default function Process25() {
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-8 font-sans">
-      <div className="bg-cyan-950 text-white rounded-[2rem] p-8 md:p-12 shadow-xl">
+    <div className="w-full max-w-4xl mx-auto p-4 md:p-8 font-sans">
+      <div className="bg-cyan-950 text-white rounded-[2rem] p-6 md:p-12 shadow-xl">
         <h2 className="text-3xl font-bold mb-10">Booking Process</h2>
         
         <div className="flex flex-col md:flex-row gap-8 mb-12">

@@ -7,7 +7,7 @@ export default function Process20() {
 
   return (
     <div className="w-full max-w-3xl mx-auto p-10 font-sans bg-white border border-gray-100 shadow-xl rounded-3xl my-10">
-      <div className="flex justify-between items-end mb-10 border-b border-gray-100 pb-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-0 mb-10 border-b border-gray-100 pb-6">
         <div>
           <h2 className="text-3xl font-bold text-gray-900">Delivery Process</h2>
           <p className="text-gray-500 mt-1">Select your shipping speed to see the workflow.</p>

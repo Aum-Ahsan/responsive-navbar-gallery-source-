@@ -23,7 +23,7 @@ export default function Process08() {
         </div>
       </div>
 
-      <div className="bg-teal-50 rounded-2xl p-10 min-h-[250px] flex items-center justify-center text-center mb-8 border border-teal-100">
+      <div className="bg-teal-50 rounded-2xl p-5 sm:p-8 lg:p-10 min-h-[160px] sm:h-[200px] lg:h-[250px] flex items-center justify-center text-center mb-8 border border-teal-100">
         <div>
           <div className="w-16 h-16 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-4 shadow-sm">
             {step}

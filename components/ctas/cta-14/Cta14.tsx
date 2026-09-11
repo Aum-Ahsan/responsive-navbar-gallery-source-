@@ -10,13 +10,13 @@ export default function Cta14() {
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-indigo-50 rounded-3xl border border-indigo-100 p-8 sm:p-16 relative overflow-hidden">
         
-        <div className="flex flex-col lg:flex-row items-center gap-16">
+        <div className="flex flex-col sm:flex-row items-center gap-8 sm:gap-12 lg:gap-16">
           
           <div className="flex-1">
-            <h2 className="text-4xl sm:text-5xl font-black text-indigo-950 mb-6 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl font-black text-indigo-950 mb-6 tracking-tight">
               Ready to scale?
             </h2>
             <p className="text-indigo-800/70 text-lg sm:text-xl mb-10 max-w-md">
@@ -45,7 +45,7 @@ export default function Cta14() {
             </button>
           </div>
 
-          <div className="w-full lg:w-[400px] grid grid-cols-1 gap-4 relative z-10">
+          <div className="w-full lg:w-full sm:w-full sm:w-[280px] md:w-[340px] md:w-[400px] grid grid-cols-1 gap-4 relative z-10">
             {features.map((feat, i) => {
               const Icon = feat.icon;
               return (

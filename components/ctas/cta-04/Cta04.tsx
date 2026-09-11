@@ -4,20 +4,20 @@ import { Calendar, Video, Users, ArrowRight } from 'lucide-react';
 
 export default function Cta04() {
   return (
-    <div className="w-full max-w-6xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-[2.5rem] overflow-hidden shadow-2xl relative">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-[1.25rem] sm:rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden shadow-2xl relative">
         
         {/* Abstract background pattern */}
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
         
-        <div className="relative p-8 sm:p-16 lg:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
+        <div className="relative p-8 sm:p-16 lg:p-20 flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8 lg:gap-12 lg:gap-20">
           
           <div className="flex-1 text-white text-center lg:text-left">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 px-4 py-2 rounded-full text-sm font-bold mb-8 text-blue-200">
               <Video size={16} /> Live 1-on-1 Demo
             </div>
             
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-6 leading-tight tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl lg:text-6xl font-black mb-6 leading-tight tracking-tight">
               See how we can <br className="hidden lg:block"/>transform your team.
             </h2>
             

@@ -85,7 +85,7 @@ export default function Hero43() {
         <div className="mb-4 sm:mb-6 inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs font-bold text-blue-700 uppercase tracking-wider">
           <Sparkles size={14} className="text-blue-500" /> Neural AI Translation
         </div>
-        {/* <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4 leading-[1.1] text-slate-900">
+        {/* <h1 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4 leading-[1.1] text-slate-900">
           Understand the <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">World.</span>
         </h1>
         <p className="text-sm sm:text-base text-slate-500 max-w-2xl mx-auto font-medium">
@@ -139,7 +139,7 @@ export default function Hero43() {
           </div>
 
           {/* Text Areas Section (50/50 Split) */}
-          <div className="flex flex-col md:flex-row min-h-[250px] sm:min-h-[300px]">
+          <div className="flex flex-col md:flex-row min-h-[160px] sm:h-[200px] lg:h-[250px] sm:min-h-[200px] sm:h-[260px] lg:h-[300px]">
             
             {/* Input Area (Left) */}
             <div className="w-full md:w-1/2 flex flex-col p-4 sm:p-6 border-b md:border-b-0 md:border-r border-slate-100">

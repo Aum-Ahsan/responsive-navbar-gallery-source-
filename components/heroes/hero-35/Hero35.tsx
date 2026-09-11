@@ -55,7 +55,7 @@ export default function Hero35() {
 
         <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] xl:text-[8rem] font-medium leading-[1] mb-6 drop-shadow-2xl">
           The <span className="italic text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400">Renaissance</span><br />
-          <span className="text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[6rem]">Reimagined.</span>
+          <span className="text-2xl sm:text-3xl lg:text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[6rem]">Reimagined.</span>
         </h1>
 
         <p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mx-auto font-light leading-relaxed mb-10 tracking-wide">
@@ -108,7 +108,7 @@ export default function Hero35() {
         <HeroUI isFullDemo={true} />
         
         {/* DUMMY CONTENT TO PROVE PARALLAX SCROLL WORKS */}
-        <div className="relative z-30 bg-[#0a0a0a] w-full min-h-screen py-24 px-6 flex flex-col items-center border-t border-white/10">
+        <div className="relative z-30 bg-[#0a0a0a] w-full min-h-screen py-12 sm:py-16 lg:py-24 px-6 flex flex-col items-center border-t border-white/10">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="font-serif text-3xl sm:text-5xl text-white mb-8">About the Exhibition</h2>
             <p className="text-gray-400 text-lg leading-relaxed mb-12 font-light">

@@ -13,8 +13,8 @@ export default function Cta31() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-pink-50 rounded-[2.5rem] p-8 sm:p-12 lg:p-16 text-center border border-pink-100 shadow-xl relative overflow-hidden">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-pink-50 rounded-[1.25rem] sm:rounded-[2rem] lg:rounded-[2.5rem] p-8 sm:p-12 lg:p-16 text-center border border-pink-100 shadow-xl relative overflow-hidden">
         
         {/* Decorative Shapes */}
         <div className="absolute top-10 left-10 text-pink-300 transform -rotate-12">

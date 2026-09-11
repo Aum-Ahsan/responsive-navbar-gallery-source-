@@ -10,7 +10,7 @@ export default function Hero32() {
       <div className="w-full max-w-[1400px] border border-gray-800 overflow-hidden relative z-20 shadow-2xl bg-[#0c0c0c] rounded-xl">
         
         {/* HERO SECTION */}
-        <section className="relative w-full flex flex-col lg:flex-row overflow-hidden bg-[#0c0c0c] text-[#f9f9f9] min-h-[700px] lg:min-h-[650px] xl:min-h-[750px]">
+        <section className="relative w-full flex flex-col sm:flex-row overflow-hidden bg-[#0c0c0c] text-[#f9f9f9] min-h-[700px] lg:min-h-[650px] xl:min-h-[750px]">
           
           {/* Custom CSS for Slow Zoom */}
           <style dangerouslySetInnerHTML={{__html: `
@@ -22,7 +22,7 @@ export default function Hero32() {
           `}} />
 
           {/* LEFT COLUMN: High-Res Image (50%) */}
-          <div className="w-full lg:w-1/2 h-[350px] sm:h-[450px] lg:h-auto relative overflow-hidden bg-zinc-900">
+          <div className="w-full lg:w-1/2 h-[240px] sm:h-[200px] sm:h-[260px] lg:h-[300px] lg:h-[350px] sm:h-[180px] sm:h-[240px] lg:h-[280px] sm:h-[380px] lg:h-[450px] lg:h-auto relative overflow-hidden bg-zinc-900">
             {/* Dark overlay for better text blend on image */}
             <div className="absolute inset-0 bg-black/30 z-10 pointer-events-none"></div>
             

@@ -27,10 +27,10 @@ export default function Cta21() {
   const currentRating = hoveredStar || selectedStar;
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-white rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-8 sm:p-16 text-center">
         
-        <div className="text-6xl mb-4 transition-transform duration-300 transform scale-110">
+        <div className="text-3xl sm:text-5xl lg:text-6xl mb-4 transition-transform duration-300 transform scale-110">
           {getEmoji(currentRating)}
         </div>
         

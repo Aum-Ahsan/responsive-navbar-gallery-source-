@@ -10,8 +10,8 @@ export default function Cta33() {
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-slate-900 rounded-[2rem] p-8 sm:p-12 lg:p-16 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-12 shadow-2xl relative overflow-hidden">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-slate-900 rounded-[2rem] p-8 sm:p-12 lg:p-16 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8 lg:gap-12 shadow-2xl relative overflow-hidden">
         
         {/* Left Side: Content */}
         <div className="flex-1 text-center md:text-left relative z-10">
@@ -57,7 +57,7 @@ export default function Cta33() {
         </div>
 
         {/* Abstract background shapes */}
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-emerald-500/10 rounded-full mix-blend-screen filter blur-[100px] opacity-50 z-0 pointer-events-none"></div>
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[200px] sm:h-[260px] lg:h-[300px] sm:h-[260px] sm:h-[340px] lg:h-[400px] lg:h-[500px] bg-emerald-500/10 rounded-full mix-blend-screen filter blur-[100px] opacity-50 z-0 pointer-events-none"></div>
 
       </div>
     </div>

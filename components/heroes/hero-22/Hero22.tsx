@@ -66,7 +66,7 @@ export default function Hero22() {
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/30 px-3 py-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-widest backdrop-blur-md">
             <Sparkles size={14} className="text-blue-400" /> {SLIDES[current].tag}
           </div>
-          {/* <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 md:mb-6 max-w-3xl leading-tight">
+          {/* <h1 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 md:mb-6 max-w-3xl leading-tight">
             {SLIDES[current].title}
           </h1> */}
           <h1 className="!text-[36px] md:!text-[44px] lg:!text-[56px] max-[767px]:landscape:!text-[40px] md:max-[1279px]:landscape:!text-[48px] font-bold tracking-tight mb-4 md:mb-6 max-w-3xl leading-tight">
@@ -115,7 +115,7 @@ export default function Hero22() {
 
   // ================= VIEW 2: STATIC PREVIEW (MAIN PAGE) =================
   return (
-    <div className="relative w-full py-16 flex flex-col items-center justify-center">
+    <div className="relative w-full py-10 sm:py-12 lg:py-16 flex flex-col items-center justify-center">
       
       {/* OPEN IN NEW TAB BUTTON (Adapted from your Navbar50 code) */}
       <a

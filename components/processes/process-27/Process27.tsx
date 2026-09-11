@@ -42,7 +42,7 @@ export default function Process27() {
       </div>
 
       {/* Main Form Area */}
-      <div className="md:w-2/3 bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-gray-100 flex flex-col justify-between min-h-[400px]">
+      <div className="md:w-2/3 bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-gray-100 flex flex-col justify-between min-h-[260px] sm:h-[340px] lg:h-[400px]">
         <div>
           <h3 className="text-2xl font-bold text-gray-900 mb-2">{steps[active-1].title} Setup</h3>
           <p className="text-gray-500 mb-8">Please configure your settings below.</p>

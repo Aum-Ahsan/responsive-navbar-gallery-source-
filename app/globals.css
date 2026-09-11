@@ -3,7 +3,7 @@
 @import "../vendor/shadcn-tailwind-4.13.0.css";
 :root { --background:#f5f5f3; --foreground:#151515; --font-sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; --component-gutter:clamp(20px,4vw,64px); --component-card-padding:clamp(12px,2vw,24px); --component-max-width:1440px; }
 @theme inline { --color-background:var(--background); --color-foreground:var(--foreground); --font-sans:var(--font-sans); }
-*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--background);color:var(--foreground);font-family:var(--font-sans)} button,a{-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box} html{scroll-behavior:smooth;overflow-x:hidden} body{margin:0;overflow-x:hidden;background:var(--background);color:var(--foreground);font-family:var(--font-sans)} button,a{-webkit-tap-highlight-color:transparent}
 .navbar-surface{container-type:inline-size}.nav-mobile{display:none}.component-container{width:100%;max-width:var(--component-max-width)!important;margin-inline:auto!important;padding-left:var(--component-gutter)!important;padding-right:var(--component-gutter)!important}.component-card-header{padding:16px var(--component-card-padding)}.component-preview{padding:var(--component-card-padding)}.gallery-section{padding:48px var(--component-card-padding)}
 @container (max-width:720px){.nav-desktop{display:none!important}.nav-mobile{display:flex!important}}
 .preview-mobile .nav-desktop{display:none!important}.preview-mobile .nav-mobile{display:flex!important}.preview-tablet .tablet-hide{display:none!important}

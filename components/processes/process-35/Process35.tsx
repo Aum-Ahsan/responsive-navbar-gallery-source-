@@ -11,8 +11,8 @@ export default function Process35() {
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-12 font-sans my-10 bg-white rounded-[3rem] border border-gray-100">
-      <h2 className="text-3xl font-black text-center text-gray-900 mb-16 uppercase tracking-wider">The Icon Journey</h2>
+    <div className="w-full max-w-5xl mx-auto p-5 sm:p-8 lg:p-12 font-sans my-10 bg-white rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[3rem] border border-gray-100">
+      <h2 className="text-3xl font-black text-center text-gray-900 mb-8 sm:mb-12 lg:mb-16 uppercase tracking-wider">The Icon Journey</h2>
 
       <div className="flex flex-col md:flex-row justify-between items-center relative">
         <div className="hidden md:block absolute top-12 left-[10%] right-[10%] h-0.5 bg-gray-100 z-0 border-t-2 border-dashed border-gray-300"></div>

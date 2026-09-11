@@ -11,17 +11,17 @@ export default function Cta15() {
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-white rounded-[2rem] border border-gray-200 shadow-xl overflow-hidden flex flex-col md:flex-row">
         
         {/* Product Image Side */}
-        <div className="w-full md:w-1/2 bg-gray-50 p-12 flex items-center justify-center border-b md:border-b-0 md:border-r border-gray-200 relative overflow-hidden min-h-[300px]">
+        <div className="w-full md:w-1/2 bg-gray-50 p-5 sm:p-8 lg:p-12 flex items-center justify-center border-b md:border-b-0 md:border-r border-gray-200 relative overflow-hidden min-h-[200px] sm:h-[260px] lg:h-[300px]">
           <div className="absolute top-6 left-6 inline-flex items-center gap-1.5 bg-black text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full z-10">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
             Pre-order Live
           </div>
           
-          <div className={`w-48 h-64 sm:w-64 sm:h-80 ${colors[color].bg} rounded-[3rem] shadow-2xl relative transition-colors duration-700 ease-in-out border-8 border-white`}>
+          <div className={`w-48 h-64 sm:w-64 sm:h-80 ${colors[color].bg} rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[3rem] shadow-2xl relative transition-colors duration-700 ease-in-out border-8 border-white`}>
             {/* Camera module mock */}
             <div className="absolute top-4 left-4 w-12 h-12 bg-black/20 rounded-2xl backdrop-blur-sm"></div>
             {/* Logo mock */}
@@ -37,7 +37,7 @@ export default function Cta15() {
           <p className="text-gray-500 mb-8 font-medium">Next-generation spatial audio engine.</p>
           
           <div className="flex items-baseline gap-2 mb-8 border-b border-gray-100 pb-8">
-            <span className="text-4xl sm:text-5xl font-black text-gray-900">$299</span>
+            <span className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl font-black text-gray-900">$299</span>
             <span className="text-gray-400 line-through font-semibold">$349</span>
           </div>
 

@@ -74,14 +74,14 @@ becomeDeveloper(true);`;
 
   // ================= 3. REUSABLE HERO UI (RESPONSIVE) =================
   const HeroUI = ({ isFullDemo = false }: { isFullDemo?: boolean }) => (
-    <section className={`relative w-full flex items-center justify-center overflow-hidden bg-[#0d1117] text-white transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-20 lg:py-0' : 'py-12 sm:py-16 lg:py-0 lg:h-[85vh] min-h-[800px] lg:min-h-[650px]'}`}>
+    <section className={`relative w-full flex items-center justify-center overflow-hidden bg-[#0d1117] text-white transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-10 sm:py-14 lg:py-20 lg:py-0' : 'py-12 sm:py-16 lg:py-0 lg:h-[85vh] min-h-[800px] lg:min-h-[650px]'}`}>
       
       {/* Background Decorative Elements */}
       <div className="absolute top-[-20%] left-[-10%] w-[60%] sm:w-[50%] h-[50%] bg-blue-600/20 blur-[100px] rounded-full z-0 pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[50%] sm:w-[40%] h-[40%] bg-pink-600/20 blur-[100px] rounded-full z-0 pointer-events-none" />
 
       {/* Main Content Container */}
-      <div className="relative z-10 max-w-7xl w-full px-4 sm:px-6 md:px-10 lg:px-8 xl:px-16 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-8 xl:gap-16 mt-6 lg:mt-0">
+      <div className="relative z-10 max-w-7xl w-full px-4 sm:px-6 md:px-10 lg:px-8 xl:px-16 flex flex-col sm:flex-row items-center justify-between gap-10 lg:gap-8 xl:gap-16 mt-6 lg:mt-0">
         
         {/* LEFT COLUMN: Text Content (Animations removed for instant load) */}
         <div className="flex-1 flex flex-col items-center text-center lg:items-start lg:text-left w-full opacity-100">
@@ -91,7 +91,7 @@ becomeDeveloper(true);`;
             <Terminal size={14} className="sm:w-4 sm:h-4" /> v2.0 Next-Gen Bootcamp
           </div>
           
-          {/* <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6 leading-[1.15] md:leading-[1.1] text-slate-100">
+          {/* <h1 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6 leading-[1.15] md:leading-[1.1] text-slate-100">
             Master Code. <br className="hidden lg:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-pink-500">
               Build the Future.
@@ -159,7 +159,7 @@ becomeDeveloper(true);`;
             </div>
 
             {/* Code Body with Auto-typing Effect */}
-            <div className="p-4 sm:p-6 h-[250px] sm:h-[300px] lg:h-[280px] xl:h-[350px] overflow-hidden text-left bg-[#0d1117]">
+            <div className="p-4 sm:p-6 h-[160px] sm:h-[200px] lg:h-[250px] sm:h-[200px] sm:h-[260px] lg:h-[300px] lg:h-[180px] sm:h-[240px] lg:h-[280px] xl:h-[240px] sm:h-[200px] sm:h-[260px] lg:h-[300px] lg:h-[350px] overflow-hidden text-left bg-[#0d1117]">
               
               {/* Line Numbers & Code */}
               <div className="flex font-mono text-[10px] sm:text-xs md:text-sm leading-relaxed sm:leading-loose">

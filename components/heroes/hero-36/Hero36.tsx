@@ -131,7 +131,7 @@ export default function Hero36() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-900/40 border border-blue-500/30 text-blue-300 text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
             <Plane size={14} /> Global Freight Network
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1] drop-shadow-2xl">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1] drop-shadow-2xl">
             Fast, Reliable <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Global Logistics.</span>
           </h1>

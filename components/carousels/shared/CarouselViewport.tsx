@@ -7,7 +7,7 @@ interface CarouselViewportProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const CarouselViewport = forwardRef<HTMLDivElement, CarouselViewportProps>(
   ({ children, className = "", vertical = false, ...props }, ref) => {
-    const defaultClasses = vertical ? "flex flex-col overflow-y-auto snap-y h-[500px]" : "flex flex-row overflow-x-auto snap-x";
+    const defaultClasses = vertical ? "flex flex-col overflow-y-auto snap-y h-[200px] sm:h-[260px] lg:h-[300px] sm:h-[260px] sm:h-[340px] lg:h-[400px] lg:h-[500px]" : "flex flex-row overflow-x-auto snap-x";
     
     return (
       <>

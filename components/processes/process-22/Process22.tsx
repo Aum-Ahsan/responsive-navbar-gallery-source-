@@ -13,7 +13,7 @@ export default function Process22() {
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-10 font-sans">
+    <div className="w-full max-w-4xl mx-auto p-5 sm:p-8 lg:p-10 font-sans">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
         <div>
           <h2 className="text-3xl font-bold text-gray-900">System Status</h2>

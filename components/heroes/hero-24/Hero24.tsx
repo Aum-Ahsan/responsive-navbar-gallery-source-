@@ -23,14 +23,14 @@ export default function Hero24() {
 
   // ================= 2. REUSABLE HERO UI (RESPONSIVE) =================
   const HeroUI = ({ isFullDemo = false }: { isFullDemo?: boolean }) => (
-    <section className={`relative w-full flex items-center justify-center overflow-hidden bg-[#09090b] text-white transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-20 lg:py-0' : 'py-20 lg:h-[80vh] min-h-[650px]'}`}>
+    <section className={`relative w-full flex items-center justify-center overflow-hidden bg-[#09090b] text-white transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-10 sm:py-14 lg:py-20 lg:py-0' : 'py-20 lg:h-[80vh] min-h-[650px]'}`}>
       
       {/* Background Glow Effects - Responsive sizing */}
       <div className="absolute top-[-20%] left-[-10%] w-[70%] sm:w-[50%] h-[50%] bg-blue-600/20 blur-[100px] md:blur-[120px] rounded-full z-0 pointer-events-none" />
       <div className="absolute bottom-[-20%] right-[-10%] w-[70%] sm:w-[50%] h-[50%] bg-purple-600/20 blur-[100px] md:blur-[120px] rounded-full z-0 pointer-events-none" />
 
       {/* Main Content Container - Flex Col for Mobile/iPad Portrait, Flex Row for Desktop/iPad Landscape */}
-      <div className="relative z-10 max-w-7xl w-full px-5 sm:px-8 md:px-12 lg:px-16 xl:px-24 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 mt-12 lg:mt-0">
+      <div className="relative z-10 max-w-7xl w-full px-5 sm:px-8 md:px-12 lg:px-16 xl:px-24 flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8 lg:gap-12 lg:gap-8 mt-12 lg:mt-0">
         
         {/* LEFT COLUMN: Text & CTAs */}
         <div className={`flex-1 flex flex-col items-center text-center lg:items-start lg:text-left w-full ${isFullDemo ? 'animate-in fade-in slide-in-from-left-8 duration-1000' : ''}`}>
@@ -40,7 +40,7 @@ export default function Hero24() {
             <Shield size={16} className="shrink-0" /> Secure Web3 Infrastructure
           </div>
           
-          {/* <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold tracking-tight mb-4 sm:mb-6 leading-[1.15] md:leading-[1.1]">
+          {/* <h1 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold tracking-tight mb-4 sm:mb-6 leading-[1.15] md:leading-[1.1]">
             Trade Crypto with <br className="hidden lg:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">
               Zero Limits.
@@ -89,7 +89,7 @@ export default function Hero24() {
         </div>
 
         {/* RIGHT COLUMN: Floating 3D / Glassmorphism Elements */}
-        <div className={`flex-1 relative w-full h-[350px] sm:h-[400px] lg:h-[500px] flex items-center justify-center ${isFullDemo ? 'animate-in fade-in zoom-in-95 duration-1000 delay-300' : ''}`}>
+        <div className={`flex-1 relative w-full h-[240px] sm:h-[200px] sm:h-[260px] lg:h-[300px] lg:h-[350px] sm:h-[260px] sm:h-[340px] lg:h-[400px] lg:h-[200px] sm:h-[260px] lg:h-[300px] sm:h-[260px] sm:h-[340px] lg:h-[400px] lg:h-[500px] flex items-center justify-center ${isFullDemo ? 'animate-in fade-in zoom-in-95 duration-1000 delay-300' : ''}`}>
           
           {/* Custom CSS for smooth floating animation */}
           <style dangerouslySetInnerHTML={{__html: `
@@ -139,7 +139,7 @@ export default function Hero24() {
 
           {/* Background Decorative Circles - Scale based on device */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 sm:w-72 sm:h-72 lg:w-72 lg:h-72 xl:w-80 xl:h-80 border border-white/5 rounded-full z-0"></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 sm:w-96 sm:h-96 lg:w-[350px] lg:h-[350px] xl:w-[450px] xl:h-[450px] border border-white/5 rounded-full z-0 border-dashed"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 sm:w-96 sm:h-96 lg:w-[350px] lg:h-[240px] sm:h-[200px] sm:h-[260px] lg:h-[300px] lg:h-[350px] xl:w-[450px] xl:h-[180px] sm:h-[240px] lg:h-[280px] sm:h-[380px] lg:h-[450px] border border-white/5 rounded-full z-0 border-dashed"></div>
 
         </div>
       </div>

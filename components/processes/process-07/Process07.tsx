@@ -31,7 +31,7 @@ export default function Process07() {
             )
           })}
         </div>
-        <div className="md:w-2/3 p-10 flex flex-col justify-center min-h-[300px]">
+        <div className="md:w-2/3 p-5 sm:p-8 lg:p-10 flex flex-col justify-center min-h-[200px] sm:h-[260px] lg:h-[300px]">
           <h3 className="text-2xl font-black text-cyan-950 mb-4">{tabs[activeTab].title} Phase</h3>
           <p className="text-gray-600 text-lg leading-relaxed">{tabs[activeTab].content}</p>
           <div className="mt-8 pt-8 border-t border-gray-100 flex gap-2">

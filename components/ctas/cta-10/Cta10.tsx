@@ -4,7 +4,7 @@ import { MapPin, Calendar, Clock, Ticket } from 'lucide-react';
 
 export default function Cta10() {
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-red-50 rounded-3xl border border-red-100 overflow-hidden shadow-xl flex flex-col md:flex-row relative">
         
         {/* Abstract Background pattern */}

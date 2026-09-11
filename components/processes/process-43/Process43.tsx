@@ -12,7 +12,7 @@ export default function Process43() {
 
   return (
     <div className="w-full max-w-4xl mx-auto p-6 sm:p-12 font-sans bg-slate-900 text-white rounded-3xl my-10">
-      <h2 className="text-3xl font-bold text-center mb-16">Sales Pipeline Funnel</h2>
+      <h2 className="text-3xl font-bold text-center mb-8 sm:mb-12 lg:mb-16">Sales Pipeline Funnel</h2>
 
       <div className="flex flex-col items-center space-y-2">
         {funnel.map((stage, idx) => {

@@ -4,20 +4,31 @@ import { Headphones, PlayCircle, Plus } from 'lucide-react';
 
 export default function Cta35() {
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-zinc-950 rounded-[3rem] p-8 sm:p-12 lg:p-16 border border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-12 shadow-2xl relative overflow-hidden">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-zinc-950 rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[3rem] p-8 sm:p-12 lg:p-16 border border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8 lg:gap-12 shadow-2xl relative overflow-hidden">
         
-        {/* Animated Audio Wave visualizer background */}
+        {/* Animated Audio Wave visualizer background (deterministic values - avoids SSR hydration mismatch) */}
         <div className="absolute inset-0 flex items-end justify-between opacity-10 px-4 pointer-events-none pb-0">
-          {Array.from({ length: 40 }).map((_, i) => (
-            <div 
-              key={i} 
+          {[
+            { h: 37, d: 0.63 }, { h: 25, d: 1.26 }, { h: 83, d: 0.91 }, { h: 51, d: 0.55 },
+            { h: 90, d: 1.47 }, { h: 63, d: 0.80 }, { h: 28, d: 1.13 }, { h: 74, d: 0.54 },
+            { h: 42, d: 1.38 }, { h: 95, d: 0.67 }, { h: 33, d: 1.01 }, { h: 68, d: 0.79 },
+            { h: 81, d: 1.22 }, { h: 22, d: 0.59 }, { h: 57, d: 0.93 }, { h: 45, d: 1.45 },
+            { h: 76, d: 0.71 }, { h: 30, d: 1.18 }, { h: 88, d: 0.52 }, { h: 40, d: 0.88 },
+            { h: 65, d: 1.33 }, { h: 24, d: 0.61 }, { h: 92, d: 1.49 }, { h: 53, d: 0.76 },
+            { h: 35, d: 1.09 }, { h: 79, d: 0.58 }, { h: 48, d: 1.28 }, { h: 70, d: 0.83 },
+            { h: 27, d: 0.65 }, { h: 86, d: 1.41 }, { h: 59, d: 0.72 }, { h: 38, d: 0.98 },
+            { h: 72, d: 1.15 }, { h: 44, d: 0.56 }, { h: 96, d: 0.87 }, { h: 21, d: 1.37 },
+            { h: 60, d: 0.69 }, { h: 84, d: 1.04 }, { h: 32, d: 0.77 }, { h: 50, d: 1.21 },
+          ].map(({ h, d }, i) => (
+            <div
+              key={i}
               className="w-4 bg-white rounded-t-full"
               style={{
-                height: `${Math.random() * 80 + 20}%`,
-                animation: `pulse-height ${Math.random() * 1 + 0.5}s ease-in-out infinite alternate`
+                height: `${h}%`,
+                animation: `pulse-height ${d}s ease-in-out infinite alternate`
               }}
-            ></div>
+            />
           ))}
         </div>
 
@@ -48,7 +59,7 @@ export default function Cta35() {
 
         {/* Right Player Mock */}
         <div className="w-full md:w-auto relative z-10">
-          <div className="bg-zinc-900 border border-zinc-800 p-6 rounded-3xl shadow-2xl w-full sm:w-[320px]">
+          <div className="bg-zinc-900 border border-zinc-800 p-6 rounded-3xl shadow-2xl w-full sm:w-full sm:w-[260px] md:w-[320px]">
             <img src="https://images.unsplash.com/photo-1619983081563-430f63602796?q=80&w=1000&auto=format&fit=crop" alt="Podcast Cover" className="w-full h-48 object-cover rounded-2xl mb-6 shadow-md" />
             <div className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">Latest Episode</div>
             <h3 className="text-white font-bold text-lg mb-4 truncate">EP 142: Server Components...</h3>

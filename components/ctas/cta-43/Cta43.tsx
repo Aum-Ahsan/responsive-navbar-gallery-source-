@@ -9,8 +9,8 @@ export default function Cta43() {
   const price = size === 0 ? 12.99 : size === 1 ? 16.99 : 20.99;
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-orange-50 rounded-[2.5rem] border border-orange-100 shadow-xl overflow-hidden flex flex-col md:flex-row">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-orange-50 rounded-[1.25rem] sm:rounded-[2rem] lg:rounded-[2.5rem] border border-orange-100 shadow-xl overflow-hidden flex flex-col md:flex-row">
         
         {/* Left: Image Background */}
         <div 

@@ -6,7 +6,7 @@ export default function Cta19() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans relative min-h-[400px] bg-slate-50 rounded-3xl border border-slate-200 flex items-center justify-center overflow-hidden">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans relative min-h-[260px] sm:h-[340px] lg:h-[400px] bg-slate-50 rounded-3xl border border-slate-200 flex items-center justify-center overflow-hidden">
       
       <div className="text-center z-0 p-8">
         <h2 className="text-3xl font-bold text-slate-400 mb-4">Background Content</h2>
@@ -14,7 +14,7 @@ export default function Cta19() {
       </div>
 
       {/* Floating Action Button & Expanded Form */}
-      <div className={`absolute bottom-6 right-6 sm:bottom-10 sm:right-10 transition-all duration-500 ease-out z-20 ${open ? 'w-[calc(100%-3rem)] sm:w-[400px] h-[400px]' : 'w-16 h-16'}`}>
+      <div className={`absolute bottom-6 right-6 sm:bottom-10 sm:right-10 transition-all duration-500 ease-out z-20 ${open ? 'w-[calc(100%-3rem)] sm:w-full sm:w-full sm:w-[280px] md:w-[340px] md:w-[400px] h-[260px] sm:h-[340px] lg:h-[400px]' : 'w-16 h-16'}`}>
         
         {/* Expanded Form State */}
         <div className={`absolute inset-0 bg-white rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden transition-all duration-500 origin-bottom-right ${open ? 'scale-100 opacity-100' : 'scale-50 opacity-0 pointer-events-none'}`}>

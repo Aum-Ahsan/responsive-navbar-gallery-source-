@@ -4,8 +4,8 @@ import { MapPin, Navigation, Phone } from 'lucide-react';
 
 export default function Cta38() {
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="relative rounded-[2rem] overflow-hidden shadow-2xl bg-slate-100 min-h-[400px] border border-gray-200">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="relative rounded-[2rem] overflow-hidden shadow-2xl bg-slate-100 min-h-[260px] sm:h-[340px] lg:h-[400px] border border-gray-200">
         
         {/* Fake Map Background */}
         <div 

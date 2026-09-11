@@ -23,8 +23,8 @@ export default function Process38() {
           <ChevronLeft />
         </button>
 
-        <div className="relative z-0 max-w-md px-12 sm:px-0">
-          <div className="text-6xl sm:text-8xl font-black text-teal-100 absolute -top-8 sm:-top-16 left-1/2 -translate-x-1/2 -z-10 select-none">
+        <div className="relative z-0 max-w-md px-4 sm:px-8 lg:px-12 sm:px-0">
+          <div className="text-3xl sm:text-5xl lg:text-6xl sm:text-8xl font-black text-teal-100 absolute -top-8 sm:-top-16 left-1/2 -translate-x-1/2 -z-10 select-none">
             {slide + 1}
           </div>
           <h3 className="text-xl sm:text-3xl font-bold text-teal-900 mb-2 sm:mb-4">{steps[slide].title}</h3>

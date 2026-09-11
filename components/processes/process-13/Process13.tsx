@@ -11,12 +11,12 @@ export default function Process13() {
   ];
 
   return (
-    <div className="w-full bg-[#1A1A1A] p-12 md:p-20 font-sans text-white rounded-3xl overflow-hidden relative shadow-2xl">
+    <div className="w-full bg-[#1A1A1A] p-5 sm:p-8 lg:p-12 md:p-20 font-sans text-white rounded-3xl overflow-hidden relative shadow-2xl">
       {/* Decorative Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:30px_30px]"></div>
 
-      <div className="relative z-10 mb-16">
-        <h2 className="text-4xl md:text-5xl font-black text-amber-500 uppercase tracking-tighter">Product Roadmap</h2>
+      <div className="relative z-10 mb-8 sm:mb-12 lg:mb-16">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl md:text-5xl font-black text-amber-500 uppercase tracking-tighter">Product Roadmap</h2>
         <p className="text-gray-400 mt-2 text-lg">Our strategic journey mapped out across the fiscal year.</p>
       </div>
 
@@ -36,7 +36,7 @@ export default function Process13() {
               </div>
               
               <div className="ml-6 md:ml-0 md:mt-8 flex flex-col">
-                <span className="text-5xl font-black text-white/10 -ml-2 -mb-5 relative z-0">{ms.year}</span>
+                <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-white/10 -ml-2 -mb-5 relative z-0">{ms.year}</span>
                 <div className="relative z-10">
                   <h3 className="text-xl font-bold text-white">{ms.title}</h3>
                   <p className="text-gray-400 text-sm mt-1 max-w-[200px] leading-relaxed">{ms.desc}</p>

@@ -11,7 +11,7 @@ export default function Process32() {
   ];
 
   return (
-    <div className="w-full max-w-6xl mx-auto font-sans bg-white border border-gray-200 rounded-[2rem] overflow-hidden my-10 shadow-sm flex flex-col md:flex-row h-auto md:h-[500px]">
+    <div className="w-full max-w-6xl mx-auto font-sans bg-white border border-gray-200 rounded-[2rem] overflow-hidden my-10 shadow-sm flex flex-col md:flex-row h-auto md:h-[200px] sm:h-[260px] lg:h-[300px] sm:h-[260px] sm:h-[340px] lg:h-[400px] lg:h-[500px]">
       
       {/* Left Text Side */}
       <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center bg-gray-50 border-r border-gray-200 overflow-y-auto">
@@ -42,14 +42,14 @@ export default function Process32() {
       </div>
 
       {/* Right Visual Side */}
-      <div className="w-full md:w-1/2 min-h-[300px] md:min-h-0 relative bg-zinc-900 flex items-center justify-center overflow-hidden">
+      <div className="w-full md:w-1/2 min-h-[200px] sm:h-[260px] lg:h-[300px] md:min-h-0 relative bg-zinc-900 flex items-center justify-center overflow-hidden">
         {steps.map((step, idx) => (
           <div 
             key={idx} 
             className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-700 ${step.bg} ${activeStep === idx ? 'opacity-100 scale-100' : 'opacity-0 scale-110 pointer-events-none'}`}
           >
             <div className="w-48 h-48 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center shadow-2xl border border-white/20">
-              <span className="text-6xl text-white/50 font-black">0{idx + 1}</span>
+              <span className="text-3xl sm:text-5xl lg:text-6xl text-white/50 font-black">0{idx + 1}</span>
             </div>
             <div className="mt-8 text-white font-bold text-xl uppercase tracking-widest">{step.title}</div>
           </div>

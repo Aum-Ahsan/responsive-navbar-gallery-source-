@@ -23,13 +23,13 @@ export default function Hero25() {
 
   // ================= 2. REUSABLE HERO UI (RESPONSIVE) =================
   const HeroUI = ({ isFullDemo = false }: { isFullDemo?: boolean }) => (
-    <section className={`relative w-full flex items-center justify-center overflow-hidden bg-black text-white transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-20 lg:py-0' : 'py-16 lg:h-[80vh] min-h-[700px]'}`}>
+    <section className={`relative w-full flex items-center justify-center overflow-hidden bg-black text-white transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-10 sm:py-14 lg:py-20 lg:py-0' : 'py-16 lg:h-[80vh] min-h-[700px]'}`}>
       
       {/* Background Texture/Noise (Subtle) */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/stardust.png")' }}></div>
 
       {/* Main Content Container */}
-      <div className="relative z-10 max-w-7xl w-full px-5 sm:px-8 md:px-12 lg:px-16 xl:px-24 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 mt-12 lg:mt-0">
+      <div className="relative z-10 max-w-7xl w-full px-5 sm:px-8 md:px-12 lg:px-16 xl:px-24 flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8 lg:gap-12 lg:gap-8 mt-12 lg:mt-0">
         
         {/* LEFT COLUMN: Bold Typography & CTAs */}
         <div className={`flex-1 flex flex-col items-start w-full ${isFullDemo ? 'animate-in fade-in slide-in-from-left-8 duration-1000' : ''}`}>
@@ -39,7 +39,7 @@ export default function Hero25() {
             <Flame size={16} fill="currentColor" /> Premium Fitness
           </div>
           
-          {/* <h1 className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-black uppercase tracking-tighter mb-4 sm:mb-6 leading-[0.9]">
+          {/* <h1 className="text-3xl sm:text-4xl lg:text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-black uppercase tracking-tighter mb-4 sm:mb-6 leading-[0.9]">
             Push <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text" style={{ WebkitTextStroke: '1px white', color: 'transparent' }}>Past Your</span> <br />
             Limits.
@@ -89,7 +89,7 @@ export default function Hero25() {
         <div className={`flex-1 w-full lg:max-w-xl ${isFullDemo ? 'animate-in fade-in zoom-in-95 duration-1000 delay-300' : ''}`}>
           
           {/* CSS Grid for Asymmetrical Layout */}
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 h-[400px] sm:h-[500px] lg:h-[600px]">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 h-[260px] sm:h-[340px] lg:h-[400px] sm:h-[200px] sm:h-[260px] lg:h-[300px] sm:h-[260px] sm:h-[340px] lg:h-[400px] lg:h-[500px] lg:h-[600px]">
             
             {/* Left Tall Image (Spans 2 rows) */}
             <div className="col-span-1 row-span-2 relative overflow-hidden group">

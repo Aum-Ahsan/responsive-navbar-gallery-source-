@@ -29,7 +29,7 @@ export default function Process15() {
           ))}
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 to-transparent"></div>
           <div className="absolute bottom-12 left-12">
-            <h2 className="text-4xl font-black">{content[activeIndex].title} Phase</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black">{content[activeIndex].title} Phase</h2>
             <p className="text-zinc-400 mt-2">Sticky visual dynamically updates.</p>
           </div>
         </div>
@@ -44,7 +44,7 @@ export default function Process15() {
           }}
         >
           {content.map((item, idx) => (
-            <div key={idx} className="h-full w-full snap-center flex flex-col justify-center p-12 md:p-24 relative">
+            <div key={idx} className="h-full w-full snap-center flex flex-col justify-center p-5 sm:p-8 lg:p-12 md:p-24 relative">
               {/* Mobile image fallback */}
               <div className="md:hidden w-full h-48 mb-8 rounded-2xl overflow-hidden relative">
                 <img src={item.img} className="w-full h-full object-cover" alt="" />

@@ -4,8 +4,8 @@ import { Mail, Calendar, ArrowRight } from 'lucide-react';
 
 export default function Cta37() {
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-[#fcfaf8] rounded-[3rem] p-8 sm:p-16 border border-[#e8e4df] shadow-[0_20px_60px_rgba(0,0,0,0.03)] text-center relative overflow-hidden">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-[#fcfaf8] rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[3rem] p-8 sm:p-16 border border-[#e8e4df] shadow-[0_20px_60px_rgba(0,0,0,0.03)] text-center relative overflow-hidden">
         
         {/* Decorative Grid */}
         <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(#000 2px, transparent 2px)', backgroundSize: '32px 32px' }}></div>
@@ -23,7 +23,7 @@ export default function Cta37() {
             </div>
           </div>
           
-          <h2 className="text-4xl sm:text-5xl font-black text-[#2d2a26] mb-6 tracking-tight font-serif">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl font-black text-[#2d2a26] mb-6 tracking-tight font-serif">
             Let's build something beautiful.
           </h2>
           

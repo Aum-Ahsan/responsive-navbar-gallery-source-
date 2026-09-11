@@ -7,7 +7,7 @@ export default function Cta46() {
 
   if (!visible) {
     return (
-      <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans flex items-center justify-center min-h-[200px]">
+      <div className="w-full w-full p-4 sm:p-8 my-10 font-sans flex items-center justify-center min-h-[200px]">
         <button onClick={() => setVisible(true)} className="text-sm font-bold text-gray-500 hover:text-gray-900 border border-gray-200 px-4 py-2 rounded-lg">
           Show Banner Demo
         </button>
@@ -20,7 +20,7 @@ export default function Cta46() {
       
       {/* Background context to show it's a "sticky" banner */}
       <div className="text-center opacity-30 pointer-events-none mb-10">
-        <h2 className="text-4xl font-bold mb-4 text-gray-300">Website Content Here</h2>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 text-gray-300">Website Content Here</h2>
         <p className="text-gray-300 max-w-lg mx-auto">This banner is designed to stick to the top or bottom of a viewport.</p>
       </div>
 

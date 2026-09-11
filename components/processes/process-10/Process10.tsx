@@ -12,7 +12,7 @@ export default function Process10() {
 
   return (
     <div className="w-full max-w-3xl mx-auto p-6 sm:p-12 font-sans flex flex-col items-center my-10 overflow-hidden">
-      <h2 className="text-3xl font-extrabold text-violet-950 mb-16 text-center">Circular Ecosystem</h2>
+      <h2 className="text-3xl font-extrabold text-violet-950 mb-8 sm:mb-12 lg:mb-16 text-center">Circular Ecosystem</h2>
       
       <div className="relative w-72 h-72 sm:w-80 sm:h-80 rounded-full border-[1px] border-dashed border-violet-300 flex items-center justify-center animate-[spin_40s_linear_infinite]">
         

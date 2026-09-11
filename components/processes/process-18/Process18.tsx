@@ -6,7 +6,7 @@ export default function Process18() {
   const [choice, setChoice] = useState<'design' | 'dev' | null>(null);
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-12 font-sans bg-lime-50 rounded-[2rem] text-center my-10 border border-lime-100">
+    <div className="w-full max-w-3xl mx-auto p-5 sm:p-8 lg:p-12 font-sans bg-lime-50 rounded-[2rem] text-center my-10 border border-lime-100">
       <div className="w-16 h-16 bg-lime-200 text-lime-700 rounded-full flex items-center justify-center mx-auto mb-6">
         <GitBranch size={32} />
       </div>

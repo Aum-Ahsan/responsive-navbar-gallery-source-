@@ -13,9 +13,9 @@ export default function Carousel08() {
   return (
     <CarouselShell name="Vertical Slide" index={8} headerControls={<div className="flex gap-2"><button onClick={()=>api?.scrollPrev()} className="p-3 border rounded-full"><ChevronLeft/></button><button onClick={()=>api?.scrollNext()} className="p-3 border rounded-full"><ChevronRight/></button></div>}>
       <div className="overflow-hidden" ref={ref}>
-        <div className="flex flex-col h-[500px] gap-4">
+        <div className="flex flex-col h-[200px] sm:h-[260px] lg:h-[300px] sm:h-[260px] sm:h-[340px] lg:h-[400px] lg:h-[500px] gap-4">
           {["https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80","https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&q=80","https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=80","https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80","https://images.unsplash.com/photo-1473625247510-8ceb1760943f?w=800&q=80","https://images.unsplash.com/photo-1503614472-8c93d56e92ce?w=800&q=80","https://images.unsplash.com/photo-1518182170546-076616fdfaaf?w=800&q=80","https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&q=80","https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80","https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=800&q=80"].map((img, i) => (
-            <div key={i} className="h-[300px] min-w-0 aspect-video bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
+            <div key={i} className="h-[200px] sm:h-[260px] lg:h-[300px] min-w-0 aspect-video bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
               <img src={img} className="w-full h-full object-cover " />
             </div>
           ))}

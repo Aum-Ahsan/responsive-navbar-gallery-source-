@@ -29,7 +29,7 @@ export default function Process17() {
               <h3 className="text-xl font-bold text-gray-900">{phase.name}</h3>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {phase.steps.map((step, sIdx) => (
                 <div key={sIdx} className="flex items-center bg-gray-50 p-4 rounded-xl">
                   <div className="w-8 h-8 rounded-full bg-white shadow-sm border border-gray-200 flex items-center justify-center text-sm font-bold text-gray-500 mr-3 shrink-0">

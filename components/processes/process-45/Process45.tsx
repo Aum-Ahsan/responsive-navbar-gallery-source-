@@ -15,7 +15,7 @@ export default function Process45() {
   const totalXP = quests.filter(q => q.id <= level).reduce((acc, q) => acc + q.xp, 0);
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-4 sm:p-8 font-sans bg-slate-900 text-white rounded-3xl my-10 border-[4px] border-indigo-900 shadow-[0_0_50px_rgba(79,70,229,0.3)]">
+    <div className="w-full w-full p-4 sm:p-8 font-sans bg-slate-900 text-white rounded-3xl my-10 border-[4px] border-indigo-900 shadow-[0_0_50px_rgba(79,70,229,0.3)]">
       
       {/* Player Stats */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-0 mb-8 bg-slate-800 p-6 rounded-2xl border border-slate-700">

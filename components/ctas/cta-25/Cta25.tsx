@@ -4,7 +4,7 @@ import { ArrowRightLeft } from 'lucide-react';
 
 export default function Cta25() {
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-white rounded-[2rem] border border-gray-200 shadow-xl overflow-hidden p-8 sm:p-16 text-center relative">
         
         {/* Background Grid */}

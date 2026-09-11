@@ -4,8 +4,8 @@ import { Star, GitFork, Heart, GitBranch } from 'lucide-react';
 
 export default function Cta36() {
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-[#0d1117] text-[#c9d1d9] rounded-[2rem] border border-[#30363d] p-8 sm:p-12 lg:p-16 flex flex-col md:flex-row items-center gap-12 shadow-2xl relative overflow-hidden">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-[#0d1117] text-[#c9d1d9] rounded-[2rem] border border-[#30363d] p-8 sm:p-12 lg:p-16 flex flex-col md:flex-row items-center gap-6 sm:gap-8 lg:gap-12 shadow-2xl relative overflow-hidden">
         
         {/* Glow effect */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-[#238636] mix-blend-screen filter blur-[100px] opacity-20 rounded-full"></div>

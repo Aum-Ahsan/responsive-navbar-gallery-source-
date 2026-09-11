@@ -6,7 +6,7 @@ export default function Process26() {
   const steps = ['Cart', 'Details', 'Payment', 'Review'];
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-10 font-sans bg-gray-50 my-10 rounded-3xl border border-gray-200">
+    <div className="w-full max-w-3xl mx-auto p-5 sm:p-8 lg:p-10 font-sans bg-gray-50 my-10 rounded-3xl border border-gray-200">
       <h2 className="text-2xl font-black text-gray-900 mb-8 uppercase tracking-tight">Checkout</h2>
       
       <div className="flex items-center justify-between mb-12 relative">

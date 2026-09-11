@@ -10,12 +10,12 @@ export default function Process42() {
   ]);
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 font-sans my-10 bg-white rounded-3xl border border-gray-200 shadow-sm">
+    <div className="w-full w-full p-4 sm:p-8 font-sans my-10 bg-white rounded-3xl border border-gray-200 shadow-sm">
       <h2 className="text-3xl font-bold text-gray-900 mb-8">Kanban Workflow</h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {columns.map(col => (
-          <div key={col.id} className={`${col.color} rounded-2xl p-4 min-h-[400px]`}>
+          <div key={col.id} className={`${col.color} rounded-2xl p-4 min-h-[260px] sm:h-[340px] lg:h-[400px]`}>
             <div className="flex justify-between items-center mb-4">
               <h3 className={`font-bold ${col.text}`}>{col.title}</h3>
               <span className="bg-white px-2 py-0.5 rounded text-xs font-bold text-gray-500 shadow-sm">{col.cards.length}</span>

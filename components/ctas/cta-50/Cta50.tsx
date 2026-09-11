@@ -18,8 +18,8 @@ export default function Cta50() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-[#1a0b2e] rounded-[3rem] p-8 sm:p-12 lg:p-16 border-[8px] border-[#3b1c6b] shadow-[0_20px_80px_rgba(59,28,107,0.5)] flex flex-col md:flex-row items-center gap-12 relative overflow-hidden">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-[#1a0b2e] rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[3rem] p-8 sm:p-12 lg:p-16 border-[8px] border-[#3b1c6b] shadow-[0_20px_80px_rgba(59,28,107,0.5)] flex flex-col md:flex-row items-center gap-6 sm:gap-8 lg:gap-12 relative overflow-hidden">
         
         {/* Lights decoration around the edge */}
         <div className="absolute inset-0 pointer-events-none opacity-50" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, transparent 95%, #ffd700 100%)', backgroundSize: '40px 40px' }}></div>
@@ -30,7 +30,7 @@ export default function Cta50() {
             <Gift size={32} />
           </div>
           
-          <h2 className="text-4xl sm:text-5xl font-black text-white mb-4 tracking-tighter">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl font-black text-white mb-4 tracking-tighter">
             Spin to Win!
           </h2>
           

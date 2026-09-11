@@ -4,7 +4,7 @@ import { Shield, Zap, Globe, ArrowRight } from 'lucide-react';
 
 export default function Cta08() {
   return (
-    <div className="w-full max-w-6xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div 
         className="relative rounded-[2rem] overflow-hidden bg-slate-900 border border-slate-700/50 p-8 sm:p-12 md:p-16 flex flex-col items-center text-center shadow-2xl"
         style={{

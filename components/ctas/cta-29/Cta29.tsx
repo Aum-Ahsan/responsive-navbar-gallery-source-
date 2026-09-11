@@ -11,7 +11,7 @@ export default function Cta29() {
   const annualSavings = monthlySavings * 12;
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-emerald-950 rounded-[2rem] border border-emerald-900 overflow-hidden flex flex-col md:flex-row shadow-2xl">
         
         {/* Left Side: Calculator */}
@@ -51,7 +51,7 @@ export default function Cta29() {
 
           <div className="relative z-10 text-center">
             <div className="text-emerald-200 font-bold text-sm uppercase tracking-widest mb-2">Estimated Annual Savings</div>
-            <div className="text-5xl sm:text-6xl font-black text-white mb-2 tracking-tighter tabular-nums">
+            <div className="text-3xl sm:text-4xl lg:text-5xl sm:text-6xl font-black text-white mb-2 tracking-tighter tabular-nums">
               ${annualSavings.toLocaleString()}
             </div>
             <div className="text-emerald-400 font-medium text-sm mb-10">

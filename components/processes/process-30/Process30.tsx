@@ -7,8 +7,8 @@ export default function Process30() {
   const [otp, setOtp] = useState(['', '', '', '']);
 
   return (
-    <div className="w-full max-w-lg mx-auto p-4 sm:p-8 font-sans">
-      <div className="bg-white rounded-[2.5rem] p-6 sm:p-10 shadow-2xl border border-gray-100 text-center relative overflow-hidden">
+    <div className="w-full w-full p-4 sm:p-8 font-sans">
+      <div className="bg-white rounded-[1.25rem] sm:rounded-[2rem] lg:rounded-[2.5rem] p-6 sm:p-10 shadow-2xl border border-gray-100 text-center relative overflow-hidden">
         
         {/* Progress header */}
         <div className="flex justify-center items-center gap-4 mb-10">

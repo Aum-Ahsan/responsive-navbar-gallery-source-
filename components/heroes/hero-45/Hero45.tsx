@@ -27,7 +27,7 @@ export default function Hero45() {
 
   // ================= 2. REUSABLE HERO UI (RESPONSIVE) =================
   const HeroUI = ({ isFullDemo = false }: { isFullDemo?: boolean }) => (
-    <section className={`relative w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-20 lg:py-0' : 'py-16 lg:py-0 lg:h-[85vh] min-h-[850px] sm:min-h-[900px] lg:min-h-[700px]'}`}>
+    <section className={`relative w-full flex flex-col items-center justify-center overflow-hidden bg-black text-white transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-10 sm:py-14 lg:py-20 lg:py-0' : 'py-16 lg:py-0 lg:h-[85vh] min-h-[850px] sm:min-h-[900px] lg:min-h-[700px]'}`}>
       
       {/* ================= BACKGROUND VIDEO LAYER ================= */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -82,7 +82,7 @@ export default function Hero45() {
         
         <div className="max-w-[1200px] mx-auto bg-white/10 backdrop-blur-xl border border-white/20 p-2 sm:p-2.5 rounded-2xl sm:rounded-[2rem] lg:rounded-full shadow-[0_30px_60px_rgba(0,0,0,0.6)]">
           
-          <div className="flex flex-col lg:flex-row items-center gap-1 sm:gap-1.5 lg:gap-0">
+          <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-1.5 lg:gap-0">
             
             {/* 1. Location Selector */}
             <div className="flex-1 w-full lg:w-auto px-4 sm:px-6 py-2.5 sm:py-3.5 lg:py-4 xl:py-5 flex flex-col justify-center border-b border-white/5 lg:border-b-0 lg:border-r lg:border-white/20 cursor-pointer group hover:bg-white/5 rounded-xl sm:rounded-t-3xl lg:rounded-l-full lg:rounded-tr-none transition-colors relative">

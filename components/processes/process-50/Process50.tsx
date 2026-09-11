@@ -18,7 +18,7 @@ export default function Process50() {
       </div>
 
       <div className="overflow-x-auto pb-8 hide-scrollbar">
-        <div className="relative w-full min-w-[600px] md:min-w-0 h-[500px] mt-8">
+        <div className="relative w-full min-w-[600px] md:min-w-0 h-[200px] sm:h-[260px] lg:h-[300px] sm:h-[260px] sm:h-[340px] lg:h-[400px] lg:h-[500px] mt-8">
         
         {/* Mock Map Background (Topographic lines) */}
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 30% 30%, transparent 20%, #10b981 21%, transparent 22%), radial-gradient(circle at 70% 70%, transparent 30%, #10b981 31%, transparent 32%), radial-gradient(circle at 50% 50%, transparent 40%, #10b981 41%, transparent 42%)', backgroundSize: '100% 100%' }}></div>

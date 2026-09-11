@@ -23,7 +23,7 @@ export default function Hero37() {
 
   // ================= 2. REUSABLE HERO UI (RESPONSIVE) =================
   const HeroUI = ({ isFullDemo = false }: { isFullDemo?: boolean }) => (
-    <section className={`relative w-full flex flex-col justify-between overflow-hidden bg-[#f4f4f0] text-black transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh]' : 'h-[600px] sm:h-[700px] lg:h-[85vh] min-h-[600px]'}`}>
+    <section className={`relative w-full flex flex-col justify-between overflow-hidden bg-[#f4f4f0] text-black transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh]' : 'h-[600px] sm:h-[700px] lg:h-[85vh] min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] sm:min-h-[350px] sm:min-h-[420px] lg:min-h-[500px] lg:min-h-[600px]'}`}>
       
       {/* Brutalist Top Border */}
       <div className="w-full h-2 sm:h-3 md:h-4 bg-black shrink-0"></div>

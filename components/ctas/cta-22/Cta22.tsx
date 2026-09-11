@@ -13,11 +13,11 @@ export default function Cta22() {
   const progress = 50;
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-indigo-50 rounded-3xl border border-indigo-100 overflow-hidden flex flex-col md:flex-row">
         
         {/* Left Side: Progress Visual */}
-        <div className="w-full md:w-2/5 bg-indigo-600 p-10 flex flex-col items-center justify-center text-white relative">
+        <div className="w-full md:w-2/5 bg-indigo-600 p-5 sm:p-8 lg:p-10 flex flex-col items-center justify-center text-white relative">
           {/* Circular Progress */}
           <div className="relative w-48 h-48 flex items-center justify-center mb-6">
             <svg className="w-full h-full transform -rotate-90">
@@ -34,7 +34,7 @@ export default function Cta22() {
               />
             </svg>
             <div className="absolute flex flex-col items-center justify-center">
-              <span className="text-5xl font-black">{progress}%</span>
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-black">{progress}%</span>
               <span className="text-indigo-200 text-sm font-medium uppercase tracking-wider">Complete</span>
             </div>
           </div>

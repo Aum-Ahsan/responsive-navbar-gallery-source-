@@ -6,12 +6,12 @@ export default function Cta44() {
   const [selected, setSelected] = useState(1);
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="text-center mb-12">
         <div className="inline-flex items-center gap-2 bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4">
           <Ticket size={14} /> Official Passes
         </div>
-        <h2 className="text-4xl sm:text-5xl font-black text-gray-900 mb-4 tracking-tight">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl font-black text-gray-900 mb-4 tracking-tight">
           Choose your experience.
         </h2>
         <p className="text-gray-500 text-lg font-medium max-w-xl mx-auto">
@@ -36,7 +36,7 @@ export default function Cta44() {
             </div>
           </div>
           
-          <div className="text-5xl font-black text-gray-900 mb-8">$199</div>
+          <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-8">$199</div>
           
           <ul className="space-y-4 mb-8">
             <li className="flex items-center gap-3 text-gray-600 font-medium"><Check size={18} className="text-indigo-500" /> Full 2-day conference access</li>
@@ -68,7 +68,7 @@ export default function Cta44() {
             </div>
           </div>
           
-          <div className="text-5xl font-black text-white mb-8">$599</div>
+          <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-8">$599</div>
           
           <ul className="space-y-4 mb-8">
             <li className="flex items-center gap-3 text-slate-300 font-medium"><Check size={18} className="text-amber-400" /> Full 2-day conference access</li>
@@ -82,7 +82,7 @@ export default function Cta44() {
       </div>
       
       <div className="mt-10 flex justify-center">
-        <button className="w-full sm:w-auto px-12 py-5 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-xl text-lg shadow-xl transition-transform hover:-translate-y-1">
+        <button className="w-full sm:w-auto px-4 sm:px-8 lg:px-12 py-5 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-xl text-lg shadow-xl transition-transform hover:-translate-y-1">
           Continue to Checkout
         </button>
       </div>

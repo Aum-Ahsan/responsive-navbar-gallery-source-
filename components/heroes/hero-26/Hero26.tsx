@@ -24,14 +24,14 @@ export default function Hero26() {
 
   // ================= 2. REUSABLE HERO UI (RESPONSIVE) =================
   const HeroUI = ({ isFullDemo = false }: { isFullDemo?: boolean }) => (
-    <section className={`relative w-full flex items-center justify-center overflow-hidden bg-[#0a0a0a] text-white transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-20 lg:py-0' : 'py-16 lg:py-0 lg:h-[80vh] min-h-[750px] lg:min-h-[600px]'}`}>
+    <section className={`relative w-full flex items-center justify-center overflow-hidden bg-[#0a0a0a] text-white transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-10 sm:py-14 lg:py-20 lg:py-0' : 'py-16 lg:py-0 lg:h-[80vh] min-h-[750px] lg:min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] sm:min-h-[350px] sm:min-h-[420px] lg:min-h-[500px] lg:min-h-[600px]'}`}>
       
       {/* Background Gradient/Glow Effects */}
       <div className="absolute top-0 right-0 w-[80%] lg:w-[50%] h-[80%] bg-violet-600/20 blur-[100px] md:blur-[150px] rounded-full z-0 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[80%] sm:w-[50%] h-[50%] bg-fuchsia-600/10 blur-[100px] md:blur-[120px] rounded-full z-0 pointer-events-none" />
 
       {/* Main Content Container - Flex Col for Mobile/iPad, Flex Row for iPad Landscape/Desktop */}
-      <div className="relative z-10 max-w-7xl w-full px-5 sm:px-8 md:px-12 lg:px-12 xl:px-20 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 xl:gap-16 mt-8 lg:mt-0">
+      <div className="relative z-10 max-w-7xl w-full px-5 sm:px-8 md:px-12 lg:px-12 xl:px-20 flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8 lg:gap-12 lg:gap-8 xl:gap-16 mt-8 lg:mt-0">
         
         {/* LEFT COLUMN: Text Content */}
         <div className={`flex-1 flex flex-col items-center text-center lg:items-start lg:text-left w-full ${isFullDemo ? 'animate-in fade-in slide-in-from-left-8 duration-1000' : ''}`}>
@@ -41,7 +41,7 @@ export default function Hero26() {
             <Mic size={16} className="animate-pulse" /> New Episode Out Now
           </div>
 {/*           
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[2.75rem] xl:text-6xl 2xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6 leading-[1.15] md:leading-[1.1]">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl md:text-6xl lg:text-[2.75rem] xl:text-6xl 2xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6 leading-[1.15] md:leading-[1.1]">
             The Future of <br className="hidden lg:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-500">
               Tech & Design.
@@ -94,7 +94,7 @@ export default function Hero26() {
         </div>
 
         {/* RIGHT COLUMN: Interactive Audio Player UI - Scales perfectly */}
-        <div className={`w-full max-w-[340px] sm:max-w-md lg:max-w-[360px] xl:max-w-[420px] mx-auto lg:mx-0 ${isFullDemo ? 'animate-in fade-in zoom-in-95 duration-1000 delay-300' : ''}`}>
+        <div className={`w-full max-w-full sm:w-[280px] md:w-[340px] sm:max-w-md lg:max-w-full sm:w-full sm:w-[240px] md:w-[300px] md:w-[360px] xl:max-w-[420px] mx-auto lg:mx-0 ${isFullDemo ? 'animate-in fade-in zoom-in-95 duration-1000 delay-300' : ''}`}>
           
           <style dangerouslySetInnerHTML={{__html: `
             @keyframes visualizer {

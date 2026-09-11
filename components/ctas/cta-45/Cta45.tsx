@@ -25,7 +25,7 @@ export default function Cta45() {
   }, [index]);
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-[#0c0c0c] rounded-3xl p-8 sm:p-16 border border-zinc-800 shadow-2xl relative overflow-hidden flex flex-col items-center text-center">
         
         {/* Terminal Window Mockup */}

@@ -12,8 +12,8 @@ export default function Cta48() {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-slate-50 rounded-[2.5rem] border border-slate-200 overflow-hidden shadow-xl p-8 sm:p-12 flex flex-col lg:flex-row items-center gap-12 relative">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-slate-50 rounded-[1.25rem] sm:rounded-[2rem] lg:rounded-[2.5rem] border border-slate-200 overflow-hidden shadow-xl p-8 sm:p-12 flex flex-col sm:flex-row items-center gap-6 sm:gap-8 lg:gap-12 relative">
         
         {/* Left: Map UI */}
         <div className="w-full lg:w-1/2 relative bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">

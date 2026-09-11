@@ -4,11 +4,11 @@ import { Lock, Sparkles } from 'lucide-react';
 
 export default function Cta28() {
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 sm:p-8 my-10 font-sans relative">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans relative">
       
       {/* Fake Content Background */}
       <div className="text-slate-300 select-none space-y-4 filter blur-[6px] opacity-60">
-        <h1 className="text-4xl font-black text-slate-800 mb-6">Advanced React Server Components Architecture</h1>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-800 mb-6">Advanced React Server Components Architecture</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         <div className="h-64 bg-slate-200 rounded-xl my-6"></div>
         <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>

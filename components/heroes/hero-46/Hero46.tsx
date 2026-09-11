@@ -61,28 +61,38 @@ export default function Hero46() {
           }
         `}} />
 
-        {/* Generate 30 random raindrops using CSS (Increased count) */}
-        {[...Array(30)].map((_, i) => {
-          const left = Math.floor(Math.random() * 100);
-          // Faster rain: 0.4s to 1.2s duration
-          const duration = 0.4 + Math.random() * 0.8;
-          const delay = Math.random() * 2;
-          return (
-            <div 
-              key={i} 
-              className="rain-drop" 
-              style={{ 
-                left: `${left}%`, 
-                animationDuration: `${duration}s`,
-                animationDelay: `${delay}s`
-              }} 
-            />
-          );
-        })}
+        {/* Generate 30 raindrops using deterministic values (avoids SSR hydration mismatch) */}
+        {[
+          { left: 3,  dur: 0.71, del: 1.23 }, { left: 10, dur: 0.55, del: 0.47 },
+          { left: 17, dur: 0.94, del: 1.81 }, { left: 24, dur: 0.62, del: 0.09 },
+          { left: 31, dur: 0.48, del: 1.55 }, { left: 38, dur: 0.83, del: 0.72 },
+          { left: 45, dur: 0.57, del: 1.38 }, { left: 52, dur: 1.02, del: 0.31 },
+          { left: 59, dur: 0.76, del: 1.94 }, { left: 66, dur: 0.41, del: 0.88 },
+          { left: 73, dur: 0.69, del: 1.62 }, { left: 80, dur: 0.93, del: 0.15 },
+          { left: 87, dur: 0.52, del: 1.07 }, { left: 94, dur: 0.78, del: 0.59 },
+          { left: 7,  dur: 1.15, del: 1.76 }, { left: 14, dur: 0.44, del: 0.22 },
+          { left: 21, dur: 0.87, del: 1.41 }, { left: 28, dur: 0.63, del: 0.84 },
+          { left: 35, dur: 1.08, del: 0.03 }, { left: 42, dur: 0.49, del: 1.19 },
+          { left: 49, dur: 0.74, del: 1.97 }, { left: 56, dur: 0.98, del: 0.66 },
+          { left: 63, dur: 0.53, del: 1.33 }, { left: 70, dur: 0.81, del: 0.41 },
+          { left: 77, dur: 0.46, del: 1.88 }, { left: 84, dur: 1.12, del: 0.97 },
+          { left: 91, dur: 0.67, del: 0.28 }, { left: 98, dur: 0.59, del: 1.52 },
+          { left: 5,  dur: 0.88, del: 0.74 }, { left: 33, dur: 0.72, del: 1.16 },
+        ].map(({ left, dur, del }, i) => (
+          <div
+            key={i}
+            className="rain-drop"
+            style={{
+              left: `${left}%`,
+              animationDuration: `${dur}s`,
+              animationDelay: `${del}s`
+            }}
+          />
+        ))}
       </div>
 
       {/* ================= MAIN CONTENT ================= */}
-      <div className={`relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-8 mt-4 lg:mt-0 ${isFullDemo ? 'animate-in fade-in slide-in-from-top-8 duration-1000' : ''}`}>
+      <div className={`relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 flex flex-col sm:flex-row items-center justify-between gap-10 lg:gap-8 mt-4 lg:mt-0 ${isFullDemo ? 'animate-in fade-in slide-in-from-top-8 duration-1000' : ''}`}>
         
         {/* LEFT: Text & Search */}
         <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left w-full">
@@ -91,7 +101,7 @@ export default function Hero46() {
             <ThermometerSun size={16} className="text-amber-400" /> Next-Gen Climate Tech
           </div>
           
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[5rem] font-bold tracking-tight mb-4 sm:mb-6 leading-[1.1] text-white">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[5rem] font-bold tracking-tight mb-4 sm:mb-6 leading-[1.1] text-white">
             Weather intelligence <br className="hidden lg:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-slate-300 to-white">
               for the real world.
@@ -131,7 +141,7 @@ export default function Hero46() {
         <div className={`w-full lg:w-[450px] xl:w-[500px] ${isFullDemo ? 'animate-in fade-in zoom-in-95 duration-1000 delay-300' : ''}`}>
           
           {/* The Widget Container */}
-          <div className="relative bg-slate-900/40 backdrop-blur-2xl rounded-3xl sm:rounded-[2.5rem] border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.5)] overflow-hidden p-6 sm:p-8 xl:p-10 min-h-[350px] sm:min-h-[400px] flex flex-col justify-center">
+          <div className="relative bg-slate-900/40 backdrop-blur-2xl rounded-3xl sm:rounded-[1.25rem] sm:rounded-[2rem] lg:rounded-[2.5rem] border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.5)] overflow-hidden p-6 sm:p-8 xl:p-10 min-h-[240px] sm:h-[200px] sm:h-[260px] lg:h-[300px] lg:h-[350px] sm:min-h-[260px] sm:h-[340px] lg:h-[400px] flex flex-col justify-center">
             
             {/* Ambient inner glow */}
             <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-blue-500/20 blur-[80px] rounded-full pointer-events-none"></div>
@@ -161,7 +171,7 @@ export default function Hero46() {
                 <div className="flex items-center gap-6 sm:gap-8 mb-8 sm:mb-12">
                   <CloudRain size={72} strokeWidth={1.5} className="text-blue-400 drop-shadow-[0_0_20px_rgba(96,165,250,0.5)] sm:w-[90px] sm:h-[90px]" />
                   <div>
-                    <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-white leading-none tracking-tighter">
+                    <h2 className="text-3xl sm:text-5xl lg:text-6xl sm:text-7xl xl:text-8xl font-black text-white leading-none tracking-tighter">
                       58<span className="text-3xl sm:text-4xl text-slate-400 font-medium">°F</span>
                     </h2>
                     <p className="text-sm sm:text-base text-blue-300 font-bold tracking-wide mt-2">Heavy Rain expected.</p>

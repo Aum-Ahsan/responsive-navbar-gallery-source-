@@ -101,7 +101,7 @@ export default function Hero44() {
           <span className="flex items-center gap-2"><Calendar size={16} /> Aug 12-14, 2024</span>
         </div>
 
-        {/* <h1 className="text-6xl sm:text-[5.5rem] md:text-[7rem] lg:text-[8rem] xl:text-[10rem] font-black uppercase tracking-tighter leading-[0.85] mb-8 text-white select-none">
+        {/* <h1 className="text-3xl sm:text-5xl lg:text-6xl sm:text-[5.5rem] md:text-[7rem] lg:text-[8rem] xl:text-[10rem] font-black uppercase tracking-tighter leading-[0.85] mb-8 text-white select-none">
           <span className="block glitch-text relative inline-block">Electric</span>
           <span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 drop-shadow-[0_0_30px_rgba(236,72,153,0.8)]">Neon</span>
         </h1>

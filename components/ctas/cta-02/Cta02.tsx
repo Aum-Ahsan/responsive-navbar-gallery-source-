@@ -4,17 +4,17 @@ import { Smartphone, QrCode } from 'lucide-react';
 
 export default function Cta02() {
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-slate-900 rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row items-center border border-slate-800">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-slate-900 rounded-[1.25rem] sm:rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row items-center border border-slate-800">
         
         {/* Left Content */}
-        <div className="w-full md:w-1/2 p-10 sm:p-16 text-left flex flex-col justify-center text-white">
+        <div className="w-full md:w-1/2 p-5 sm:p-8 lg:p-10 sm:p-16 text-left flex flex-col justify-center text-white">
           <div className="inline-flex items-center gap-2 text-emerald-400 font-bold mb-6 text-sm uppercase tracking-wider">
             <Smartphone size={18} />
             Mobile App Available
           </div>
           
-          <h2 className="text-4xl sm:text-5xl font-black mb-6 leading-[1.1]">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl font-black mb-6 leading-[1.1]">
             Your entire workflow, right in your pocket.
           </h2>
           
@@ -57,12 +57,12 @@ export default function Cta02() {
         </div>
 
         {/* Right Image/Mockup */}
-        <div className="w-full md:w-1/2 bg-slate-800 relative min-h-[400px] md:min-h-full flex items-center justify-center p-8 overflow-hidden">
+        <div className="w-full md:w-1/2 bg-slate-800 relative min-h-[260px] sm:h-[340px] lg:h-[400px] md:min-h-full flex items-center justify-center p-8 overflow-hidden">
           {/* Abstract glowing background */}
           <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/30 to-emerald-500/30 blur-[80px]"></div>
           
           {/* Mock Phone Frame */}
-          <div className="relative w-[240px] h-[480px] bg-slate-950 rounded-[2.5rem] border-[8px] border-slate-700 shadow-2xl flex flex-col overflow-hidden rotate-12 transform hover:rotate-0 transition-transform duration-700">
+          <div className="relative w-[240px] h-[480px] bg-slate-950 rounded-[1.25rem] sm:rounded-[2rem] lg:rounded-[2.5rem] border-[8px] border-slate-700 shadow-2xl flex flex-col overflow-hidden rotate-12 transform hover:rotate-0 transition-transform duration-700">
             <div className="w-32 h-6 bg-slate-700 absolute top-0 left-1/2 -translate-x-1/2 rounded-b-xl z-10"></div>
             <div className="p-4 pt-10 flex flex-col gap-4">
               <div className="w-full h-24 bg-slate-800 rounded-xl"></div>

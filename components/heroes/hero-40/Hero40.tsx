@@ -68,7 +68,7 @@ export default function Hero40() {
 
   // ================= 3. REUSABLE HERO UI (RESPONSIVE) =================
   const HeroUI = ({ isFullDemo = false }: { isFullDemo?: boolean }) => (
-    <section className={`relative w-full flex flex-col items-center justify-center overflow-hidden bg-[#f8fafc] text-slate-900 transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-20 lg:py-0' : 'py-16 lg:h-[85vh] min-h-[750px] lg:min-h-[700px]'}`}>
+    <section className={`relative w-full flex flex-col items-center justify-center overflow-hidden bg-[#f8fafc] text-slate-900 transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-10 sm:py-14 lg:py-20 lg:py-0' : 'py-16 lg:h-[85vh] min-h-[750px] lg:min-h-[700px]'}`}>
       
       {/* Background Decorative Cloud / Blobs */}
       <div className="absolute top-[-10%] left-[-5%] w-[60%] sm:w-[40%] h-[40%] bg-blue-200/40 blur-[100px] rounded-full z-0 pointer-events-none" />
@@ -90,7 +90,7 @@ export default function Hero40() {
           <ShieldCheck size={16} className="sm:w-[18px] sm:h-[18px]" /> End-to-End Encrypted
         </div>
         
-        {/* <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[4.5rem] font-extrabold tracking-tight mb-4 sm:mb-5 leading-[1.1] text-slate-900 px-2 sm:px-0">
+        {/* <h1 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[4.5rem] font-extrabold tracking-tight mb-4 sm:mb-5 leading-[1.1] text-slate-900 px-2 sm:px-0">
           The easiest way to <br className="hidden sm:block" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
             send large files.
@@ -126,7 +126,7 @@ export default function Hero40() {
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
-          <div className="flex flex-col items-center justify-center p-8 sm:p-12 md:p-16 min-h-[250px] sm:min-h-[300px]">
+          <div className="flex flex-col items-center justify-center p-8 sm:p-12 md:p-16 min-h-[160px] sm:h-[200px] lg:h-[250px] sm:min-h-[200px] sm:h-[260px] lg:h-[300px]">
             
             {/* STATE 1: IDLE / DRAGGING */}
             {(dragState === 'idle' || dragState === 'dragging') && (

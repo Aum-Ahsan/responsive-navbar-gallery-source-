@@ -10,8 +10,8 @@ export default function Cta39() {
   const presets = [10, 25, 50, 100];
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-emerald-900 rounded-[2.5rem] p-8 sm:p-12 border border-emerald-800 shadow-2xl flex flex-col md:flex-row items-center gap-12">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-emerald-900 rounded-[1.25rem] sm:rounded-[2rem] lg:rounded-[2.5rem] p-8 sm:p-12 border border-emerald-800 shadow-2xl flex flex-col md:flex-row items-center gap-6 sm:gap-8 lg:gap-12">
         
         <div className="flex-1 text-center md:text-left">
           <div className="w-16 h-16 bg-emerald-800 rounded-full flex items-center justify-center text-emerald-300 mb-6 mx-auto md:mx-0">

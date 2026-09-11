@@ -22,7 +22,7 @@ export default function Process36() {
             
             <div className="relative z-10 w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div className="flex items-center gap-6">
-                <span className="text-5xl font-black text-zinc-400 group-hover:text-white transition-colors">
+                <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-400 group-hover:text-white transition-colors">
                   {idx + 1}.
                 </span>
                 <h3 className="text-2xl font-bold text-zinc-300 group-hover:text-white transition-colors">{step.title}</h3>

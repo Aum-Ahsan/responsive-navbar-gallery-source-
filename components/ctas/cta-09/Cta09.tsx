@@ -21,7 +21,7 @@ export default function Cta09() {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-white rounded-3xl border border-gray-200 shadow-[0_20px_60px_rgba(0,0,0,0.05)] p-8 sm:p-12 text-center overflow-hidden relative">
         
         {/* Progress Bar */}

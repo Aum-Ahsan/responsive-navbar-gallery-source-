@@ -37,7 +37,7 @@ export default function Hero31() {
           <Activity size={16} className="text-indigo-400 shrink-0" /> New: Real-time User Funnels
         </div>
         
-        {/* <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[3rem] xl:text-[3.5rem] 2xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6 leading-[1.15] md:leading-[1.1] px-2 sm:px-0">
+        {/* <h1 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl md:text-6xl lg:text-[3rem] xl:text-[3.5rem] 2xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6 leading-[1.15] md:leading-[1.1] px-2 sm:px-0">
           Understand your users. <br className="hidden sm:block" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
             Grow your product.
@@ -103,7 +103,7 @@ export default function Hero31() {
           </div>
 
           {/* Dashboard Body - Adjusted heights for different screens */}
-          <div className="flex p-3 sm:p-5 lg:p-5 xl:p-6 gap-4 lg:gap-5 xl:gap-6 h-[220px] sm:h-[300px] lg:h-[300px] xl:h-[400px]">
+          <div className="flex p-3 sm:p-5 lg:p-5 xl:p-6 gap-4 lg:gap-5 xl:gap-6 h-[220px] sm:h-[200px] sm:h-[260px] lg:h-[300px] lg:h-[200px] sm:h-[260px] lg:h-[300px] xl:h-[260px] sm:h-[340px] lg:h-[400px]">
             
             {/* Sidebar - Shown on iPad Landscape (lg) & Desktop (xl) */}
             <div className="hidden lg:flex flex-col gap-4 w-32 xl:w-48 border-r border-white/10 pr-4 xl:pr-6 pt-2 shrink-0">

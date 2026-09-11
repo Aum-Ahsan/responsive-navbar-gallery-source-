@@ -7,7 +7,7 @@ export default function Cta49() {
   const [hover, setHover] = useState(0);
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-white rounded-3xl border border-gray-200 shadow-xl p-8 sm:p-12 relative overflow-hidden">
         
         <div className="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-emerald-400 to-teal-500"></div>

@@ -32,7 +32,7 @@ export default function Process14() {
   ];
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-8 py-20 font-sans" ref={containerRef}>
+    <div className="w-full max-w-3xl mx-auto p-8 py-10 sm:py-14 lg:py-20 font-sans" ref={containerRef}>
       <div className="text-center mb-24">
         <h2 className="text-3xl font-bold text-slate-800">Scroll-Reveal Journey</h2>
         <p className="text-slate-500 mt-2">Scroll down to see the steps animate into view.</p>
@@ -48,7 +48,7 @@ export default function Process14() {
               className={`scroll-reveal-item flex flex-col md:flex-row items-center gap-8 transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24'}`}
             >
               <div className="w-32 h-32 shrink-0 bg-slate-100 rounded-3xl flex items-center justify-center shadow-inner border border-slate-200">
-                <span className="text-5xl font-black text-slate-300">0{idx + 1}</span>
+                <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-300">0{idx + 1}</span>
               </div>
               <div>
                 <h3 className="text-3xl font-bold text-slate-900 mb-3">{item.title}</h3>

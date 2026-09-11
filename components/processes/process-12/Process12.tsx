@@ -11,12 +11,12 @@ export default function Process12() {
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-12 font-sans overflow-hidden">
-      <h2 className="text-4xl font-black text-pink-950 mb-16 text-center">S-Curve Pathway</h2>
+    <div className="w-full max-w-4xl mx-auto p-5 sm:p-8 lg:p-12 font-sans overflow-hidden">
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-pink-950 mb-8 sm:mb-12 lg:mb-16 text-center">S-Curve Pathway</h2>
       
       <div className="relative">
         {/* SVG S-Curve Line */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-full z-0 hidden md:block">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full sm:w-[240px] md:w-[300px] h-full z-0 hidden md:block">
           <svg width="300" height="100%" preserveAspectRatio="none" className="overflow-visible stroke-pink-200">
             <path 
               d="M 150 0 C 300 100, 300 200, 150 300 C 0 400, 0 500, 150 600 C 300 700, 300 800, 150 900" 
@@ -28,7 +28,7 @@ export default function Process12() {
           </svg>
         </div>
 
-        <div className="space-y-16 md:space-y-24 relative z-10">
+        <div className="space-y-8 sm:space-y-6 sm:space-y-8 lg:space-y-12 lg:space-y-16 md:space-y-24 relative z-10">
           {steps.map((step, idx) => (
             <div key={idx} className={`flex flex-col md:flex-row items-center justify-center gap-8 ${step.align === 'right' ? 'md:flex-row-reverse' : ''}`}>
               <div className="md:w-1/2 flex justify-center">

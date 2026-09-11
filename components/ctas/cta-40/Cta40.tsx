@@ -4,8 +4,8 @@ import { Home, Calendar, Star, ChevronRight } from 'lucide-react';
 
 export default function Cta40() {
   return (
-    <div className="w-full max-w-6xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-white rounded-[2rem] border border-gray-200 shadow-xl overflow-hidden flex flex-col lg:flex-row relative">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-white rounded-[2rem] border border-gray-200 shadow-xl overflow-hidden flex flex-col sm:flex-row relative">
         
         {/* Photo Gallery Side */}
         <div className="w-full lg:w-3/5 h-64 lg:h-auto relative">
@@ -23,7 +23,7 @@ export default function Cta40() {
           <h2 className="text-3xl font-black text-gray-900 mb-2">Modern Villa Estate</h2>
           <div className="text-2xl font-black text-gray-500 mb-8">$8,500,000</div>
 
-          <div className="grid grid-cols-3 gap-4 border-y border-gray-100 py-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 border-y border-gray-100 py-6 mb-8">
             <div className="text-center">
               <div className="font-black text-gray-900 text-xl">5</div>
               <div className="text-xs text-gray-500 font-bold uppercase mt-1">Beds</div>

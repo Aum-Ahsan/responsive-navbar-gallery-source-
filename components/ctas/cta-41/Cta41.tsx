@@ -4,8 +4,8 @@ import { BookOpen, Video, Clock, CheckCircle2, Play } from 'lucide-react';
 
 export default function Cta41() {
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-indigo-950 rounded-[2.5rem] border border-indigo-800 shadow-2xl p-8 sm:p-12 relative overflow-hidden flex flex-col lg:flex-row items-center gap-12">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-indigo-950 rounded-[1.25rem] sm:rounded-[2rem] lg:rounded-[2.5rem] border border-indigo-800 shadow-2xl p-8 sm:p-12 relative overflow-hidden flex flex-col sm:flex-row items-center gap-6 sm:gap-8 lg:gap-12">
         
         {/* Glow effect */}
         <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-indigo-500 rounded-full mix-blend-screen filter blur-[120px] opacity-30 z-0"></div>

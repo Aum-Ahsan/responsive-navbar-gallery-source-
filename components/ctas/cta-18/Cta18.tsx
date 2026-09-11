@@ -4,8 +4,8 @@ import { Sparkles, ArrowRight } from 'lucide-react';
 
 export default function Cta18() {
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="relative rounded-[2.5rem] overflow-hidden p-10 sm:p-20 text-center flex flex-col items-center">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="relative rounded-[1.25rem] sm:rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden p-5 sm:p-8 lg:p-10 sm:p-20 text-center flex flex-col items-center">
         
         {/* Animated Gradient Background */}
         <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-orange-600 animate-[gradient_8s_ease_infinite]" style={{ backgroundSize: '200% 200%' }}></div>
@@ -16,7 +16,7 @@ export default function Cta18() {
             <Sparkles size={14} /> Next Generation
           </div>
           
-          <h2 className="text-4xl sm:text-6xl font-black text-white mb-6 tracking-tight drop-shadow-lg max-w-3xl mx-auto leading-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl sm:text-6xl font-black text-white mb-6 tracking-tight drop-shadow-lg max-w-3xl mx-auto leading-tight">
             Stop coding from scratch. <br className="hidden sm:block"/>Start assembling.
           </h2>
           

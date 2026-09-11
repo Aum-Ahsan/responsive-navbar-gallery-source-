@@ -6,7 +6,7 @@ export default function Cta27() {
   const usage = 94; // 94% usage
   
   return (
-    <div className="w-full max-w-3xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-slate-900 text-white rounded-3xl border border-slate-800 shadow-2xl p-8 sm:p-12 relative overflow-hidden">
         
         <div className="flex items-start justify-between mb-8">

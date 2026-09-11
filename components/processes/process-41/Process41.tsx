@@ -12,7 +12,7 @@ export default function Process41() {
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4 sm:p-12 font-sans bg-gray-50 rounded-[2rem] my-10 border border-gray-200">
-      <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">Hover Tooltip Process</h2>
+      <h2 className="text-3xl font-bold text-center text-gray-900 mb-8 sm:mb-12 lg:mb-16">Hover Tooltip Process</h2>
 
       <div className="relative flex justify-between items-center px-4">
         {/* Connector Line */}

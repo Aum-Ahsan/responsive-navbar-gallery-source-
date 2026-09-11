@@ -6,10 +6,10 @@ export default function Cta03() {
   const [annual, setAnnual] = useState(true);
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-white rounded-3xl border border-gray-200 shadow-xl p-8 sm:p-16">
         
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8 lg:gap-12">
           
           <div className="flex-1 text-center lg:text-left">
             <h2 className="text-3xl sm:text-5xl font-black text-gray-900 mb-6 tracking-tight">
@@ -47,7 +47,7 @@ export default function Cta03() {
             </div>
             
             <div className="mb-6 flex items-end gap-1">
-              <span className="text-5xl font-black text-gray-900">${annual ? '24' : '39'}</span>
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900">${annual ? '24' : '39'}</span>
               <span className="text-gray-500 font-medium mb-1">/mo</span>
             </div>
             

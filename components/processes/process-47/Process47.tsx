@@ -11,9 +11,9 @@ export default function Process47() {
 
   return (
     <div className="w-full max-w-4xl mx-auto p-8 font-sans my-10">
-      <h2 className="text-3xl font-bold text-teal-900 mb-16 text-center">Diagonal Ascend</h2>
+      <h2 className="text-3xl font-bold text-teal-900 mb-8 sm:mb-12 lg:mb-16 text-center">Diagonal Ascend</h2>
 
-      <div className="relative md:h-[500px]">
+      <div className="relative md:h-[200px] sm:h-[260px] lg:h-[300px] sm:h-[260px] sm:h-[340px] lg:h-[400px] lg:h-[500px]">
         {/* Diagonal Line */}
         <div className="hidden md:block absolute left-[20%] top-0 bottom-0 w-1 bg-teal-100 transform -skew-x-12"></div>
 

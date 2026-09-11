@@ -49,7 +49,7 @@ export default function Process48() {
         </div>
 
         {/* Terminal Body */}
-        <div className="p-6 text-green-400 min-h-[300px]">
+        <div className="p-6 text-green-400 min-h-[200px] sm:h-[260px] lg:h-[300px]">
           {lines.map((line, idx) => (
             <div key={idx} className={`mb-2 ${line?.startsWith('>') ? 'text-white font-bold mt-4' : ''} ${line?.includes('Error') ? 'text-red-500' : ''}`}>
               {line}

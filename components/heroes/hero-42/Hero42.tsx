@@ -139,8 +139,8 @@ export default function Hero42() {
           .animate-iso-float { animation: iso-float 6s ease-in-out infinite; }
         `}} />
 
-        {/* Max-height constraint added (lg:max-h-[320px]) so it never overflows iPad landscape */}
-        <div className="relative w-full aspect-[4/3] max-h-[350px] sm:max-h-[400px] lg:max-h-[320px] xl:max-h-[450px] animate-iso-float">
+        {/* Max-height constraint added (lg:max-h-[220px] sm:h-[180px] sm:h-[240px] lg:h-[280px] lg:h-[320px]) so it never overflows iPad landscape */}
+        <div className="relative w-full aspect-[4/3] max-h-[240px] sm:h-[200px] sm:h-[260px] lg:h-[300px] lg:h-[350px] sm:max-h-[260px] sm:h-[340px] lg:h-[400px] lg:max-h-[220px] sm:h-[180px] sm:h-[240px] lg:h-[280px] lg:h-[320px] xl:max-h-[180px] sm:h-[240px] lg:h-[280px] sm:h-[380px] lg:h-[450px] animate-iso-float">
           
           <img 
             src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop" 

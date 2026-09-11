@@ -7,7 +7,7 @@ export default function Cta47() {
 
   if (!visible) {
     return (
-      <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans flex items-center justify-center min-h-[400px] border border-gray-200 rounded-3xl bg-gray-50">
+      <div className="w-full w-full p-4 sm:p-8 my-10 font-sans flex items-center justify-center min-h-[260px] sm:h-[340px] lg:h-[400px] border border-gray-200 rounded-3xl bg-gray-50">
         <button onClick={() => setVisible(true)} className="text-sm font-bold text-gray-500 hover:text-gray-900 bg-white border border-gray-200 px-4 py-2 rounded-lg shadow-sm">
           Simulate Exit Intent
         </button>
@@ -16,12 +16,12 @@ export default function Cta47() {
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto my-10 font-sans relative min-h-[500px] border border-gray-200 rounded-3xl bg-gray-50 overflow-hidden flex items-center justify-center p-4">
+    <div className="w-full max-w-5xl mx-auto my-10 font-sans relative min-h-[200px] sm:h-[260px] lg:h-[300px] sm:h-[260px] sm:h-[340px] lg:h-[400px] lg:h-[500px] border border-gray-200 rounded-3xl bg-gray-50 overflow-hidden flex items-center justify-center p-4">
       
       {/* Background to simulate page content behind modal */}
-      <div className="absolute inset-0 p-12 text-gray-300 pointer-events-none select-none blur-sm">
-        <h1 className="text-5xl font-bold mb-4">Pricing Page</h1>
-        <div className="grid grid-cols-3 gap-6 mt-12">
+      <div className="absolute inset-0 p-5 sm:p-8 lg:p-12 text-gray-300 pointer-events-none select-none blur-sm">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Pricing Page</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           <div className="h-64 bg-gray-200 rounded-xl"></div>
           <div className="h-64 bg-gray-200 rounded-xl"></div>
           <div className="h-64 bg-gray-200 rounded-xl"></div>

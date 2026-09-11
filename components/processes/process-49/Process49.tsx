@@ -12,7 +12,7 @@ export default function Process49() {
 
   return (
     <div className="w-full max-w-4xl mx-auto p-6 sm:p-12 font-sans my-10 h-[600px] flex flex-col items-center">
-      <h2 className="text-3xl font-black text-gray-900 mb-16">3D Card Stack Process</h2>
+      <h2 className="text-3xl font-black text-gray-900 mb-8 sm:mb-12 lg:mb-16">3D Card Stack Process</h2>
 
       <div className="relative w-full max-w-md h-80 perspective-[1000px]">
         {cards.map((card, idx) => {
@@ -41,7 +41,7 @@ export default function Process49() {
             >
               <div className="flex justify-between items-start">
                 <h3 className="text-3xl font-bold">{card.title}</h3>
-                <span className="text-5xl font-black opacity-30">0{idx + 1}</span>
+                <span className="text-3xl sm:text-4xl lg:text-5xl font-black opacity-30">0{idx + 1}</span>
               </div>
               <p className="font-medium text-white/80">Click to bring this card to the front of the stack. This creates a deeply layered 3D workflow effect.</p>
             </div>

@@ -14,8 +14,8 @@ export default function Cta11() {
 
   if (submitted) {
     return (
-      <div className="w-full max-w-2xl mx-auto p-4 sm:p-8 my-10 font-sans">
-        <div className="bg-white rounded-3xl border border-gray-200 shadow-xl p-12 text-center flex flex-col items-center animate-in zoom-in-95 duration-500">
+      <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+        <div className="bg-white rounded-3xl border border-gray-200 shadow-xl p-5 sm:p-8 lg:p-12 text-center flex flex-col items-center animate-in zoom-in-95 duration-500">
           <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-6">
             <Check size={40} strokeWidth={3} />
           </div>
@@ -27,7 +27,7 @@ export default function Cta11() {
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-white rounded-3xl border border-gray-200 shadow-[0_20px_50px_rgba(0,0,0,0.06)] p-8 sm:p-12">
         <h2 className="text-2xl sm:text-3xl font-black text-gray-900 mb-2 text-center">How was your experience?</h2>
         <p className="text-gray-500 mb-10 text-center font-medium">Please rate your recent interaction with our support team.</p>

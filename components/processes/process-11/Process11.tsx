@@ -10,13 +10,13 @@ export default function Process11() {
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-12 font-sans bg-slate-50 rounded-[3rem] my-10 border border-slate-200 shadow-inner">
-      <div className="text-center mb-16">
+    <div className="w-full max-w-4xl mx-auto p-5 sm:p-8 lg:p-12 font-sans bg-slate-50 rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[3rem] my-10 border border-slate-200 shadow-inner">
+      <div className="text-center mb-8 sm:mb-12 lg:mb-16">
         <h2 className="text-3xl font-bold text-slate-900 mb-4">Continuous Cycle</h2>
         <p className="text-slate-600">A never-ending loop of constant improvement and refinement.</p>
       </div>
 
-      <div className="relative w-full max-w-2xl mx-auto h-[400px] scale-75 md:scale-100 origin-center overflow-hidden md:overflow-visible">
+      <div className="relative w-full max-w-2xl mx-auto h-[260px] sm:h-[340px] lg:h-[400px] scale-75 md:scale-100 origin-center overflow-hidden md:overflow-visible">
         {/* Central Core */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-300 animate-[spin_10s_linear_infinite]">
           <RefreshCw size={120} strokeWidth={1} />

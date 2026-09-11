@@ -11,7 +11,7 @@ export default function Process33() {
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto font-sans my-10 relative h-[600px] rounded-[3rem] overflow-hidden group shadow-2xl">
+    <div className="w-full max-w-5xl mx-auto font-sans my-10 relative h-[600px] rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[3rem] overflow-hidden group shadow-2xl">
       {/* Background Images */}
       {steps.map((step, idx) => (
         <img 
@@ -28,7 +28,7 @@ export default function Process33() {
       {/* Content */}
       <div className="absolute inset-x-0 bottom-0 p-6 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-0">
         <div>
-          <h2 className="text-5xl font-black text-white mb-2">{steps[active].title}</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-2">{steps[active].title}</h2>
           <p className="text-gray-300 max-w-sm">A highly visual journey where the imagery speaks louder than words.</p>
         </div>
 

@@ -4,7 +4,7 @@ import { Mail, Sparkles } from 'lucide-react';
 
 export default function Cta01() {
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="relative bg-gradient-to-br from-indigo-50 to-white rounded-[2rem] border border-indigo-100 p-8 sm:p-16 overflow-hidden shadow-lg text-center flex flex-col items-center">
         
         {/* Floating Decorative Elements */}

@@ -21,7 +21,7 @@ export default function Cta23() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-slate-900 rounded-[2rem] border border-slate-800 shadow-2xl p-8 sm:p-12 lg:p-16 text-center">
         
         <div className="w-20 h-20 bg-slate-800 border border-slate-700 text-blue-400 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-inner">

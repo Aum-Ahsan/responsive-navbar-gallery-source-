@@ -9,11 +9,11 @@ export default function Cta17() {
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-stone-50 rounded-[2.5rem] border border-stone-200 overflow-hidden flex flex-col lg:flex-row items-center p-8 sm:p-12 lg:p-16 gap-12 lg:gap-20 shadow-xl">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-stone-50 rounded-[1.25rem] sm:rounded-[2rem] lg:rounded-[2.5rem] border border-stone-200 overflow-hidden flex flex-col sm:flex-row items-center p-8 sm:p-12 lg:p-16 gap-6 sm:gap-8 lg:gap-12 lg:gap-20 shadow-xl">
         
         <div className="flex-1 text-center lg:text-left">
-          <h2 className="text-4xl sm:text-5xl font-black text-stone-900 mb-6 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl font-black text-stone-900 mb-6 tracking-tight">
             Talk to a human.
           </h2>
           <p className="text-stone-600 text-lg sm:text-xl mb-10 max-w-lg mx-auto lg:mx-0">
@@ -30,7 +30,7 @@ export default function Cta17() {
           </div>
         </div>
 
-        <div className="w-full lg:w-[400px]">
+        <div className="w-full lg:w-full sm:w-full sm:w-[280px] md:w-[340px] md:w-[400px]">
           <div className="bg-white rounded-2xl shadow-xl border border-stone-100 p-6 relative">
             <div className="absolute -top-4 -right-4 w-12 h-12 bg-emerald-500 rounded-full border-4 border-stone-50 flex items-center justify-center shadow-lg text-white">
               <Calendar size={20} />

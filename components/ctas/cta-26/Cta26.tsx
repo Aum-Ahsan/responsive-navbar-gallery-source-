@@ -4,11 +4,11 @@ import { ShieldAlert, Smartphone, Fingerprint, Lock } from 'lucide-react';
 
 export default function Cta26() {
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-red-50 rounded-3xl border border-red-200 shadow-lg p-8 sm:p-12 relative overflow-hidden flex flex-col items-center text-center">
         
         {/* Animated Background Pulse */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-100 rounded-full animate-pulse opacity-50 z-0"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[200px] sm:h-[260px] lg:h-[300px] sm:h-[260px] sm:h-[340px] lg:h-[400px] lg:h-[500px] bg-red-100 rounded-full animate-pulse opacity-50 z-0"></div>
 
         <div className="relative z-10 w-24 h-24 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-6 shadow-inner border-[6px] border-white">
           <ShieldAlert size={48} strokeWidth={1.5} />
@@ -19,7 +19,7 @@ export default function Cta26() {
           We strongly recommend enabling Two-Factor Authentication (2FA) to protect your sensitive billing and personal data from unauthorized access.
         </p>
 
-        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-4 w-full mb-10">
+        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full mb-10">
           <div className="bg-white/80 backdrop-blur-sm border border-red-100 p-4 rounded-2xl flex flex-col items-center">
             <Smartphone className="text-red-400 mb-2" size={24} />
             <span className="text-sm font-bold text-red-950">SMS Codes</span>

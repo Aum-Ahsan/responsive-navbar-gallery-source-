@@ -19,8 +19,8 @@ export default function Cta34() {
   }, []);
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-gradient-to-r from-violet-900 to-fuchsia-900 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row relative">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-gradient-to-r from-violet-900 to-fuchsia-900 rounded-[1.25rem] sm:rounded-[2rem] lg:rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col sm:flex-row relative">
         
         {/* Left Side: Info */}
         <div className="flex-1 p-8 sm:p-12 lg:p-16 text-white relative z-10">
@@ -61,11 +61,11 @@ export default function Cta34() {
         </div>
 
         {/* Right Side: Timer & Speakers */}
-        <div className="w-full lg:w-[400px] bg-black/30 p-8 sm:p-12 lg:p-16 flex flex-col justify-between backdrop-blur-md border-l border-white/10 relative z-10">
+        <div className="w-full lg:w-full sm:w-full sm:w-[280px] md:w-[340px] md:w-[400px] bg-black/30 p-8 sm:p-12 lg:p-16 flex flex-col justify-between backdrop-blur-md border-l border-white/10 relative z-10">
           
           <div className="mb-10">
             <div className="text-fuchsia-300 text-sm font-bold uppercase tracking-widest mb-4">Starting In</div>
-            <div className="grid grid-cols-4 gap-2 text-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-center">
               {Object.entries(timeLeft).map(([unit, val]) => (
                 <div key={unit} className="bg-white/10 rounded-xl p-3 border border-white/10">
                   <div className="text-2xl font-black text-white tabular-nums">{val.toString().padStart(2, '0')}</div>

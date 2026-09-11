@@ -6,7 +6,7 @@ export default function Cta32() {
   const [revealed, setRevealed] = useState(false);
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-yellow-400 rounded-[2rem] p-8 sm:p-12 text-center shadow-[0_20px_0_rgba(202,138,4,1)] mb-5 relative overflow-hidden border-4 border-yellow-500">
         
         {/* Ticket zig-zag edge effect top and bottom */}
@@ -17,7 +17,7 @@ export default function Cta32() {
           <Tag size={32} />
         </div>
         
-        <h2 className="text-4xl font-black text-yellow-950 mb-2 uppercase tracking-tighter">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-yellow-950 mb-2 uppercase tracking-tighter">
           Flash Sale Unlocked!
         </h2>
         <p className="text-yellow-900 font-bold mb-10 text-lg">

@@ -4,7 +4,7 @@ import { Compass, Puzzle, Star, Download, Check } from 'lucide-react';
 
 export default function Cta24() {
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="bg-gradient-to-b from-blue-50 to-white rounded-[2rem] border border-blue-100 shadow-xl overflow-hidden flex flex-col md:flex-row relative">
         
         {/* Left Side: Mockup */}

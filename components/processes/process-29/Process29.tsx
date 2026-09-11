@@ -20,7 +20,7 @@ export default function Process29() {
         {status === 'idle' && (
           <div 
             onClick={handleUpload}
-            className="border-2 border-dashed border-sky-200 bg-sky-50 rounded-2xl p-12 cursor-pointer hover:bg-sky-100 transition-colors group"
+            className="border-2 border-dashed border-sky-200 bg-sky-50 rounded-2xl p-5 sm:p-8 lg:p-12 cursor-pointer hover:bg-sky-100 transition-colors group"
           >
             <UploadCloud size={48} className="mx-auto text-sky-400 group-hover:text-sky-600 mb-4 transition-colors" />
             <p className="font-bold text-sky-900">Click to select file</p>

@@ -75,7 +75,7 @@ export default function Hero41() {
           <Heart size={14} className="text-[#ff9f1c] fill-current sm:w-4 sm:h-4" /> Trusted by 5M+ Pet Parents
         </div>
         
-        {/* <h1 className="text-4xl sm:text-5xl md:text-[3.5rem] lg:text-[4rem] xl:text-[5rem] font-extrabold tracking-tight mb-4 sm:mb-6 leading-[1.15] md:leading-[1.1] text-slate-800 px-2 sm:px-0">
+        {/* <h1 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl md:text-[3.5rem] lg:text-[4rem] xl:text-[5rem] font-extrabold tracking-tight mb-4 sm:mb-6 leading-[1.15] md:leading-[1.1] text-slate-800 px-2 sm:px-0">
           We treat your pets <br className="hidden sm:block" />
           like <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#ff9f1c] to-[#ff6b6b]">
             family.

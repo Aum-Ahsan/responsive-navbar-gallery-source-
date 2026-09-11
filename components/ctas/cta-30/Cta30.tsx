@@ -12,7 +12,7 @@ export default function Cta30() {
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="text-center mb-12">
         <h2 className="text-3xl sm:text-5xl font-black text-gray-900 mb-4 tracking-tight">
           Why we're the better choice.
@@ -25,7 +25,7 @@ export default function Cta30() {
       <div className="bg-white rounded-3xl border border-gray-200 shadow-xl overflow-hidden relative">
         
         {/* Table Header */}
-        <div className="grid grid-cols-3 border-b border-gray-200 bg-gray-50">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-b border-gray-200 bg-gray-50">
           <div className="p-6 sm:p-8 font-bold text-gray-500 uppercase tracking-widest text-xs flex items-center">Features</div>
           <div className="p-6 sm:p-8 text-center border-l border-gray-200 bg-indigo-50/50 relative">
             <div className="absolute top-0 inset-x-0 h-1 bg-indigo-600"></div>
@@ -39,7 +39,7 @@ export default function Cta30() {
         {/* Table Rows */}
         <div className="divide-y divide-gray-100">
           {features.map((feat, i) => (
-            <div key={i} className="grid grid-cols-3 hover:bg-gray-50 transition-colors">
+            <div key={i} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 hover:bg-gray-50 transition-colors">
               <div className="p-4 sm:p-6 text-sm sm:text-base font-bold text-gray-900 flex items-center">{feat.name}</div>
               
               <div className="p-4 sm:p-6 text-center border-l border-gray-100 bg-indigo-50/20 flex items-center justify-center">

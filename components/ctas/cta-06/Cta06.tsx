@@ -4,7 +4,7 @@ import { Briefcase, Paintbrush, ArrowRight } from 'lucide-react';
 
 export default function Cta06() {
   return (
-    <div className="w-full max-w-6xl mx-auto p-4 sm:p-8 my-10 font-sans">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
       <div className="text-center mb-12">
         <h2 className="text-3xl sm:text-5xl font-black text-slate-900 mb-4 tracking-tight">
           Who are you joining as?

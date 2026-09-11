@@ -6,7 +6,7 @@ export default function Process20() {
   const [shippingMethod, setShippingMethod] = useState<'standard' | 'express'>('standard');
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-10 font-sans bg-white border border-gray-100 shadow-xl rounded-3xl my-10">
+    <div className="w-full max-w-3xl mx-auto p-5 sm:p-8 lg:p-10 font-sans bg-white border border-gray-100 shadow-xl rounded-3xl my-10">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-0 mb-10 border-b border-gray-100 pb-6">
         <div>
           <h2 className="text-3xl font-bold text-gray-900">Delivery Process</h2>

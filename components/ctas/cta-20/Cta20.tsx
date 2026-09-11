@@ -6,8 +6,8 @@ export default function Cta20() {
   const [unlocked, setUnlocked] = useState(false);
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-gradient-to-br from-amber-400 to-orange-500 rounded-[2.5rem] p-8 sm:p-16 text-center shadow-2xl relative overflow-hidden flex flex-col items-center border-[8px] border-amber-300/30">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-gradient-to-br from-amber-400 to-orange-500 rounded-[1.25rem] sm:rounded-[2rem] lg:rounded-[2.5rem] p-8 sm:p-16 text-center shadow-2xl relative overflow-hidden flex flex-col items-center border-[8px] border-amber-300/30">
         
         {/* Confetti or decorative background could go here */}
         <div className="absolute top-0 left-0 w-full h-full opacity-20" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'3\'/%3E%3Ccircle cx=\'13\' cy=\'13\' r=\'3\'/%3E%3C/g%3E%3C/svg%3E")' }}></div>
@@ -37,7 +37,7 @@ export default function Cta20() {
             {/* Back: Revealed Reward */}
             <div className="absolute inset-0 bg-white rounded-3xl shadow-xl flex flex-col items-center justify-center backface-hidden rotate-y-180 border-4 border-dashed border-amber-300">
               <div className="text-amber-500 font-bold uppercase tracking-widest text-sm mb-2">You won a</div>
-              <div className="text-6xl font-black text-gray-900 mb-2">50%</div>
+              <div className="text-3xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-2">50%</div>
               <div className="text-xl font-bold text-gray-400 mb-6">Lifetime Discount</div>
               <div className="bg-amber-100 text-amber-800 px-4 py-2 rounded-lg font-mono font-bold tracking-widest border border-amber-200">
                 LUCKY50

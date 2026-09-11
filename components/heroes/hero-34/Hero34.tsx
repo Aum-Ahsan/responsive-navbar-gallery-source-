@@ -63,7 +63,7 @@ export default function Hero34() {
 
   // ================= 3. REUSABLE HERO UI (RESPONSIVE) =================
   const HeroUI = ({ isFullDemo = false }: { isFullDemo?: boolean }) => (
-    <section className={`relative w-full flex items-center justify-center overflow-hidden bg-slate-50 text-slate-900 transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-20 lg:py-0' : 'py-12 sm:py-16 lg:py-0 lg:h-[85vh] min-h-[800px] lg:min-h-[650px]'}`}>
+    <section className={`relative w-full flex items-center justify-center overflow-hidden bg-slate-50 text-slate-900 transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-10 sm:py-14 lg:py-20 lg:py-0' : 'py-12 sm:py-16 lg:py-0 lg:h-[85vh] min-h-[800px] lg:min-h-[650px]'}`}>
       
       {/* Background Decorative Elements */}
       <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-indigo-200/50 blur-[100px] rounded-full z-0 pointer-events-none" />
@@ -72,7 +72,7 @@ export default function Hero34() {
 
       {/* Main Content Container - Flex Col for mobile, Flex Row for iPad Landscape/Desktop */}
       {/* NOTE: Left Video / Right Text requirement applied here via flex-col-reverse on mobile, lg:flex-row */}
-      <div className="relative z-10 max-w-7xl w-full px-4 sm:px-6 md:px-10 lg:px-8 xl:px-16 flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-10 xl:gap-16 mt-6 lg:mt-0">
+      <div className="relative z-10 max-w-7xl w-full px-4 sm:px-6 md:px-10 lg:px-8 xl:px-16 flex flex-col-reverse lg:flex-row items-center justify-between gap-6 sm:gap-8 lg:gap-12 lg:gap-10 xl:gap-16 mt-6 lg:mt-0">
         
         {/* LEFT COLUMN: Interactive Video Player Mockup */}
         <div className={`w-full lg:w-1/2 max-w-xl mx-auto lg:mx-0 relative ${isFullDemo ? 'animate-in fade-in slide-in-from-left-8 duration-1000' : ''}`}>
@@ -171,7 +171,7 @@ export default function Hero34() {
             <Users size={16} className="sm:w-[18px] sm:h-[18px]" /> Video for Business
           </div>
           
-          {/* <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-[3.5rem] 2xl:text-6xl font-extrabold tracking-tight mb-4 sm:mb-6 leading-[1.15] md:leading-[1.1] text-slate-900">
+          {/* <h1 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-[3.5rem] 2xl:text-6xl font-extrabold tracking-tight mb-4 sm:mb-6 leading-[1.15] md:leading-[1.1] text-slate-900">
             Host, share, and <br className="hidden xl:block" />
             <span className="text-indigo-600">track your videos.</span>
           </h1>

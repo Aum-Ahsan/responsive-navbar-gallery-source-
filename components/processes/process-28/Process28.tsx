@@ -5,7 +5,7 @@ export default function Process28() {
   const [step, setStep] = useState(1);
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-10 font-sans bg-white border-2 border-violet-100 rounded-3xl shadow-lg my-10">
+    <div className="w-full max-w-2xl mx-auto p-5 sm:p-8 lg:p-10 font-sans bg-white border-2 border-violet-100 rounded-3xl shadow-lg my-10">
       <div className="flex justify-between items-center mb-8">
         <h2 className="text-3xl font-bold text-violet-950">Registration</h2>
         <div className="text-sm font-bold text-violet-500 bg-violet-50 px-3 py-1 rounded-full">
@@ -14,7 +14,7 @@ export default function Process28() {
       </div>
 
       {/* Form Steps */}
-      <div className="relative overflow-hidden min-h-[250px]">
+      <div className="relative overflow-hidden min-h-[160px] sm:h-[200px] lg:h-[250px]">
         
         {step === 1 && (
           <div className="animate-in slide-in-from-right duration-500 absolute w-full">

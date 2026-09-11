@@ -69,7 +69,7 @@ export default function Hero27() {
             <Camera size={16} /> Premium Visuals
           </div>
           
-          {/* <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6 leading-[1.1] text-white drop-shadow-lg">
+          {/* <h1 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6 leading-[1.1] text-white drop-shadow-lg">
             Capture The <br className="hidden sm:block" />
             <span className="italic font-serif font-light text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-500">
               Unseen Beauty.

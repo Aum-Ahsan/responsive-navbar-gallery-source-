@@ -6,8 +6,8 @@ export default function Cta13() {
   const [playing, setPlaying] = useState(false);
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl bg-slate-900 min-h-[500px] flex items-center justify-center">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="relative rounded-[1.25rem] sm:rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden shadow-2xl bg-slate-900 min-h-[200px] sm:h-[260px] lg:h-[300px] sm:h-[260px] sm:h-[340px] lg:h-[400px] lg:h-[500px] flex items-center justify-center">
         
         {/* Placeholder for Video Background */}
         <div 
@@ -29,7 +29,7 @@ export default function Cta13() {
             Brand Film
           </div>
           
-          <h2 className="text-4xl sm:text-6xl font-black text-white mb-8 tracking-tight drop-shadow-lg max-w-3xl mx-auto leading-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl sm:text-6xl font-black text-white mb-8 tracking-tight drop-shadow-lg max-w-3xl mx-auto leading-tight">
             Experience the unseen standard of design.
           </h2>
 

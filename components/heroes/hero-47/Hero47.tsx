@@ -31,7 +31,7 @@ export default function Hero47() {
 
   // ================= 2. REUSABLE HERO UI (RESPONSIVE) =================
   const HeroUI = ({ isFullDemo = false }: { isFullDemo?: boolean }) => (
-    <section className={`relative w-full flex items-center justify-center overflow-hidden bg-[#FDFBF7] text-[#4A3C31] transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-16 lg:py-0' : 'py-12 sm:py-16 lg:h-[85vh] min-h-[850px] lg:min-h-[650px]'}`}>
+    <section className={`relative w-full flex items-center justify-center overflow-hidden bg-[#FDFBF7] text-[#4A3C31] transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-10 sm:py-12 lg:py-16 lg:py-0' : 'py-12 sm:py-16 lg:h-[85vh] min-h-[850px] lg:min-h-[650px]'}`}>
       
       {/* ================= BACKGROUND BLOBS (Soft Pastel Aesthetics) ================= */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -42,7 +42,7 @@ export default function Hero47() {
       </div>
 
       {/* ================= MAIN CONTENT ================= */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-0 lg:pl-12 xl:pl-20 flex flex-col lg:flex-row items-center lg:items-stretch gap-10 lg:gap-0 mt-4 lg:mt-0">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-0 lg:pl-12 xl:pl-20 flex flex-col sm:flex-row items-center lg:items-stretch gap-10 lg:gap-0 mt-4 lg:mt-0">
         
         {/* LEFT COLUMN: Text Content */}
         <div className={`w-full lg:w-5/12 flex flex-col items-center lg:items-start text-center lg:text-left px-5 sm:px-10 lg:px-0 pt-4 lg:pt-20 ${isFullDemo ? 'animate-in fade-in slide-in-from-left-8 duration-1000' : ''}`}>
@@ -90,7 +90,7 @@ export default function Hero47() {
             {products.map((product, index) => (
               <div 
                 key={product.id} 
-                className={`snap-center sm:snap-start shrink-0 w-[240px] sm:w-[280px] lg:w-[260px] xl:w-[300px] flex flex-col group mt-${index % 2 !== 0 ? '0 lg:mt-12' : '0'}`}
+                className={`snap-center sm:snap-start shrink-0 w-[240px] sm:w-[280px] lg:w-[260px] xl:w-full sm:w-[240px] md:w-[300px] flex flex-col group mt-${index % 2 !== 0 ? '0 lg:mt-12' : '0'}`}
               >
                 {/* Product Image Card */}
                 <div className="relative aspect-[4/5] bg-white rounded-[2rem] p-4 shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-[#f0e8e6] overflow-hidden mb-4 transition-transform duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_rgba(217,138,142,0.15)]">
@@ -131,7 +131,7 @@ export default function Hero47() {
             ))}
             
             {/* View All Card */}
-            <div className="snap-center sm:snap-start shrink-0 w-[240px] sm:w-[280px] lg:w-[260px] xl:w-[300px] flex items-center justify-center">
+            <div className="snap-center sm:snap-start shrink-0 w-[240px] sm:w-[280px] lg:w-[260px] xl:w-full sm:w-[240px] md:w-[300px] flex items-center justify-center">
               <button className="flex flex-col items-center justify-center gap-3 w-32 h-32 rounded-full border border-[#e8b4b8] text-[#b87a7f] hover:bg-[#fbf0f0] transition-colors">
                 <ArrowRight size={24} />
                 <span className="text-xs font-bold uppercase tracking-widest">View All</span>

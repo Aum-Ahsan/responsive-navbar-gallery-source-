@@ -23,7 +23,7 @@ export default function Hero29() {
 
   // ================= 2. REUSABLE HERO UI (RESPONSIVE) =================
   const HeroUI = ({ isFullDemo = false }: { isFullDemo?: boolean }) => (
-    <section className={`relative w-full flex items-center justify-center overflow-hidden bg-slate-50 text-slate-900 transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-16 lg:py-0' : 'py-12 sm:py-16 lg:py-0 lg:h-[80vh] min-h-[750px] lg:min-h-[650px]'}`}>
+    <section className={`relative w-full flex items-center justify-center overflow-hidden bg-slate-50 text-slate-900 transition-all duration-700 ${isFullDemo ? 'min-h-[100dvh] py-10 sm:py-12 lg:py-16 lg:py-0' : 'py-12 sm:py-16 lg:py-0 lg:h-[80vh] min-h-[750px] lg:min-h-[650px]'}`}>
       
       {/* Background Decorative Elements */}
       <div className="absolute top-0 right-0 w-[80%] sm:w-[60%] h-[80%] bg-emerald-100/50 rounded-bl-full z-0 pointer-events-none" />
@@ -31,7 +31,7 @@ export default function Hero29() {
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03] z-0 pointer-events-none"></div>
 
       {/* Main Content Container - Flex row for iPad Rotate/Desktop */}
-      <div className="relative z-10 max-w-7xl w-full px-4 sm:px-6 md:px-10 lg:px-8 xl:px-16 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 xl:gap-16 mt-6 lg:mt-0">
+      <div className="relative z-10 max-w-7xl w-full px-4 sm:px-6 md:px-10 lg:px-8 xl:px-16 flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8 lg:gap-12 lg:gap-8 xl:gap-16 mt-6 lg:mt-0">
         
         {/* LEFT COLUMN: Trust & Value Props */}
         <div className={`flex-1 flex flex-col items-center text-center lg:items-start lg:text-left w-full ${isFullDemo ? 'animate-in fade-in slide-in-from-left-8 duration-1000' : ''}`}>
@@ -62,7 +62,7 @@ export default function Hero29() {
 </p>
           
           {/* Features List - Wraps correctly on mobile */}
-          <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3 sm:gap-5 mb-8 sm:mb-10 w-full sm:w-auto text-left px-4 sm:px-0">
+          <div className="flex flex-col sm:flex-col md:flex-row gap-3 sm:gap-5 mb-8 sm:mb-10 w-full sm:w-auto text-left px-4 sm:px-0">
             <div className="flex items-center gap-3 bg-white/50 sm:bg-transparent p-2 sm:p-0 rounded-lg sm:rounded-none">
               <div className="bg-emerald-100 p-1.5 sm:p-2 rounded-full text-emerald-600 shrink-0"><CheckCircle2 size={18} className="sm:w-5 sm:h-5" /></div>
               <span className="font-semibold text-sm sm:text-base text-slate-700">Upfront Pricing</span>
@@ -91,8 +91,8 @@ export default function Hero29() {
         </div>
 
         {/* RIGHT COLUMN: Lead Capture / Search Form Card */}
-        {/* Adjusted Max-width for iPad landscape (lg:max-w-[380px]) to prevent overlapping */}
-        <div className={`w-full max-w-sm sm:max-w-md lg:max-w-[380px] xl:max-w-lg mx-auto lg:mx-0 relative ${isFullDemo ? 'animate-in fade-in zoom-in-95 duration-1000 delay-300' : ''}`}>
+        {/* Adjusted Max-width for iPad landscape (lg:max-w-full sm:w-full sm:w-[260px] md:w-[320px] md:w-[380px]) to prevent overlapping */}
+        <div className={`w-full max-w-sm sm:max-w-md lg:max-w-full sm:w-full sm:w-[260px] md:w-[320px] md:w-[380px] xl:max-w-lg mx-auto lg:mx-0 relative ${isFullDemo ? 'animate-in fade-in zoom-in-95 duration-1000 delay-300' : ''}`}>
           
           {/* Floating Badge - FIXED for mobile to prevent overflow (right-[-10px] scale-90 on mobile) */}
           <div className="absolute -top-5 -right-2 sm:-top-6 sm:-right-6 lg:-right-8 bg-white p-2.5 sm:p-3 rounded-2xl shadow-xl z-20 flex items-center gap-2 sm:gap-3 animate-[bounce_3s_ease-in-out_infinite] scale-90 sm:scale-100 origin-bottom-right">

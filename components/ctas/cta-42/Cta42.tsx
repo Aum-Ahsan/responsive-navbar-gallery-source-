@@ -10,8 +10,8 @@ export default function Cta42() {
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-4 sm:p-8 my-10 font-sans">
-      <div className="bg-stone-50 rounded-[2.5rem] border border-stone-200 overflow-hidden shadow-xl p-8 sm:p-12 lg:p-16 flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+    <div className="w-full w-full p-4 sm:p-8 my-10 font-sans">
+      <div className="bg-stone-50 rounded-[1.25rem] sm:rounded-[2rem] lg:rounded-[2.5rem] border border-stone-200 overflow-hidden shadow-xl p-8 sm:p-12 lg:p-16 flex flex-col md:flex-row items-center gap-6 sm:gap-8 lg:gap-12 lg:gap-20">
         
         <div className="flex-1 text-center md:text-left">
           <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 mx-auto md:mx-0 shadow-inner">

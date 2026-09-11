@@ -47,7 +47,7 @@ export default function Hero33() {
 
       {/* TOP TEXT: Model Name & Tagline */}
       <div className={`relative z-20 pt-16 sm:pt-24 lg:pt-32 text-center flex flex-col items-center px-4 ${isFullDemo ? 'animate-in fade-in slide-in-from-top-10 duration-1000 delay-300' : ''}`}>
-        {/* <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[6rem] font-bold tracking-widest uppercase text-white drop-shadow-lg leading-none mb-2">
+        {/* <h1 className="text-3xl sm:text-4xl lg:text-5xl sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[6rem] font-bold tracking-widest uppercase text-white drop-shadow-lg leading-none mb-2">
           Aether <span className="text-gray-400">X</span>
         </h1>
         <p className="text-sm sm:text-base md:text-lg tracking-[0.3em] uppercase text-gray-300 font-medium">

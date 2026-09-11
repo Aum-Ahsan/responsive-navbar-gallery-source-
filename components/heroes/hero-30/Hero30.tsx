@@ -51,7 +51,7 @@ export default function Hero30() {
             Urgent Global Appeal
           </div>
           
-          {/* <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4 sm:mb-6 leading-[1.1] max-w-4xl">
+          {/* <h1 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-4 sm:mb-6 leading-[1.1] max-w-4xl">
             Bring Clean Water to <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-orange-400">
               10,000 Families.
@@ -106,7 +106,7 @@ export default function Hero30() {
           {/* Amount Selection Grid */}
           <div className="mb-6">
             <label className="block text-xs sm:text-sm font-bold text-gray-700 mb-3">Choose a donation amount:</label>
-            <div className="grid grid-cols-4 gap-2 sm:gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
               {[25, 50, 100, 250].map((amount) => (
                 <button
                   key={amount}

@@ -35,7 +35,7 @@ export default function Hero28() {
         <h2 className="text-gray-400 font-semibold tracking-[0.2em] uppercase text-xs sm:text-sm mb-4">
           All-New Release
         </h2>
-        {/* <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 sm:mb-6 leading-[1.1]">
+        {/* <h1 className="text-3xl sm:text-4xl lg:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 sm:mb-6 leading-[1.1]">
           Aura Pro <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-500">Max.</span>
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl text-gray-300 font-medium mb-8">

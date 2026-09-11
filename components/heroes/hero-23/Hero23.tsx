@@ -3,7 +3,7 @@ import { Search, MapPin, Users } from "lucide-react";
 
 export default function Hero23() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#fafafa] text-slate-900 py-20 lg:py-32 flex flex-col items-center justify-center">
+    <section className="relative w-full overflow-hidden bg-[#fafafa] text-slate-900 py-10 sm:py-14 lg:py-20 lg:py-32 flex flex-col items-center justify-center">
       
       {/* Background Pattern (Subtle Grid) */}
       <div 
@@ -12,8 +12,8 @@ export default function Hero23() {
       />
       
       {/* Soft Glow effects */}
-      <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] rounded-full bg-blue-400/20 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[20%] w-[500px] h-[500px] rounded-full bg-purple-400/20 blur-[120px] pointer-events-none" />
+      <div className="absolute top-[-10%] left-[20%] w-[500px] h-[200px] sm:h-[260px] lg:h-[300px] sm:h-[260px] sm:h-[340px] lg:h-[400px] lg:h-[500px] rounded-full bg-blue-400/20 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[20%] w-[500px] h-[200px] sm:h-[260px] lg:h-[300px] sm:h-[260px] sm:h-[340px] lg:h-[400px] lg:h-[500px] rounded-full bg-purple-400/20 blur-[120px] pointer-events-none" />
 
       {/* Main Content Container */}
       <div className="relative z-10 px-4 md:px-8 w-full max-w-5xl mx-auto text-center flex flex-col items-center">
@@ -24,7 +24,7 @@ export default function Hero23() {
           Trusted by 10,000+ Companies
         </div>
 
-        {/* <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 text-slate-900 leading-[1.1]">
+        {/* <h1 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 text-slate-900 leading-[1.1]">
           Find the job that <br className="hidden md:block" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">fits your life.</span>
         </h1>

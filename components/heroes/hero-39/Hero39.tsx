@@ -57,7 +57,7 @@ export default function Hero39() {
 
       {/* ================= LAYER 2: TEXT & CTAs ================= */}
       <div 
-        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-12 xl:px-16 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-8 transition-transform duration-300 ease-out pointer-events-none"
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-12 xl:px-16 flex flex-col sm:flex-row items-center justify-between gap-10 lg:gap-8 transition-transform duration-300 ease-out pointer-events-none"
         style={{ transform: `translate(${mousePos.x * 0.4}px, ${mousePos.y * 0.4}px)` }}
       >
         
@@ -69,7 +69,7 @@ export default function Hero39() {
             <Sparkles size={14} className="text-cyan-400 sm:w-4 sm:h-4" /> Introducing Aurora OS
           </div>
 {/*           
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[5.5rem] 2xl:text-[6.5rem] font-medium tracking-tight mb-4 sm:mb-6 leading-[1.1] md:leading-[1.05] px-2 sm:px-0">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[5.5rem] 2xl:text-[6.5rem] font-medium tracking-tight mb-4 sm:mb-6 leading-[1.1] md:leading-[1.05] px-2 sm:px-0">
             Welcome to <br className="hidden sm:block" />
             <span className="font-light italic text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-400">
               Spatial
@@ -118,7 +118,7 @@ export default function Hero39() {
         className="relative lg:absolute mt-10 sm:mt-16 lg:mt-0 lg:top-[50%] lg:-translate-y-1/2 lg:right-6 xl:right-[15%] z-20 transition-transform duration-200 ease-out pointer-events-none w-full flex justify-center lg:justify-end"
         style={{ transform: `translate(${mousePos.x * 1.5}px, ${mousePos.y * 1.5}px)` }}
       >
-        <div className="w-[280px] sm:w-[320px] lg:w-[300px] xl:w-[340px] bg-white/10 backdrop-blur-2xl border border-white/20 p-4 sm:p-5 rounded-2xl sm:rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.6)] flex flex-col gap-3 sm:gap-4 animate-[float-slow_6s_ease-in-out_infinite] lg:animate-none pointer-events-auto">
+        <div className="w-[280px] sm:w-full sm:w-[260px] md:w-[320px] lg:w-full sm:w-[240px] md:w-[300px] xl:w-full sm:w-[280px] md:w-[340px] bg-white/10 backdrop-blur-2xl border border-white/20 p-4 sm:p-5 rounded-2xl sm:rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.6)] flex flex-col gap-3 sm:gap-4 animate-[float-slow_6s_ease-in-out_infinite] lg:animate-none pointer-events-auto">
           
           {/* Top Bar of Glass UI */}
           <div className="flex justify-between items-center border-b border-white/10 pb-2.5 sm:pb-3">
@@ -132,7 +132,7 @@ export default function Hero39() {
           </div>
 
           {/* AR App Icons Grid */}
-          <div className="grid grid-cols-4 gap-2 sm:gap-3 py-1 sm:py-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 py-1 sm:py-2">
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
               <div key={i} className={`aspect-square rounded-xl sm:rounded-2xl flex items-center justify-center cursor-pointer transition-all hover:scale-110 hover:bg-white/30 shadow-inner border border-white/10 ${i === 1 ? 'bg-white/30' : 'bg-white/5'}`}>
                 {i === 1 && <Box size={20} className="text-white drop-shadow-md sm:w-6 sm:h-6" />}

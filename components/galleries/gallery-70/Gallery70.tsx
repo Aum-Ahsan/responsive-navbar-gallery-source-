@@ -16,52 +16,59 @@ export default function Gallery70() {
   return (
     <div className="w-full h-[600px] md:h-[900px] bg-[#f9f9f9] font-sans relative flex items-center justify-center overflow-hidden border-y border-black/5">
       
-      <div className="absolute z-30 text-center pointer-events-none">
-        <h2 className="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter uppercase mb-2">The Dial</h2>
-        <p className="text-gray-500 font-bold tracking-widest uppercase text-xs">Infinite Orbital Scroll</p>
+      {/* Background Orbit Rings (Circle Shape Animation) */}
+      <div className="absolute w-[400px] h-[400px] md:w-[700px] md:h-[700px] border border-gray-300 rounded-full z-0 pointer-events-none"></div>
+      <div className="absolute w-[300px] h-[300px] md:w-[500px] md:h-[500px] border border-gray-300 border-dashed rounded-full z-0 pointer-events-none animate-[spin_40s_linear_infinite_reverse]"></div>
+      <div className="absolute w-[200px] h-[200px] md:w-[350px] md:h-[350px] border border-gray-200 rounded-full z-0 pointer-events-none animate-[spin_20s_linear_infinite]"></div>
+
+      {/* The Dial (Center Title) */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 text-center pointer-events-none bg-white/70 backdrop-blur-md px-8 py-5 md:px-10 md:py-6 rounded-3xl shadow-xl border border-white/50">
+        <h2 className="text-3xl md:text-6xl font-black text-gray-900 tracking-tighter uppercase mb-2">The Dial</h2>
+        <p className="text-gray-500 font-bold tracking-widest uppercase text-[10px] md:text-xs">Infinite Orbital Scroll</p>
       </div>
 
       {/* The rotating container */}
-      <div className="relative w-[800px] h-[800px] md:w-[1200px] md:h-[1200px] rounded-full animate-[spin_60s_linear_infinite]">
+      <div className="relative z-10 w-[800px] h-[800px] md:w-[1200px] md:h-[1200px] rounded-full animate-[spin_60s_linear_infinite]">
         
         {images.map((src, idx) => {
           const angle = idx * (360 / images.length);
           return (
             <div 
               key={idx}
-              className="absolute w-40 h-56 md:w-56 md:h-72 rounded-3xl overflow-hidden shadow-2xl border border-white/50"
-              style={{
-                // Position each image along the circumference of the circle
-                // We rotate the container, translate it outward, and then rotate it back so it stays upright
-                // Wait, if the parent is spinning, the images will spin upside down.
-                // We need to apply a counter-spin to the images to keep them upright.
-                top: '50%',
-                left: '50%',
-                transform: `translate(-50%, -50%) rotate(${angle}deg) translateY(-350px) rotate(-${angle}deg)`
-              }}
+              className="absolute top-1/2 left-1/2"
             >
-              <img src={src} alt="" className="w-full h-full object-cover" />
-              
-              {/* Apply reverse spin animation to keep images totally upright while parent spins */}
-              <style dangerouslySetInnerHTML={{__html: `
-                @media (min-width: 768px) {
-                  .absolute.w-40:nth-child(${idx + 1}) {
-                    transform: translate(-50%, -50%) rotate(${angle}deg) translateY(-500px) rotate(-${angle}deg) !important;
-                  }
-                }
-              `}} />
+              {/* This inner div handles the static rotation and outward translation for positioning */}
+              <div 
+                className="gallery70-orbiter"
+                style={{ '--angle': `${angle}deg` } as React.CSSProperties}
+              >
+                {/* This div negates the parent's dynamic spin to keep the card fully upright at all times */}
+                <div className="animate-[gallery70-counterSpin_60s_linear_infinite]">
+                  <div className="w-24 h-32 md:w-40 md:h-56 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/50 hover:scale-110 transition-transform duration-300 cursor-pointer">
+                    <img src={src} alt="" className="w-full h-full object-cover" />
+                  </div>
+                </div>
+              </div>
             </div>
           )
         })}
 
-        {/* Global Counter-Spin for all children */}
+        {/* CSS for orbital math and counter-spin */}
         <style dangerouslySetInnerHTML={{__html: `
-          .animate-\\[spin_60s_linear_infinite\\] > div > img {
-            animation: counterSpin 60s linear infinite;
+          .gallery70-orbiter {
+            /* Mobile radius: 200px (matches 400px ring) */
+            transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-200px) rotate(calc(-1 * var(--angle)));
           }
-          @keyframes counterSpin {
-            from { transform: rotate(0deg) scale(1.2); }
-            to { transform: rotate(-360deg) scale(1.2); }
+          @media (min-width: 768px) {
+            .gallery70-orbiter {
+              /* Desktop radius: 350px (matches 700px ring) */
+              transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-350px) rotate(calc(-1 * var(--angle)));
+            }
+          }
+          
+          @keyframes gallery70-counterSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
           }
         `}} />
 

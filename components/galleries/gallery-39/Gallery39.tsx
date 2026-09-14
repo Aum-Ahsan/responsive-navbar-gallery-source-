@@ -12,7 +12,7 @@ export default function Gallery39() {
       {splits.map((split, idx) => (
         <div 
           key={split.id}
-          className="relative flex-1 hover:flex-[4] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group cursor-pointer border-r border-black/10 last:border-0"
+          className="relative min-w-0 overflow-hidden flex-1 hover:flex-[4] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group cursor-pointer border-r border-black/10 last:border-0"
         >
           <img 
             src={split.src} 
@@ -28,12 +28,12 @@ export default function Gallery39() {
             </h3>
           </div>
 
-          {/* Expanded State Text (Bottom Left/Right depending on side) */}
-          <div className={`absolute bottom-12 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100 w-full px-12 ${idx === 0 ? 'text-left' : 'text-right'}`}>
+          {/* Expanded State Text (Bottom Left) */}
+          <div className="absolute bottom-12 left-0 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100 w-full px-12 text-left">
             <h3 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter mb-4 drop-shadow-lg">
               {split.title}
             </h3>
-            <p className={`text-white/90 text-lg md:text-xl drop-shadow-md max-w-sm ${idx === 0 ? 'mr-auto' : 'ml-auto'}`}>
+            <p className="text-white/90 text-lg md:text-xl drop-shadow-md max-w-sm">
               {split.desc}
             </p>
           </div>

@@ -6,9 +6,9 @@ export default function Gallery28() {
   const [activeHotspot, setActiveHotspot] = useState<number | null>(null);
 
   const hotspots = [
-    { id: 1, top: '30%', left: '25%', title: 'The Starting Line', desc: 'Where the journey begins.', img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff' },
-    { id: 2, top: '65%', left: '45%', title: 'Midpoint Ridge', desc: 'A challenging incline.', img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e' },
-    { id: 3, top: '40%', left: '75%', title: 'The Summit', desc: 'Breathtaking views at the top.', img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30' },
+    { id: 1, top: '30%', left: '25%', title: 'The Starting Line', desc: 'Where the journey begins.', img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff', popupClass: 'left-[-16px] md:left-1/2 md:-translate-x-1/2 origin-top-left md:origin-top' },
+    { id: 2, top: '65%', left: '45%', title: 'Midpoint Ridge', desc: 'A challenging incline.', img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e', popupClass: 'left-1/2 -translate-x-1/2 origin-top' },
+    { id: 3, top: '40%', left: '75%', title: 'The Summit', desc: 'Breathtaking views at the top.', img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30', popupClass: 'right-[-16px] md:right-auto md:left-1/2 md:-translate-x-1/2 origin-top-right md:origin-top' },
   ];
 
   return (
@@ -25,7 +25,7 @@ export default function Gallery28() {
         <div className="absolute inset-0 bg-black/20"></div>
 
         {/* Floating Title */}
-        <div className="absolute top-8 right-8 bg-white/90 backdrop-blur px-6 py-3 rounded-full">
+        <div className="absolute top-8 right-8 bg-white/90 backdrop-blur px-6 py-3 rounded-full z-10">
           <h2 className="font-bold text-gray-900 tracking-widest uppercase text-sm">Interactive Map</h2>
         </div>
 
@@ -33,7 +33,7 @@ export default function Gallery28() {
         {hotspots.map((spot) => (
           <div 
             key={spot.id}
-            className="absolute"
+            className="absolute z-20"
             style={{ top: spot.top, left: spot.left }}
             onMouseEnter={() => setActiveHotspot(spot.id)}
             onMouseLeave={() => setActiveHotspot(null)}
@@ -48,7 +48,8 @@ export default function Gallery28() {
 
             {/* The Popover Card */}
             <div 
-              className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-64 bg-white rounded-2xl p-2 shadow-2xl transition-all duration-300 origin-top
+              className={`absolute top-full mt-4 w-64 bg-white rounded-2xl p-2 shadow-2xl transition-all duration-300
+                ${spot.popupClass}
                 ${activeHotspot === spot.id ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}
               `}
             >

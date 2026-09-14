@@ -36,8 +36,8 @@ export default function Gallery63() {
             
             <div className="absolute inset-0 bg-black/40"></div>
             
-            <div className="absolute bottom-24 left-12 md:left-24 z-10">
-              <h3 className="text-6xl md:text-8xl font-black text-white uppercase tracking-tighter">{slide.title}</h3>
+            <div className="absolute bottom-24 left-0 right-0 text-center md:right-auto md:left-24 md:text-left z-10 px-4 md:px-0">
+              <h3 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter">{slide.title}</h3>
             </div>
             
             {/* Scroll Indicator (Only show on first slide to guide user) */}

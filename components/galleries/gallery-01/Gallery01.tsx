@@ -6,11 +6,13 @@ export default function Gallery01() {
   const images = [
     { src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085', aspect: 'aspect-[4/3]', title: 'Workspace Setup', category: 'Tech' },
     { src: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e', aspect: 'aspect-[3/4]', title: 'Premium Audio', category: 'Product' },
-    { src: 'https://images.unsplash.com/photo-1558655146-d09347e92766', aspect: 'aspect-[1/1]', title: 'Creative Studio', category: 'Design' },
+    { src: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8', aspect: 'aspect-[1/1]', title: 'Creative Studio', category: 'Design' },
     { src: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30', aspect: 'aspect-[3/4]', title: 'Smart Watch', category: 'Lifestyle' },
     { src: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f', aspect: 'aspect-[4/3]', title: 'Vintage Camera', category: 'Photography' },
     { src: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff', aspect: 'aspect-[1/1]', title: 'Sneaker Drop', category: 'Fashion' },
-    { src: 'https://images.unsplash.com/photo-1503602642458-2322119d4411', aspect: 'aspect-[3/4]', title: 'Minimal Desk', category: 'Architecture' },
+    { src: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5', aspect: 'aspect-[3/4]', title: 'Minimal Desk', category: 'Architecture' },
+    { src: 'https://images.unsplash.com/photo-1483058712412-4245e9b90334', aspect: 'aspect-[4/3]', title: 'Workspace Inspiration', category: 'Office' },
+    { src: 'https://images.unsplash.com/photo-1493723843671-1d655e66ac1c', aspect: 'aspect-[1/1]', title: 'Modern Setup', category: 'Tech' },
   ];
 
   return (

@@ -6,11 +6,11 @@ export default function Gallery30() {
   const [activePhoto, setActivePhoto] = useState<number | null>(null);
 
   const photos = [
-    { id: 1, src: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff', top: '10%', left: '15%', rot: '-12deg', label: 'Air Max' },
-    { id: 2, src: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e', top: '25%', left: '45%', rot: '8deg', label: 'Studio' },
-    { id: 3, src: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30', top: '55%', left: '20%', rot: '-5deg', label: 'Watch' },
-    { id: 4, src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085', top: '45%', left: '65%', rot: '15deg', label: 'Code' },
-    { id: 5, src: 'https://images.unsplash.com/photo-1558655146-d09347e92766', top: '15%', left: '75%', rot: '-8deg', label: 'Design' },
+    { id: 1, src: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff', rot: '-12deg', label: 'Air Max', className: 'top-[15%] left-[5%] w-[140px] md:top-[10%] md:left-[15%] md:w-[200px]' },
+    { id: 2, src: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e', rot: '8deg', label: 'Studio', className: 'top-[30%] left-[45%] w-[150px] md:top-[25%] md:left-[45%] md:w-[200px]' },
+    { id: 3, src: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30', rot: '-5deg', label: 'Watch', className: 'top-[55%] left-[10%] w-[130px] md:top-[55%] md:left-[20%] md:w-[200px]' },
+    { id: 4, src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085', rot: '15deg', label: 'Code', className: 'top-[65%] left-[50%] w-[150px] md:top-[45%] md:left-[65%] md:w-[200px]' },
+    { id: 5, src: 'https://images.unsplash.com/photo-1558655146-d09347e92766', rot: '-8deg', label: 'Design', className: 'top-[18%] left-[60%] w-[120px] md:top-[15%] md:left-[75%] md:w-[200px]' },
   ];
 
   return (
@@ -28,14 +28,13 @@ export default function Gallery30() {
           <div 
             key={photo.id}
             onClick={() => !isActive && setActivePhoto(photo.id)}
-            className={`absolute p-3 pb-12 bg-white rounded-sm shadow-[0_10px_20px_rgba(0,0,0,0.15)] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] origin-center
-              ${isActive ? 'z-50 cursor-default' : 'z-10 cursor-pointer hover:scale-110 hover:z-20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)]'}
+            className={`absolute p-2 pb-10 md:p-3 md:pb-12 bg-white rounded-sm shadow-[0_10px_20px_rgba(0,0,0,0.15)] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] origin-center
+              ${isActive 
+                ? 'z-50 cursor-default top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[450px]' 
+                : `z-10 cursor-pointer hover:scale-110 hover:z-20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] ${photo.className}`
+              }
             `}
-            style={
-              isActive 
-                ? { top: '50%', left: '50%', transform: 'translate(-50%, -50%) rotate(0deg) scale(1.5)', width: '300px' } 
-                : { top: photo.top, left: photo.left, transform: `rotate(${photo.rot})`, width: '200px' }
-            }
+            style={isActive ? {} : { rotate: photo.rot }}
           >
             <div className="w-full aspect-square bg-gray-100 overflow-hidden relative">
               <img src={photo.src} alt={photo.label} className="absolute inset-0 w-full h-full object-cover" />

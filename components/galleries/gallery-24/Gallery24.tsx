@@ -4,16 +4,16 @@ import { Move } from 'lucide-react';
 
 export default function Gallery24() {
   const images = [
-    { id: 1, src: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff', top: '10%', left: '10%', width: '300px', height: '400px' },
-    { id: 2, src: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e', top: '20%', left: '50%', width: '400px', height: '250px' },
-    { id: 3, src: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30', top: '60%', left: '15%', width: '250px', height: '350px' },
-    { id: 4, src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085', top: '50%', left: '60%', width: '350px', height: '350px' },
-    { id: 5, src: 'https://images.unsplash.com/photo-1558655146-d09347e92766', top: '75%', left: '40%', width: '200px', height: '200px' },
+    { id: 1, src: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff', top: '40%', left: '45%', width: '300px', height: '400px' },
+    { id: 2, src: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e', top: '50%', left: '20%', width: '400px', height: '250px' },
+    { id: 3, src: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30', top: '30%', left: '65%', width: '250px', height: '350px' },
+    { id: 4, src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085', top: '70%', left: '30%', width: '350px', height: '350px' },
+    { id: 5, src: 'https://images.unsplash.com/photo-1558655146-d09347e92766', top: '60%', left: '75%', width: '200px', height: '200px' },
   ];
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [position, setPosition] = useState({ x: -400, y: -200 }); // initial offset
+  const [position, setPosition] = useState({ x: -600, y: -300 }); // initial offset to frame the layout nicely
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -38,10 +38,12 @@ export default function Gallery24() {
       
       {/* Floating UI overlay */}
       <div className="absolute top-8 left-8 z-50 pointer-events-none">
-        <h2 className="text-4xl font-black text-gray-900 mb-2 mix-blend-difference text-white">Infinite Canvas</h2>
-        <p className="text-gray-900 font-bold flex items-center gap-2 mix-blend-difference text-white/80">
-          <Move size={16} /> Click and drag to explore
-        </p>
+        <div className="bg-white/80 backdrop-blur-md px-6 py-4 rounded-2xl shadow-lg border border-white/50">
+          <h2 className="text-4xl font-black text-gray-900 mb-2">Infinite Canvas</h2>
+          <p className="text-gray-600 font-bold flex items-center gap-2">
+            <Move size={16} /> Click and drag to explore
+          </p>
+        </div>
       </div>
 
       {/* Draggable oversized canvas area */}

@@ -15,18 +15,18 @@ export default function Gallery43() {
   ];
 
   return (
-    <div className="w-full h-[600px] md:h-[800px] bg-[#fdfaf6] font-sans relative overflow-hidden flex items-center justify-center">
+    <div className="w-full h-[500px] md:h-[800px] bg-[#fdfaf6] font-sans relative overflow-hidden flex items-center justify-center">
       
       {/* Title Overlay */}
-      <div className="absolute top-12 left-12 z-20">
-        <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-2 uppercase tracking-tighter">Isometric<br/>Projection</h2>
+      <div className="absolute top-8 md:top-12 left-0 right-0 md:right-auto md:left-12 z-20 w-full md:w-auto text-center md:text-left px-4">
+        <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-2 uppercase tracking-tighter">Isometric<br/>Projection</h2>
         <p className="text-gray-500 font-bold uppercase tracking-widest text-xs">Architectural Grid</p>
       </div>
 
       {/* Isometric Grid Container */}
       {/* Standard isometric transform: rotateX(60deg) rotateZ(-45deg) */}
       <div 
-        className="grid grid-cols-3 gap-4 md:gap-8 w-[600px] md:w-[800px] scale-75 md:scale-100"
+        className="grid grid-cols-3 gap-3 md:gap-8 w-[350px] md:w-[800px] mt-16 md:mt-0"
         style={{
           transformStyle: 'preserve-3d',
           transform: 'rotateX(60deg) rotateZ(-45deg)',

@@ -8,6 +8,9 @@ export default function Gallery07() {
     { id: '02', title: 'Neon Nights', category: 'Photography', src: 'https://images.unsplash.com/photo-1555448248-2571daf6344b' },
     { id: '03', title: 'Minimal Workspace', category: 'Interior', src: 'https://images.unsplash.com/photo-1497366216548-37526070297c' },
     { id: '04', title: 'Alpine Retreat', category: 'Landscape', src: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b' },
+    { id: '05', title: 'Urban Exploration', category: 'Cityscape', src: 'https://images.unsplash.com/photo-1449844908441-8829872d2607' },
+    { id: '06', title: 'Modern Concept', category: 'Design', src: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853' },
+    { id: '07', title: 'Abstract Flow', category: 'Art', src: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1' },
   ];
 
   return (

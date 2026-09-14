@@ -5,11 +5,11 @@ export default function Gallery45() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   const scraps = [
-    { src: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff', top: '15%', left: '15%', rot: '-5deg', size: 'w-64 h-80', z: 10 },
-    { src: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e', top: '40%', left: '45%', rot: '8deg', size: 'w-72 h-64', z: 20 },
-    { src: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30', top: '20%', left: '70%', rot: '12deg', size: 'w-56 h-72', z: 15 },
-    { src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085', top: '60%', left: '20%', rot: '-10deg', size: 'w-80 h-56', z: 25 },
-    { src: 'https://images.unsplash.com/photo-1558655146-d09347e92766', top: '55%', left: '75%', rot: '-3deg', size: 'w-64 h-64', z: 30 },
+    { src: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff', top: '40%', left: '15%', rot: '-5deg', size: 'w-64 h-80', z: 10 },
+    { src: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e', top: '65%', left: '45%', rot: '8deg', size: 'w-72 h-64', z: 20 },
+    { src: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30', top: '45%', left: '70%', rot: '12deg', size: 'w-56 h-72', z: 15 },
+    { src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085', top: '75%', left: '20%', rot: '-10deg', size: 'w-80 h-56', z: 25 },
+    { src: 'https://images.unsplash.com/photo-1558655146-d09347e92766', top: '70%', left: '75%', rot: '-3deg', size: 'w-64 h-64', z: 30 },
   ];
 
   return (

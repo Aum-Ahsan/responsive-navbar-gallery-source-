@@ -24,7 +24,7 @@ export default function Gallery06() {
 
   return (
     <div className="w-full bg-slate-950 py-20 font-sans overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-10 flex flex-col sm:flex-row justify-between items-end gap-6">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6">
         <div>
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">Horizontal Snap</h2>
           <p className="text-slate-400">Swipe or scroll through the collection.</p>
@@ -32,13 +32,13 @@ export default function Gallery06() {
         <div className="flex gap-3">
           <button 
             onClick={() => scroll('left')}
-            className="w-12 h-12 rounded-full border border-slate-700 bg-slate-800 text-white flex items-center justify-center hover:bg-white hover:text-black hover:border-white transition-all"
+            className="w-12 h-12 rounded-full border border-slate-700 bg-slate-800 text-white flex items-center justify-center hover:bg-white hover:text-black hover:border-white transition-all shrink-0"
           >
             <ChevronLeft size={24} />
           </button>
           <button 
             onClick={() => scroll('right')}
-            className="w-12 h-12 rounded-full border border-slate-700 bg-slate-800 text-white flex items-center justify-center hover:bg-white hover:text-black hover:border-white transition-all"
+            className="w-12 h-12 rounded-full border border-slate-700 bg-slate-800 text-white flex items-center justify-center hover:bg-white hover:text-black hover:border-white transition-all shrink-0"
           >
             <ChevronRight size={24} />
           </button>
@@ -53,7 +53,7 @@ export default function Gallery06() {
         {images.map((img, idx) => (
           <div 
             key={idx} 
-            className="snap-center shrink-0 w-[85vw] sm:w-[400px] md:w-[500px] aspect-[4/5] sm:aspect-[4/3] rounded-3xl overflow-hidden relative group cursor-pointer"
+            className="snap-center shrink-0 w-[280px] sm:w-[400px] md:w-[500px] aspect-[4/5] sm:aspect-[4/3] rounded-3xl overflow-hidden relative group cursor-pointer"
           >
             <img 
               src={img.src} 

@@ -13,13 +13,13 @@ export default function Gallery44() {
   ];
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 py-24 font-sans">
-      <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 h-[600px] lg:h-[700px]">
+    <div className="w-full max-w-7xl mx-auto px-4 py-12 lg:py-24 font-sans text-left">
+      <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 h-auto lg:h-[700px]">
         
         {/* Tabs List */}
-        <div className="w-full lg:w-1/3 flex flex-col justify-center h-full">
+        <div className="w-full lg:w-1/3 flex flex-col justify-center lg:h-full shrink-0">
           <div className="mb-12">
-            <h2 className="text-4xl font-black text-gray-900 uppercase tracking-tighter mb-2">Collections</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 uppercase tracking-tighter mb-2">Collections</h2>
             <p className="text-gray-500 font-medium">Select a category to explore.</p>
           </div>
           
@@ -27,13 +27,13 @@ export default function Gallery44() {
             {tabs.map((tab, idx) => (
               <div 
                 key={idx}
-                className={`flex items-center justify-between p-6 cursor-pointer border-l-4 transition-all duration-300
+                className={`flex items-center justify-between p-4 md:p-6 cursor-pointer border-l-4 transition-all duration-300
                   ${activeTab === idx ? 'bg-gray-100 border-black' : 'bg-transparent border-transparent hover:bg-gray-50'}
                 `}
                 onClick={() => setActiveTab(idx)}
               >
                 <div>
-                  <h3 className={`text-xl font-bold transition-colors ${activeTab === idx ? 'text-gray-900' : 'text-gray-500'}`}>{tab.title}</h3>
+                  <h3 className={`text-lg md:text-xl font-bold transition-colors ${activeTab === idx ? 'text-gray-900' : 'text-gray-500'}`}>{tab.title}</h3>
                   <span className="text-xs text-gray-400 font-mono tracking-widest uppercase mt-1 block">{tab.date}</span>
                 </div>
                 <ChevronRight size={20} className={`transition-transform duration-300 ${activeTab === idx ? 'text-black translate-x-2' : 'text-gray-300'}`} />
@@ -43,7 +43,7 @@ export default function Gallery44() {
         </div>
 
         {/* Featured Image Display */}
-        <div className="w-full lg:w-2/3 h-full relative rounded-3xl overflow-hidden shadow-2xl">
+        <div className="w-full lg:w-2/3 h-[400px] md:h-[500px] lg:h-full relative rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shrink-0">
           {tabs.map((tab, idx) => (
             <div 
               key={idx}
@@ -54,9 +54,9 @@ export default function Gallery44() {
               <img src={tab.src} alt={tab.title} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               
-              <div className="absolute bottom-12 left-12 max-w-md">
-                <h2 className="text-5xl font-black text-white mb-4 uppercase tracking-tighter drop-shadow-md">{tab.title}</h2>
-                <p className="text-white/80 text-lg leading-relaxed drop-shadow">{tab.desc}</p>
+              <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12 pr-6 md:pr-12 max-w-md">
+                <h2 className="text-3xl md:text-5xl font-black text-white mb-2 md:mb-4 uppercase tracking-tighter drop-shadow-md">{tab.title}</h2>
+                <p className="text-white/80 text-sm md:text-lg leading-relaxed drop-shadow">{tab.desc}</p>
               </div>
             </div>
           ))}

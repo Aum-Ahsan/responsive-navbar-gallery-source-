@@ -30,10 +30,9 @@ function Card({
   return (
     <article id={`${type.toLowerCase()}-${id}`} className="component-card overflow-visible rounded-[22px] border border-black/10 bg-white shadow-[0_18px_60px_rgba(0,0,0,.06)]">
       {/* Card header */}
-      <div className="component-card-header flex items-center justify-between rounded-t-[22px] border-b border-black/8 bg-white px-4 py-3">
-        <div className="flex items-baseline gap-3 min-w-0">
-          <h3 className="text-base font-bold shrink-0">{type} {id}</h3>
-          <span className="hidden text-sm text-[#787873] sm:inline truncate">{name}</span>
+      <div className="component-card-header flex flex-wrap items-center justify-between gap-2 rounded-t-[22px] border-b border-black/8 bg-white px-4 py-3">
+        <div className="min-w-0 flex-1">
+          <h3 className="text-sm sm:text-base font-bold line-clamp-2 sm:line-clamp-1 leading-snug">{type} {id} — {name}</h3>
         </div>
         <div className="flex items-center gap-2 shrink-0">
           <span className="hidden sm:inline rounded-full bg-[#f0f0ed] px-3 py-1 text-[11px] font-semibold uppercase tracking-[.08em] text-[#71716c]">

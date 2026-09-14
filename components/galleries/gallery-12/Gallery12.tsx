@@ -4,14 +4,14 @@ import { Bookmark, Heart, Share2 } from 'lucide-react';
 
 export default function Gallery12() {
   const pins = [
-    { id: 1, src: 'https://images.unsplash.com/photo-1512496015851-a1dc8a4781df', title: 'Minimal Setup', author: 'Design Co', avatar: 'https://i.pravatar.cc/150?img=32', aspect: 'aspect-[3/4]' },
-    { id: 2, src: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff', title: 'Sneaker Drop', author: 'Hype Beast', avatar: 'https://i.pravatar.cc/150?img=11', aspect: 'aspect-[4/5]' },
-    { id: 3, src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085', title: 'Developer Desk', author: 'Tech Life', avatar: 'https://i.pravatar.cc/150?img=47', aspect: 'aspect-[1/1]' },
-    { id: 4, src: 'https://images.unsplash.com/photo-1558655146-d09347e92766', title: 'Creative Studio', author: 'Art Space', avatar: 'https://i.pravatar.cc/150?img=12', aspect: 'aspect-[4/3]' },
-    { id: 5, src: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e', title: 'Wireless Audio', author: 'Sound Lab', avatar: 'https://i.pravatar.cc/150?img=33', aspect: 'aspect-[3/4]' },
-    { id: 6, src: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30', title: 'Smart Watch', author: 'Gadget Grid', avatar: 'https://i.pravatar.cc/150?img=68', aspect: 'aspect-[1/1]' },
-    { id: 7, src: 'https://images.unsplash.com/photo-1503602642458-2322119d4411', title: 'Typography', author: 'Type Foundry', avatar: 'https://i.pravatar.cc/150?img=49', aspect: 'aspect-[4/5]' },
-    { id: 8, src: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b', title: 'Summer Vibes', author: 'Travel Log', avatar: 'https://i.pravatar.cc/150?img=25', aspect: 'aspect-[3/4]' },
+    { id: 1, src: 'https://images.unsplash.com/photo-1512496015851-a1dc8a4781df', title: 'Minimal Setup', author: 'Design Co', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80', aspect: 'aspect-[3/4]' },
+    { id: 2, src: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff', title: 'Sneaker Drop', author: 'Hype Beast', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80', aspect: 'aspect-[4/5]' },
+    { id: 3, src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085', title: 'Developer Desk', author: 'Tech Life', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80', aspect: 'aspect-[1/1]' },
+    { id: 4, src: 'https://images.unsplash.com/photo-1558655146-d09347e92766', title: 'Creative Studio', author: 'Art Space', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80', aspect: 'aspect-[4/3]' },
+    { id: 5, src: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e', title: 'Wireless Audio', author: 'Sound Lab', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80', aspect: 'aspect-[3/4]' },
+    { id: 6, src: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30', title: 'Smart Watch', author: 'Gadget Grid', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80', aspect: 'aspect-[1/1]' },
+    { id: 7, src: 'https://images.unsplash.com/photo-1503602642458-2322119d4411', title: 'Typography', author: 'Type Foundry', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80', aspect: 'aspect-[4/5]' },
+    { id: 8, src: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b', title: 'Summer Vibes', author: 'Travel Log', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80', aspect: 'aspect-[3/4]' },
   ];
 
   return (

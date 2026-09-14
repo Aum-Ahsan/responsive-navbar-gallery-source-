@@ -208,7 +208,7 @@ export default function Hero34() {
             <div className="flex -space-x-2">
               {[1,2,3,4].map((i) => (
                 <div key={i} className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-slate-200 border-2 border-slate-50 flex items-center justify-center overflow-hidden">
-                  <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="user" className="w-full h-full object-cover" />
+                  <img src={`https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80${i+10}`} alt="user" className="w-full h-full object-cover" />
                 </div>
               ))}
             </div>

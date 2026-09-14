@@ -79,14 +79,14 @@ export default function Cta34() {
             <div className="text-fuchsia-300 text-sm font-bold uppercase tracking-widest mb-4">Featured Speakers</div>
             <div className="space-y-4">
               <div className="flex items-center gap-4 bg-white/5 p-3 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors cursor-pointer">
-                <img src="https://i.pravatar.cc/100?img=68" alt="Speaker" className="w-14 h-14 rounded-xl object-cover" />
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80" alt="Speaker" className="w-14 h-14 rounded-xl object-cover" />
                 <div>
                   <h4 className="font-bold text-white">Elena Rostova</h4>
                   <p className="text-xs text-violet-300 font-medium">VP of Engineering, Vercel</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 bg-white/5 p-3 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors cursor-pointer">
-                <img src="https://i.pravatar.cc/100?img=12" alt="Speaker" className="w-14 h-14 rounded-xl object-cover" />
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80" alt="Speaker" className="w-14 h-14 rounded-xl object-cover" />
                 <div>
                   <h4 className="font-bold text-white">David Kim</h4>
                   <p className="text-xs text-violet-300 font-medium">Principal Architect, Meta</p>

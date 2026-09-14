@@ -62,7 +62,7 @@ export default function Navbar51() {
         <div className="relative cursor-pointer ml-1 lg:ml-2 group">
           <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full p-[3px]" style={{ background: 'conic-gradient(#eab308 75%, #e5e7eb 0)' }}>
             <div className="w-full h-full bg-white rounded-full p-[2px]">
-              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Gamer" alt="User" className="w-full h-full rounded-full bg-gray-100" />
+              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80" alt="User" className="w-full h-full rounded-full bg-gray-100" />
             </div>
           </div>
           <div className="absolute -bottom-1 -right-1 bg-yellow-400 border-2 border-white text-white text-[9px] lg:text-[10px] font-black px-1.5 rounded-full shadow-sm group-hover:scale-110 transition-transform">

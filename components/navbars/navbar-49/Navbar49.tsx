@@ -88,7 +88,7 @@ export default function Navbar49() {
           </button>
           
           <div className="hidden sm:block w-8 h-8 rounded-full bg-zinc-800 border-2 border-zinc-700 overflow-hidden cursor-pointer hover:border-green-500 transition-colors">
-             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=MusicFan" alt="User" className="w-full h-full object-cover" />
+             <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80" alt="User" className="w-full h-full object-cover" />
           </div>
 
           {/* Hamburger Menu (Moved to Right Side for Mobile) */}
@@ -137,7 +137,7 @@ export default function Navbar49() {
         
         <div className="flex-1 overflow-y-auto py-6 px-6 flex flex-col gap-6">
           <div className="flex items-center gap-3 mb-4">
-             <div className="w-10 h-10 rounded-full bg-zinc-800 overflow-hidden"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=MusicFan" className="w-full h-full object-cover" /></div>
+             <div className="w-10 h-10 rounded-full bg-zinc-800 overflow-hidden"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80" className="w-full h-full object-cover" /></div>
              <div>
                <p className="text-white font-bold text-sm">MusicFan</p>
                <p className="text-zinc-500 text-xs">View Profile</p>

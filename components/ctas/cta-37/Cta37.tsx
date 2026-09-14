@@ -13,7 +13,7 @@ export default function Cta37() {
         <div className="relative z-10 flex flex-col items-center">
           
           <div className="relative mb-8 group cursor-pointer">
-            <img src="https://i.pravatar.cc/150?img=32" alt="Profile" className="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-white shadow-xl group-hover:scale-105 transition-transform duration-300" />
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80" alt="Profile" className="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-white shadow-xl group-hover:scale-105 transition-transform duration-300" />
             <div className="absolute -bottom-2 right-0 bg-white px-3 py-1.5 rounded-full border border-[#e8e4df] shadow-sm flex items-center gap-2 group-hover:-translate-y-1 transition-transform">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>

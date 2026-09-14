@@ -4,8 +4,8 @@ import { PhoneCall, Calendar, Mail } from 'lucide-react';
 
 export default function Cta17() {
   const reps = [
-    { name: "Sarah Jenkins", role: "Enterprise Sales", img: "https://i.pravatar.cc/150?img=47" },
-    { name: "Marcus Chen", role: "Technical Specialist", img: "https://i.pravatar.cc/150?img=11" }
+    { name: "Sarah Jenkins", role: "Enterprise Sales", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80" },
+    { name: "Marcus Chen", role: "Technical Specialist", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80" }
   ];
 
   return (

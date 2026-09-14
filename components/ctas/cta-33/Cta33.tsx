@@ -4,9 +4,9 @@ import { MessageSquare, ArrowRight } from 'lucide-react';
 
 export default function Cta33() {
   const agents = [
-    { name: "Alex", img: "https://i.pravatar.cc/100?img=33" },
-    { name: "Sam", img: "https://i.pravatar.cc/100?img=44" },
-    { name: "Jordan", img: "https://i.pravatar.cc/100?img=55" },
+    { name: "Alex", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80" },
+    { name: "Sam", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80" },
+    { name: "Jordan", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80" },
   ];
 
   return (

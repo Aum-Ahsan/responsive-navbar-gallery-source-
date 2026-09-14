@@ -11,7 +11,7 @@ export default function Newsletter32() {
           <div className="md:w-1/3 flex flex-col items-center">
             <div className="relative mb-4">
               <img 
-                src="https://i.pravatar.cc/150?img=32" 
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80" 
                 alt="Creator Avatar" 
                 className="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
               />

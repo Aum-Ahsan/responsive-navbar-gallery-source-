@@ -39,7 +39,7 @@ export default function Hero45() {
           className="w-full h-full object-cover opacity-80"
           poster="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=2000&auto=format&fit=crop"
         >
-          <source src="https://cdn.pixabay.com/video/2017/10/12/12330-238475510_large.mp4" type="video/mp4" />
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
         </video>
         
         {/* Dark Overlays */}

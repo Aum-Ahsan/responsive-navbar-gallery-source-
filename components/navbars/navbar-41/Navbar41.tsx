@@ -85,7 +85,7 @@
 //         {/* Profile Avatar with Tooltip */}
 //         <div className="relative group ml-2 cursor-pointer">
 //           <div className="w-10 h-10 rounded-xl bg-indigo-100 border-2 border-indigo-200 overflow-hidden flex items-center justify-center">
-//             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=ConnectX" alt="User" className="w-full h-full object-cover" />
+//             <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80" alt="User" className="w-full h-full object-cover" />
 //           </div>
 //           <div className="absolute top-full mt-3 right-0 px-2.5 py-1 bg-gray-800 text-white text-[11px] font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50 shadow-lg tracking-wide">
 //             Profile & Settings
@@ -285,7 +285,7 @@ export default function Navbar41() {
         {/* Profile Avatar with Tooltip */}
         <div className="relative group ml-2 cursor-pointer">
           <div className="w-10 h-10 rounded-xl bg-indigo-100 border-2 border-indigo-200 overflow-hidden flex items-center justify-center">
-            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=ConnectX" alt="User" className="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80" alt="User" className="w-full h-full object-cover" />
           </div>
           <div className="absolute top-full mt-3 right-0 px-2.5 py-1 bg-gray-800 text-white text-[11px] font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50 shadow-lg tracking-wide">
             Profile & Settings

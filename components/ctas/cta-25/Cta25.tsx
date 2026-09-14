@@ -15,7 +15,7 @@ export default function Cta25() {
           {/* Animated Logos Area */}
           <div className="flex items-center justify-center gap-4 sm:gap-8 mb-10">
             <div className="w-16 h-16 sm:w-24 sm:h-24 bg-white rounded-2xl shadow-lg border border-gray-100 flex items-center justify-center z-10 hover:scale-110 transition-transform">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/7/76/Slack_Icon.png" alt="Slack" className="w-10 sm:w-16" />
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" alt="Slack" className="w-10 sm:w-16" />
             </div>
             
             <div className="hidden sm:flex w-24 h-px bg-gradient-to-r from-gray-200 via-indigo-500 to-gray-200 relative">
@@ -35,7 +35,7 @@ export default function Cta25() {
             </div>
             
             <div className="w-16 h-16 sm:w-24 sm:h-24 bg-white rounded-2xl shadow-lg border border-gray-100 flex items-center justify-center z-10 hover:scale-110 transition-transform">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Jira_%28Software%29_logo.svg/512px-Jira_%28Software%29_logo.svg.png" alt="Jira" className="w-10 sm:w-16" />
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt="Jira" className="w-10 sm:w-16" />
             </div>
           </div>
 

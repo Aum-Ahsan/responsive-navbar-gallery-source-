@@ -48,6 +48,16 @@ import Process47 from './process-47/Process47';
 import Process48 from './process-48/Process48';
 import Process49 from './process-49/Process49';
 import Process50 from './process-50/Process50';
+import Process51 from './process-51/Process51';
+import Process52 from './process-52/Process52';
+import Process53 from './process-53/Process53';
+import Process54 from './process-54/Process54';
+import Process55 from './process-55/Process55';
+import Process56 from './process-56/Process56';
+import Process57 from './process-57/Process57';
+import Process58 from './process-58/Process58';
+import Process59 from './process-59/Process59';
+import Process60 from './process-60/Process60';
 
 export const processes = [
   { id: '01', name: 'Horizontal Step Timeline', Component: Process01 },
@@ -99,5 +109,15 @@ export const processes = [
   { id: '47', name: 'Ecosystem Process', Component: Process47 },
   { id: '48', name: 'Parallel Process', Component: Process48 },
   { id: '49', name: 'Merge Process', Component: Process49 },
-  { id: '50', name: 'Interactive Process Simulator', Component: Process50 }
+  { id: '50', name: 'Interactive Process Simulator', Component: Process50 },
+  { id: '51', name: 'Order Tracking Timeline', Component: Process51 },
+  { id: '52', name: 'Product Roadmap', Component: Process52 },
+  { id: '53', name: 'Subscription Onboarding Flow', Component: Process53 },
+  { id: '54', name: 'CI/CD Deployment Pipeline', Component: Process54 },
+  { id: '55', name: 'User Journey Map', Component: Process55 },
+  { id: '56', name: 'Loan Approval Process', Component: Process56 },
+  { id: '57', name: 'Player Progression', Component: Process57 },
+  { id: '58', name: 'Supply Chain Process', Component: Process58 },
+  { id: '59', name: 'Event Timeline', Component: Process59 },
+  { id: '60', name: 'System Architecture', Component: Process60 }
 ];

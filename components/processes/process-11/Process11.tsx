@@ -16,11 +16,12 @@ export default function Process11() {
         <p className="text-slate-600">A never-ending loop of constant improvement and refinement.</p>
       </div>
 
-      <div className="relative w-full max-w-2xl mx-auto h-[260px] sm:h-[340px] lg:h-[400px] scale-75 md:scale-100 origin-center overflow-hidden md:overflow-visible">
-        {/* Central Core */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-300 animate-[spin_10s_linear_infinite]">
-          <RefreshCw size={120} strokeWidth={1} />
-        </div>
+      <div className="relative w-full max-w-2xl mx-auto h-[260px] sm:h-[340px] lg:h-[400px] flex items-center justify-center overflow-hidden md:overflow-visible">
+        <div className="border border-red-500 relative w-full h-[400px] scale-[0.65] sm:scale-75 md:scale-100 origin-center">
+          {/* Central Core */}
+          <div className="border border-red-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-10 text-slate-300 animate-[spin_10s_linear_infinite]">
+            <RefreshCw size={120} strokeWidth={1} />
+          </div>
 
         {/* Nodes arranged in a triangle/cycle using absolute positioning */}
         {steps.map((step, idx) => {
@@ -34,7 +35,7 @@ export default function Process11() {
           return (
             <div 
               key={step.id}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center bg-white p-6 rounded-2xl shadow-xl w-48 text-center transition-transform hover:scale-110 z-10 border border-slate-100"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-30 flex flex-col items-center bg-white p-6 rounded-3xl shadow-xl w-48 text-center transition-transform hover:scale-110 z-10 border border-slate-100"
               style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}
             >
               <div className={`w-12 h-12 ${step.bg} ${step.color} rounded-full flex items-center justify-center mb-4`}>
@@ -44,7 +45,8 @@ export default function Process11() {
               <p className="text-xs text-slate-500 mt-2">{step.desc}</p>
             </div>
           );
-        })}
+          })}
+        </div>
       </div>
     </div>
   );

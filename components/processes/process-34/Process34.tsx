@@ -17,16 +17,17 @@ export default function Process34() {
 
       <div className="bg-gray-900 rounded-[2rem] p-4 shadow-2xl border border-gray-800">
         {/* Mock Video Player */}
-        <div className="w-full aspect-video bg-black rounded-xl overflow-hidden relative flex items-center justify-center group cursor-pointer">
+        <div className="w-full aspect-video bg-black rounded-xl overflow-hidden relative flex items-center justify-center group cursor-pointer select-none">
           <div className="absolute inset-0 bg-gradient-to-br from-red-900/20 to-black"></div>
           <PlayCircle size={64} className="text-white/80 group-hover:text-white group-hover:scale-110 transition-all z-10" />
           <div className="absolute bottom-4 left-4 bg-black/60 px-3 py-1 rounded text-white text-sm font-semibold">
-            Playing: {steps[activeVideo].title}
+            <span className="text-white/60 font-normal mr-1">Playing:</span>
+            {steps[activeVideo].title}
           </div>
         </div>
 
         {/* Playlist */}
-        <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
           {steps.map((step, idx) => (
             <button 
               key={idx}

@@ -27,35 +27,75 @@ import Carousel26 from './carousel-26/Carousel26';
 import Carousel27 from './carousel-27/Carousel27';
 import Carousel28 from './carousel-28/Carousel28';
 import Carousel29 from './carousel-29/Carousel29';
+import Carousel30 from './carousel-30/Carousel30';
+import Carousel31 from './carousel-31/Carousel31';
+import Carousel32 from './carousel-32/Carousel32';
+import Carousel33 from './carousel-33/Carousel33';
+import Carousel34 from './carousel-34/Carousel34';
+import Carousel35 from './carousel-35/Carousel35';
+import Carousel36 from './carousel-36/Carousel36';
+import Carousel37 from './carousel-37/Carousel37';
+import Carousel38 from './carousel-38/Carousel38';
+import Carousel39 from './carousel-39/Carousel39';
+import Carousel40 from './carousel-40/Carousel40';
+import Carousel41 from './carousel-41/Carousel41';
+import Carousel42 from './carousel-42/Carousel42';
+import Carousel43 from './carousel-43/Carousel43';
+import Carousel44 from './carousel-44/Carousel44';
+import Carousel45 from './carousel-45/Carousel45';
+import Carousel46 from './carousel-46/Carousel46';
+import Carousel47 from './carousel-47/Carousel47';
+import Carousel48 from './carousel-48/Carousel48';
+import Carousel49 from './carousel-49/Carousel49';
 
 export const carousels = [
-  { id: '01', name: 'Carousel01', Component: Carousel01 },
-  { id: '02', name: 'Carousel02', Component: Carousel02 },
-  { id: '03', name: 'Carousel03', Component: Carousel03 },
-  { id: '04', name: 'Carousel04', Component: Carousel04 },
-  { id: '05', name: 'Carousel05', Component: Carousel05 },
-  { id: '06', name: 'Carousel06', Component: Carousel06 },
-  { id: '07', name: 'Carousel07', Component: Carousel07 },
-  { id: '08', name: 'Carousel08', Component: Carousel08 },
-  { id: '09', name: 'Carousel09', Component: Carousel09 },
-  { id: '10', name: 'Carousel10', Component: Carousel10 },
-  { id: '11', name: 'Carousel11', Component: Carousel11 },
-  { id: '12', name: 'Carousel12', Component: Carousel12 },
-  { id: '13', name: 'Carousel13', Component: Carousel13 },
-  { id: '14', name: 'Carousel14', Component: Carousel14 },
-  { id: '15', name: 'Carousel15', Component: Carousel15 },
-  { id: '16', name: 'Carousel16', Component: Carousel16 },
-  { id: '17', name: 'Carousel17', Component: Carousel17 },
-  { id: '18', name: 'Carousel18', Component: Carousel18 },
-  { id: '19', name: 'Carousel19', Component: Carousel19 },
-  { id: '20', name: 'Carousel20', Component: Carousel20 },
-  { id: '21', name: 'Carousel21', Component: Carousel21 },
-  { id: '22', name: 'Carousel22', Component: Carousel22 },
-  { id: '23', name: 'Carousel23', Component: Carousel23 },
-  { id: '24', name: 'Carousel24', Component: Carousel24 },
-  { id: '25', name: 'Carousel25', Component: Carousel25 },
-  { id: '26', name: 'Carousel26', Component: Carousel26 },
-  { id: '27', name: 'Carousel27', Component: Carousel27 },
-  { id: '28', name: 'Carousel28', Component: Carousel28 },
-  { id: '29', name: 'Carousel29', Component: Carousel29 }
+  { id: '01', name: 'Basic Slide', Component: Carousel01 },
+  { id: '02', name: 'Multi-Slide', Component: Carousel02 },
+  { id: '03', name: 'Scroll Snap', Component: Carousel03 },
+  { id: '04', name: 'Infinite Loop', Component: Carousel04 },
+  { id: '05', name: 'Autoplay', Component: Carousel05 },
+  { id: '06', name: 'Auto-Reverse', Component: Carousel06 },
+  { id: '07', name: 'Center Mode', Component: Carousel07 },
+  { id: '08', name: 'Vertical Slide', Component: Carousel08 },
+  { id: '09', name: 'Crossfade', Component: Carousel09 },
+  { id: '10', name: 'Scale Focus', Component: Carousel10 },
+  { id: '11', name: '3D Coverflow', Component: Carousel11 },
+  { id: '12', name: 'Flip', Component: Carousel12 },
+  { id: '13', name: 'Stack', Component: Carousel13 },
+  { id: '14', name: 'Accordion', Component: Carousel14 },
+  { id: '15', name: 'Thumbnail Controlled', Component: Carousel15 },
+  { id: '16', name: 'Synced Dual Track', Component: Carousel16 },
+  { id: '17', name: 'Progress Controlled', Component: Carousel17 },
+  { id: '18', name: 'Mouse Wheel Controlled', Component: Carousel18 },
+  { id: '19', name: 'Story / Timed Progress', Component: Carousel19 },
+  { id: '20', name: 'Before/After Drag', Component: Carousel20 },
+  { id: '21', name: 'Circular / Radial', Component: Carousel21 },
+  { id: '22', name: 'Orbit', Component: Carousel22 },
+  { id: '23', name: 'Cylinder', Component: Carousel23 },
+  { id: '24', name: 'Fan / Deck', Component: Carousel24 },
+  { id: '25', name: 'Depth / Z-Axis', Component: Carousel25 },
+  { id: '26', name: 'Zoom Transition', Component: Carousel26 },
+  { id: '27', name: 'Clip-Path Transition', Component: Carousel27 },
+  { id: '28', name: 'Split Transition', Component: Carousel28 },
+  { id: '29', name: 'Bidirectional Track', Component: Carousel29 },
+  { id: '30', name: 'Streaming Continue Watching', Component: Carousel30 },
+  { id: '31', name: 'E-Commerce Swatch Catalog', Component: Carousel31 },
+  { id: '32', name: 'SaaS Interactive Feature Tour', Component: Carousel32 },
+  { id: '33', name: 'Story Segmented Micro-Reels', Component: Carousel33 },
+  { id: '34', name: '3D Card Stack Gesture Swipe', Component: Carousel34 },
+  { id: '35', name: 'Interactive Before/After Comparison', Component: Carousel35 },
+  { id: '36', name: 'Hero Campaign Promotional Billboard', Component: Carousel36 },
+  { id: '37', name: 'Live Sports Match Center Ticker', Component: Carousel37 },
+  { id: '38', name: 'B2B Proof & Metric Testimonial', Component: Carousel38 },
+  { id: '39', name: 'Podcast & Audio Player Carousel', Component: Carousel39 },
+  { id: '40', name: 'Mobile App Feature Onboarding', Component: Carousel40 },
+  { id: '41', name: 'News Publication Breaking Ticker', Component: Carousel41 },
+  { id: '42', name: 'Real Estate Property Gallery', Component: Carousel42 },
+  { id: '43', name: 'Restaurant Menu Highlights', Component: Carousel43 },
+  { id: '44', name: 'Timeline History Slider', Component: Carousel44 },
+  { id: '45', name: 'Team Member Roster Cards', Component: Carousel45 },
+  { id: '46', name: 'Gamified Progress Map', Component: Carousel46 },
+  { id: '47', name: 'Music Album Coverflow', Component: Carousel47 },
+  { id: '48', name: 'Recipe Step-by-Step Guide', Component: Carousel48 },
+  { id: '49', name: 'Event Schedule Agenda Track', Component: Carousel49 },
 ];

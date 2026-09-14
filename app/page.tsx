@@ -92,16 +92,16 @@ export default function Home() {
               Navigation &amp; Hero Gallery
             </h1>
             <p className="mt-1 max-w-2xl text-xs leading-6 text-[#64645f] sm:text-sm">
-              Fifty-three responsive navbars, twenty heroes, Twenty-Nine Carousels, fifty Processes and CTAs using one common container, gutter and card-padding system.
+              Fifty-three responsive navbars, twenty heroes, Forty-Nine Carousels, sixty Processes and fifty CTAs using one common container, gutter and card-padding system.
             </p>
             {/* Category pills — wrap on mobile */}
             <div className="mt-3 flex flex-wrap gap-2">
               {[
                 { href: "#navbars",     label: "53 Navbars" },
                 { href: "#heroes",      label: "20 Heroes" },
-                { href: "#carousels",   label: "29 Carousels" },
-                { href: "#processes",   label: "50 Processes" },
-                { href: "#newsletters", label: "25 Newsletters" },
+                { href: "#carousels",   label: "49 Carousels" },
+                { href: "#processes",   label: "60 Processes" },
+                { href: "#newsletters", label: "35 Newsletters" },
                 { href: "#ctas",        label: "50 CTAs" },
               ].map(({ href, label }) => (
                 <a key={href} href={href} className="rounded-full border border-black/10 bg-white px-3 py-1.5 text-xs font-semibold hover:bg-black/5 transition">
@@ -149,7 +149,7 @@ export default function Home() {
       </section>
 
       <section id="carousels" className="gallery-section mx-auto max-w-[1600px] border-t border-black/10">
-        <SectionHeader category="Category 03" title="Carousel Components" description="A collection of responsive carousel and slider components using the same shared container, spacing and preview system." />
+        <SectionHeader category="Category 03" title="Carousel Components" description="Forty-nine responsive carousel components featuring real-world production designs — including streaming continue-watching rows, e-commerce swatch pickers, SaaS feature tours, story reels, 3D card swipe, before/after comparisons, hero deal billboards, and sports match tickers." />
         <div className="space-y-8">
           {carousels.map(({ id, name, Component }) => (
             <Card key={id} id={id} name={name} source={`COMPONENT ${id}`} preview={preview} type="Carousel"><Component /></Card>
@@ -158,7 +158,7 @@ export default function Home() {
       </section>
 
       <section id="processes" className="gallery-section mx-auto max-w-[1600px] border-t border-black/10">
-        <SectionHeader category="Category 04" title="Process Sections" description="Fifty visually stunning and fully responsive process sections and workflows." />
+        <SectionHeader category="Category 04" title="Process Sections" description="Sixty visually stunning and fully responsive process sections and workflows." />
         <div className="space-y-8">
           {processes.map(({ id, name, Component }) => (
             <Card key={id} id={id} name={name} source={`PROCESS ${id}`} preview={preview} type="Process"><Component /></Card>
@@ -176,7 +176,7 @@ export default function Home() {
       </section>
 
       <section id="newsletters" className="gallery-section mx-auto max-w-[1600px] border-t border-black/10">
-        <SectionHeader category="Category 06" title="Newsletter Signups" description="Twenty-five unique newsletter components demonstrating various layouts and interactions." />
+        <SectionHeader category="Category 06" title="Newsletter Signups" description="Thirty-five unique newsletter components demonstrating various layouts and interactions." />
         <div className="space-y-8">
           {newsletters.map(({ id, name, Component }) => (
             <Card key={id} id={id} name={name} source={`Newsletter ${id}`} preview={preview} type="Newsletter"><Component /></Card>

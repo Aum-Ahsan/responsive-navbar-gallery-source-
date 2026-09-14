@@ -19,6 +19,16 @@ import Newsletter22 from './newsletter-22/Newsletter22';
 import Newsletter23 from './newsletter-23/Newsletter23';
 import Newsletter24 from './newsletter-24/Newsletter24';
 import Newsletter25 from './newsletter-25/Newsletter25';
+import Newsletter26 from './newsletter-26/Newsletter26';
+import Newsletter27 from './newsletter-27/Newsletter27';
+import Newsletter28 from './newsletter-28/Newsletter28';
+import Newsletter29 from './newsletter-29/Newsletter29';
+import Newsletter30 from './newsletter-30/Newsletter30';
+import Newsletter31 from './newsletter-31/Newsletter31';
+import Newsletter32 from './newsletter-32/Newsletter32';
+import Newsletter33 from './newsletter-33/Newsletter33';
+import Newsletter34 from './newsletter-34/Newsletter34';
+import Newsletter35 from './newsletter-35/Newsletter35';
 
 export const newsletters = [
   { id: '01', name: 'Newsletter 01', Component: Newsletter01 },
@@ -41,5 +51,15 @@ export const newsletters = [
   { id: '22', name: 'Newsletter 22', Component: Newsletter22 },
   { id: '23', name: 'Newsletter 23', Component: Newsletter23 },
   { id: '24', name: 'Newsletter 24', Component: Newsletter24 },
-  { id: '25', name: 'Newsletter 25', Component: Newsletter25 }
+  { id: '25', name: 'Newsletter 25', Component: Newsletter25 },
+  { id: '26', name: 'Glassmorphic Popup', Component: Newsletter26 },
+  { id: '27', name: 'Minimalist Brutalism', Component: Newsletter27 },
+  { id: '28', name: 'Envelope Animation', Component: Newsletter28 },
+  { id: '29', name: 'Tech / Terminal Style', Component: Newsletter29 },
+  { id: '30', name: 'E-commerce Discount', Component: Newsletter30 },
+  { id: '31', name: 'SaaS Product Update', Component: Newsletter31 },
+  { id: '32', name: 'Creator Profile', Component: Newsletter32 },
+  { id: '33', name: 'Editorial Magazine', Component: Newsletter33 },
+  { id: '34', name: 'Travel / Hospitality', Component: Newsletter34 },
+  { id: '35', name: 'Floating Action Bar', Component: Newsletter35 }
 ];

@@ -4,10 +4,10 @@ import { MapPin, Flag, Navigation } from 'lucide-react';
 
 export default function Process13() {
   const milestones = [
-    { year: 'Q1', title: 'Foundation', desc: 'Setting up the infrastructure', icon: MapPin },
-    { year: 'Q2', title: 'Beta Release', desc: 'Opening to early adopters', icon: Navigation },
-    { year: 'Q3', title: 'Expansion', desc: 'Adding key requested features', icon: Navigation },
-    { year: 'Q4', title: 'Global Launch', desc: 'Public marketing push', icon: Flag }
+    { year: '01', title: 'Foundation', desc: 'Setting up the infrastructure', icon: MapPin },
+    { year: '02', title: 'Beta Release', desc: 'Opening to early adopters', icon: Navigation },
+    { year: '03', title: 'Expansion', desc: 'Adding key requested features', icon: Navigation },
+    { year: '04', title: 'Global Launch', desc: 'Public marketing push', icon: Flag }
   ];
 
   return (
@@ -36,8 +36,8 @@ export default function Process13() {
               </div>
               
               <div className="ml-6 md:ml-0 md:mt-8 flex flex-col">
-                <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-white/10 -ml-2 -mb-5 relative z-0">{ms.year}</span>
-                <div className="relative z-10">
+                <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-white/20 mb-1">{ms.year}</span>
+                <div>
                   <h3 className="text-xl font-bold text-white">{ms.title}</h3>
                   <p className="text-gray-400 text-sm mt-1 max-w-[200px] leading-relaxed">{ms.desc}</p>
                 </div>

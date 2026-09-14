@@ -7,6 +7,7 @@ import { carousels } from "@/components/carousels";
 import { processes } from "@/components/processes";
 import { ctas } from "@/components/ctas";
 import { newsletters } from "@/components/newsletters";
+import { galleries } from "@/components/galleries";
 
 type Preview = "desktop" | "tablet" | "mobile";
 
@@ -24,7 +25,7 @@ function Card({
   source: string;
   children: React.ReactNode;
   preview: Preview;
-  type: "Navbar" | "Hero" | "Carousel" | "Process" | "CTA" | "Newsletter";
+  type: "Navbar" | "Hero" | "Carousel" | "Process" | "CTA" | "Newsletter" | "Gallery";
 }) {
   return (
     <article id={`${type.toLowerCase()}-${id}`} className="component-card overflow-visible rounded-[22px] border border-black/10 bg-white shadow-[0_18px_60px_rgba(0,0,0,.06)]">
@@ -55,7 +56,7 @@ function Card({
       </div>
       {/* Preview area */}
       <div className="component-preview overflow-visible rounded-b-[22px] bg-[linear-gradient(135deg,#ecece8_25%,transparent_25%),linear-gradient(225deg,#ecece8_25%,transparent_25%),linear-gradient(45deg,#ecece8_25%,transparent_25%),linear-gradient(315deg,#ecece8_25%,#f6f6f3_25%)] bg-[length:16px_16px] bg-[position:8px_0,8px_0,0_0,0_0]">
-        <div className={`preview-shell preview-${preview} mx-auto transition-[max-width] duration-300 ${preview === "desktop" ? "max-w-full" : preview === "tablet" ? "max-w-[820px]" : "max-w-[390px]"}`}>
+        <div className={`preview-shell @container preview-${preview} mx-auto transition-[max-width] duration-300 ${preview === "desktop" ? "max-w-full" : preview === "tablet" ? "max-w-[820px]" : "max-w-[390px]"}`}>
           {children}
         </div>
       </div>
@@ -89,10 +90,10 @@ export default function Home() {
               Reusable component system
             </p>
             <h1 className="text-2xl font-semibold tracking-[-.04em] sm:text-3xl md:text-4xl">
-              Navigation &amp; Hero Gallery
+              UI Components &amp; Galleries
             </h1>
             <p className="mt-1 max-w-2xl text-xs leading-6 text-[#64645f] sm:text-sm">
-              Fifty-three responsive navbars, twenty heroes, Forty-Nine Carousels, sixty Processes and fifty CTAs using one common container, gutter and card-padding system.
+              Fifty-three responsive navbars, twenty heroes, forty-nine carousels, sixty processes, fifty CTAs, and 70 interactive galleries using one common container, gutter and card-padding system.
             </p>
             {/* Category pills — wrap on mobile */}
             <div className="mt-3 flex flex-wrap gap-2">
@@ -103,6 +104,7 @@ export default function Home() {
                 { href: "#processes",   label: "60 Processes" },
                 { href: "#newsletters", label: "35 Newsletters" },
                 { href: "#ctas",        label: "50 CTAs" },
+                { href: "#galleries",   label: "70 Galleries" },
               ].map(({ href, label }) => (
                 <a key={href} href={href} className="rounded-full border border-black/10 bg-white px-3 py-1.5 text-xs font-semibold hover:bg-black/5 transition">
                   {label}
@@ -180,6 +182,15 @@ export default function Home() {
         <div className="space-y-8">
           {newsletters.map(({ id, name, Component }) => (
             <Card key={id} id={id} name={name} source={`Newsletter ${id}`} preview={preview} type="Newsletter"><Component /></Card>
+          ))}
+        </div>
+      </section>
+
+      <section id="galleries" className="gallery-section mx-auto max-w-[1600px] border-t border-black/10">
+        <SectionHeader category="Category 07" title="Galleries & Portfolios" description="A collection of dynamic, responsive image galleries featuring masonry grids, interactive polaroids, and filterable portfolios." />
+        <div className="space-y-8">
+          {galleries.map(({ id, name, source, Component }) => (
+            <Card key={id} id={id} name={name} source={source} preview={preview} type="Gallery"><Component /></Card>
           ))}
         </div>
       </section>

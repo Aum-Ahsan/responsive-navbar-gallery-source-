@@ -84,7 +84,7 @@ export function PreviewShell({ children, type, id }: { children: React.ReactNode
           )}
 
           {/* Component content — preview-mobile/tablet classes trigger the navbar CSS rules in globals.css */}
-          <div className={`w-full overflow-x-hidden ${view !== "desktop" ? "bg-white" : ""} ${view === "mobile" ? "preview-mobile" : view === "tablet" ? "preview-tablet" : ""}`}>
+          <div className={`w-full overflow-x-hidden @container ${view !== "desktop" ? "bg-white" : ""} ${view === "mobile" ? "preview-mobile" : view === "tablet" ? "preview-tablet" : ""}`}>
             {children}
           </div>
 

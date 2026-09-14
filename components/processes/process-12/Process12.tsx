@@ -17,9 +17,9 @@ export default function Process12() {
       <div className="relative">
         {/* SVG S-Curve Line */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full sm:w-[240px] md:w-[300px] h-full z-0 hidden md:block">
-          <svg width="300" height="100%" preserveAspectRatio="none" className="overflow-visible stroke-pink-200">
+          <svg width="300" height="100%" preserveAspectRatio="none" viewBox="0 0 300 1000" className="overflow-visible stroke-pink-200">
             <path 
-              d="M 150 0 C 300 100, 300 200, 150 300 C 0 400, 0 500, 150 600 C 300 700, 300 800, 150 900" 
+              d="M 150 0 C 44 50, 44 150, 150 200 C 256 250, 256 350, 150 400 C 44 450, 44 550, 150 600 C 256 650, 256 750, 150 800 C 44 850, 44 950, 150 1000" 
               fill="transparent" 
               strokeWidth="6" 
               strokeDasharray="12 12" 
@@ -32,13 +32,13 @@ export default function Process12() {
           {steps.map((step, idx) => (
             <div key={idx} className={`flex flex-col md:flex-row items-center justify-center gap-8 ${step.align === 'right' ? 'md:flex-row-reverse' : ''}`}>
               <div className="md:w-1/2 flex justify-center">
-                <div className="bg-white p-6 rounded-3xl shadow-[0_20px_50px_rgba(236,72,153,0.1)] border border-pink-50 w-72 text-center transform transition-transform hover:-translate-y-2">
+                <div className="bg-white p-6 rounded-3xl shadow-[0_20px_50px_rgba(236,72,153,0.1)] border border-pink-50 w-72 text-center transform transition-transform hover:-translate-y-2 relative z-20">
                   <div className="text-sm font-bold text-pink-500 mb-1 uppercase tracking-widest">Stage {idx + 1}</div>
                   <h3 className="text-2xl font-bold text-gray-900">{step.title}</h3>
                 </div>
               </div>
-              <div className="md:w-1/2 flex justify-center md:justify-start">
-                <div className={`w-6 h-6 rounded-full bg-pink-500 border-4 border-white shadow-lg ${step.align === 'left' ? 'md:-ml-[15px]' : 'md:-mr-[15px]'}`}></div>
+              <div className={`md:w-1/2 flex justify-center ${step.align === 'left' ? 'md:justify-start' : 'md:justify-end'}`}>
+                <div className={`w-6 h-6 rounded-full bg-pink-500 border-4 border-white shadow-lg relative z-20 transform ${step.align === 'left' ? 'md:-translate-x-[80px]' : 'md:translate-x-[80px]'}`}></div>
               </div>
             </div>
           ))}

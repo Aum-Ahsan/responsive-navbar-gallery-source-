@@ -14,7 +14,7 @@ export default function Process40() {
     <div className="w-full w-full p-4 sm:p-8 font-sans my-10">
       <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">Expandable Cards</h2>
 
-      <div className="flex flex-col md:flex-row h-[600px] md:h-[260px] sm:h-[340px] lg:h-[400px] gap-4">
+      <div className="flex flex-col md:flex-row h-[500px] sm:h-[550px] md:h-[260px] lg:h-[280px] gap-4">
         {steps.map((step, idx) => {
           const isActive = active === idx;
           return (
@@ -47,7 +47,7 @@ export default function Process40() {
               )}
 
               {isActive && (
-                <div className="text-white/90 leading-relaxed mt-auto max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-500 delay-150">
+                <div className="text-white/90 leading-relaxed max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-500 delay-150">
                   Detailed information about the {step.title} phase. When this card expands, it reveals the full context while the other cards collapse to save screen space.
                 </div>
               )}

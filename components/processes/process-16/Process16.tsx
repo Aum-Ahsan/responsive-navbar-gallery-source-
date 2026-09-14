@@ -17,10 +17,10 @@ export default function Process16() {
             <Clock size={32} />
           </div>
           <h3 className="text-xl font-bold text-sky-900 mb-4 uppercase tracking-wider text-sm">Before (Prep)</h3>
-          <ul className="space-y-3 text-sky-800/70 text-sm">
-            <li className="flex items-center justify-center"><span className="w-1.5 h-1.5 bg-sky-400 rounded-full mr-2"></span> Initial Consultation</li>
-            <li className="flex items-center justify-center"><span className="w-1.5 h-1.5 bg-sky-400 rounded-full mr-2"></span> Asset Gathering</li>
-            <li className="flex items-center justify-center"><span className="w-1.5 h-1.5 bg-sky-400 rounded-full mr-2"></span> Timeline Creation</li>
+          <ul className="space-y-3 text-sky-800/70 text-sm flex flex-col items-start">
+            <li className="flex items-center"><span className="w-1.5 h-1.5 bg-sky-400 rounded-full mr-3 shrink-0"></span> Initial Consultation</li>
+            <li className="flex items-center"><span className="w-1.5 h-1.5 bg-sky-400 rounded-full mr-3 shrink-0"></span> Asset Gathering</li>
+            <li className="flex items-center"><span className="w-1.5 h-1.5 bg-sky-400 rounded-full mr-3 shrink-0"></span> Timeline Creation</li>
           </ul>
         </div>
 
@@ -30,10 +30,10 @@ export default function Process16() {
             <Activity size={32} />
           </div>
           <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-wider text-sm">During (Execution)</h3>
-          <ul className="space-y-3 text-sky-100 text-sm">
-            <li className="flex items-center justify-center"><span className="w-1.5 h-1.5 bg-white rounded-full mr-2"></span> Active Development</li>
-            <li className="flex items-center justify-center"><span className="w-1.5 h-1.5 bg-white rounded-full mr-2"></span> Weekly Syncs</li>
-            <li className="flex items-center justify-center"><span className="w-1.5 h-1.5 bg-white rounded-full mr-2"></span> Iterative Testing</li>
+          <ul className="space-y-3 text-sky-100 text-sm flex flex-col items-start">
+            <li className="flex items-center"><span className="w-1.5 h-1.5 bg-white rounded-full mr-3 shrink-0"></span> Active Development</li>
+            <li className="flex items-center"><span className="w-1.5 h-1.5 bg-white rounded-full mr-3 shrink-0"></span> Weekly Syncs</li>
+            <li className="flex items-center"><span className="w-1.5 h-1.5 bg-white rounded-full mr-3 shrink-0"></span> Iterative Testing</li>
           </ul>
         </div>
 
@@ -43,10 +43,10 @@ export default function Process16() {
             <CheckCircle size={32} />
           </div>
           <h3 className="text-xl font-bold text-sky-900 mb-4 uppercase tracking-wider text-sm">After (Delivery)</h3>
-          <ul className="space-y-3 text-sky-800/70 text-sm">
-            <li className="flex items-center justify-center"><span className="w-1.5 h-1.5 bg-emerald-400 rounded-full mr-2"></span> Final Sign-off</li>
-            <li className="flex items-center justify-center"><span className="w-1.5 h-1.5 bg-emerald-400 rounded-full mr-2"></span> Handover Assets</li>
-            <li className="flex items-center justify-center"><span className="w-1.5 h-1.5 bg-emerald-400 rounded-full mr-2"></span> 30-Day Support</li>
+          <ul className="space-y-3 text-sky-800/70 text-sm flex flex-col items-start">
+            <li className="flex items-center"><span className="w-1.5 h-1.5 bg-emerald-400 rounded-full mr-3 shrink-0"></span> Final Sign-off</li>
+            <li className="flex items-center"><span className="w-1.5 h-1.5 bg-emerald-400 rounded-full mr-3 shrink-0"></span> Handover Assets</li>
+            <li className="flex items-center"><span className="w-1.5 h-1.5 bg-emerald-400 rounded-full mr-3 shrink-0"></span> 30-Day Support</li>
           </ul>
         </div>
       </div>

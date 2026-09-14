@@ -16,8 +16,8 @@ export default function Carousel26() {
           const isActive = i === curr;
           const style = {
             opacity: isActive ? 1 : 0,
-            transform: `scale(${isActive ? 1 : 1.5})`,
-            transition: 'all 1.2s cubic-bezier(0.25, 1, 0.5, 1)',
+            transform: `scale(${isActive ? 1 : 0.75})`,
+            transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
             zIndex: isActive ? 10 : 1
           };
 

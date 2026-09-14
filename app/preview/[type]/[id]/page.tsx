@@ -6,6 +6,8 @@ import { ctas } from "@/components/ctas";
 import { newsletters } from "@/components/newsletters";
 import { PreviewShell } from "./PreviewShell";
 
+import { galleries } from "@/components/galleries";
+
 export default async function PreviewPage(props: { params: Promise<{ type: string, id: string }> }) {
   const params = await props.params;
   let Comp: any = null;
@@ -16,6 +18,7 @@ export default async function PreviewPage(props: { params: Promise<{ type: strin
   if (params.type === 'process') Comp = processes.find(p => p.id === params.id)?.Component;
   if (params.type === 'cta') Comp = ctas.find(c => c.id === params.id)?.Component;
   if (params.type === 'newsletter') Comp = newsletters.find(n => n.id === params.id)?.Component;
+  if (params.type === 'gallery') Comp = galleries.find(g => g.id === params.id)?.Component;
 
   if (!Comp) return <div className="p-10 text-center font-semibold text-xl">Component not found</div>;
 

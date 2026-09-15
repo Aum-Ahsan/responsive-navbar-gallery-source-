@@ -23,6 +23,31 @@ import Checkout22 from './checkout-22/Checkout22';
 import Checkout23 from './checkout-23/Checkout23';
 import Checkout24 from './checkout-24/Checkout24';
 import Checkout25 from './checkout-25/Checkout25';
+import Checkout26 from './checkout-26/Checkout26';
+import Checkout27 from './checkout-27/Checkout27';
+import Checkout28 from './checkout-28/Checkout28';
+import Checkout29 from './checkout-29/Checkout29';
+import Checkout30 from './checkout-30/Checkout30';
+import Checkout31 from './checkout-31/Checkout31';
+import Checkout32 from './checkout-32/Checkout32';
+import Checkout33 from './checkout-33/Checkout33';
+import Checkout34 from './checkout-34/Checkout34';
+import Checkout35 from './checkout-35/Checkout35';
+import Checkout36 from './checkout-36/Checkout36';
+import Checkout37 from './checkout-37/Checkout37';
+import Checkout38 from './checkout-38/Checkout38';
+import Checkout39 from './checkout-39/Checkout39';
+import Checkout40 from './checkout-40/Checkout40';
+import Checkout41 from './checkout-41/Checkout41';
+import Checkout42 from './checkout-42/Checkout42';
+import Checkout43 from './checkout-43/Checkout43';
+import Checkout44 from './checkout-44/Checkout44';
+import Checkout45 from './checkout-45/Checkout45';
+import Checkout46 from './checkout-46/Checkout46';
+import Checkout47 from './checkout-47/Checkout47';
+import Checkout48 from './checkout-48/Checkout48';
+import Checkout49 from './checkout-49/Checkout49';
+import Checkout50 from './checkout-50/Checkout50';
 
 export const checkouts = [
   { id: '01', name: 'Single-Page Checkout', Component: Checkout01 },
@@ -50,4 +75,29 @@ export const checkouts = [
   { id: '23', name: 'Pharmacy / Prescription Checkout', Component: Checkout23 },
   { id: '24', name: 'Tipping / Gratuity Checkout', Component: Checkout24 },
   { id: '25', name: 'International / Cross-Border Checkout', Component: Checkout25 },
+  { id: '26', name: 'Crypto / Web3 Wallet Checkout', Component: Checkout26 },
+  { id: '27', name: 'One-Click Upsell Post-Checkout (OTO)', Component: Checkout27 },
+  { id: '28', name: 'Multi-Shipping Address Checkout', Component: Checkout28 },
+  { id: '29', name: 'In-Store Pickup / Curbside Checkout', Component: Checkout29 },
+  { id: '30', name: 'Split-the-Bill (Multi-Payer) Checkout', Component: Checkout30 },
+  { id: '31', name: 'Gift Registry / Wishlist Purchase Checkout', Component: Checkout31 },
+  { id: '32', name: 'SaaS Free Trial with Credit Card Capture', Component: Checkout32 },
+  { id: '33', name: 'Invoice Payment / Pay-by-Link Checkout', Component: Checkout33 },
+  { id: '34', name: 'Flight / Airline Ticket Checkout', Component: Checkout34 },
+  { id: '35', name: 'Car Rental / Vehicle Booking Checkout', Component: Checkout35 },
+  { id: '36', name: 'Insurance Quote / Policy Purchase Checkout', Component: Checkout36 },
+  { id: '37', name: 'Gaming / Micro-transaction Checkout', Component: Checkout37 },
+  { id: '38', name: 'Real Estate Deposit / Escrow Checkout', Component: Checkout38 },
+  { id: '39', name: 'Accessibility-First / High Contrast Checkout', Component: Checkout39 },
+  { id: '40', name: 'Telehealth / Virtual Consultation Checkout', Component: Checkout40 },
+  { id: '41', name: 'Trade-in / Exchange Value Checkout', Component: Checkout41 },
+  { id: '42', name: 'Influencer / Creator Paywall Checkout', Component: Checkout42 },
+  { id: '43', name: 'Local Delivery (Distance/Radius Based) Checkout', Component: Checkout43 },
+  { id: '44', name: 'Anonymous / Privacy-Focused Checkout', Component: Checkout44 },
+  { id: '45', name: 'Crowdfunding Milestone Checkout', Component: Checkout45 },
+  { id: '46', name: 'Pay-What-You-Want Checkout', Component: Checkout46 },
+  { id: '47', name: 'Corporate / Employee Benefits Checkout', Component: Checkout47 },
+  { id: '48', name: 'Pet Adoption / Services Checkout', Component: Checkout48 },
+  { id: '49', name: 'Storage / Logistics Space Booking', Component: Checkout49 },
+  { id: '50', name: 'AI-Assisted Conversational Checkout (Chat UI)', Component: Checkout50 },
 ];

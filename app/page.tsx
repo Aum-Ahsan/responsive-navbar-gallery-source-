@@ -8,6 +8,8 @@ import { processes } from "@/components/processes";
 import { ctas } from "@/components/ctas";
 import { newsletters } from "@/components/newsletters";
 import { galleries } from "@/components/galleries";
+import { carts } from "@/components/carts";
+import { checkouts } from "@/components/checkouts";
 
 type Preview = "desktop" | "tablet" | "mobile";
 
@@ -25,7 +27,7 @@ function Card({
   source: string;
   children: React.ReactNode;
   preview: Preview;
-  type: "Navbar" | "Hero" | "Carousel" | "Process" | "CTA" | "Newsletter" | "Gallery";
+  type: "Navbar" | "Hero" | "Carousel" | "Process" | "CTA" | "Newsletter" | "Gallery" | "Cart" | "Checkout";
 }) {
   return (
     <article id={`${type.toLowerCase()}-${id}`} className="component-card overflow-visible rounded-[22px] border border-black/10 bg-white shadow-[0_18px_60px_rgba(0,0,0,.06)]">
@@ -92,7 +94,7 @@ export default function Home() {
               UI Components &amp; Galleries
             </h1>
             <p className="mt-1 max-w-2xl text-xs leading-6 text-[#64645f] sm:text-sm">
-              Fifty-three responsive navbars, twenty heroes, forty-nine carousels, sixty processes, fifty CTAs, and 70 interactive galleries using one common container, gutter and card-padding system.
+              Fifty-three responsive navbars, twenty heroes, forty-nine carousels, sixty processes, fifty CTAs, 70 interactive galleries, 30 add-to-carts, and 25 checkouts using one common container, gutter and card-padding system.
             </p>
             {/* Category pills — wrap on mobile */}
             <div className="mt-3 flex flex-wrap gap-2">
@@ -104,6 +106,8 @@ export default function Home() {
                 { href: "#newsletters", label: "35 Newsletters" },
                 { href: "#ctas",        label: "50 CTAs" },
                 { href: "#galleries",   label: "70 Galleries" },
+                { href: "#carts",       label: "30 Add-to-Carts" },
+                { href: "#checkouts",   label: "25 Checkouts" },
               ].map(({ href, label }) => (
                 <a key={href} href={href} className="rounded-full border border-black/10 bg-white px-3 py-1.5 text-xs font-semibold hover:bg-black/5 transition">
                   {label}
@@ -190,6 +194,24 @@ export default function Home() {
         <div className="space-y-8">
           {galleries.map(({ id, name, source, Component }) => (
             <Card key={id} id={id} name={name} source={source} preview={preview} type="Gallery"><Component /></Card>
+          ))}
+        </div>
+      </section>
+
+      <section id="carts" className="gallery-section mx-auto max-w-[1600px] border-t border-black/10">
+        <SectionHeader category="Category 08" title="Add-to-Carts" description="Thirty high-conversion 'Add to Cart' components ranging from one-click widgets and floating action buttons to subscription toggles, seat pickers, and bundle builders." />
+        <div className="space-y-8">
+          {carts.map(({ id, name, Component }) => (
+            <Card key={id} id={id} name={name} source={`Cart ${id}`} preview={preview} type="Cart"><Component /></Card>
+          ))}
+        </div>
+      </section>
+
+      <section id="checkouts" className="gallery-section mx-auto max-w-[1600px] border-t border-black/10">
+        <SectionHeader category="Category 09" title="Checkouts" description="Twenty-five fully realized checkout interfaces including B2B PO forms, digital delivery, international duty calculation, donation pages, wholesale pricing, and hotel booking workflows." />
+        <div className="space-y-8">
+          {checkouts.map(({ id, name, Component }) => (
+            <Card key={id} id={id} name={name} source={`Checkout ${id}`} preview={preview} type="Checkout"><Component /></Card>
           ))}
         </div>
       </section>

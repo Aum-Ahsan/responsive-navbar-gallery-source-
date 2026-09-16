@@ -17,10 +17,27 @@ export default function Cart04() {
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
   const [wished, setWished] = useState(false);
+  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
 
   const handleAdd = () => {
     setAdded(true);
     setTimeout(() => setAdded(false), 2500);
+  };
+
+  const getShoeFilter = (hex: string) => {
+    switch (hex) {
+      case "#1a1a1a": // Black
+        return "grayscale(100%) brightness(40%)";
+      case "#2563eb": // Blue
+        return "sepia(100%) hue-rotate(180deg) saturate(300%) brightness(90%)";
+      case "#dc2626": // Red
+        return "sepia(100%) hue-rotate(330deg) saturate(300%) brightness(90%)";
+      case "#16a34a": // Green
+        return "sepia(100%) hue-rotate(110deg) saturate(300%) brightness(90%)";
+      default:
+        return "none";
+    }
   };
 
   return (
@@ -28,8 +45,13 @@ export default function Cart04() {
       {/* Product Area */}
       <div className="p-6 sm:p-10 flex flex-col sm:flex-row gap-8 pb-32">
         {/* Image */}
-        <div className="relative w-full sm:w-72 h-72 bg-gradient-to-br from-blue-50 to-indigo-100 rounded-3xl flex items-center justify-center text-8xl shrink-0">
-          {product.emoji}
+        <div className="relative w-full sm:w-72 h-72 bg-gradient-to-br from-blue-50 to-indigo-100 rounded-3xl flex items-center justify-center text-8xl shrink-0 overflow-hidden">
+          <span 
+            className="transition-all duration-500 ease-in-out"
+            style={{ filter: getShoeFilter(selectedColor) }}
+          >
+            {product.emoji}
+          </span>
           <button
             onClick={() => setWished(w => !w)}
             className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full shadow flex items-center justify-center"
@@ -60,7 +82,12 @@ export default function Cart04() {
             <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Color</p>
             <div className="flex gap-2">
               {product.colors.map(c => (
-                <button key={c} className="w-8 h-8 rounded-full border-2 border-white ring-2 ring-slate-200 hover:ring-slate-900 transition" style={{ backgroundColor: c }} />
+                <button 
+                  key={c} 
+                  onClick={() => setSelectedColor(c)}
+                  className={`w-8 h-8 rounded-full border-2 border-white ring-2 transition ${selectedColor === c ? "ring-slate-900" : "ring-slate-200 hover:ring-slate-900"}`} 
+                  style={{ backgroundColor: c }} 
+                />
               ))}
             </div>
           </div>
@@ -70,7 +97,11 @@ export default function Cart04() {
             <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Size</p>
             <div className="flex flex-wrap gap-2">
               {product.sizes.map(s => (
-                <button key={s} className="px-3 py-2 text-sm border border-slate-200 rounded-xl hover:border-slate-900 hover:bg-slate-900 hover:text-white transition font-medium">
+                <button 
+                  key={s} 
+                  onClick={() => setSelectedSize(s)}
+                  className={`px-3 py-2 text-sm border rounded-xl transition font-medium ${selectedSize === s ? "border-slate-900 bg-slate-900 text-white" : "border-slate-200 hover:border-slate-900 hover:bg-slate-900 hover:text-white"}`}
+                >
                   {s}
                 </button>
               ))}

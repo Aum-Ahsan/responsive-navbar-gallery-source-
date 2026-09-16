@@ -8,6 +8,8 @@ import { PreviewShell } from "./PreviewShell";
 import { galleries } from "@/components/galleries";
 import { carts } from "@/components/carts";
 import { checkouts } from "@/components/checkouts";
+import { categories } from "@/components/categories";
+import { paymentProcesses } from "@/components/payment-processes";
 
 export default async function PreviewPage(props: { params: Promise<{ type: string, id: string }> }) {
   const params = await props.params;
@@ -22,6 +24,8 @@ export default async function PreviewPage(props: { params: Promise<{ type: strin
   if (params.type === 'gallery') Comp = galleries.find(g => g.id === params.id)?.Component;
   if (params.type === 'cart') Comp = carts.find(c => c.id === params.id)?.Component;
   if (params.type === 'checkout') Comp = checkouts.find(c => c.id === params.id)?.Component;
+  if (params.type === 'category') Comp = categories.find(c => c.id === params.id)?.Component;
+  if (params.type === 'paymentprocess') Comp = paymentProcesses.find(p => p.id === params.id)?.Component;
 
   if (!Comp) return <div className="p-10 text-center font-semibold text-xl">Component not found</div>;
 

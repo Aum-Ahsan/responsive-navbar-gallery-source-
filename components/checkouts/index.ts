@@ -48,6 +48,7 @@ import Checkout47 from './checkout-47/Checkout47';
 import Checkout48 from './checkout-48/Checkout48';
 import Checkout49 from './checkout-49/Checkout49';
 import Checkout50 from './checkout-50/Checkout50';
+import Checkout51 from './checkout-51/Checkout51';
 
 export const checkouts = [
   { id: '01', name: 'Single-Page Checkout', Component: Checkout01 },
@@ -100,4 +101,5 @@ export const checkouts = [
   { id: '48', name: 'Pet Adoption / Services Checkout', Component: Checkout48 },
   { id: '49', name: 'Storage / Logistics Space Booking', Component: Checkout49 },
   { id: '50', name: 'AI-Assisted Conversational Checkout (Chat UI)', Component: Checkout50 },
+  { id: '51', name: 'Multi-Step SaaS Payment Process', Component: Checkout51 },
 ];

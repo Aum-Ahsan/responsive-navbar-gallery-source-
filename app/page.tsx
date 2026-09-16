@@ -10,6 +10,8 @@ import { newsletters } from "@/components/newsletters";
 import { galleries } from "@/components/galleries";
 import { carts } from "@/components/carts";
 import { checkouts } from "@/components/checkouts";
+import { categories } from "@/components/categories";
+import { paymentProcesses } from "@/components/payment-processes";
 
 type Preview = "desktop" | "tablet" | "mobile";
 
@@ -27,7 +29,7 @@ function Card({
   source: string;
   children: React.ReactNode;
   preview: Preview;
-  type: "Navbar" | "Hero" | "Carousel" | "Process" | "CTA" | "Newsletter" | "Gallery" | "Cart" | "Checkout";
+  type: "Navbar" | "Hero" | "Carousel" | "Process" | "CTA" | "Newsletter" | "Gallery" | "Cart" | "Checkout" | "Category" | "PaymentProcess";
 }) {
   return (
     <article id={`${type.toLowerCase()}-${id}`} className="component-card overflow-visible rounded-[22px] border border-black/10 bg-white shadow-[0_18px_60px_rgba(0,0,0,.06)]">
@@ -108,6 +110,7 @@ export default function Home() {
                 { href: "#galleries",   label: "70 Galleries" },
                 { href: "#carts",       label: "50 Add-to-Carts" },
                 { href: "#checkouts",   label: "50 Checkouts" },
+                { href: "#payment-processes", label: "100 Payment Processes" },
               ].map(({ href, label }) => (
                 <a key={href} href={href} className="rounded-full border border-black/10 bg-white px-3 py-1.5 text-xs font-semibold hover:bg-black/5 transition">
                   {label}
@@ -212,6 +215,17 @@ export default function Home() {
         <div className="space-y-8">
           {checkouts.map(({ id, name, Component }) => (
             <Card key={id} id={id} name={name} source={`Checkout ${id}`} preview={preview} type="Checkout"><Component /></Card>
+          ))}
+        </div>
+      </section>
+
+
+
+      <section id="payment-processes" className="gallery-section mx-auto max-w-[1600px] border-t border-black/10">
+        <SectionHeader category="Category 11" title="Payment Processes" description="Specialized payment workflows and interactive checkout forms." />
+        <div className="space-y-8">
+          {paymentProcesses.map(({ id, name, Component }) => (
+            <Card key={id} id={id} name={name} source={`Payment Process ${id}`} preview={preview} type="PaymentProcess"><Component /></Card>
           ))}
         </div>
       </section>

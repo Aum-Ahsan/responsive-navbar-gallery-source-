@@ -41,7 +41,7 @@ export default function PaymentProcess02() {
                     <div className="flex justify-between items-center mb-1">
                       <span className="font-bold text-gray-900 text-sm md:text-base">{tier.name}</span>
                       <div className="text-right">
-                        <span className="text-lg md:text-xl font-bold text-gray-900">$${billingMode === 'monthly' ? tier.monthly : tier.annual}</span>
+                        <span className="text-lg md:text-xl font-bold text-gray-900">${billingMode === 'monthly' ? tier.monthly : tier.annual}</span>
                         <span className="text-gray-500 text-xs md:text-sm">/mo</span>
                       </div>
                     </div>
@@ -52,7 +52,7 @@ export default function PaymentProcess02() {
             
             <div className="mt-8 md:mt-12 pt-6 border-t border-gray-200 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 sm:gap-0">
               <span className="font-semibold text-gray-600 text-sm md:text-base">Total due today</span>
-              <span className="text-2xl md:text-3xl font-bold text-gray-900">$${billingMode === 'monthly' ? currentPrice : currentPrice * 12}</span>
+              <span className="text-2xl md:text-3xl font-bold text-gray-900">${billingMode === 'monthly' ? currentPrice : currentPrice * 12}</span>
             </div>
           </div>
           
@@ -70,20 +70,24 @@ export default function PaymentProcess02() {
                 </div>
               </div>
               <div>
+                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Name on Card</label>
+                <input required type="text" placeholder="John Doe" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none text-sm sm:text-base focus:ring-emerald-600/20 focus:border-emerald-600" />
+              </div>
+              <div>
                 <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Card Number</label>
                 <div className="relative">
                   <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
-                  <input required type="text" placeholder="0000 0000 0000 0000" className="w-full pl-10 sm:pl-12 bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-emerald-600/20 focus:border-emerald-600" />
+                  <input maxLength={16} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 16); }} required type="text" placeholder="0000 0000 0000 0000" className="w-full pl-10 sm:pl-12 bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-emerald-600/20 focus:border-emerald-600" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Expiry</label>
-                  <input required type="text" placeholder="MM/YY" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-emerald-600/20 focus:border-emerald-600" />
+                  <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-emerald-600/20 focus:border-emerald-600" />
                 </div>
                 <div>
                   <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">CVC</label>
-                  <input required type="text" placeholder="123" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-emerald-600/20 focus:border-emerald-600" />
+                  <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="123" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-emerald-600/20 focus:border-emerald-600" />
                 </div>
               </div>
               <button type="submit" disabled={isProcessing} className="w-full mt-4 sm:mt-6 bg-emerald-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 text-sm sm:text-base hover:shadow-lg hover:-translate-y-0.5">

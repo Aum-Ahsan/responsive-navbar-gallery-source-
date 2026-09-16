@@ -96,10 +96,10 @@ export default function PaymentProcess05() {
               <div>
                 <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Card Information</label>
                 <div className="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden transition-all focus-within:ring-2 focus-within:border-transparent">
-                  <input required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-transparent px-4 py-3 sm:py-3.5 border-b border-gray-200 focus:outline-none font-mono text-sm sm:text-base" />
+                  <input maxLength={16} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 16); }} required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-transparent px-4 py-3 sm:py-3.5 border-b border-gray-200 focus:outline-none font-mono text-sm sm:text-base" />
                   <div className="flex">
-                    <input required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none border-r border-gray-200 font-mono text-sm sm:text-base" />
-                    <input required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none font-mono text-sm sm:text-base" />
+                    <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none border-r border-gray-200 font-mono text-sm sm:text-base" />
+                    <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none font-mono text-sm sm:text-base" />
                   </div>
                 </div>
               </div>

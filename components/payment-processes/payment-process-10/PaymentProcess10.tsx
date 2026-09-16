@@ -70,20 +70,24 @@ export default function PaymentProcess10() {
                 </div>
               </div>
               <div>
+                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Name on Card</label>
+                <input required type="text" placeholder="John Doe" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none text-sm sm:text-base focus:ring-zinc-800/20 focus:border-zinc-800" />
+              </div>
+              <div>
                 <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Card Number</label>
                 <div className="relative">
                   <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
-                  <input required type="text" placeholder="0000 0000 0000 0000" className="w-full pl-10 sm:pl-12 bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-zinc-800/20 focus:border-zinc-800" />
+                  <input maxLength={16} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 16); }} required type="text" placeholder="0000 0000 0000 0000" className="w-full pl-10 sm:pl-12 bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-zinc-800/20 focus:border-zinc-800" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Expiry</label>
-                  <input required type="text" placeholder="MM/YY" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-zinc-800/20 focus:border-zinc-800" />
+                  <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-zinc-800/20 focus:border-zinc-800" />
                 </div>
                 <div>
                   <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">CVC</label>
-                  <input required type="text" placeholder="123" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-zinc-800/20 focus:border-zinc-800" />
+                  <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="123" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-zinc-800/20 focus:border-zinc-800" />
                 </div>
               </div>
               <button type="submit" disabled={isProcessing} className="w-full mt-4 sm:mt-6 bg-zinc-800 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 text-sm sm:text-base hover:shadow-lg hover:-translate-y-0.5">

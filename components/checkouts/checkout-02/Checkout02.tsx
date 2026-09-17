@@ -49,7 +49,7 @@ export default function Checkout02() {
         <div className="flex items-center mb-8">
           {STEPS.map((s, i) => (
             <React.Fragment key={s.id}>
-              <button
+              <button type="button"
                 onClick={() => i < step && setStep(i)}
                 className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold transition ${
                   i === step ? "bg-slate-900 text-white" : i < step ? "text-emerald-600 hover:bg-emerald-50" : "text-slate-300"
@@ -132,12 +132,12 @@ export default function Checkout02() {
 
         <div className="flex gap-3 mt-5">
           {step > 0 && (
-            <button onClick={() => setStep(s => s - 1)} className="px-5 py-3.5 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-600 hover:bg-slate-100 transition">
+            <button type="button" onClick={() => setStep(s => s - 1)} className="px-5 py-3.5 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-600 hover:bg-slate-100 transition">
               Back
             </button>
           )}
           {step < 3 ? (
-            <button
+            <button type="button"
               onClick={() => canProceed() && setStep(s => s + 1)}
               disabled={!canProceed()}
               className={`flex-1 flex items-center justify-center gap-1.5 py-3.5 rounded-2xl font-bold text-sm transition ${canProceed() ? "bg-slate-900 hover:bg-slate-700 text-white" : "bg-slate-200 text-slate-400 cursor-not-allowed"}`}
@@ -145,7 +145,7 @@ export default function Checkout02() {
               Continue <ChevronRight size={16} />
             </button>
           ) : (
-            <button onClick={() => setPlaced(true)} className="flex-1 flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-2xl text-sm transition">
+            <button type="button" onClick={() => setPlaced(true)} className="flex-1 flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-2xl text-sm transition">
               <Lock size={15} /> Place Order — $325
             </button>
           )}

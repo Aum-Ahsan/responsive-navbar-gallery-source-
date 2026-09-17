@@ -66,7 +66,7 @@ export default function Cart47() {
                 <span className="font-semibold text-slate-700">{p.name}</span>
               </div>
               <div className="flex items-center gap-3 bg-slate-50 rounded-xl p-1 border border-slate-100">
-                <button 
+                <button type="button" 
                   onClick={() => update(p.id, -1)}
                   disabled={items[p.id] === 0}
                   className="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm text-slate-500 disabled:opacity-50"
@@ -74,7 +74,7 @@ export default function Cart47() {
                   <Minus size={14} />
                 </button>
                 <span className="w-4 text-center font-bold text-sm text-slate-900">{items[p.id]}</span>
-                <button 
+                <button type="button" 
                   onClick={() => update(p.id, 1)}
                   disabled={remaining === 0}
                   className="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm text-slate-500 disabled:opacity-50"
@@ -86,7 +86,7 @@ export default function Cart47() {
           ))}
         </div>
 
-        <button 
+        <button type="button" 
           onClick={handleAdd}
           disabled={added || remaining > 0}
           className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition 

@@ -1,64 +1,185 @@
 "use client";
 import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import { ShoppingCart, X, CreditCard, ChevronRight, Check } from "lucide-react";
 
 export default function PaymentProcess19() {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const presets = [10, 25, 50, 100];
-    const [amount, setAmount] = useState<number>(50);
-    const [isCustom, setIsCustom] = useState(false);
-    const [isProcessing, setIsProcessing] = useState(false);
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
-    };
+  const closeFAB = () => {
+    setIsExpanded(false);
+    setTimeout(() => {
+      setIsSuccess(false);
+    }, 500);
+  };
 
-    return (
-      <div className="w-full min-h-[600px] bg-pink-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-md w-full bg-white rounded-[2rem] md:rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 sm:h-2 bg-pink-600" />
-          
-          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-pink-50 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-            <Heart className="w-7 h-7 sm:w-8 sm:h-8 text-pink-600" fill="currentColor" />
+  return (
+    <div className="w-full min-h-[700px] bg-slate-50 font-sans p-6 relative overflow-hidden flex items-center justify-center">
+      
+      {/* Background Page Content Simulation */}
+      <div className="w-full max-w-4xl opacity-50 pointer-events-none">
+        <header className="flex justify-between items-center mb-12">
+          <div className="w-32 h-8 bg-slate-200 rounded"></div>
+          <div className="flex gap-4">
+            <div className="w-16 h-4 bg-slate-200 rounded"></div>
+            <div className="w-16 h-4 bg-slate-200 rounded"></div>
           </div>
-          
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Open Source Sponsor Tier</h2>
-            <p className="text-gray-500 text-xs sm:text-sm">Your contribution makes a direct impact. Select an amount to give today.</p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
-            {presets.map(a => (
-              <button key={a} onClick={() => { setAmount(a); setIsCustom(false); }} className={`py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg transition-all ${!isCustom && amount === a ? 'bg-pink-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-                $${a}
-              </button>
-            ))}
-          </div>
-          
-          <button onClick={() => setIsCustom(true)} className={`w-full py-3 sm:py-4 rounded-xl font-bold mb-6 sm:mb-8 transition-all ${isCustom ? 'bg-pink-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-            Custom Amount
-          </button>
-
-          {isCustom && (
-            <div className="mb-6 sm:mb-8 relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-lg sm:text-xl">$</span>
-              <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full text-xl sm:text-2xl font-bold text-gray-900 pl-10 pr-4 py-3 sm:py-4 bg-gray-50 rounded-xl focus:outline-none focus:ring-pink-600/20 focus:border-pink-600" />
+        </header>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+            <div key={i} className="space-y-3">
+              <div className="w-full h-48 bg-slate-200 rounded-2xl"></div>
+              <div className="w-3/4 h-4 bg-slate-200 rounded"></div>
+              <div className="w-1/2 h-4 bg-slate-200 rounded"></div>
             </div>
-          )}
-
-          <form onSubmit={handlePay} className="space-y-3 sm:space-y-4">
-            <input required type="email" placeholder="Email Address" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-pink-600/20 focus:border-pink-600" />
-            <input required type="text" placeholder="Card Number" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-pink-600/20 focus:border-pink-600" />
-            
-            <button type="submit" disabled={isProcessing} className="w-full bg-pink-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 mt-4 transition-all hover:opacity-90 text-sm sm:text-base">
-              {isProcessing ? 'Processing...' : `Donate $${amount}`}
-              {!isProcessing && <Heart className="w-4 h-4 ml-1" />}
-            </button>
-          </form>
+          ))}
         </div>
       </div>
-    );
-        
+
+      {/* FAB Overlay Background (optional, dims background) */}
+      <div 
+        className={`absolute inset-0 bg-slate-900/20 backdrop-blur-sm z-40 transition-opacity duration-500 ${isExpanded ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        onClick={closeFAB}
+      ></div>
+
+      {/* 
+        The Expanding FAB Container
+        We position it absolutely at bottom-8 right-8.
+        When not expanded, it's w-16 h-16 rounded-full.
+        When expanded, it's max-w-md w-full h-[600px] rounded-[2rem].
+      */}
+      <div 
+        className={`absolute z-50 bg-white shadow-2xl transition-all duration-500 cubic-bezier(0.2,0.8,0.2,1) flex flex-col overflow-hidden ${
+          isExpanded 
+            ? 'bottom-4 md:bottom-8 right-4 md:right-8 w-[calc(100%-2rem)] md:w-[400px] h-[600px] max-h-[calc(100%-2rem)] rounded-[2rem] opacity-100' 
+            : 'bottom-8 right-8 w-16 h-16 rounded-full hover:scale-105 opacity-90 hover:opacity-100 cursor-pointer'
+        }`}
+        onClick={() => !isExpanded && setIsExpanded(true)}
+      >
+        {/* Closed State (Icon only) */}
+        <div className={`absolute inset-0 flex items-center justify-center bg-violet-600 text-white transition-opacity duration-300 ${isExpanded ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+          <ShoppingCart className="w-6 h-6" />
+          <div className="absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full border-2 border-violet-600"></div>
+        </div>
+
+        {/* Expanded State Content */}
+        <div className={`flex flex-col h-full w-full transition-opacity duration-500 delay-100 ${isExpanded ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+          
+          <div className="flex justify-between items-center p-6 border-b border-slate-100 bg-white z-10 shrink-0">
+            <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+              <ShoppingCart className="w-5 h-5 text-violet-600" /> Checkout
+            </h2>
+            <button type="button" onClick={(e: any) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = (e) => { e.stopPropagation(); closeFAB(); ;
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+      else if (typeof originalHandler === 'object' && originalHandler !== null) { /* ignore event objects */ }
+    }}} className="p-2 bg-slate-50 text-slate-400 hover:text-slate-900 hover:bg-slate-100 rounded-full transition-colors">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div className="flex-1 overflow-y-auto p-6 relative">
+            {!isSuccess ? (
+              <div className="space-y-8 animate-in fade-in duration-500">
+                {/* Order Summary mini */}
+                <div className="bg-slate-50 p-4 rounded-2xl flex items-center gap-4 border border-slate-100">
+                  <div className="w-16 h-16 bg-white rounded-xl shadow-sm overflow-hidden p-2 shrink-0">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=150&q=80" alt="Watch" className="w-full h-full object-contain" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-slate-900">Smart Watch</h4>
+                    <p className="text-xs text-slate-500">Space Grey</p>
+                    <div className="font-bold text-violet-600 mt-1">$299.00</div>
+                  </div>
+                </div>
+
+                <form onSubmit={handlePay} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Card Details</label>
+                    <div className="bg-white border border-slate-200 rounded-xl overflow-hidden focus-within:border-violet-500 focus-within:ring-1 focus-within:ring-violet-500 transition-all shadow-sm">
+                      <div className="relative border-b border-slate-200">
+                        <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full pl-11 pr-4 py-3 focus:outline-none text-sm font-medium" />
+                      </div>
+                      <div className="flex">
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 px-4 py-3 border-r border-slate-200 focus:outline-none text-sm font-medium" />
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVC" className="w-1/2 px-4 py-3 focus:outline-none text-sm font-medium" />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Cardholder Name</label>
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Name on card" className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl shadow-sm focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-all text-sm font-medium" />
+                  </div>
+
+                  <div className="pt-4 mt-8 border-t border-slate-100 flex justify-between items-end mb-6">
+                    <span className="font-bold text-slate-500">Total to pay</span>
+                    <span className="text-3xl font-black text-slate-900">$299.00</span>
+                  </div>
+
+                  <button 
+                    type="submit" 
+                    disabled={isProcessing}
+                    className="w-full py-4 bg-violet-600 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-violet-700 transition-all shadow-lg shadow-violet-600/30 disabled:opacity-70 disabled:shadow-none"
+                  >
+                    {isProcessing ? (
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    ) : (
+                      <>Pay Now <ChevronRight className="w-5 h-5" /></>
+                    )}
+                  </button>
+                </form>
+              </div>
+            ) : (
+              <div className="h-full flex flex-col items-center justify-center text-center animate-in zoom-in-95 duration-500 pb-10">
+                <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-6">
+                  <Check className="w-10 h-10 text-emerald-500" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">Order Successful!</h3>
+                <p className="text-slate-500 mb-8 px-4">Your order has been placed and is being processed.</p>
+                <button type="button" onClick={(e: any) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = (e) => { e.stopPropagation(); closeFAB(); ;
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+    }}} className="px-8 py-3 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold rounded-xl transition-colors">
+                  Continue Shopping
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
 }

@@ -113,7 +113,7 @@ export default function Checkout25() {
               <p className="text-xs text-slate-400 mt-2 text-right">Includes all customs fees. No surprises on delivery.</p>
             </div>
 
-            <button onClick={() => setPlaced(true)} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition shadow-lg shadow-blue-500/20">
+            <button type="button" onClick={() => setPlaced(true)} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition shadow-lg shadow-blue-500/20">
               <Lock size={15} /> Pay {selected.symbol}{totalLocal.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2})}
             </button>
           </div>

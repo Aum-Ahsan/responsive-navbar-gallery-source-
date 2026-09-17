@@ -40,7 +40,7 @@ export default function Cart43() {
           {cohorts.map(c => {
             const isFull = c.seats === 0;
             return (
-              <button
+              <button type="button"
                 key={c.id}
                 onClick={() => !isFull && setCohort(c.id)}
                 disabled={isFull}
@@ -69,7 +69,7 @@ export default function Cart43() {
           })}
         </div>
 
-        <button 
+        <button type="button" 
           onClick={handleAdd}
           disabled={added}
           className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition ${added ? "bg-emerald-500 text-white" : "bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20"}`}

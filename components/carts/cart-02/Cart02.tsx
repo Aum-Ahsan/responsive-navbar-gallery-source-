@@ -89,7 +89,7 @@ export default function Cart02() {
               <p className="font-semibold text-gray-900 text-sm leading-tight">{p.name}</p>
               <p className="text-gray-500 text-sm">${p.price}</p>
             </div>
-            <button
+            <button type="button"
               ref={el => { btnRefs.current[p.id] = el; }}
               onClick={() => handleAdd(p.id)}
               disabled={added[p.id]}

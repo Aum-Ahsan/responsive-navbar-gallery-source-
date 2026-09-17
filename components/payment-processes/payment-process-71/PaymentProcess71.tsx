@@ -1,117 +1,112 @@
 "use client";
 import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import { CreditCard, ArrowRight, CheckCircle2, ShoppingBag } from "lucide-react";
 
 export default function PaymentProcess71() {
+  const TOTAL_AMOUNT = 149.99;
+  
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const [paymentMode, setPaymentMode] = useState<"upfront" | "split">("upfront");
-    const [splitMonths, setSplitMonths] = useState<number>(3);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
 
-    const totalAmount = 1200;
-    const splitAmount = Math.ceil((totalAmount * 1.05) / splitMonths);
-
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => {
-        setIsProcessing(false);
-        setIsSuccess(true);
-      }, 2000);
-    };
-
-    if (isSuccess) {
-      return (
-        <div className="w-full min-h-[600px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 text-center max-w-md w-full shadow-xl border border-gray-100">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Check className="w-8 h-8 sm:w-10 sm:h-10" />
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Payment Confirmed</h2>
-            <p className="text-sm sm:text-base text-gray-500 mb-8">Your payment has been processed successfully. A receipt has been sent to your email.</p>
-            <button onClick={() => setIsSuccess(false)} className="text-cyan-600 font-semibold hover:opacity-80 transition-opacity text-sm sm:text-base">
-              Return to Dashboard
-            </button>
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <div className="w-full min-h-[700px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
-          <div className="space-y-6 md:space-y-8">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-50 text-cyan-600 text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-3 sm:mb-4">
-                <Zap className="w-3 h-3" /> Medical Bill Payment Plan
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 tracking-tight">Complete your purchase</h2>
-              <p className="text-sm sm:text-base md:text-lg text-gray-500 leading-relaxed">Choose how you want to pay. Pay upfront to save, or split it into manageable monthly payments.</p>
-            </div>
-
-            <div className="bg-white rounded-3xl p-1.5 shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-1.5 sm:gap-0">
-              <button onClick={() => setPaymentMode("upfront")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "upfront" ? "bg-cyan-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Pay in full</button>
-              <button onClick={() => setPaymentMode("split")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "split" ? "bg-cyan-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Split payment</button>
-            </div>
-
-            <div className="bg-white rounded-3xl p-5 sm:p-6 md:p-8 border border-gray-100 shadow-sm transition-all">
-              {paymentMode === "upfront" ? (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Total Payment</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">One-time payment</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${totalAmount}</div>
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Monthly Split</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">Includes 5% fee</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${splitAmount}<span className="text-base sm:text-lg text-gray-400 font-normal">/mo</span></div>
-                  </div>
-                  <div className="pt-4 border-t border-gray-100">
-                    <input type="range" min="2" max="6" step="1" value={splitMonths} onChange={(e) => setSplitMonths(Number(e.target.value))} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
-                    <div className="flex justify-between text-[10px] sm:text-xs text-gray-400 mt-2 font-medium">
-                      <span>2 mos</span>
-                      <span>6 mos</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="bg-white rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
-            <form onSubmit={handlePay} className="space-y-4 sm:space-y-5 relative z-10">
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
-                <input required type="email" placeholder="you@example.com" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 text-sm sm:text-base text-gray-900 placeholder-gray-400 focus:outline-none transition-all focus:ring-cyan-600/20 focus:border-cyan-600" />
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Card Information</label>
-                <div className="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden transition-all focus-within:ring-2 focus-within:border-transparent">
-                  <input maxLength={16} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 16); }} required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-transparent px-4 py-3 sm:py-3.5 border-b border-gray-200 focus:outline-none font-mono text-sm sm:text-base" />
-                  <div className="flex">
-                    <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none border-r border-gray-200 font-mono text-sm sm:text-base" />
-                    <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none font-mono text-sm sm:text-base" />
-                  </div>
-                </div>
-              </div>
-              <div className="pt-2 sm:pt-4">
-                <button type="submit" disabled={isProcessing} className="w-full bg-cyan-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed text-sm sm:text-base">
-                  {isProcessing ? 'Processing...' : `Pay $${paymentMode === "upfront" ? totalAmount : splitAmount} Now`}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+  return (
+    <div className="w-full min-h-[700px] bg-slate-900 flex items-center justify-center font-sans p-6 text-slate-100 overflow-hidden relative">
+      
+      {/* Background Animated Orbs (The Key to Glassmorphism) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-purple-500/50 mix-blend-screen blur-[120px] animate-[pulse_8s_ease-in-out_infinite]"></div>
+        <div className="absolute top-[20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-blue-500/40 mix-blend-screen blur-[120px] animate-[pulse_10s_ease-in-out_infinite_reverse]"></div>
+        <div className="absolute bottom-[-20%] left-[20%] w-[50%] h-[50%] rounded-full bg-pink-500/40 mix-blend-screen blur-[120px] animate-[pulse_12s_ease-in-out_infinite]"></div>
       </div>
-    );
-        
+
+      {!isSuccess ? (
+        // Glassy Container
+        <div className="max-w-md w-full bg-white/10 backdrop-blur-2xl rounded-[2.5rem] p-8 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] border border-white/20 relative z-10 animate-in fade-in duration-700">
+          
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-3xl font-black text-white tracking-tight drop-shadow-sm">Checkout</h2>
+          </div>
+
+          <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 mb-8 border border-white/10 shadow-inner">
+             <div className="flex justify-between items-center text-sm mb-4">
+               <span className="font-medium text-white/70">Subtotal</span>
+               <span className="font-bold text-white">${TOTAL_AMOUNT.toFixed(2)}</span>
+             </div>
+             
+             <div className="flex justify-between items-end pt-4 border-t border-white/10">
+               <span className="font-bold text-white/70">Total</span>
+               <span className="text-4xl font-black text-white drop-shadow-md">${TOTAL_AMOUNT.toFixed(2)}</span>
+             </div>
+          </div>
+
+          <form onSubmit={handlePay} className="space-y-4">
+            
+            <div className="relative group">
+              <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50 group-focus-within:text-white transition-colors" />
+              <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" 
+                required 
+                type="text" 
+                placeholder="Card Number" 
+                className="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl pl-12 pr-4 py-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/40 focus:bg-white/10 transition-all font-mono tracking-widest text-sm shadow-inner" 
+              />
+            </div>
+            
+            <div className="flex gap-4">
+              <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" 
+                required 
+                type="text" 
+                placeholder="MM/YY" 
+                className="w-1/2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/40 focus:bg-white/10 transition-all font-mono tracking-widest text-center text-sm shadow-inner" 
+              />
+              <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" 
+                required 
+                type="text" 
+                placeholder="CVV" 
+                className="w-1/2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/40 focus:bg-white/10 transition-all font-mono tracking-widest text-center text-sm shadow-inner" 
+              />
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={isProcessing}
+              className="w-full py-5 mt-4 bg-white/20 hover:bg-white/30 backdrop-blur-md text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.2)] disabled:opacity-50 disabled:cursor-not-allowed group"
+            >
+              {isProcessing ? (
+                <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+              ) : (
+                <>Pay Now <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" /></>
+              )}
+            </button>
+          </form>
+
+        </div>
+      ) : (
+        <div className="max-w-md w-full bg-white/10 backdrop-blur-2xl rounded-[2.5rem] p-12 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] border border-white/20 text-center relative z-10 animate-in zoom-in duration-500">
+           
+           <div className="w-24 h-24 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-6 border border-white/20 shadow-inner">
+             <CheckCircle2 className="w-12 h-12 text-white drop-shadow-md" strokeWidth={2} />
+           </div>
+
+           <h2 className="text-3xl font-black text-white mb-2 drop-shadow-md">Payment Successful</h2>
+           <p className="text-white/70 mb-8 font-medium">Your receipt has been sent to your email.</p>
+           
+           <button type="button" 
+              onClick={() => { setIsSuccess(false); }}
+              className="w-full py-4 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 font-bold rounded-xl transition-all shadow-lg"
+            >
+              Done
+            </button>
+        </div>
+      )}
+
+    </div>
+  );
 }

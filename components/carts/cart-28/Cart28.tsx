@@ -57,18 +57,17 @@ export default function Cart28() {
                     const isUnavail = unavailable.has(seat);
                     const isSel = selected.has(seat);
                     return (
-                      <button
+                      <button type="button"
                         key={seat}
                         onClick={() => toggle(seat)}
                         disabled={isUnavail}
                         title={seat}
-                        className={`w-8 h-8 rounded-lg text-xs font-bold transition-all duration-150 border ${
-                          isUnavail
+                        className={`w-8 h-8 rounded-lg text-xs font-bold transition-all duration-150 border ${isUnavail
                             ? "bg-slate-700 border-slate-700 text-slate-600 cursor-not-allowed"
                             : isSel
-                            ? "bg-violet-500 border-violet-400 text-white scale-110 shadow-lg shadow-violet-500/30"
-                            : "bg-slate-700/60 border-slate-600 text-slate-400 hover:border-violet-400 hover:text-white"
-                        }`}
+                              ? "bg-violet-500 border-violet-400 text-white scale-110 shadow-lg shadow-violet-500/30"
+                              : "bg-slate-700/60 border-slate-600 text-slate-400 hover:border-violet-400 hover:text-white"
+                          }`}
                       >
                         {col}
                       </button>
@@ -106,21 +105,20 @@ export default function Cart28() {
           </div>
         </div>
 
-        <button
+        <button type="button"
           onClick={handleAdd}
           disabled={selected.size === 0}
-          className={`w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all duration-300 ${
-            selected.size === 0
+          className={`w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all duration-300 ${selected.size === 0
               ? "bg-slate-700 text-slate-500 cursor-not-allowed"
               : added
-              ? "bg-emerald-500 text-white"
-              : "bg-violet-600 hover:bg-violet-500 text-white"
-          }`}
+                ? "bg-emerald-500 text-white"
+                : "bg-violet-600 hover:bg-violet-500 text-white"
+            }`}
         >
           {added ? (
             <><Check size={20} /> {selected.size} Ticket{selected.size !== 1 ? "s" : ""} Added!</>
           ) : (
-            <><Ticket size={20} /> Reserve {selected.size > 0 ? `${selected.size} Seat${selected.size !== 1 ? "s" : ""}` : "Seats"}{selected.size > 0 ? ` — $${selected.size * pricePerSeat}` : ""}</>
+            <><Ticket size={20} /> Reserve {selected.size > 0 ? `${selected.size} Seat${selected.size !== 1 ? "s" : ""}` : "Seats"}{selected.size > 0 ? ` — ${selected.size * pricePerSeat}` : ""}</>
           )}
         </button>
       </div>

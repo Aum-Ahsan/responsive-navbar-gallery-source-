@@ -13,7 +13,7 @@ export default function Checkout42() {
             <Unlock size={32} className="text-rose-500" />
           </div>
           <h2 className="text-2xl font-bold text-white mb-6">Access Granted</h2>
-          <button className="py-3 px-6 rounded-full bg-rose-500 text-white font-bold flex items-center gap-2 mx-auto hover:bg-rose-600 transition">
+          <button type="button" className="py-3 px-6 rounded-full bg-rose-500 text-white font-bold flex items-center gap-2 mx-auto hover:bg-rose-600 transition">
             <PlayCircle size={20} /> Play Video
           </button>
         </div>
@@ -44,7 +44,7 @@ export default function Checkout42() {
         </div>
 
         <div className="space-y-3 mb-6">
-          <button 
+          <button type="button" 
             onClick={() => setPlaced(true)}
             className="w-full py-4 rounded-xl font-bold bg-white text-black hover:bg-slate-200 transition flex items-center justify-center gap-2"
           >
@@ -58,7 +58,7 @@ export default function Checkout42() {
           </div>
 
           <input placeholder="Card Number" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-rose-500 placeholder-white/30" />
-          <button 
+          <button type="button" 
             onClick={() => setPlaced(true)}
             className="w-full py-4 rounded-xl font-bold bg-rose-600 hover:bg-rose-700 text-white transition mt-2"
           >

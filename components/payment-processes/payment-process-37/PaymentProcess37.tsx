@@ -1,117 +1,149 @@
 "use client";
 import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import { Check, CreditCard, ChevronRight, Fingerprint } from "lucide-react";
 
 export default function PaymentProcess37() {
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [activeElement, setActiveElement] = useState<string | null>(null);
 
-    const [paymentMode, setPaymentMode] = useState<"upfront" | "split">("upfront");
-    const [splitMonths, setSplitMonths] = useState<number>(3);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-
-    const totalAmount = 1200;
-    const splitAmount = Math.ceil((totalAmount * 1.05) / splitMonths);
-
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => {
-        setIsProcessing(false);
-        setIsSuccess(true);
-      }, 2000);
-    };
-
-    if (isSuccess) {
-      return (
-        <div className="w-full min-h-[600px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 text-center max-w-md w-full shadow-xl border border-gray-100">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Check className="w-8 h-8 sm:w-10 sm:h-10" />
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Payment Confirmed</h2>
-            <p className="text-sm sm:text-base text-gray-500 mb-8">Your payment has been processed successfully. A receipt has been sent to your email.</p>
-            <button onClick={() => setIsSuccess(false)} className="text-orange-600 font-semibold hover:opacity-80 transition-opacity text-sm sm:text-base">
-              Return to Dashboard
-            </button>
-          </div>
-        </div>
-      );
+  const handlePointerDown = (id: string) => {
+    setActiveElement(id);
+    // Optional: If we were on mobile, we could call navigator.vibrate(50) here
+    if (typeof navigator !== 'undefined' && navigator.vibrate) {
+      navigator.vibrate(10);
     }
+  };
 
-    return (
-      <div className="w-full min-h-[700px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
-          <div className="space-y-6 md:space-y-8">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-3 sm:mb-4">
-                <Zap className="w-3 h-3" /> Home Remodel Staged Payments
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 tracking-tight">Complete your purchase</h2>
-              <p className="text-sm sm:text-base md:text-lg text-gray-500 leading-relaxed">Choose how you want to pay. Pay upfront to save, or split it into manageable monthly payments.</p>
-            </div>
+  const handlePointerUp = () => {
+    setActiveElement(null);
+  };
 
-            <div className="bg-white rounded-3xl p-1.5 shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-1.5 sm:gap-0">
-              <button onClick={() => setPaymentMode("upfront")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "upfront" ? "bg-orange-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Pay in full</button>
-              <button onClick={() => setPaymentMode("split")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "split" ? "bg-orange-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Split payment</button>
-            </div>
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+      if (typeof navigator !== 'undefined' && navigator.vibrate) {
+        navigator.vibrate([30, 50, 30]); // Success vibration pattern
+      }
+    }, 1500);
+  };
 
-            <div className="bg-white rounded-3xl p-5 sm:p-6 md:p-8 border border-gray-100 shadow-sm transition-all">
-              {paymentMode === "upfront" ? (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Total Payment</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">One-time payment</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${totalAmount}</div>
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Monthly Split</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">Includes 5% fee</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${splitAmount}<span className="text-base sm:text-lg text-gray-400 font-normal">/mo</span></div>
-                  </div>
-                  <div className="pt-4 border-t border-gray-100">
-                    <input type="range" min="2" max="6" step="1" value={splitMonths} onChange={(e) => setSplitMonths(Number(e.target.value))} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
-                    <div className="flex justify-between text-[10px] sm:text-xs text-gray-400 mt-2 font-medium">
-                      <span>2 mos</span>
-                      <span>6 mos</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
+  return (
+    <div className="w-full min-h-[700px] bg-neutral-900 flex items-center justify-center font-sans p-6 text-neutral-200">
+      
+      {!isSuccess ? (
+        <div className="max-w-sm w-full bg-neutral-800 rounded-[2rem] p-8 shadow-2xl border border-neutral-700 animate-in fade-in duration-500">
+          
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-xl font-black text-white">Payment</h2>
+            <Fingerprint className="w-6 h-6 text-neutral-500" />
           </div>
 
-          <div className="bg-white rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
-            <form onSubmit={handlePay} className="space-y-4 sm:space-y-5 relative z-10">
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
-                <input required type="email" placeholder="you@example.com" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 text-sm sm:text-base text-gray-900 placeholder-gray-400 focus:outline-none transition-all focus:ring-orange-600/20 focus:border-orange-600" />
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Card Information</label>
-                <div className="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden transition-all focus-within:ring-2 focus-within:border-transparent">
-                  <input maxLength={16} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 16); }} required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-transparent px-4 py-3 sm:py-3.5 border-b border-gray-200 focus:outline-none font-mono text-sm sm:text-base" />
-                  <div className="flex">
-                    <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none border-r border-gray-200 font-mono text-sm sm:text-base" />
-                    <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none font-mono text-sm sm:text-base" />
-                  </div>
-                </div>
-              </div>
-              <div className="pt-2 sm:pt-4">
-                <button type="submit" disabled={isProcessing} className="w-full bg-orange-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed text-sm sm:text-base">
-                  {isProcessing ? 'Processing...' : `Pay $${paymentMode === "upfront" ? totalAmount : splitAmount} Now`}
-                </button>
-              </div>
-            </form>
+          <div className="bg-neutral-900 rounded-2xl p-5 mb-8 border border-neutral-800 shadow-inner">
+            <div className="text-sm font-bold text-neutral-500 mb-1">Total</div>
+            <div className="text-4xl font-black text-white">$45.00</div>
           </div>
+
+          <form onSubmit={handlePay} className="space-y-4">
+            
+            {/* Tactile Input Container */}
+            <div 
+              className={`transition-transform duration-100 ease-out ${activeElement === 'card' ? 'scale-[0.98]' : 'scale-100'}`}
+              onPointerDown={() => handlePointerDown('card')}
+              onPointerUp={handlePointerUp}
+              onPointerLeave={handlePointerUp}
+            >
+              <label className="block text-xs font-bold text-neutral-500 uppercase tracking-widest mb-2 ml-1 pointer-events-none">Card Number</label>
+              <div className="relative">
+                <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500 pointer-events-none" />
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" 
+                  required 
+                  type="text" 
+                 
+                  placeholder="0000 0000 0000 0000" 
+                  className="w-full bg-neutral-900 border-2 border-neutral-700 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-amber-500 transition-colors font-mono tracking-widest text-sm shadow-inner" 
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <div 
+                className={`w-1/2 transition-transform duration-100 ease-out ${activeElement === 'exp' ? 'scale-[0.96]' : 'scale-100'}`}
+                onPointerDown={() => handlePointerDown('exp')}
+                onPointerUp={handlePointerUp}
+                onPointerLeave={handlePointerUp}
+              >
+                <label className="block text-xs font-bold text-neutral-500 uppercase tracking-widest mb-2 ml-1 pointer-events-none">Expiry</label>
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" 
+                  required 
+                  type="text" 
+                 
+                  placeholder="MM/YY" 
+                  className="w-full bg-neutral-900 border-2 border-neutral-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-amber-500 transition-colors font-mono tracking-widest text-center text-sm shadow-inner" 
+                />
+              </div>
+
+              <div 
+                className={`w-1/2 transition-transform duration-100 ease-out ${activeElement === 'cvv' ? 'scale-[0.96]' : 'scale-100'}`}
+                onPointerDown={() => handlePointerDown('cvv')}
+                onPointerUp={handlePointerUp}
+                onPointerLeave={handlePointerUp}
+              >
+                <label className="block text-xs font-bold text-neutral-500 uppercase tracking-widest mb-2 ml-1 pointer-events-none">CVV</label>
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9\s\-\,]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" 
+                  required 
+                  type="text" 
+                  maxLength={4}
+                  placeholder="123" 
+                  className="w-full bg-neutral-900 border-2 border-neutral-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-amber-500 transition-colors font-mono tracking-widest text-center text-sm shadow-inner" 
+                />
+              </div>
+            </div>
+
+            {/* Tactile Button */}
+            <div className="pt-4">
+              <button 
+                type="submit" 
+                disabled={isProcessing}
+                onPointerDown={() => handlePointerDown('submit')}
+                onPointerUp={handlePointerUp}
+                onPointerLeave={handlePointerUp}
+                className={`w-full py-5 bg-amber-500 text-neutral-900 rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-amber-400 disabled:opacity-70 disabled:hover:bg-amber-500 shadow-[0_4px_0_rgb(217,119,6)] active:shadow-[0_0px_0_rgb(217,119,6)] active:translate-y-1 transition-all duration-75`}
+              >
+                {isProcessing ? (
+                  <div className="w-6 h-6 border-4 border-neutral-900/30 border-t-neutral-900 rounded-full animate-spin"></div>
+                ) : (
+                  <>Pay Now <ChevronRight className="w-5 h-5" strokeWidth={3} /></>
+                )}
+              </button>
+            </div>
+
+          </form>
         </div>
-      </div>
-    );
-        
+      ) : (
+        <div className="max-w-sm w-full bg-neutral-800 rounded-[2rem] p-10 shadow-2xl border border-neutral-700 text-center animate-in zoom-in-95 duration-300">
+           <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+             <Check className="w-10 h-10 text-green-500" strokeWidth={4} />
+           </div>
+           <h2 className="text-2xl font-black text-white mb-2">Done!</h2>
+           <p className="text-neutral-400 mb-8 font-medium">Payment was processed.</p>
+           
+           {/* Tactile Reset Button */}
+           <button type="button" 
+              onClick={() => setIsSuccess(false)}
+              onPointerDown={() => handlePointerDown('reset')}
+              onPointerUp={handlePointerUp}
+              onPointerLeave={handlePointerUp}
+              className={`px-8 py-3 bg-neutral-700 text-white font-bold rounded-xl active:bg-neutral-600 active:scale-95 transition-all duration-75`}
+            >
+              Back
+            </button>
+        </div>
+      )}
+
+    </div>
+  );
 }

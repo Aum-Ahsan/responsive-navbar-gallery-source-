@@ -51,7 +51,7 @@ export default function Cart05() {
           </div>
           <div className="flex gap-3">
             {colors.map(c => (
-              <button
+              <button type="button"
                 key={c.hex}
                 onClick={() => { setSelectedColor(c.hex); setAttempted(false); }}
                 className={`w-10 h-10 rounded-full transition-all duration-200 ${
@@ -73,11 +73,11 @@ export default function Cart05() {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-3">
             <p className="font-semibold text-slate-700 text-sm">Size</p>
-            <button className="text-xs text-indigo-600 font-semibold">Size Guide →</button>
+            <button type="button" className="text-xs text-indigo-600 font-semibold">Size Guide →</button>
           </div>
           <div className="grid grid-cols-6 gap-2">
             {sizes.map(s => (
-              <button
+              <button type="button"
                 key={s}
                 onClick={() => { setSelectedSize(s); setAttempted(false); }}
                 className={`py-2.5 rounded-xl text-sm font-semibold border transition-all duration-200 ${
@@ -96,7 +96,7 @@ export default function Cart05() {
         </div>
 
         {/* Add Button — locked until both selected */}
-        <button
+        <button type="button"
           onClick={handleAdd}
           className={`w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all duration-300 ${
             added

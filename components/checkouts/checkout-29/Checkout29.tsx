@@ -37,7 +37,7 @@ export default function Checkout29() {
             <p className="text-xs text-slate-500 mt-1">123 Market St, San Francisco, CA</p>
             <p className="text-xs font-semibold text-emerald-600 mt-2 flex items-center gap-1"><Clock size={12}/> Ready today by 3:00 PM</p>
           </div>
-          <button className="text-xs font-bold text-blue-600 hover:underline ml-auto">Change</button>
+          <button type="button" className="text-xs font-bold text-blue-600 hover:underline ml-auto">Change</button>
         </div>
 
         <h3 className="font-bold text-slate-900 text-sm mb-3">How would you like to pick it up?</h3>
@@ -77,7 +77,7 @@ export default function Checkout29() {
           <input placeholder="Phone Number (for SMS updates)" className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </div>
 
-        <button 
+        <button type="button" 
           onClick={() => setPlaced(true)}
           className="w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white transition shadow-lg shadow-slate-900/20"
         >

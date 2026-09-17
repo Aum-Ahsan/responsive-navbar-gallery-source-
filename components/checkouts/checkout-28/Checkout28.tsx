@@ -85,7 +85,7 @@ export default function Checkout28() {
           <p className="font-bold text-blue-900">$10.00</p>
         </div>
 
-        <button 
+        <button type="button" 
           onClick={() => setPlaced(true)}
           className="w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white transition shadow-lg shadow-slate-900/20"
         >

@@ -1,69 +1,164 @@
 "use client";
-import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
 
 export default function PaymentProcess78() {
+  const TOTAL_AMOUNT = 1337.00;
+  
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [log, setLog] = useState<string[]>([]);
+  const [booted, setBooted] = useState(false);
 
-    const [isProcessing, setIsProcessing] = useState(false);
+  useEffect(() => {
+    const bootSequence = [
+      "INIT SECURE SHELL...",
+      "CONNECTING TO PAYMENT GATEWAY [OK]",
+      "ESTABLISHING ENCRYPTED TUNNEL [OK]",
+      "HANDSHAKE COMPLETE.",
+      "AWAITING INPUT..."
+    ];
+    
+    let i = 0;
+    const interval = setInterval(() => {
+      setLog(prev => [...prev, bootSequence[i]]);
+      i++;
+      if (i === bootSequence.length) {
+        clearInterval(interval);
+        setBooted(true);
+      }
+    }, 400);
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
-    };
+    return () => clearInterval(interval);
+  }, []);
 
-    return (
-      <div className="w-full min-h-[600px] bg-neutral-900 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 rounded-[2rem] overflow-hidden shadow-2xl bg-white">
-          <div className="bg-emerald-600 p-8 sm:p-10 flex flex-col justify-between text-white">
-            <div>
-              <FileText className="w-8 h-8 sm:w-10 sm:h-10 mb-6 sm:mb-8 opacity-80" />
-              <h2 className="text-2xl sm:text-3xl font-bold mb-2">Invoice Payment</h2>
-              <p className="opacity-80 mb-6 sm:mb-8 text-sm sm:text-base">Utility Bill Quick Pay</p>
-              
-              <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                <div className="flex justify-between text-xs sm:text-sm opacity-90 border-b border-white/20 pb-2">
-                  <span>Invoice #</span>
-                  <span className="font-mono">INV-2026</span>
-                </div>
-                <div className="flex justify-between text-xs sm:text-sm opacity-90 border-b border-white/20 pb-2">
-                  <span>Due Date</span>
-                  <span>Oct 1, 2026</span>
-                </div>
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    
+    const processingSequence = [
+      "> ./execute_payment.sh",
+      "VALIDATING PAN...",
+      "AUTHORIZING...",
+      "TRANSACTION APPROVED.",
+      "EXITING."
+    ];
+
+    let i = 0;
+    setLog(prev => [...prev, processingSequence[0]]);
+    
+    const interval = setInterval(() => {
+      i++;
+      if (i < processingSequence.length) {
+        setLog(prev => [...prev, processingSequence[i]]);
+      }
+      if (i === processingSequence.length) {
+        clearInterval(interval);
+        setIsProcessing(false);
+        setIsSuccess(true);
+      }
+    }, 600);
+  };
+
+  return (
+    <div className="w-full min-h-[700px] bg-black flex items-center justify-center font-mono p-6 text-green-500 selection:bg-green-500 selection:text-black">
+      
+      <div className="max-w-2xl w-full h-full flex flex-col relative z-10 p-4 border border-green-900 shadow-[0_0_20px_rgba(0,255,0,0.1)]">
+        
+        {/* Terminal Header */}
+        <div className="border-b border-green-900 pb-2 mb-4 flex justify-between text-xs opacity-70">
+          <span>user@sys:~</span>
+          <span>bash 5.1.16</span>
+        </div>
+
+        {/* Boot Log */}
+        <div className="mb-8 space-y-1 text-sm">
+          {log.map((line, idx) => (
+            <div key={idx} className="animate-in fade-in duration-300">
+              {line}
+            </div>
+          ))}
+          {!isProcessing && !isSuccess && booted && (
+            <div className="animate-pulse">_</div>
+          )}
+        </div>
+
+        {!isSuccess && booted && !isProcessing && (
+          <form onSubmit={handlePay} className="space-y-6 mt-auto">
+            
+            <div className="space-y-1">
+              <label className="text-sm">root@pay:~$ cat ./total_due</label>
+              <div className="text-xl font-bold">${TOTAL_AMOUNT.toFixed(2)}</div>
+            </div>
+            
+            <div className="space-y-1">
+              <label className="text-sm">root@pay:~$ enter_pan</label>
+              <div className="flex items-center">
+                <span className="mr-2">&gt;</span>
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" 
+                  required 
+                  type="text" 
+                  placeholder="XXXX XXXX XXXX XXXX" 
+                  className="w-full bg-transparent border-b border-green-900 text-green-500 focus:outline-none focus:border-green-400 transition-colors font-mono placeholder:text-green-900" 
+                />
               </div>
             </div>
             
-            <div className="mt-8 md:mt-0">
-              <p className="text-xs sm:text-sm opacity-80 mb-1">Amount Due</p>
-              <p className="text-4xl sm:text-5xl font-bold tracking-tight">$4,500.00</p>
-            </div>
-          </div>
-          
-          <div className="p-8 sm:p-10 flex flex-col justify-center">
-            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-6">Payment Method</h3>
-            <form onSubmit={handlePay} className="space-y-4">
-              <div>
-                <label className="block text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Name on Card</label>
-                <input required type="text" className="w-full bg-gray-50 border-none rounded-xl px-4 py-3 sm:py-4 focus:ring-2 focus:ring-gray-200 transition-shadow text-sm sm:text-base" />
-              </div>
-              <div>
-                <label className="block text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Card Details</label>
-                <div className="bg-gray-50 rounded-xl overflow-hidden flex flex-col">
-                  <input required type="text" placeholder="Card Number" className="w-full bg-transparent px-4 py-3 sm:py-4 border-b border-gray-200 focus:outline-none text-sm sm:text-base" />
-                  <div className="flex">
-                    <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-4 border-r border-gray-200 focus:outline-none text-sm sm:text-base" />
-                    <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-4 focus:outline-none text-sm sm:text-base" />
-                  </div>
+            <div className="flex gap-8">
+              <div className="space-y-1 w-1/2">
+                <label className="text-sm">root@pay:~$ enter_exp</label>
+                <div className="flex items-center">
+                  <span className="mr-2">&gt;</span>
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" 
+                    required 
+                    type="text" 
+                    placeholder="MM/YY" 
+                    className="w-full bg-transparent border-b border-green-900 text-green-500 focus:outline-none focus:border-green-400 transition-colors font-mono placeholder:text-green-900" 
+                  />
                 </div>
               </div>
-              <button type="submit" disabled={isProcessing} className="w-full bg-gray-900 text-white font-bold py-3.5 sm:py-4 rounded-xl mt-4 sm:mt-6 hover:bg-black transition-colors flex items-center justify-center text-sm sm:text-base">
-                {isProcessing ? 'Processing...' : 'Pay Invoice'}
-                {!isProcessing && <ArrowRight className="w-4 h-4 ml-2" />}
-              </button>
-            </form>
+              <div className="space-y-1 w-1/2">
+                <label className="text-sm">root@pay:~$ enter_cvv</label>
+                <div className="flex items-center">
+                  <span className="mr-2">&gt;</span>
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" 
+                    required 
+                    type="text" 
+                    placeholder="***" 
+                    className="w-full bg-transparent border-b border-green-900 text-green-500 focus:outline-none focus:border-green-400 transition-colors font-mono placeholder:text-green-900" 
+                  />
+                </div>
+              </div>
+            </div>
+
+            <button 
+              type="submit" 
+              className="w-full py-4 mt-8 bg-green-950/30 border border-green-900 hover:bg-green-900 text-green-500 hover:text-black transition-all flex items-center justify-center gap-2 group"
+            >
+              <span>./execute_payment.sh</span>
+              <span className="inline-block w-2 h-4 bg-green-500 group-hover:bg-black animate-pulse"></span>
+            </button>
+          </form>
+        )}
+
+        {isSuccess && (
+          <div className="mt-8">
+            <div className="border border-green-500 p-4 inline-block mb-8 shadow-[0_0_15px_rgba(0,255,0,0.2)]">
+              <h2 className="text-2xl font-bold">SUCCESS</h2>
+            </div>
+            <p className="mb-8 opacity-70">FUNDS TRANSFERRED SUCCESSFULLY.</p>
+            
+            <button type="button" 
+              onClick={() => { setIsSuccess(false); setLog(["INIT SECURE SHELL...", "READY."]); setBooted(true); }}
+              className="px-4 py-2 bg-transparent border border-green-900 hover:bg-green-900 text-green-500 hover:text-black transition-all"
+            >
+              logout
+            </button>
           </div>
-        </div>
-      </div>
-    );
+        )}
         
+        {/* Terminal Scanline overlay */}
+        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[size:100%_4px,3px_100%] z-50 mix-blend-overlay opacity-30"></div>
+      </div>
+    </div>
+  );
 }

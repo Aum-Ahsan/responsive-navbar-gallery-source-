@@ -34,7 +34,7 @@ export default function Cart48() {
             <p className="text-sm text-slate-300 opacity-80 mt-1">$1,250.00</p>
           </div>
 
-          <button 
+          <button type="button" 
             onClick={handleAdd}
             disabled={added}
             className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition backdrop-blur-md 

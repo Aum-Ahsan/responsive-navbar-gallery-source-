@@ -21,7 +21,7 @@ export default function Checkout08() {
         <div className="text-center">
           <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4"><Check size={28} className="text-emerald-600" /></div>
           <h2 className="text-xl font-bold text-slate-900">Order Confirmed!</h2>
-          <p className="text-slate-500 text-sm mt-2">{plan === "full" ? `Paid $${total} in full.` : `${bnplOptions.find(o=>o.id===bnplOption)?.provider} installment plan set up.`}</p>
+          <p className="text-slate-500 text-sm mt-2">{plan === "full" ? `Paid ${total} in full.` : `${bnplOptions.find(o => o.id === bnplOption)?.provider} installment plan set up.`}</p>
         </div>
       </div>
     );
@@ -35,10 +35,10 @@ export default function Checkout08() {
 
         {/* Plan toggle */}
         <div className="grid grid-cols-2 bg-slate-100 rounded-2xl p-1 mb-6">
-          <button onClick={() => setPlan("full")} className={`py-3 rounded-xl font-bold text-sm transition ${plan === "full" ? "bg-white shadow text-slate-900" : "text-slate-500"}`}>
+          <button type="button" onClick={() => setPlan("full")} className={`py-3 rounded-xl font-bold text-sm transition ${plan === "full" ? "bg-white shadow text-slate-900" : "text-slate-500"}`}>
             Pay in Full — ${total}
           </button>
-          <button onClick={() => setPlan("bnpl")} className={`py-3 rounded-xl font-bold text-sm transition ${plan === "bnpl" ? "bg-white shadow text-slate-900" : "text-slate-500"}`}>
+          <button type="button" onClick={() => setPlan("bnpl")} className={`py-3 rounded-xl font-bold text-sm transition ${plan === "bnpl" ? "bg-white shadow text-slate-900" : "text-slate-500"}`}>
             Buy Now, Pay Later
           </button>
         </div>
@@ -82,8 +82,8 @@ export default function Checkout08() {
           </div>
         )}
 
-        <button onClick={() => setPlaced(true)} className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition">
-          <Lock size={16} /> {plan === "full" ? `Pay $${total}` : `Confirm ${bnplOptions.find(o=>o.id===bnplOption)?.provider} Plan`}
+        <button type="button" onClick={() => setPlaced(true)} className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition">
+          <Lock size={16} /> {plan === "full" ? `Pay ${total}` : `Confirm ${bnplOptions.find(o => o.id === bnplOption)?.provider} Plan`}
         </button>
       </div>
     </div>

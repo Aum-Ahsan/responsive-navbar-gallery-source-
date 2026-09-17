@@ -1,117 +1,207 @@
 "use client";
-import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import React, { useState, useCallback, useRef } from "react";
+import { Heart, Coffee, ShieldCheck, CheckCircle2 } from "lucide-react";
 
 export default function PaymentProcess17() {
+  const [tipAdded, setTipAdded] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  
+  const basePrice = 24.50;
+  const tipAmount = 2.00;
+  
+  const total = basePrice + (tipAdded ? tipAmount : 0);
+  
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-    const [paymentMode, setPaymentMode] = useState<"upfront" | "split">("upfront");
-    const [splitMonths, setSplitMonths] = useState<number>(3);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-
-    const totalAmount = 1200;
-    const splitAmount = Math.ceil((totalAmount * 1.05) / splitMonths);
-
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => {
-        setIsProcessing(false);
-        setIsSuccess(true);
-      }, 2000);
-    };
-
-    if (isSuccess) {
-      return (
-        <div className="w-full min-h-[600px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 text-center max-w-md w-full shadow-xl border border-gray-100">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Check className="w-8 h-8 sm:w-10 sm:h-10" />
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Payment Confirmed</h2>
-            <p className="text-sm sm:text-base text-gray-500 mb-8">Your payment has been processed successfully. A receipt has been sent to your email.</p>
-            <button onClick={() => setIsSuccess(false)} className="text-emerald-600 font-semibold hover:opacity-80 transition-opacity text-sm sm:text-base">
-              Return to Dashboard
-            </button>
-          </div>
-        </div>
-      );
+  // Custom double tap logic for better mobile support than just onDoubleClick
+  const handleInteraction = () => {
+    if (tipAdded) {
+      // If already added, tap again to remove
+      setTipAdded(false);
+      return;
     }
 
+    setClickCount((prev) => prev + 1);
+
+    if (clickCount === 1) {
+      // Second click within 300ms
+      setTipAdded(true);
+      setShowAnimation(true);
+      setClickCount(0);
+      
+      // Hide animation after 1s
+      setTimeout(() => setShowAnimation(false), 1000);
+      
+      if (timerRef.current) clearTimeout(timerRef.current);
+    } else {
+      // First click
+      timerRef.current = setTimeout(() => {
+        setClickCount(0); // Reset if second click doesn't happen fast enough
+      }, 300);
+    }
+  };
+
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
+
+  if (isSuccess) {
     return (
-      <div className="w-full min-h-[700px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
-          <div className="space-y-6 md:space-y-8">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-3 sm:mb-4">
-                <Zap className="w-3 h-3" /> Student Tuition Payment Plan
+      <div className="w-full min-h-screen bg-pink-50 flex items-center justify-center p-6 font-sans">
+        <div className="bg-white p-12 rounded-[2rem] shadow-xl text-center max-w-sm w-full border border-pink-100 animate-in zoom-in-95 duration-500">
+          <div className="w-24 h-24 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <CheckCircle2 className="w-12 h-12 text-pink-500" />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Order Confirmed</h2>
+          <p className="text-gray-500 mb-6">Your order is being prepared.</p>
+          
+          <div className="bg-pink-50 rounded-xl p-4 mb-8 text-left">
+            <div className="flex justify-between text-sm text-pink-900 mb-2 font-medium">
+              <span>Total Paid</span>
+              <span>${total.toFixed(2)}</span>
+            </div>
+            {tipAdded && (
+              <div className="flex items-center gap-2 text-xs text-pink-600">
+                <Heart className="w-4 h-4 fill-pink-500 text-pink-500" /> Includes $2 tip. Thanks!
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 tracking-tight">Complete your purchase</h2>
-              <p className="text-sm sm:text-base md:text-lg text-gray-500 leading-relaxed">Choose how you want to pay. Pay upfront to save, or split it into manageable monthly payments.</p>
-            </div>
-
-            <div className="bg-white rounded-3xl p-1.5 shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-1.5 sm:gap-0">
-              <button onClick={() => setPaymentMode("upfront")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "upfront" ? "bg-emerald-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Pay in full</button>
-              <button onClick={() => setPaymentMode("split")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "split" ? "bg-emerald-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Split payment</button>
-            </div>
-
-            <div className="bg-white rounded-3xl p-5 sm:p-6 md:p-8 border border-gray-100 shadow-sm transition-all">
-              {paymentMode === "upfront" ? (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Total Payment</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">One-time payment</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${totalAmount}</div>
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Monthly Split</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">Includes 5% fee</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${splitAmount}<span className="text-base sm:text-lg text-gray-400 font-normal">/mo</span></div>
-                  </div>
-                  <div className="pt-4 border-t border-gray-100">
-                    <input type="range" min="2" max="6" step="1" value={splitMonths} onChange={(e) => setSplitMonths(Number(e.target.value))} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
-                    <div className="flex justify-between text-[10px] sm:text-xs text-gray-400 mt-2 font-medium">
-                      <span>2 mos</span>
-                      <span>6 mos</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
+            )}
           </div>
 
-          <div className="bg-white rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
-            <form onSubmit={handlePay} className="space-y-4 sm:space-y-5 relative z-10">
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
-                <input required type="email" placeholder="you@example.com" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 text-sm sm:text-base text-gray-900 placeholder-gray-400 focus:outline-none transition-all focus:ring-emerald-600/20 focus:border-emerald-600" />
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Card Information</label>
-                <div className="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden transition-all focus-within:ring-2 focus-within:border-transparent">
-                  <input maxLength={16} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 16); }} required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-transparent px-4 py-3 sm:py-3.5 border-b border-gray-200 focus:outline-none font-mono text-sm sm:text-base" />
-                  <div className="flex">
-                    <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none border-r border-gray-200 font-mono text-sm sm:text-base" />
-                    <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none font-mono text-sm sm:text-base" />
-                  </div>
-                </div>
-              </div>
-              <div className="pt-2 sm:pt-4">
-                <button type="submit" disabled={isProcessing} className="w-full bg-emerald-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed text-sm sm:text-base">
-                  {isProcessing ? 'Processing...' : `Pay $${paymentMode === "upfront" ? totalAmount : splitAmount} Now`}
-                </button>
-              </div>
-            </form>
-          </div>
+          <button type="button" onClick={() => { setIsSuccess(false); setTipAdded(false); }} className="w-full py-4 bg-gray-900 text-white rounded-xl font-bold hover:bg-gray-800 transition-colors">
+            Close
+          </button>
         </div>
       </div>
     );
+  }
+
+  return (
+    <div className="w-full min-h-screen bg-pink-50 flex items-center justify-center font-sans p-6 selection:bg-pink-200">
+      
+      <div className="max-w-md w-full bg-white rounded-[2.5rem] p-6 sm:p-8 shadow-2xl border border-pink-100 relative">
         
+        <header className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-xl font-black text-gray-900 tracking-tight">Checkout</h1>
+            <p className="text-sm text-gray-500 font-medium">Bakehouse Cafe</p>
+          </div>
+          <div className="w-12 h-12 bg-pink-50 text-pink-500 rounded-full flex items-center justify-center">
+            <Coffee className="w-6 h-6" />
+          </div>
+        </header>
+
+        {/* Order Details */}
+        <div className="space-y-4 mb-8">
+          <div className="flex gap-4">
+            <div className="w-16 h-16 bg-gray-100 rounded-2xl flex-shrink-0">
+               <img src="https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?w=150&q=80" alt="Pastry" className="w-full h-full object-cover rounded-2xl" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-bold text-gray-900">Almond Croissant</h3>
+              <p className="text-sm text-gray-500">Qty: 2</p>
+            </div>
+            <div className="font-bold text-gray-900">$12.00</div>
+          </div>
+          <div className="flex gap-4">
+            <div className="w-16 h-16 bg-gray-100 rounded-2xl flex-shrink-0">
+               <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=150&q=80" alt="Coffee" className="w-full h-full object-cover rounded-2xl" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-bold text-gray-900">Caramel Latte</h3>
+              <p className="text-sm text-gray-500">Oat milk • Large</p>
+            </div>
+            <div className="font-bold text-gray-900">$12.50</div>
+          </div>
+        </div>
+
+        {/* Interactive Double Tap Area */}
+        <div 
+          className="relative w-full h-48 bg-gradient-to-br from-pink-400 to-rose-500 rounded-3xl mb-8 flex flex-col items-center justify-center text-white cursor-pointer overflow-hidden shadow-inner group select-none"
+          onClick={handleInteraction}
+        >
+          {/* Popping Heart Animation */}
+          {showAnimation && (
+            <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+              <Heart className="w-24 h-24 text-white fill-white opacity-0 animate-[ping_1s_ease-out_forwards]" />
+              <Heart className="absolute w-24 h-24 text-white fill-white opacity-0 animate-[scaleUpFade_1s_ease-out_forwards]" />
+            </div>
+          )}
+
+          {/* Inner Content */}
+          <div className={`relative z-10 text-center transition-transform duration-300 ${clickCount === 1 ? 'scale-95' : 'scale-100'}`}>
+            <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+              <Heart className={`w-8 h-8 transition-colors duration-300 ${tipAdded ? 'fill-white text-white' : 'text-white'}`} />
+            </div>
+            {tipAdded ? (
+              <div>
+                <h3 className="font-bold text-lg leading-none mb-1">Tip Added!</h3>
+                <p className="text-white/80 text-xs font-medium">Tap again to remove</p>
+              </div>
+            ) : (
+              <div>
+                <h3 className="font-bold text-lg leading-none mb-1">Double Tap to Tip</h3>
+                <p className="text-white/80 text-xs font-medium">Add a $2.00 tip for the barista</p>
+              </div>
+            )}
+          </div>
+          
+          {/* Subtle instructions */}
+          <div className="absolute bottom-4 opacity-50 text-[10px] font-bold uppercase tracking-widest pointer-events-none group-hover:opacity-100 transition-opacity">
+            Interactive Area
+          </div>
+        </div>
+
+        {/* CSS for custom animation */}
+        <style dangerouslySetInnerHTML={{__html: `
+          @keyframes scaleUpFade {
+            0% { transform: scale(0.5); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+          }
+        `}} />
+
+        {/* Payment Summary & Action */}
+        <div className="bg-gray-50 rounded-2xl p-5 mb-8 border border-gray-100">
+          <div className="flex justify-between text-sm text-gray-500 mb-2 font-medium">
+            <span>Subtotal</span>
+            <span>${basePrice.toFixed(2)}</span>
+          </div>
+          <div className="flex justify-between text-sm font-medium transition-all duration-300 overflow-hidden" style={{ height: tipAdded ? '20px' : '0px', marginBottom: tipAdded ? '8px' : '0px', opacity: tipAdded ? 1 : 0 }}>
+            <span className="text-pink-600 flex items-center gap-1"><Heart className="w-3 h-3 fill-pink-600" /> Tip</span>
+            <span className="text-pink-600">${tipAmount.toFixed(2)}</span>
+          </div>
+          <div className="flex justify-between items-end pt-3 border-t border-gray-200">
+            <span className="font-bold text-gray-900">Total</span>
+            <span className="text-3xl font-black text-gray-900 transition-all duration-300">${total.toFixed(2)}</span>
+          </div>
+        </div>
+
+        <form onSubmit={handlePay}>
+          <button 
+            type="submit" 
+            disabled={isProcessing}
+            className="w-full py-5 bg-gray-900 text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-gray-800 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 disabled:opacity-70 disabled:hover:translate-y-0 disabled:hover:shadow-xl"
+          >
+            {isProcessing ? (
+              <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+            ) : (
+              `Pay $${total.toFixed(2)}`
+            )}
+          </button>
+          <div className="flex items-center justify-center gap-2 mt-4 text-xs font-semibold text-gray-400">
+            <ShieldCheck className="w-4 h-4" /> Secure Payment
+          </div>
+        </form>
+
+      </div>
+    </div>
+  );
 }

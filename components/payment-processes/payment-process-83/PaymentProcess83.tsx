@@ -1,117 +1,267 @@
 "use client";
 import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import { CreditCard, ArrowRight, CheckCircle2, MapPin, User, ChevronDown, Check } from "lucide-react";
+
+type Step = 1 | 2 | 3;
 
 export default function PaymentProcess83() {
+  const TOTAL_AMOUNT = 149.50;
+  
+  const [activeStep, setActiveStep] = useState<Step>(1);
+  const [completedSteps, setCompletedSteps] = useState<Step[]>([]);
+  
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const [paymentMode, setPaymentMode] = useState<"upfront" | "split">("upfront");
-    const [splitMonths, setSplitMonths] = useState<number>(3);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
+  const nextStep = (step: Step) => {
+    setCompletedSteps([...completedSteps, activeStep]);
+    setActiveStep(step);
+  };
 
-    const totalAmount = 1200;
-    const splitAmount = Math.ceil((totalAmount * 1.05) / splitMonths);
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => {
-        setIsProcessing(false);
-        setIsSuccess(true);
-      }, 2000);
-    };
+  const steps = [
+    { id: 1, title: "Account", icon: User },
+    { id: 2, title: "Shipping", icon: MapPin },
+    { id: 3, title: "Payment", icon: CreditCard },
+  ] as const;
 
-    if (isSuccess) {
-      return (
-        <div className="w-full min-h-[600px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 text-center max-w-md w-full shadow-xl border border-gray-100">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Check className="w-8 h-8 sm:w-10 sm:h-10" />
+  return (
+    <div className="w-full min-h-[700px] bg-slate-100 flex items-center justify-center font-sans p-4 md:p-8 text-slate-800">
+      
+      {!isSuccess ? (
+        <div className="w-full max-w-3xl bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden relative z-10 flex flex-col h-full md:h-auto min-h-[600px] md:min-h-0">
+          
+          <div className="p-6 md:p-8 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
+            <h2 className="text-2xl font-black text-slate-900">Checkout</h2>
+            <div className="text-right">
+              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Total</p>
+              <p className="text-xl font-black">${TOTAL_AMOUNT.toFixed(2)}</p>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Payment Confirmed</h2>
-            <p className="text-sm sm:text-base text-gray-500 mb-8">Your payment has been processed successfully. A receipt has been sent to your email.</p>
-            <button onClick={() => setIsSuccess(false)} className="text-rose-600 font-semibold hover:opacity-80 transition-opacity text-sm sm:text-base">
-              Return to Dashboard
-            </button>
           </div>
-        </div>
-      );
-    }
 
-    return (
-      <div className="w-full min-h-[700px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
-          <div className="space-y-6 md:space-y-8">
+          {/* Desktop Horizontal Progress Bar (Hidden on Mobile) */}
+          <div className="hidden md:flex items-center justify-between p-8 bg-white border-b border-slate-100 relative">
+            {/* Connecting Line */}
+            <div className="absolute top-1/2 left-16 right-16 h-1 bg-slate-100 -translate-y-1/2 z-0"></div>
+            
+            {steps.map((step) => {
+              const Icon = step.icon;
+              const isActive = activeStep === step.id;
+              const isCompleted = completedSteps.includes(step.id);
+              
+              return (
+                <div key={step.id} className="relative z-10 flex flex-col items-center gap-2 bg-white px-4">
+                  <button type="button" 
+                    onClick={(e) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = () => setActiveStep(step.id);
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+      else if (typeof originalHandler === 'object' && originalHandler !== null) { /* ignore event objects */ }
+    }}
+                    className={`w-12 h-12 rounded-full flex items-center justify-center border-4 transition-all ${
+                      isActive ? 'border-blue-500 bg-blue-50 text-blue-500' : 
+                      isCompleted ? 'border-green-500 bg-green-50 text-green-500' : 
+                      'border-slate-200 bg-white text-slate-400'
+                    }`}
+                  >
+                    {isCompleted && !isActive ? <Check strokeWidth={3} className="w-5 h-5" /> : <Icon className="w-5 h-5" />}
+                  </button>
+                  <span className={`text-xs font-bold uppercase tracking-widest ${isActive ? 'text-blue-500' : isCompleted ? 'text-green-500' : 'text-slate-400'}`}>
+                    {step.title}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Main Content Area */}
+          <div className="flex-1 flex flex-col md:block overflow-y-auto bg-slate-50 md:bg-white p-4 md:p-8">
+            
+            {/* Step 1: Account */}
+            <div className="mb-4 md:mb-0">
+              {/* Mobile Accordion Header */}
+              <button type="button" 
+                onClick={() => setActiveStep(1)}
+                className={`md:hidden w-full flex items-center justify-between p-4 rounded-xl font-bold bg-white border shadow-sm transition-all ${activeStep === 1 ? 'border-blue-500 text-blue-600' : 'border-slate-200 text-slate-600'}`}
+              >
+                <div className="flex items-center gap-3">
+                  <User className="w-5 h-5" /> 1. Account
+                </div>
+                <ChevronDown className={`w-5 h-5 transition-transform ${activeStep === 1 ? 'rotate-180' : ''}`} />
+              </button>
+
+              {/* Step 1 Content */}
+              <div className={`mt-2 md:mt-0 bg-white md:bg-transparent p-4 md:p-0 rounded-xl md:rounded-none border md:border-0 border-slate-200 ${activeStep === 1 ? 'block animate-in fade-in slide-in-from-top-2' : 'hidden'}`}>
+                <h3 className="hidden md:block text-xl font-black mb-6">Create Account</h3>
+                <div className="space-y-4">
+                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="email" placeholder="Email Address" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors" />
+                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="password" placeholder="Password (Optional)" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors" />
+                  <button type="button" onClick={(e) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = () => nextStep(2);
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+    }} className="w-full py-4 mt-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors">
+                    Continue to Shipping
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Step 2: Shipping */}
+            <div className="mb-4 md:mb-0">
+              {/* Mobile Accordion Header */}
+              <button type="button" 
+                onClick={(e) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = () => setActiveStep(2);
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+      else if (typeof originalHandler === 'object' && originalHandler !== null) { /* ignore event objects */ }
+    }}
+                className={`md:hidden w-full flex items-center justify-between p-4 rounded-xl font-bold bg-white border shadow-sm transition-all ${activeStep === 2 ? 'border-blue-500 text-blue-600' : 'border-slate-200 text-slate-600'}`}
+              >
+                <div className="flex items-center gap-3">
+                  <MapPin className="w-5 h-5" /> 2. Shipping
+                </div>
+                <ChevronDown className={`w-5 h-5 transition-transform ${activeStep === 2 ? 'rotate-180' : ''}`} />
+              </button>
+
+              {/* Step 2 Content */}
+              <div className={`mt-2 md:mt-0 bg-white md:bg-transparent p-4 md:p-0 rounded-xl md:rounded-none border md:border-0 border-slate-200 ${activeStep === 2 ? 'block animate-in fade-in slide-in-from-top-2' : 'hidden'}`}>
+                <h3 className="hidden md:block text-xl font-black mb-6">Shipping Address</h3>
+                <div className="space-y-4">
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z\s\-]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Full Name" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9\s\-\,]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Address" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors" />
+                  <div className="flex gap-4">
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z\s\-]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="City" className="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors" />
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 5); }} pattern="\\d{5}" maxLength={5} title="5 digit zip code" required type="text" placeholder="ZIP" className="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors" />
+                  </div>
+                  <button type="button" onClick={(e) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = () => nextStep(3);
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+    }} className="w-full py-4 mt-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors">
+                    Continue to Payment
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Step 3: Payment */}
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-rose-600 text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-3 sm:mb-4">
-                <Zap className="w-3 h-3" /> Jewelry Financing Plan
+              {/* Mobile Accordion Header */}
+              <button type="button" 
+                onClick={(e) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = () => setActiveStep(3);
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+      else if (typeof originalHandler === 'object' && originalHandler !== null) { /* ignore event objects */ }
+    }}
+                className={`md:hidden w-full flex items-center justify-between p-4 rounded-xl font-bold bg-white border shadow-sm transition-all ${activeStep === 3 ? 'border-blue-500 text-blue-600' : 'border-slate-200 text-slate-600'}`}
+              >
+                <div className="flex items-center gap-3">
+                  <CreditCard className="w-5 h-5" /> 3. Payment
+                </div>
+                <ChevronDown className={`w-5 h-5 transition-transform ${activeStep === 3 ? 'rotate-180' : ''}`} />
+              </button>
+
+              {/* Step 3 Content */}
+              <div className={`mt-2 md:mt-0 bg-white md:bg-transparent p-4 md:p-0 rounded-xl md:rounded-none border md:border-0 border-slate-200 ${activeStep === 3 ? 'block animate-in fade-in slide-in-from-top-2' : 'hidden'}`}>
+                <h3 className="hidden md:block text-xl font-black mb-6">Payment Details</h3>
+                <form onSubmit={handlePay} className="space-y-4">
+                  <div className="relative">
+                    <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-12 pr-4 py-4 focus:outline-none focus:border-blue-500 transition-colors font-mono tracking-widest text-sm" />
+                  </div>
+                  <div className="flex gap-4">
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 focus:outline-none focus:border-blue-500 transition-colors font-mono tracking-widest text-center text-sm" />
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 focus:outline-none focus:border-blue-500 transition-colors font-mono tracking-widest text-center text-sm" />
+                  </div>
+                  <button 
+                    type="submit" 
+                    disabled={isProcessing}
+                    className="w-full py-5 mt-4 bg-slate-900 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-slate-800 transition-all shadow-lg disabled:opacity-70"
+                  >
+                    {isProcessing ? (
+                      <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    ) : (
+                      <>Pay ${TOTAL_AMOUNT.toFixed(2)} <ArrowRight className="w-5 h-5" /></>
+                    )}
+                  </button>
+                </form>
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 tracking-tight">Complete your purchase</h2>
-              <p className="text-sm sm:text-base md:text-lg text-gray-500 leading-relaxed">Choose how you want to pay. Pay upfront to save, or split it into manageable monthly payments.</p>
             </div>
 
-            <div className="bg-white rounded-3xl p-1.5 shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-1.5 sm:gap-0">
-              <button onClick={() => setPaymentMode("upfront")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "upfront" ? "bg-rose-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Pay in full</button>
-              <button onClick={() => setPaymentMode("split")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "split" ? "bg-rose-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Split payment</button>
-            </div>
-
-            <div className="bg-white rounded-3xl p-5 sm:p-6 md:p-8 border border-gray-100 shadow-sm transition-all">
-              {paymentMode === "upfront" ? (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Total Payment</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">One-time payment</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${totalAmount}</div>
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Monthly Split</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">Includes 5% fee</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${splitAmount}<span className="text-base sm:text-lg text-gray-400 font-normal">/mo</span></div>
-                  </div>
-                  <div className="pt-4 border-t border-gray-100">
-                    <input type="range" min="2" max="6" step="1" value={splitMonths} onChange={(e) => setSplitMonths(Number(e.target.value))} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
-                    <div className="flex justify-between text-[10px] sm:text-xs text-gray-400 mt-2 font-medium">
-                      <span>2 mos</span>
-                      <span>6 mos</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="bg-white rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
-            <form onSubmit={handlePay} className="space-y-4 sm:space-y-5 relative z-10">
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
-                <input required type="email" placeholder="you@example.com" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 text-sm sm:text-base text-gray-900 placeholder-gray-400 focus:outline-none transition-all focus:ring-rose-600/20 focus:border-rose-600" />
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Card Information</label>
-                <div className="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden transition-all focus-within:ring-2 focus-within:border-transparent">
-                  <input maxLength={16} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 16); }} required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-transparent px-4 py-3 sm:py-3.5 border-b border-gray-200 focus:outline-none font-mono text-sm sm:text-base" />
-                  <div className="flex">
-                    <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none border-r border-gray-200 font-mono text-sm sm:text-base" />
-                    <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none font-mono text-sm sm:text-base" />
-                  </div>
-                </div>
-              </div>
-              <div className="pt-2 sm:pt-4">
-                <button type="submit" disabled={isProcessing} className="w-full bg-rose-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed text-sm sm:text-base">
-                  {isProcessing ? 'Processing...' : `Pay $${paymentMode === "upfront" ? totalAmount : splitAmount} Now`}
-                </button>
-              </div>
-            </form>
           </div>
         </div>
-      </div>
-    );
-        
+      ) : (
+        <div className="max-w-md w-full bg-white rounded-3xl p-12 text-center shadow-xl border border-slate-200 animate-in zoom-in duration-500">
+           <div className="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+             <CheckCircle2 className="w-12 h-12 text-blue-500" strokeWidth={3} />
+           </div>
+           <h2 className="text-3xl font-black mb-2 text-slate-900">Success!</h2>
+           <p className="text-slate-500 mb-8 font-medium">Your payment was processed successfully.</p>
+           <button type="button" 
+              onClick={() => { setIsSuccess(false); setActiveStep(1); setCompletedSteps([]); }}
+              className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-colors"
+            >
+              Done
+            </button>
+        </div>
+      )}
+
+    </div>
+  );
 }

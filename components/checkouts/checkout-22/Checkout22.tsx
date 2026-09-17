@@ -62,14 +62,14 @@ export default function Checkout22() {
           <div>
             <label className="text-sm font-semibold text-slate-400 block mb-3">Billing Cycle</label>
             <div className="grid grid-cols-2 gap-3">
-              <button 
+              <button type="button" 
                 onClick={() => setCycle("monthly")}
                 className={`py-3 px-4 rounded-xl text-sm font-bold border-2 transition ${cycle === "monthly" ? "bg-indigo-600/20 border-indigo-500 text-indigo-300" : "bg-slate-700 border-slate-600 text-slate-300"}`}
               >
                 Monthly
                 <div className="text-xs font-normal opacity-70 mt-1">${pricePerSeatMonthly} / seat</div>
               </button>
-              <button 
+              <button type="button" 
                 onClick={() => setCycle("annual")}
                 className={`py-3 px-4 rounded-xl text-sm font-bold border-2 transition relative ${cycle === "annual" ? "bg-indigo-600/20 border-indigo-500 text-indigo-300" : "bg-slate-700 border-slate-600 text-slate-300"}`}
               >
@@ -106,7 +106,7 @@ export default function Checkout22() {
           </div>
         </div>
 
-        <button onClick={() => setPlaced(true)} className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition">
+        <button type="button" onClick={() => setPlaced(true)} className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition">
           <Lock size={16} /> Pay ${total} & Generate License
         </button>
         <p className="flex justify-center items-center gap-2 text-xs text-slate-500 mt-4">

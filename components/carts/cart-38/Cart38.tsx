@@ -41,11 +41,11 @@ export default function Cart38() {
                 <p className="text-xs text-blue-600 mt-0.5">24 SKUs mapped • 1,250 units</p>
               </div>
             </div>
-            <button onClick={() => setUploaded(false)} className="text-xs font-bold text-blue-600 hover:underline">Replace</button>
+            <button type="button" onClick={() => setUploaded(false)} className="text-xs font-bold text-blue-600 hover:underline">Replace</button>
           </div>
         )}
 
-        <button 
+        <button type="button" 
           onClick={handleAdd}
           disabled={!uploaded || added}
           className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition ${!uploaded ? "bg-slate-100 text-slate-400 cursor-not-allowed" : added ? "bg-emerald-500 text-white" : "bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20"}`}

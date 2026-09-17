@@ -39,7 +39,7 @@ export default function Cart50() {
               <span className="text-slate-300">{command}</span>
             </div>
             
-            <button 
+            <button type="button" 
               onClick={handleCopy}
               className="text-white/40 hover:text-white transition p-2 rounded-md hover:bg-white/10"
               title="Copy command"

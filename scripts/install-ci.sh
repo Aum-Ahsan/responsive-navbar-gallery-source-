@@ -53,7 +53,7 @@ fi
 # line and working directory through /proc, so avoid broad process-name matches.
 for process in /proc/[0-9]*; do
   pid="${process##*/}"
-  [[ "${pid}" != "$$" && "${pid}" != "${PPID}" ]] || continue
+  [[ "${pid}" != "$" && "${pid}" != "${PPID}" ]] || continue
   process_cwd="$(readlink -f "${process}/cwd" || true)"
   [[ "${process_cwd}" == "${SITES_PROJECT_ROOT}" ]] || continue
   process_command="$(tr '\0' ' ' <"${process}/cmdline" || true)"

@@ -52,7 +52,7 @@ export default function Checkout43() {
                 onChange={e => { setZip(e.target.value); setChecked(false); }}
                 className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500" 
               />
-              <button 
+              <button type="button" 
                 onClick={handleCheck}
                 disabled={!zip}
                 className="py-3 px-6 bg-slate-900 text-white rounded-xl font-bold hover:bg-slate-800 disabled:opacity-50"
@@ -84,13 +84,13 @@ export default function Checkout43() {
               <textarea placeholder="Delivery Instructions (e.g. gate code)" className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm min-h-[80px]" />
             </div>
 
-            <button 
+            <button type="button" 
               onClick={() => setPlaced(true)}
               className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white transition shadow-lg shadow-blue-500/20"
             >
               Pay $49 Delivery Fee
             </button>
-            <button 
+            <button type="button" 
               onClick={() => { setChecked(false); setZip(""); }}
               className="w-full py-3 mt-2 text-sm font-semibold text-slate-500 hover:text-slate-800"
             >

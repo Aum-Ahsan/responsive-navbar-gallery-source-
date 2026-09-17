@@ -32,7 +32,7 @@ export default function Cart16() {
           <span className="text-sm font-semibold text-slate-700">Quantity</span>
           <div className="flex items-center border border-slate-200 rounded-xl overflow-hidden">
             {[1,2,3,4,5].map(n => (
-              <button
+              <button type="button"
                 key={n}
                 onClick={() => setQty(n)}
                 className={`w-9 h-9 text-sm font-bold transition ${qty === n ? "bg-slate-900 text-white" : "hover:bg-slate-50 text-slate-600"}`}
@@ -46,7 +46,7 @@ export default function Cart16() {
         {/* Dual CTA */}
         <div className="flex flex-col sm:flex-row gap-3">
           {/* Add to Cart */}
-          <button
+          <button type="button"
             onClick={handleAddToCart}
             className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-2xl font-bold text-base transition-all duration-300 ${
               cartAdded ? "bg-emerald-500 text-white" : "bg-slate-100 hover:bg-slate-200 text-slate-900"
@@ -61,7 +61,7 @@ export default function Cart16() {
               <Check size={20} /> Proceeding...
             </div>
           ) : (
-            <button
+            <button type="button"
               onClick={() => setBuyNow(true)}
               className="flex-1 flex items-center justify-center gap-2 py-4 rounded-2xl font-bold text-base bg-indigo-600 hover:bg-indigo-700 text-white transition"
             >

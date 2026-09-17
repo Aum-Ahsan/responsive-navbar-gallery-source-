@@ -32,7 +32,7 @@ export default function Cart01() {
             <div className="relative bg-gradient-to-br from-slate-100 to-slate-200 h-48 flex items-center justify-center text-7xl">
               {p.img}
               <span className="absolute top-3 left-3 text-xs font-bold bg-slate-900 text-white px-2.5 py-1 rounded-full">{p.badge}</span>
-              <button
+              <button type="button"
                 onClick={() => setWished(w => ({ ...w, [p.id]: !w[p.id] }))}
                 className="absolute top-3 right-3 p-2 bg-white rounded-full shadow-sm transition-colors"
               >
@@ -53,14 +53,14 @@ export default function Cart01() {
                 <span className="text-xl font-bold text-slate-900">${p.price}</span>
                 {/* Inline Quantity Stepper */}
                 <div className="flex items-center gap-0 border border-slate-200 rounded-xl overflow-hidden">
-                  <button
+                  <button type="button"
                     onClick={() => change(p.id, -1)}
                     className="w-9 h-9 flex items-center justify-center text-slate-600 hover:bg-slate-100 transition-colors"
                   >
                     <Minus size={14} />
                   </button>
                   <span className="w-9 text-center text-sm font-bold text-slate-900">{quantities[p.id]}</span>
-                  <button
+                  <button type="button"
                     onClick={() => change(p.id, 1)}
                     className="w-9 h-9 flex items-center justify-center text-slate-600 hover:bg-slate-100 transition-colors"
                   >
@@ -69,7 +69,7 @@ export default function Cart01() {
                 </div>
               </div>
 
-              <button
+              <button type="button"
                 onClick={() => addToCart(p.id)}
                 className={`w-full py-3 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center justify-center gap-2 ${
                   added[p.id]

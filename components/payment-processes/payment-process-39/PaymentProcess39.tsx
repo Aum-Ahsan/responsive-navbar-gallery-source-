@@ -1,64 +1,183 @@
 "use client";
 import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import { CreditCard, ShieldCheck, ArrowRight, CheckCircle2 } from "lucide-react";
+
+interface Ripple {
+  id: number;
+  x: number;
+  y: number;
+}
 
 export default function PaymentProcess39() {
+  const [ripples, setRipples] = useState<Ripple[]>([]);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const presets = [10, 25, 50, 100];
-    const [amount, setAmount] = useState<number>(50);
-    const [isCustom, setIsCustom] = useState(false);
-    const [isProcessing, setIsProcessing] = useState(false);
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
-    };
+  const addRipple = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const btn = e.currentTarget;
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-    return (
-      <div className="w-full min-h-[600px] bg-fuchsia-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-md w-full bg-white rounded-[2rem] md:rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 sm:h-2 bg-fuchsia-600" />
+    const newRipple = { id: Date.now(), x, y };
+    setRipples((prev) => [...prev, newRipple]);
+
+    // Remove ripple after animation completes (600ms)
+    setTimeout(() => {
+      setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
+    }, 600);
+  };
+
+  return (
+    <div className="w-full min-h-[700px] bg-slate-900 flex items-center justify-center font-sans p-6 text-slate-100">
+      
+      {/* Global CSS for Ripple Animation */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes ripple-effect {
+          0% {
+            transform: scale(0);
+            opacity: 0.5;
+          }
+          100% {
+            transform: scale(4);
+            opacity: 0;
+          }
+        }
+        .animate-ripple {
+          animation: ripple-effect 0.6s linear;
+        }
+      `}} />
+
+      {!isSuccess ? (
+        <div className="max-w-sm w-full bg-slate-800 rounded-3xl p-8 shadow-2xl border border-slate-700 animate-in fade-in duration-500">
           
-          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-fuchsia-50 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-            <Heart className="w-7 h-7 sm:w-8 sm:h-8 text-fuchsia-600" fill="currentColor" />
-          </div>
-          
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Podcast Supporter</h2>
-            <p className="text-gray-500 text-xs sm:text-sm">Your contribution makes a direct impact. Select an amount to give today.</p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
-            {presets.map(a => (
-              <button key={a} onClick={() => { setAmount(a); setIsCustom(false); }} className={`py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg transition-all ${!isCustom && amount === a ? 'bg-fuchsia-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-                $${a}
-              </button>
-            ))}
-          </div>
-          
-          <button onClick={() => setIsCustom(true)} className={`w-full py-3 sm:py-4 rounded-xl font-bold mb-6 sm:mb-8 transition-all ${isCustom ? 'bg-fuchsia-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-            Custom Amount
-          </button>
-
-          {isCustom && (
-            <div className="mb-6 sm:mb-8 relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-lg sm:text-xl">$</span>
-              <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full text-xl sm:text-2xl font-bold text-gray-900 pl-10 pr-4 py-3 sm:py-4 bg-gray-50 rounded-xl focus:outline-none focus:ring-fuchsia-600/20 focus:border-fuchsia-600" />
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center text-indigo-400">
+              <CreditCard className="w-5 h-5" />
             </div>
-          )}
+            <h2 className="text-xl font-bold text-white">Payment Method</h2>
+          </div>
 
-          <form onSubmit={handlePay} className="space-y-3 sm:space-y-4">
-            <input required type="email" placeholder="Email Address" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-fuchsia-600/20 focus:border-fuchsia-600" />
-            <input required type="text" placeholder="Card Number" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-fuchsia-600/20 focus:border-fuchsia-600" />
+          <form onSubmit={handlePay} className="space-y-5">
             
-            <button type="submit" disabled={isProcessing} className="w-full bg-fuchsia-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 mt-4 transition-all hover:opacity-90 text-sm sm:text-base">
-              {isProcessing ? 'Processing...' : `Donate $${amount}`}
-              {!isProcessing && <Heart className="w-4 h-4 ml-1" />}
-            </button>
+            <div>
+              <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Card Number</label>
+              <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" 
+                required 
+                type="text" 
+               
+                placeholder="0000 0000 0000 0000" 
+                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-sm" 
+              />
+            </div>
+            
+            <div className="flex gap-4">
+              <div className="w-1/2">
+                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Expiry</label>
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" 
+                  required 
+                  type="text" 
+                 
+                  placeholder="MM/YY" 
+                  className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-center text-sm" 
+                />
+              </div>
+              <div className="w-1/2">
+                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">CVV</label>
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9\s\-\,]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" 
+                  required 
+                  type="text" 
+                  maxLength={4}
+                  placeholder="123" 
+                  className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-center text-sm" 
+                />
+              </div>
+            </div>
+
+            <div className="pt-6">
+              {/* Button with Ripple Effect */}
+              <button 
+                type="submit" 
+                disabled={isProcessing}
+                onMouseDown={addRipple}
+                className="relative overflow-hidden w-full py-5 bg-indigo-600 text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-indigo-500 transition-colors shadow-[0_0_30px_rgba(79,70,229,0.2)] disabled:opacity-70 disabled:shadow-none select-none"
+              >
+                {/* Ripples */}
+                {ripples.map((ripple) => (
+                  <span
+                    key={ripple.id}
+                    className="absolute bg-white rounded-full pointer-events-none animate-ripple"
+                    style={{
+                      left: ripple.x,
+                      top: ripple.y,
+                      width: '100px',
+                      height: '100px',
+                      marginLeft: '-50px',
+                      marginTop: '-50px',
+                    }}
+                  ></span>
+                ))}
+
+                {/* Button Content */}
+                <div className="relative z-10 flex items-center gap-2 pointer-events-none">
+                  {isProcessing ? (
+                    <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  ) : (
+                    <>Pay $89.00 <ArrowRight className="w-5 h-5" /></>
+                  )}
+                </div>
+              </button>
+            </div>
+
+            <div className="flex items-center justify-center gap-2 text-xs font-medium text-slate-500 mt-2">
+              <ShieldCheck className="w-4 h-4 text-emerald-500" /> AES-256 Bit Encryption
+            </div>
           </form>
+
         </div>
-      </div>
-    );
-        
+      ) : (
+        <div className="max-w-sm w-full bg-slate-800 rounded-3xl p-10 shadow-2xl border border-slate-700 text-center animate-in zoom-in duration-500">
+           <div className="w-24 h-24 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+             <CheckCircle2 className="w-12 h-12 text-emerald-500" strokeWidth={3} />
+           </div>
+           <h2 className="text-3xl font-black text-white mb-2">Success!</h2>
+           <p className="text-slate-400 mb-8">Payment processed successfully.</p>
+           
+           {/* Ripple Button for reset too */}
+           <button type="button" 
+              onClick={() => setIsSuccess(false)}
+              onMouseDown={addRipple}
+              className="relative overflow-hidden w-full py-4 bg-slate-700 text-white font-bold rounded-xl hover:bg-slate-600 transition-colors select-none"
+            >
+               {/* Ripples */}
+               {ripples.map((ripple) => (
+                  <span
+                    key={ripple.id}
+                    className="absolute bg-white rounded-full pointer-events-none animate-ripple"
+                    style={{
+                      left: ripple.x,
+                      top: ripple.y,
+                      width: '100px',
+                      height: '100px',
+                      marginLeft: '-50px',
+                      marginTop: '-50px',
+                    }}
+                  ></span>
+                ))}
+              <span className="relative z-10 pointer-events-none">Return Home</span>
+            </button>
+        </div>
+      )}
+
+    </div>
+  );
 }

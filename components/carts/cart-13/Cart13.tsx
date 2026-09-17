@@ -85,7 +85,7 @@ export default function Cart13() {
           </div>
         </div>
 
-        <button
+        <button type="button"
           onClick={handleAdd}
           className={`w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all duration-300 ${
             added ? "bg-emerald-500 text-white" : "bg-rose-500 hover:bg-rose-600 text-white"

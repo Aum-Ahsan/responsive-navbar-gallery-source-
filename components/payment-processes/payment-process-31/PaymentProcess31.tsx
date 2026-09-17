@@ -1,64 +1,197 @@
 "use client";
 import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import { CreditCard, AlertCircle, CheckCircle2, ArrowRight } from "lucide-react";
 
 export default function PaymentProcess31() {
+  const [cardNumber, setCardNumber] = useState("");
+  const [expiry, setExpiry] = useState("");
+  const [cvv, setCvv] = useState("");
+  
+  const [errors, setErrors] = useState({
+    cardNumber: false,
+    expiry: false,
+    cvv: false
+  });
+  
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const presets = [10, 25, 50, 100];
-    const [amount, setAmount] = useState<number>(50);
-    const [isCustom, setIsCustom] = useState(false);
-    const [isProcessing, setIsProcessing] = useState(false);
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Custom Validation
+    const numClean = cardNumber.replace(/\D/g, '');
+    const expClean = expiry.replace(/\D/g, '');
+    const cvvClean = cvv.replace(/\D/g, '');
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
+    const newErrors = {
+      cardNumber: numClean.length < 16,
+      expiry: expClean.length < 4,
+      cvv: cvvClean.length < 3
     };
 
-    return (
-      <div className="w-full min-h-[600px] bg-amber-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-md w-full bg-white rounded-[2rem] md:rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 sm:h-2 bg-amber-600" />
-          
-          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-amber-50 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-            <Heart className="w-7 h-7 sm:w-8 sm:h-8 text-amber-600" fill="currentColor" />
-          </div>
-          
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">School Fundraiser</h2>
-            <p className="text-gray-500 text-xs sm:text-sm">Your contribution makes a direct impact. Select an amount to give today.</p>
-          </div>
+    setErrors(newErrors);
 
-          <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
-            {presets.map(a => (
-              <button key={a} onClick={() => { setAmount(a); setIsCustom(false); }} className={`py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg transition-all ${!isCustom && amount === a ? 'bg-amber-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-                $${a}
-              </button>
-            ))}
-          </div>
-          
-          <button onClick={() => setIsCustom(true)} className={`w-full py-3 sm:py-4 rounded-xl font-bold mb-6 sm:mb-8 transition-all ${isCustom ? 'bg-amber-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-            Custom Amount
-          </button>
+    // If any error exists, don't proceed. The UI will shake.
+    if (Object.values(newErrors).some(Boolean)) {
+      // Remove errors after animation completes so it can trigger again
+      setTimeout(() => {
+        setErrors({ cardNumber: false, expiry: false, cvv: false });
+      }, 600); // 600ms is enough for the shake animation
+      return;
+    }
 
-          {isCustom && (
-            <div className="mb-6 sm:mb-8 relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-lg sm:text-xl">$</span>
-              <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full text-xl sm:text-2xl font-bold text-gray-900 pl-10 pr-4 py-3 sm:py-4 bg-gray-50 rounded-xl focus:outline-none focus:ring-amber-600/20 focus:border-amber-600" />
-            </div>
-          )}
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
 
-          <form onSubmit={handlePay} className="space-y-3 sm:space-y-4">
-            <input required type="email" placeholder="Email Address" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-amber-600/20 focus:border-amber-600" />
-            <input required type="text" placeholder="Card Number" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-amber-600/20 focus:border-amber-600" />
-            
-            <button type="submit" disabled={isProcessing} className="w-full bg-amber-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 mt-4 transition-all hover:opacity-90 text-sm sm:text-base">
-              {isProcessing ? 'Processing...' : `Donate $${amount}`}
-              {!isProcessing && <Heart className="w-4 h-4 ml-1" />}
-            </button>
-          </form>
-        </div>
-      </div>
-    );
+  const formatCard = (val: string) => {
+    const v = val.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+    const matches = v.match(/\d{4,16}/g);
+    const match = matches && matches[0] || '';
+    const parts = [];
+    for (let i = 0, len = match.length; i < len; i += 4) {
+      parts.push(match.substring(i, i + 4));
+    }
+    if (parts.length) {
+      return parts.join(' ');
+    } else {
+      return val;
+    }
+  };
+
+  const formatExpiry = (val: string) => {
+    const v = val.replace(/\D/g, '');
+    if (v.length >= 2) {
+      return v.substring(0, 2) + '/' + v.substring(2, 4);
+    }
+    return v;
+  };
+
+  return (
+    <div className="w-full min-h-screen bg-rose-50 flex items-center justify-center font-sans p-6 text-slate-800">
+      
+      {/* Global CSS for Shake Animation */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes shake {
+          10%, 90% { transform: translate3d(-1px, 0, 0); }
+          20%, 80% { transform: translate3d(2px, 0, 0); }
+          30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+          40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+        .animate-shake {
+          animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+      `}} />
+
+      <div className="max-w-md w-full bg-white rounded-[2rem] p-8 shadow-xl border border-rose-100 relative overflow-hidden">
         
+        {!isSuccess ? (
+          <div className="animate-in fade-in duration-500">
+            <h2 className="text-2xl font-black text-slate-900 mb-2">Checkout</h2>
+            <p className="text-slate-500 text-sm mb-8">Enter your payment details below. All fields are required.</p>
+
+            <form onSubmit={handlePay} className="space-y-5" noValidate>
+              
+              <div>
+                <label className={`block text-xs font-bold uppercase tracking-wider mb-2 ml-1 transition-colors ${errors.cardNumber ? 'text-red-500' : 'text-slate-500'}`}>
+                  Card Number
+                </label>
+                <div className="relative">
+                  <CreditCard className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${errors.cardNumber ? 'text-red-500' : 'text-slate-400'}`} />
+                  <input required 
+                    type="text" 
+                    value={cardNumber}
+                    onChange={(e) => setCardNumber(formatCard(e.target.value))}
+                    maxLength={19}
+                    placeholder="0000 0000 0000 0000" 
+                    className={`w-full bg-slate-50 border rounded-xl pl-12 pr-10 py-4 focus:outline-none transition-all font-mono tracking-widest text-sm
+                      ${errors.cardNumber ? 'border-red-500 text-red-600 bg-red-50 animate-shake focus:ring-1 focus:ring-red-500' : 'border-slate-200 text-slate-900 focus:border-rose-500 focus:ring-1 focus:ring-rose-500'}
+                    `} 
+                  />
+                  {errors.cardNumber && <AlertCircle className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-red-500 animate-in fade-in" />}
+                </div>
+                {errors.cardNumber && <p className="text-red-500 text-xs font-medium mt-2 ml-1 animate-in slide-in-from-top-1">Please enter a valid 16-digit card number.</p>}
+              </div>
+              
+              <div className="flex gap-4">
+                <div className="w-1/2">
+                  <label className={`block text-xs font-bold uppercase tracking-wider mb-2 ml-1 transition-colors ${errors.expiry ? 'text-red-500' : 'text-slate-500'}`}>
+                    Expiry
+                  </label>
+                  <div className="relative">
+                    <input required 
+                      type="text" 
+                      value={expiry}
+                      onChange={(e) => setExpiry(formatExpiry(e.target.value))}
+                      maxLength={5}
+                      placeholder="MM/YY" 
+                      className={`w-full bg-slate-50 border rounded-xl px-4 py-4 focus:outline-none transition-all font-mono tracking-widest text-center text-sm
+                        ${errors.expiry ? 'border-red-500 text-red-600 bg-red-50 animate-shake focus:ring-1 focus:ring-red-500' : 'border-slate-200 text-slate-900 focus:border-rose-500 focus:ring-1 focus:ring-rose-500'}
+                      `} 
+                    />
+                    {errors.expiry && <AlertCircle className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-red-500 animate-in fade-in" />}
+                  </div>
+                </div>
+                
+                <div className="w-1/2">
+                  <label className={`block text-xs font-bold uppercase tracking-wider mb-2 ml-1 transition-colors ${errors.cvv ? 'text-red-500' : 'text-slate-500'}`}>
+                    CVV
+                  </label>
+                  <div className="relative">
+                    <input required 
+                      type="text" 
+                      value={cvv}
+                      onChange={(e) => setCvv(e.target.value.replace(/\D/g, ''))}
+                      maxLength={4}
+                      placeholder="123" 
+                      className={`w-full bg-slate-50 border rounded-xl px-4 py-4 focus:outline-none transition-all font-mono tracking-widest text-center text-sm
+                        ${errors.cvv ? 'border-red-500 text-red-600 bg-red-50 animate-shake focus:ring-1 focus:ring-red-500' : 'border-slate-200 text-slate-900 focus:border-rose-500 focus:ring-1 focus:ring-rose-500'}
+                      `} 
+                    />
+                    {errors.cvv && <AlertCircle className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-red-500 animate-in fade-in" />}
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-4">
+                <button 
+                  type="submit" 
+                  disabled={isProcessing}
+                  className={`w-full py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-lg 
+                    ${Object.values(errors).some(Boolean) ? 'bg-red-500 text-white shadow-red-500/30 hover:bg-red-600' : 'bg-slate-900 text-white shadow-slate-900/30 hover:bg-slate-800'}
+                    disabled:opacity-70 disabled:shadow-none
+                  `}
+                >
+                  {isProcessing ? (
+                    <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  ) : (
+                    <>Pay $49.00 <ArrowRight className="w-5 h-5" /></>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        ) : (
+          <div className="text-center py-8 animate-in zoom-in duration-500">
+            <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <CheckCircle2 className="w-12 h-12 text-green-500" />
+            </div>
+            <h3 className="text-2xl font-black text-slate-900 mb-2">Payment Complete</h3>
+            <p className="text-slate-500 mb-8">Thank you for your purchase.</p>
+            <button type="button" 
+              onClick={() => { setIsSuccess(false); setCardNumber(""); setExpiry(""); setCvv(""); }}
+              className="w-full py-4 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold rounded-xl transition-colors"
+            >
+              Start Over
+            </button>
+          </div>
+        )}
+
+      </div>
+    </div>
+  );
 }

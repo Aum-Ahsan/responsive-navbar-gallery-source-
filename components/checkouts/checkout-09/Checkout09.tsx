@@ -68,9 +68,9 @@ export default function Checkout09() {
               className="flex-1 border border-slate-200 rounded-xl px-3 py-2.5 text-sm uppercase font-mono tracking-wider focus:outline-none focus:ring-2 focus:ring-indigo-400"
             />
             {promoDiscount > 0 ? (
-              <button onClick={() => { setPromoCode(""); setPromoDiscount(0); setPromoMsg(null); }} className="p-2.5 border border-slate-200 rounded-xl hover:bg-slate-50 transition"><X size={16} /></button>
+              <button type="button" onClick={() => { setPromoCode(""); setPromoDiscount(0); setPromoMsg(null); }} className="p-2.5 border border-slate-200 rounded-xl hover:bg-slate-50 transition"><X size={16} /></button>
             ) : (
-              <button onClick={applyPromo} className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-bold transition">Apply</button>
+              <button type="button" onClick={applyPromo} className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-bold transition">Apply</button>
             )}
           </div>
           {promoMsg && <p className={`text-xs mt-2 flex items-center gap-1 ${promoMsg.type === "success" ? "text-emerald-600" : "text-rose-500"}`}>{promoMsg.type === "success" ? <Check size={12} /> : <X size={12} />}{promoMsg.text}</p>}
@@ -90,15 +90,15 @@ export default function Checkout09() {
               className="flex-1 border border-slate-200 rounded-xl px-3 py-2.5 text-sm uppercase font-mono tracking-wider focus:outline-none focus:ring-2 focus:ring-rose-400"
             />
             {giftCredit > 0 ? (
-              <button onClick={() => { setGiftCode(""); setGiftCredit(0); setGiftMsg(null); }} className="p-2.5 border border-slate-200 rounded-xl hover:bg-slate-50 transition"><X size={16} /></button>
+              <button type="button" onClick={() => { setGiftCode(""); setGiftCredit(0); setGiftMsg(null); }} className="p-2.5 border border-slate-200 rounded-xl hover:bg-slate-50 transition"><X size={16} /></button>
             ) : (
-              <button onClick={applyGift} className="px-4 py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-sm font-bold transition">Apply</button>
+              <button type="button" onClick={applyGift} className="px-4 py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-sm font-bold transition">Apply</button>
             )}
           </div>
           {giftMsg && <p className={`text-xs mt-2 flex items-center gap-1 ${giftMsg.type === "success" ? "text-emerald-600" : "text-rose-500"}`}>{giftMsg.type === "success" ? <Check size={12} /> : <X size={12} />}{giftMsg.text}</p>}
         </div>
 
-        <button onClick={() => setPlaced(true)} className="w-full bg-slate-900 hover:bg-slate-700 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition">
+        <button type="button" onClick={() => setPlaced(true)} className="w-full bg-slate-900 hover:bg-slate-700 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition">
           <Lock size={16} /> Place Order — ${total}
         </button>
         <p className="text-center text-xs text-slate-400 mt-3">Hint: try codes SUMMER20, FIRST10, or GIFT75</p>

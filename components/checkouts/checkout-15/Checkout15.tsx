@@ -70,7 +70,7 @@ export default function Checkout15() {
           <p className="text-sm font-bold text-slate-700 mb-2">Donation Amount</p>
           <div className="flex flex-wrap gap-2 mb-3">
             {presets.map(p => (
-              <button key={p} onClick={() => setAmount(p)} className={`px-4 py-2 rounded-xl text-sm font-bold border-2 transition ${amount === p ? "border-rose-500 bg-rose-500 text-white" : "border-rose-200 text-slate-700 hover:border-rose-400"}`}>${p}</button>
+              <button type="button" key={p} onClick={() => setAmount(p)} className={`px-4 py-2 rounded-xl text-sm font-bold border-2 transition ${amount === p ? "border-rose-500 bg-rose-500 text-white" : "border-rose-200 text-slate-700 hover:border-rose-400"}`}>${p}</button>
             ))}
           </div>
           <div className="relative">
@@ -97,7 +97,7 @@ export default function Checkout15() {
           <textarea value={dedication} onChange={e=>setDedication(e.target.value)} placeholder="Dedication message (optional)" rows={2} className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-rose-400" />
         </div>
 
-        <button onClick={() => setPlaced(true)} className="w-full bg-rose-500 hover:bg-rose-600 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition">
+        <button type="button" onClick={() => setPlaced(true)} className="w-full bg-rose-500 hover:bg-rose-600 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition">
           <Heart size={18} className="fill-white" /> Donate ${amount} to {charity.name}
         </button>
         <p className="text-center text-xs text-slate-400 mt-3">Tax-deductible · Secure payment · No admin fees</p>

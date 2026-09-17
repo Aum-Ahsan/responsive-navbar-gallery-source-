@@ -1,64 +1,109 @@
 "use client";
 import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 export default function PaymentProcess73() {
+  const TOTAL_AMOUNT = 85.00;
+  
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const presets = [10, 25, 50, 100];
-    const [amount, setAmount] = useState<number>(50);
-    const [isCustom, setIsCustom] = useState(false);
-    const [isProcessing, setIsProcessing] = useState(false);
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
-    };
-
-    return (
-      <div className="w-full min-h-[600px] bg-emerald-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-md w-full bg-white rounded-[2rem] md:rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 sm:h-2 bg-emerald-600" />
+  return (
+    <div className="w-full min-h-[700px] bg-[#f0f0f0] flex items-center justify-center p-6 text-black" style={{ fontFamily: 'monospace' }}>
+      
+      {!isSuccess ? (
+        <div className="max-w-md w-full bg-white border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] animate-in fade-in duration-300">
           
-          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-            <Heart className="w-7 h-7 sm:w-8 sm:h-8 text-emerald-600" fill="currentColor" />
-          </div>
-          
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Animal Shelter Support</h2>
-            <p className="text-gray-500 text-xs sm:text-sm">Your contribution makes a direct impact. Select an amount to give today.</p>
+          <div className="mb-8 border-b-4 border-black pb-4">
+            <h2 className="text-4xl font-black uppercase tracking-tighter">Pay Now</h2>
           </div>
 
-          <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
-            {presets.map(a => (
-              <button key={a} onClick={() => { setAmount(a); setIsCustom(false); }} className={`py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg transition-all ${!isCustom && amount === a ? 'bg-emerald-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-                $${a}
-              </button>
-            ))}
+          <div className="bg-[#ccff00] border-4 border-black p-4 mb-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+             <div className="flex justify-between items-center text-sm mb-2 font-bold uppercase">
+               <span>Subtotal</span>
+               <span>${TOTAL_AMOUNT.toFixed(2)}</span>
+             </div>
+             
+             <div className="flex justify-between items-end pt-2 border-t-4 border-black">
+               <span className="font-black uppercase text-xl">Total</span>
+               <span className="text-5xl font-black tracking-tighter">${TOTAL_AMOUNT.toFixed(2)}</span>
+             </div>
           </div>
-          
-          <button onClick={() => setIsCustom(true)} className={`w-full py-3 sm:py-4 rounded-xl font-bold mb-6 sm:mb-8 transition-all ${isCustom ? 'bg-emerald-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-            Custom Amount
-          </button>
 
-          {isCustom && (
-            <div className="mb-6 sm:mb-8 relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-lg sm:text-xl">$</span>
-              <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full text-xl sm:text-2xl font-bold text-gray-900 pl-10 pr-4 py-3 sm:py-4 bg-gray-50 rounded-xl focus:outline-none focus:ring-emerald-600/20 focus:border-emerald-600" />
-            </div>
-          )}
-
-          <form onSubmit={handlePay} className="space-y-3 sm:space-y-4">
-            <input required type="email" placeholder="Email Address" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-emerald-600/20 focus:border-emerald-600" />
-            <input required type="text" placeholder="Card Number" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-emerald-600/20 focus:border-emerald-600" />
+          <form onSubmit={handlePay} className="space-y-6">
             
-            <button type="submit" disabled={isProcessing} className="w-full bg-emerald-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 mt-4 transition-all hover:opacity-90 text-sm sm:text-base">
-              {isProcessing ? 'Processing...' : `Donate $${amount}`}
-              {!isProcessing && <Heart className="w-4 h-4 ml-1" />}
+            <div className="space-y-2">
+              <label className="font-bold uppercase text-lg">Card Number</label>
+              <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" 
+                required 
+                type="text" 
+                placeholder="XXXX-XXXX-XXXX-XXXX" 
+                className="w-full bg-white border-4 border-black px-4 py-4 text-black focus:outline-none focus:bg-[#ff00ff] focus:text-white transition-none font-bold text-xl placeholder:text-gray-400" 
+              />
+            </div>
+            
+            <div className="flex gap-6">
+              <div className="space-y-2 w-1/2">
+                <label className="font-bold uppercase text-lg">MM/YY</label>
+                <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" 
+                  required 
+                  type="text" 
+                  placeholder="12/24" 
+                  className="w-full bg-white border-4 border-black px-4 py-4 text-black focus:outline-none focus:bg-[#ff00ff] focus:text-white transition-none font-bold text-xl text-center placeholder:text-gray-400" />
+              </div>
+              <div className="space-y-2 w-1/2">
+                <label className="font-bold uppercase text-lg">CVV</label>
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9\s\-\,]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" 
+                  required 
+                  type="text" 
+                  placeholder="123" 
+                  className="w-full bg-white border-4 border-black px-4 py-4 text-black focus:outline-none focus:bg-[#ff00ff] focus:text-white transition-none font-bold text-xl text-center placeholder:text-gray-400" 
+                />
+              </div>
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={isProcessing}
+              className="w-full py-6 mt-4 bg-black text-white font-black text-2xl uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-[#ff0000] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all disabled:opacity-50 active:translate-y-0 active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] border-4 border-black"
+            >
+              {isProcessing ? (
+                'Processing...'
+              ) : (
+                <>Submit <ArrowRight className="w-8 h-8" strokeWidth={4} /></>
+              )}
             </button>
           </form>
+
         </div>
-      </div>
-    );
-        
+      ) : (
+        <div className="max-w-md w-full bg-[#ccff00] border-4 border-black p-12 text-center shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] animate-in zoom-in duration-300">
+           
+           <div className="w-32 h-32 bg-white border-4 border-black flex items-center justify-center mx-auto mb-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+             <Check className="w-20 h-20 text-black" strokeWidth={4} />
+           </div>
+
+           <h2 className="text-5xl font-black uppercase tracking-tighter mb-4">Done</h2>
+           <p className="text-black text-xl font-bold mb-12 uppercase border-y-4 border-black py-4">Money Sent.</p>
+           
+           <button type="button" 
+              onClick={() => { setIsSuccess(false); }}
+              className="w-full py-6 bg-white border-4 border-black text-black font-black text-2xl uppercase tracking-widest hover:bg-black hover:text-white transition-none shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] active:translate-y-2 active:shadow-none"
+            >
+              Exit
+            </button>
+        </div>
+      )}
+
+    </div>
+  );
 }

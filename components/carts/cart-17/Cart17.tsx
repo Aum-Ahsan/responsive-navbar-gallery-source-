@@ -82,7 +82,7 @@ export default function Cart17() {
           </div>
         </div>
 
-        <button
+        <button type="button"
           onClick={handleAdd}
           disabled={stock === 0}
           className={`w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all duration-300 ${

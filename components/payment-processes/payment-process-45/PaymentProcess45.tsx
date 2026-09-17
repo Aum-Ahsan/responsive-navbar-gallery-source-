@@ -1,117 +1,167 @@
 "use client";
 import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import { CreditCard, SplitSquareHorizontal, CheckCircle2, ArrowRight } from "lucide-react";
 
 export default function PaymentProcess45() {
+  const TOTAL_AMOUNT = 850.00;
+  
+  const [isSplit, setIsSplit] = useState(false);
+  const [splitAmount, setSplitAmount] = useState(TOTAL_AMOUNT / 2); // Amount for Card 1
+  
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const [paymentMode, setPaymentMode] = useState<"upfront" | "split">("upfront");
-    const [splitMonths, setSplitMonths] = useState<number>(3);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
+  const amount1 = isSplit ? splitAmount : TOTAL_AMOUNT;
+  const amount2 = isSplit ? TOTAL_AMOUNT - splitAmount : 0;
 
-    const totalAmount = 1200;
-    const splitAmount = Math.ceil((totalAmount * 1.05) / splitMonths);
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => {
-        setIsProcessing(false);
-        setIsSuccess(true);
-      }, 2000);
-    };
-
-    if (isSuccess) {
-      return (
-        <div className="w-full min-h-[600px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 text-center max-w-md w-full shadow-xl border border-gray-100">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Check className="w-8 h-8 sm:w-10 sm:h-10" />
+  return (
+    <div className="w-full min-h-[700px] bg-slate-900 flex items-center justify-center font-sans p-6 text-slate-100">
+      
+      {!isSuccess ? (
+        <div className="max-w-2xl w-full bg-slate-800 rounded-[2rem] p-8 shadow-2xl border border-slate-700 animate-in fade-in duration-500">
+          
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-2xl font-black text-white">Payment</h2>
+            <div className="text-right">
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Total Due</div>
+              <div className="text-3xl font-black text-emerald-400">${TOTAL_AMOUNT.toFixed(2)}</div>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Payment Confirmed</h2>
-            <p className="text-sm sm:text-base text-gray-500 mb-8">Your payment has been processed successfully. A receipt has been sent to your email.</p>
-            <button onClick={() => setIsSuccess(false)} className="text-indigo-600 font-semibold hover:opacity-80 transition-opacity text-sm sm:text-base">
-              Return to Dashboard
-            </button>
           </div>
-        </div>
-      );
-    }
 
-    return (
-      <div className="w-full min-h-[700px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
-          <div className="space-y-6 md:space-y-8">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-3 sm:mb-4">
-                <Zap className="w-3 h-3" /> Bootcamp Tuition Split
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 tracking-tight">Complete your purchase</h2>
-              <p className="text-sm sm:text-base md:text-lg text-gray-500 leading-relaxed">Choose how you want to pay. Pay upfront to save, or split it into manageable monthly payments.</p>
-            </div>
-
-            <div className="bg-white rounded-3xl p-1.5 shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-1.5 sm:gap-0">
-              <button onClick={() => setPaymentMode("upfront")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "upfront" ? "bg-indigo-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Pay in full</button>
-              <button onClick={() => setPaymentMode("split")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "split" ? "bg-indigo-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Split payment</button>
-            </div>
-
-            <div className="bg-white rounded-3xl p-5 sm:p-6 md:p-8 border border-gray-100 shadow-sm transition-all">
-              {paymentMode === "upfront" ? (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Total Payment</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">One-time payment</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${totalAmount}</div>
-                  </div>
+          <form onSubmit={handlePay} className="space-y-8">
+            
+            {/* Split Toggle */}
+            <div className="flex items-center justify-between bg-slate-900 p-4 rounded-2xl border border-slate-700">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center text-slate-400">
+                  <SplitSquareHorizontal className="w-5 h-5" />
                 </div>
-              ) : (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Monthly Split</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">Includes 5% fee</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${splitAmount}<span className="text-base sm:text-lg text-gray-400 font-normal">/mo</span></div>
+                <div>
+                  <h3 className="font-bold text-white">Split Payment</h3>
+                  <p className="text-xs text-slate-400">Pay with two different cards</p>
+                </div>
+              </div>
+              
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required 
+                  type="checkbox" 
+                  className="sr-only peer" 
+                  checked={isSplit}
+                  onChange={(e) => {
+                    setIsSplit(e.target.checked);
+                    if (e.target.checked) setSplitAmount(TOTAL_AMOUNT / 2);
+                  }}
+                />
+                <div className="w-14 h-7 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-emerald-500 shadow-inner"></div>
+              </label>
+            </div>
+
+            {/* Slider Interface (Only visible if split) */}
+            <div className={`transition-all duration-500 overflow-hidden ${isSplit ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
+              <div className="bg-slate-900 rounded-2xl p-6 border border-slate-700">
+                <div className="flex justify-between text-sm font-bold mb-4">
+                  <div className="text-indigo-400">Card 1: ${amount1.toFixed(2)}</div>
+                  <div className="text-amber-400">Card 2: ${amount2.toFixed(2)}</div>
+                </div>
+                <input required 
+                  type="range" 
+                  min="1" 
+                  max={TOTAL_AMOUNT - 1} 
+                  step="1"
+                  value={splitAmount}
+                  onChange={(e) => setSplitAmount(Number(e.target.value))}
+                  className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                />
+              </div>
+            </div>
+
+            {/* Card Inputs */}
+            <div className={`grid grid-cols-1 ${isSplit ? 'md:grid-cols-2 gap-6' : 'gap-0'}`}>
+              
+              {/* Card 1 */}
+              <div className={`space-y-4 transition-all duration-500 ${isSplit ? 'bg-indigo-950/30 p-6 rounded-2xl border border-indigo-900/50' : ''}`}>
+                {isSplit && <h3 className="font-bold text-indigo-400 flex items-center justify-between">Primary Card <span>${amount1.toFixed(2)}</span></h3>}
+                <div className="relative">
+                  <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors font-mono tracking-widest text-sm" />
+                </div>
+                <div className="flex gap-4">
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-slate-900 border border-slate-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors font-mono tracking-widest text-center text-sm" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-slate-900 border border-slate-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors font-mono tracking-widest text-center text-sm" />
+                </div>
+              </div>
+
+              {/* Card 2 */}
+              {isSplit && (
+                <div className="space-y-4 animate-in fade-in zoom-in-95 duration-500 bg-amber-950/20 p-6 rounded-2xl border border-amber-900/30">
+                  <h3 className="font-bold text-amber-400 flex items-center justify-between">Secondary Card <span>${amount2.toFixed(2)}</span></h3>
+                  <div className="relative">
+                    <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-amber-500 transition-colors font-mono tracking-widest text-sm" />
                   </div>
-                  <div className="pt-4 border-t border-gray-100">
-                    <input type="range" min="2" max="6" step="1" value={splitMonths} onChange={(e) => setSplitMonths(Number(e.target.value))} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
-                    <div className="flex justify-between text-[10px] sm:text-xs text-gray-400 mt-2 font-medium">
-                      <span>2 mos</span>
-                      <span>6 mos</span>
-                    </div>
+                  <div className="flex gap-4">
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-slate-900 border border-slate-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-amber-500 transition-colors font-mono tracking-widest text-center text-sm" />
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-slate-900 border border-slate-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-amber-500 transition-colors font-mono tracking-widest text-center text-sm" />
                   </div>
                 </div>
               )}
-            </div>
-          </div>
 
-          <div className="bg-white rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
-            <form onSubmit={handlePay} className="space-y-4 sm:space-y-5 relative z-10">
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
-                <input required type="email" placeholder="you@example.com" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 text-sm sm:text-base text-gray-900 placeholder-gray-400 focus:outline-none transition-all focus:ring-indigo-600/20 focus:border-indigo-600" />
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Card Information</label>
-                <div className="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden transition-all focus-within:ring-2 focus-within:border-transparent">
-                  <input maxLength={16} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 16); }} required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-transparent px-4 py-3 sm:py-3.5 border-b border-gray-200 focus:outline-none font-mono text-sm sm:text-base" />
-                  <div className="flex">
-                    <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none border-r border-gray-200 font-mono text-sm sm:text-base" />
-                    <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none font-mono text-sm sm:text-base" />
-                  </div>
-                </div>
-              </div>
-              <div className="pt-2 sm:pt-4">
-                <button type="submit" disabled={isProcessing} className="w-full bg-indigo-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed text-sm sm:text-base">
-                  {isProcessing ? 'Processing...' : `Pay $${paymentMode === "upfront" ? totalAmount : splitAmount} Now`}
-                </button>
-              </div>
-            </form>
-          </div>
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={isProcessing}
+              className="w-full py-5 bg-emerald-600 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-emerald-500 transition-colors shadow-[0_0_20px_rgba(16,185,129,0.3)] disabled:opacity-70 disabled:shadow-none"
+            >
+              {isProcessing ? (
+                <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+              ) : (
+                <>Pay ${TOTAL_AMOUNT.toFixed(2)} <ArrowRight className="w-5 h-5" /></>
+              )}
+            </button>
+          </form>
+
         </div>
-      </div>
-    );
-        
+      ) : (
+        <div className="max-w-md w-full bg-slate-800 rounded-[2rem] p-10 shadow-2xl border border-slate-700 text-center animate-in zoom-in duration-500">
+           <div className="w-24 h-24 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+             <CheckCircle2 className="w-12 h-12 text-emerald-500" strokeWidth={3} />
+           </div>
+           <h2 className="text-3xl font-black text-white mb-2">Payment Complete</h2>
+           
+           {isSplit ? (
+             <div className="bg-slate-900 rounded-2xl p-4 my-6 space-y-2 border border-slate-700">
+                <div className="flex justify-between text-indigo-400 font-bold text-sm">
+                  <span>Card 1 Processed</span>
+                  <span>${amount1.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-amber-400 font-bold text-sm">
+                  <span>Card 2 Processed</span>
+                  <span>${amount2.toFixed(2)}</span>
+                </div>
+             </div>
+           ) : (
+             <p className="text-slate-400 mb-8 mt-2 font-medium">Your card was successfully charged.</p>
+           )}
+           
+           <button type="button" 
+              onClick={() => { setIsSuccess(false); setIsSplit(false); setSplitAmount(TOTAL_AMOUNT/2); }}
+              className="w-full py-4 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-xl transition-colors"
+            >
+              Done
+            </button>
+        </div>
+      )}
+
+    </div>
+  );
 }

@@ -56,7 +56,7 @@ export default function Checkout06() {
             {showSuggestions && query.length > 1 && filtered.length > 0 && (
               <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl border border-slate-200 shadow-xl z-20 overflow-hidden">
                 {filtered.map((s, i) => (
-                  <button key={i} onMouseDown={() => handleSelect(s)} className="w-full flex items-start gap-3 px-4 py-3 hover:bg-slate-50 text-left transition border-b border-slate-50 last:border-0">
+                  <button type="button" key={i} onMouseDown={() => handleSelect(s)} className="w-full flex items-start gap-3 px-4 py-3 hover:bg-slate-50 text-left transition border-b border-slate-50 last:border-0">
                     <MapPin size={16} className="text-indigo-400 mt-0.5 shrink-0" />
                     <div><p className="text-sm font-medium text-slate-900">{s.short}</p><p className="text-xs text-slate-400">{s.full}</p></div>
                   </button>
@@ -72,7 +72,7 @@ export default function Checkout06() {
           )}
           <input placeholder="Apartment, suite (optional)" className="border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 w-full" />
         </div>
-        <button onClick={() => selected && setPlaced(true)} disabled={!selected} className={`w-full mt-5 py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition ${selected ? "bg-slate-900 hover:bg-slate-700 text-white" : "bg-slate-200 text-slate-400 cursor-not-allowed"}`}>
+        <button type="button" onClick={() => selected && setPlaced(true)} disabled={!selected} className={`w-full mt-5 py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition ${selected ? "bg-slate-900 hover:bg-slate-700 text-white" : "bg-slate-200 text-slate-400 cursor-not-allowed"}`}>
           <Lock size={16} /> Continue to Payment
         </button>
       </div>

@@ -78,7 +78,7 @@ export default function Checkout16() {
           <p className="text-sm font-bold text-slate-300">Quantity</p>
           <div className="flex items-center border border-slate-700 rounded-xl overflow-hidden">
             {[1,2,3,4].map(n => (
-              <button key={n} onClick={() => updateQty(n)} className={`w-10 h-10 text-sm font-bold transition ${qty === n ? "bg-indigo-600 text-white" : "text-slate-400 hover:bg-slate-700"}`}>{n}</button>
+              <button type="button" key={n} onClick={() => updateQty(n)} className={`w-10 h-10 text-sm font-bold transition ${qty === n ? "bg-indigo-600 text-white" : "text-slate-400 hover:bg-slate-700"}`}>{n}</button>
             ))}
           </div>
           <span className="text-slate-400 text-sm">= <strong className="text-white">${total}</strong></span>
@@ -106,7 +106,7 @@ export default function Checkout16() {
           </div>
         </div>
 
-        <button onClick={() => setPlaced(true)} className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition">
+        <button type="button" onClick={() => setPlaced(true)} className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition">
           <Lock size={16} /> Book {qty} Ticket{qty !== 1 ? "s" : ""} — ${total}
         </button>
       </div>

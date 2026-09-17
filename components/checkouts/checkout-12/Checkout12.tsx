@@ -41,7 +41,7 @@ export default function Checkout12() {
         {/* Plan toggle */}
         <div className="grid grid-cols-3 bg-white/70 backdrop-blur rounded-2xl p-1 mb-6 border border-indigo-100">
           {plans.map(p => (
-            <button
+            <button type="button"
               key={p.id}
               onClick={() => setFrequency(p.id)}
               className={`py-3 rounded-xl text-sm font-bold transition relative ${frequency === p.id ? "bg-violet-600 text-white shadow" : "text-slate-500 hover:text-slate-900"}`}
@@ -92,7 +92,7 @@ export default function Checkout12() {
           </p>
         </div>
 
-        <button
+        <button type="button"
           onClick={() => agreed && setPlaced(true)}
           disabled={!agreed}
           className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition ${agreed ? "bg-violet-600 hover:bg-violet-700 text-white" : "bg-slate-200 text-slate-400 cursor-not-allowed"}`}

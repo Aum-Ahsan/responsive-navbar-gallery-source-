@@ -1,117 +1,181 @@
 "use client";
 import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import { ArrowRight, Check, CreditCard, ShoppingCart } from "lucide-react";
 
 export default function PaymentProcess25() {
+  const [step, setStep] = useState(1); // 1: Cart, 2: Payment, 3: Success
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-    const [paymentMode, setPaymentMode] = useState<"upfront" | "split">("upfront");
-    const [splitMonths, setSplitMonths] = useState<number>(3);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
+  const nextStep = () => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setStep(prev => prev + 1);
+      setIsTransitioning(false);
+    }, 1200); // Wait for gooey blob to cover screen
+  };
 
-    const totalAmount = 1200;
-    const splitAmount = Math.ceil((totalAmount * 1.05) / splitMonths);
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    nextStep();
+  };
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => {
-        setIsProcessing(false);
-        setIsSuccess(true);
-      }, 2000);
-    };
+  return (
+    <div className="w-full min-h-[700px] bg-slate-900 flex items-center justify-center font-sans p-6 overflow-hidden relative">
+      
+      {/* SVG Gooey Filter Definition */}
+      <svg className="hidden">
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 30 -15" result="goo" />
+            <feBlend in="SourceGraphic" in2="goo" />
+          </filter>
+        </defs>
+      </svg>
 
-    if (isSuccess) {
-      return (
-        <div className="w-full min-h-[600px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 text-center max-w-md w-full shadow-xl border border-gray-100">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Check className="w-8 h-8 sm:w-10 sm:h-10" />
+      {/* Gooey Transition Layer */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-50 flex items-center justify-center"
+        style={{ filter: "url('#goo')" }}
+      >
+        {/* Central expanding blob */}
+        <div 
+          className="bg-indigo-500 rounded-full transition-all duration-[1200ms] ease-in-out absolute"
+          style={{
+            width: isTransitioning ? '200vw' : '0px',
+            height: isTransitioning ? '200vw' : '0px',
+            opacity: isTransitioning ? 1 : 0
+          }}
+        ></div>
+        
+        {/* Satellite blobs to create the liquid tear effect */}
+        {isTransitioning && (
+          <>
+            <div className="bg-indigo-500 rounded-full absolute w-32 h-32 animate-[blob-fly_1s_ease-out_forwards] -mt-40 -ml-40"></div>
+            <div className="bg-indigo-500 rounded-full absolute w-48 h-48 animate-[blob-fly_1.1s_ease-out_forwards] mt-40 ml-40"></div>
+            <div className="bg-indigo-500 rounded-full absolute w-24 h-24 animate-[blob-fly_0.9s_ease-out_forwards] -mt-20 ml-60"></div>
+            <div className="bg-indigo-500 rounded-full absolute w-40 h-40 animate-[blob-fly_1.2s_ease-out_forwards] mt-60 -ml-20"></div>
+          </>
+        )}
+      </div>
+
+      {/* Content Container */}
+      <div className="max-w-md w-full relative z-10 transition-opacity duration-300">
+        
+        {step === 1 && (
+          <div className="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-2xl animate-in fade-in duration-500">
+            <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-8">
+              <ShoppingCart className="w-8 h-8 text-indigo-600" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Payment Confirmed</h2>
-            <p className="text-sm sm:text-base text-gray-500 mb-8">Your payment has been processed successfully. A receipt has been sent to your email.</p>
-            <button onClick={() => setIsSuccess(false)} className="text-sky-600 font-semibold hover:opacity-80 transition-opacity text-sm sm:text-base">
-              Return to Dashboard
+            <h1 className="text-3xl font-black text-slate-900 mb-6 tracking-tight">Your Cart</h1>
+            
+            <div className="space-y-4 mb-8">
+              {[1, 2].map((i) => (
+                <div key={i} className="flex gap-4 items-center bg-slate-50 p-3 rounded-2xl">
+                  <div className="w-16 h-16 bg-white rounded-xl shadow-sm shrink-0">
+                    <img src={i === 1 ? "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=150&q=80" : "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=150&q=80"} alt="Product" className="w-full h-full object-cover rounded-xl" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-slate-900 text-sm">{i === 1 ? 'Dell XPS 15' : 'Wireless Earbuds'}</h3>
+                    <p className="text-slate-500 text-xs">Qty: 1</p>
+                  </div>
+                  <div className="font-black text-slate-900">${i === 1 ? '1499' : '199'}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex justify-between items-end mb-8 pt-4 border-t border-slate-100">
+              <span className="font-bold text-slate-500">Total</span>
+              <span className="text-3xl font-black text-slate-900">$1,698.00</span>
+            </div>
+
+            <button type="button" 
+              onClick={nextStep}
+              className="w-full py-5 bg-indigo-600 text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-600/30"
+            >
+              Checkout <ArrowRight className="w-5 h-5" />
             </button>
           </div>
-        </div>
-      );
-    }
+        )}
 
-    return (
-      <div className="w-full min-h-[700px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
-          <div className="space-y-6 md:space-y-8">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-sky-600 text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-3 sm:mb-4">
-                <Zap className="w-3 h-3" /> Travel Booking Deposit
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 tracking-tight">Complete your purchase</h2>
-              <p className="text-sm sm:text-base md:text-lg text-gray-500 leading-relaxed">Choose how you want to pay. Pay upfront to save, or split it into manageable monthly payments.</p>
+        {step === 2 && (
+          <div className="bg-indigo-600 text-white rounded-[2.5rem] p-8 md:p-10 shadow-2xl animate-in fade-in duration-500 delay-300">
+            <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-8">
+              <CreditCard className="w-8 h-8 text-white" />
             </div>
+            <h1 className="text-3xl font-black mb-2 tracking-tight">Payment</h1>
+            <p className="text-indigo-200 mb-8 font-medium">Total due: <strong className="text-white">$1,698.00</strong></p>
 
-            <div className="bg-white rounded-3xl p-1.5 shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-1.5 sm:gap-0">
-              <button onClick={() => setPaymentMode("upfront")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "upfront" ? "bg-sky-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Pay in full</button>
-              <button onClick={() => setPaymentMode("split")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "split" ? "bg-sky-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Split payment</button>
-            </div>
-
-            <div className="bg-white rounded-3xl p-5 sm:p-6 md:p-8 border border-gray-100 shadow-sm transition-all">
-              {paymentMode === "upfront" ? (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Total Payment</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">One-time payment</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${totalAmount}</div>
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Monthly Split</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">Includes 5% fee</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${splitAmount}<span className="text-base sm:text-lg text-gray-400 font-normal">/mo</span></div>
-                  </div>
-                  <div className="pt-4 border-t border-gray-100">
-                    <input type="range" min="2" max="6" step="1" value={splitMonths} onChange={(e) => setSplitMonths(Number(e.target.value))} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
-                    <div className="flex justify-between text-[10px] sm:text-xs text-gray-400 mt-2 font-medium">
-                      <span>2 mos</span>
-                      <span>6 mos</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="bg-white rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
-            <form onSubmit={handlePay} className="space-y-4 sm:space-y-5 relative z-10">
+            <form onSubmit={handlePay} className="space-y-5">
               <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
-                <input required type="email" placeholder="you@example.com" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 text-sm sm:text-base text-gray-900 placeholder-gray-400 focus:outline-none transition-all focus:ring-sky-600/20 focus:border-sky-600" />
+                <label className="block text-xs font-bold text-indigo-200 uppercase tracking-wider mb-2 ml-1">Card Number</label>
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-indigo-700/50 border border-indigo-500 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all font-mono tracking-widest placeholder-indigo-400" />
               </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Card Information</label>
-                <div className="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden transition-all focus-within:ring-2 focus-within:border-transparent">
-                  <input maxLength={16} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 16); }} required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-transparent px-4 py-3 sm:py-3.5 border-b border-gray-200 focus:outline-none font-mono text-sm sm:text-base" />
-                  <div className="flex">
-                    <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none border-r border-gray-200 font-mono text-sm sm:text-base" />
-                    <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none font-mono text-sm sm:text-base" />
-                  </div>
+              
+              <div className="flex gap-4">
+                <div className="w-1/2">
+                  <label className="block text-xs font-bold text-indigo-200 uppercase tracking-wider mb-2 ml-1">Expiry</label>
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-full bg-indigo-700/50 border border-indigo-500 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all font-mono tracking-widest placeholder-indigo-400" />
+                </div>
+                <div className="w-1/2">
+                  <label className="block text-xs font-bold text-indigo-200 uppercase tracking-wider mb-2 ml-1">CVV</label>
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9\s\-\,]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="123" className="w-full bg-indigo-700/50 border border-indigo-500 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all font-mono tracking-widest placeholder-indigo-400" />
                 </div>
               </div>
-              <div className="pt-2 sm:pt-4">
-                <button type="submit" disabled={isProcessing} className="w-full bg-sky-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed text-sm sm:text-base">
-                  {isProcessing ? 'Processing...' : `Pay $${paymentMode === "upfront" ? totalAmount : splitAmount} Now`}
-                </button>
-              </div>
+
+              <button 
+                type="submit" 
+                className="w-full mt-4 py-5 bg-white text-indigo-900 rounded-2xl font-black text-lg flex items-center justify-center gap-2 hover:bg-indigo-50 transition-colors shadow-xl"
+              >
+                Pay Now <ArrowRight className="w-5 h-5" />
+              </button>
             </form>
           </div>
-        </div>
+        )}
+
+        {step === 3 && (
+          <div className="bg-white rounded-[2.5rem] p-12 shadow-2xl text-center animate-in zoom-in duration-500 delay-300">
+            <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8 relative">
+              {/* Expanding success ring */}
+              <div className="absolute inset-0 border-4 border-green-500 rounded-full animate-ping opacity-20"></div>
+              <Check className="w-12 h-12 text-green-500" strokeWidth={3} />
+            </div>
+            <h2 className="text-3xl font-black text-slate-900 mb-2 tracking-tight">Order Confirmed!</h2>
+            <p className="text-slate-500 font-medium mb-10">Thank you for your purchase.</p>
+            <button type="button" 
+              onClick={(e) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = () => setStep(1);
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+    }}
+              className="w-full py-4 bg-slate-900 text-white rounded-xl font-bold hover:bg-slate-800 transition-colors"
+            >
+              Continue Shopping
+            </button>
+          </div>
+        )}
+
       </div>
-    );
-        
+
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes blob-fly {
+          0% {
+            transform: translate(0, 0) scale(1);
+          }
+          100% {
+            transform: translate(var(--tx, 100px), var(--ty, 100px)) scale(0);
+          }
+        }
+      `}} />
+    </div>
+  );
 }

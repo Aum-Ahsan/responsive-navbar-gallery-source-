@@ -56,7 +56,7 @@ export default function Cart26() {
 
               {purchased[p.id] ? (
                 <div className="space-y-2">
-                  <button
+                  <button type="button"
                     onClick={() => handleDownload(p.id)}
                     className={`w-full py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all ${
                       downloading[p.id] ? "bg-emerald-500 text-white" : "bg-indigo-500 hover:bg-indigo-400 text-white"
@@ -69,7 +69,7 @@ export default function Cart26() {
                   </div>
                 </div>
               ) : (
-                <button
+                <button type="button"
                   onClick={() => handlePurchase(p.id)}
                   className="w-full py-3 rounded-xl font-bold text-sm bg-white text-slate-900 hover:bg-slate-100 flex items-center justify-center gap-2 transition"
                 >

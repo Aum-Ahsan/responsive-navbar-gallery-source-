@@ -76,8 +76,8 @@ export default function Checkout07() {
             </div>
             {!giftApplied ? (
               <div className="flex gap-2">
-                <input value={giftCard} onChange={e=>setGiftCard(e.target.value)} placeholder="Enter gift card code (try GIFT50)" className="flex-1 border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900" />
-                <button onClick={applyGift} className="px-4 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-slate-700 transition">Apply</button>
+                <input value={giftCard} onChange={e => setGiftCard(e.target.value)} placeholder="Enter gift card code (try GIFT50)" className="flex-1 border border-slate-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900" />
+                <button type="button" onClick={applyGift} className="px-4 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-slate-700 transition">Apply</button>
               </div>
             ) : (
               <div className="flex items-center gap-2 text-sm text-emerald-600 font-semibold"><Check size={14} /> Gift card applied — saves ${giftCredit}</div>
@@ -95,8 +95,8 @@ export default function Checkout07() {
           </div>
         </div>
 
-        <button onClick={() => remaining === 0 && setPlaced(true)} disabled={remaining > 0} className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition ${remaining > 0 ? "bg-slate-200 text-slate-400 cursor-not-allowed" : "bg-slate-900 hover:bg-slate-700 text-white"}`}>
-          <Lock size={16} /> {remaining > 0 ? `Allocate $${remaining} more to proceed` : `Place Order — $${total}`}
+        <button type="button" onClick={() => remaining === 0 && setPlaced(true)} disabled={remaining > 0} className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition ${remaining > 0 ? "bg-slate-200 text-slate-400 cursor-not-allowed" : "bg-slate-900 hover:bg-slate-700 text-white"}`}>
+          <Lock size={16} /> {remaining > 0 ? `Allocate ${remaining} more to proceed` : `Place Order — ${total}`}
         </button>
       </div>
     </div>

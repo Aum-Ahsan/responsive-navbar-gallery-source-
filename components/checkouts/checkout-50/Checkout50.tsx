@@ -86,7 +86,7 @@ export default function Checkout50() {
               placeholder={completed ? "Chat closed." : "Type 'yes' to pay..."}
               className="flex-1 bg-slate-100 rounded-full px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50"
             />
-            <button 
+            <button type="button" 
               onClick={handleSend}
               disabled={completed || !input.trim()}
               className="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white hover:bg-indigo-700 transition disabled:opacity-50 disabled:bg-slate-300"

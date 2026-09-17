@@ -1,69 +1,188 @@
 "use client";
 import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import { GripVertical, CreditCard, ArrowRight, CheckCircle2 } from "lucide-react";
+
+interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  img: string;
+}
+
+const initialCart: CartItem[] = [
+  { id: "1", name: "Studio Monitor Speakers", price: 399.00, img: "https://images.unsplash.com/photo-1545127398-14699f92334b?w=150&q=80" },
+  { id: "2", name: "Professional Microphone", price: 249.00, img: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=150&q=80" },
+  { id: "3", name: "Acoustic Panels (6-Pack)", price: 89.00, img: "https://images.unsplash.com/photo-1516223725307-6f76b9ec8742?w=150&q=80" }
+];
 
 export default function PaymentProcess44() {
+  const [cart, setCart] = useState<CartItem[]>(initialCart);
+  const [draggedIdx, setDraggedIdx] = useState<number | null>(null);
+  const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
+  
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const [isProcessing, setIsProcessing] = useState(false);
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>, index: number) => {
+    setDraggedIdx(index);
+    e.dataTransfer.effectAllowed = "move";
+    // Slight delay to allow UI to update class before browser snapshots it
+    setTimeout(() => {
+       if (e.target instanceof HTMLElement) {
+         e.target.style.opacity = '0.5';
+       }
+    }, 0);
+  };
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
-    };
+  const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
+    setDraggedIdx(null);
+    setDragOverIdx(null);
+    if (e.target instanceof HTMLElement) {
+      e.target.style.opacity = '1';
+    }
+  };
 
-    return (
-      <div className="w-full min-h-[600px] bg-neutral-900 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 rounded-[2rem] overflow-hidden shadow-2xl bg-white">
-          <div className="bg-blue-600 p-8 sm:p-10 flex flex-col justify-between text-white">
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>, index: number) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    setDragOverIdx(index);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>, dropIndex: number) => {
+    e.preventDefault();
+    if (draggedIdx === null) return;
+    if (draggedIdx === dropIndex) return;
+
+    const newCart = [...cart];
+    const draggedItem = newCart[draggedIdx];
+    
+    // Remove the item from old position
+    newCart.splice(draggedIdx, 1);
+    // Insert at new position
+    newCart.splice(dropIndex, 0, draggedItem);
+    
+    setCart(newCart);
+  };
+
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
+
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+  return (
+    <div className="w-full min-h-[700px] bg-neutral-50 flex items-center justify-center font-sans p-6 text-neutral-800">
+      
+      <div className="max-w-5xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        {/* Left Side: Draggable Cart */}
+        <div className="lg:col-span-7 bg-white rounded-[2rem] p-8 shadow-xl border border-neutral-200">
+          <div className="flex justify-between items-end mb-8">
             <div>
-              <FileText className="w-8 h-8 sm:w-10 sm:h-10 mb-6 sm:mb-8 opacity-80" />
-              <h2 className="text-2xl sm:text-3xl font-bold mb-2">Invoice Payment</h2>
-              <p className="opacity-80 mb-6 sm:mb-8 text-sm sm:text-base">Wholesale Order Payment</p>
-              
-              <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                <div className="flex justify-between text-xs sm:text-sm opacity-90 border-b border-white/20 pb-2">
-                  <span>Invoice #</span>
-                  <span className="font-mono">INV-2026</span>
-                </div>
-                <div className="flex justify-between text-xs sm:text-sm opacity-90 border-b border-white/20 pb-2">
-                  <span>Due Date</span>
-                  <span>Oct 1, 2026</span>
-                </div>
-              </div>
+              <h2 className="text-2xl font-black text-neutral-900">Your Setup</h2>
+              <p className="text-neutral-500 text-sm mt-1">Drag items to reorder priority</p>
             </div>
-            
-            <div className="mt-8 md:mt-0">
-              <p className="text-xs sm:text-sm opacity-80 mb-1">Amount Due</p>
-              <p className="text-4xl sm:text-5xl font-bold tracking-tight">$4,500.00</p>
+            <div className="text-neutral-400 font-medium text-sm bg-neutral-100 px-3 py-1 rounded-full">
+              {cart.length} items
             </div>
           </div>
           
-          <div className="p-8 sm:p-10 flex flex-col justify-center">
-            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-6">Payment Method</h3>
-            <form onSubmit={handlePay} className="space-y-4">
-              <div>
-                <label className="block text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Name on Card</label>
-                <input required type="text" className="w-full bg-gray-50 border-none rounded-xl px-4 py-3 sm:py-4 focus:ring-2 focus:ring-gray-200 transition-shadow text-sm sm:text-base" />
-              </div>
-              <div>
-                <label className="block text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Card Details</label>
-                <div className="bg-gray-50 rounded-xl overflow-hidden flex flex-col">
-                  <input required type="text" placeholder="Card Number" className="w-full bg-transparent px-4 py-3 sm:py-4 border-b border-gray-200 focus:outline-none text-sm sm:text-base" />
-                  <div className="flex">
-                    <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-4 border-r border-gray-200 focus:outline-none text-sm sm:text-base" />
-                    <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-4 focus:outline-none text-sm sm:text-base" />
-                  </div>
+          <div className="space-y-3">
+            {cart.map((item, idx) => (
+              <div 
+                key={item.id} 
+                draggable
+                onDragStart={(e) => handleDragStart(e, idx)}
+                onDragEnd={handleDragEnd}
+                onDragOver={(e) => handleDragOver(e, idx)}
+                onDrop={(e) => handleDrop(e, idx)}
+                className={`relative flex items-center gap-4 p-4 rounded-2xl bg-white border-2 transition-all duration-200 cursor-grab active:cursor-grabbing
+                  ${draggedIdx === idx ? 'border-indigo-400 shadow-xl scale-105 z-10 bg-indigo-50/50' : 'border-neutral-100 hover:border-neutral-300'}
+                  ${dragOverIdx === idx && draggedIdx !== idx ? 'border-t-4 border-t-indigo-500 pb-2 mt-4' : ''}
+                `}
+              >
+                <div className="text-neutral-400 p-2 cursor-grab">
+                  <GripVertical className="w-5 h-5" />
+                </div>
+                
+                <img src={item.img} alt={item.name} className="w-16 h-16 rounded-xl object-cover" />
+                
+                <div className="flex-1">
+                  <div className="text-xs font-bold text-indigo-500 uppercase tracking-widest mb-1">Priority {idx + 1}</div>
+                  <h3 className="font-bold text-neutral-900">{item.name}</h3>
+                </div>
+                
+                <div className="text-right pl-4">
+                  <p className="font-black text-neutral-900">${item.price.toFixed(2)}</p>
                 </div>
               </div>
-              <button type="submit" disabled={isProcessing} className="w-full bg-gray-900 text-white font-bold py-3.5 sm:py-4 rounded-xl mt-4 sm:mt-6 hover:bg-black transition-colors flex items-center justify-center text-sm sm:text-base">
-                {isProcessing ? 'Processing...' : 'Pay Invoice'}
-                {!isProcessing && <ArrowRight className="w-4 h-4 ml-2" />}
-              </button>
-            </form>
+            ))}
           </div>
         </div>
+
+        {/* Right Side: Checkout */}
+        <div className="lg:col-span-5">
+          {!isSuccess ? (
+            <div className="bg-neutral-900 text-white rounded-[2rem] p-8 shadow-2xl h-full flex flex-col relative overflow-hidden animate-in slide-in-from-right-8 duration-500">
+              
+              <h2 className="text-2xl font-black mb-8 relative z-10">Payment</h2>
+
+              <div className="bg-neutral-800 rounded-2xl p-6 border border-neutral-700 mb-8 relative z-10">
+                <div className="flex justify-between items-end mb-2">
+                  <span className="font-bold text-neutral-400">Total</span>
+                  <span className="text-4xl font-black text-white">${total.toFixed(2)}</span>
+                </div>
+              </div>
+
+              <form onSubmit={handlePay} className="mt-auto space-y-4 relative z-10">
+                
+                <div className="relative">
+                  <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-neutral-800 border border-neutral-700 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-sm shadow-inner" />
+                </div>
+                
+                <div className="flex gap-4">
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-center text-sm shadow-inner" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-center text-sm shadow-inner" />
+                </div>
+
+                <button 
+                  type="submit" 
+                  disabled={isProcessing}
+                  className="w-full py-5 mt-4 bg-indigo-600 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-indigo-500 transition-all shadow-[0_0_20px_rgba(79,70,229,0.4)] disabled:opacity-50 disabled:shadow-none"
+                >
+                  {isProcessing ? (
+                    <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  ) : (
+                    <>Checkout <ArrowRight className="w-5 h-5" /></>
+                  )}
+                </button>
+              </form>
+
+            </div>
+          ) : (
+            <div className="bg-emerald-50 text-neutral-900 rounded-[2rem] p-8 shadow-xl h-full flex flex-col items-center justify-center text-center animate-in zoom-in duration-500 border border-emerald-100">
+               <div className="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center mb-6">
+                 <CheckCircle2 className="w-12 h-12 text-emerald-600" strokeWidth={3} />
+               </div>
+               <h3 className="text-3xl font-black mb-2">Order Confirmed</h3>
+               <p className="text-neutral-500 mb-8 font-medium">Your items will be shipped in the prioritized order.</p>
+               <button type="button" 
+                 onClick={() => setIsSuccess(false)}
+                 className="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-colors w-full shadow-lg shadow-emerald-600/30"
+               >
+                 Done
+               </button>
+            </div>
+          )}
+        </div>
+
       </div>
-    );
-        
+    </div>
+  );
 }

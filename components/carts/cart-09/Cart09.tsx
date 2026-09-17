@@ -85,7 +85,7 @@ export default function Cart09() {
               <span key={i.id} className="flex items-center gap-1 text-xs bg-amber-50 text-amber-800 px-2.5 py-1 rounded-full font-medium">
                 {i.emoji} {i.name}
                 {!i.required && (
-                  <button onClick={(e) => { e.stopPropagation(); toggle(i.id); }} className="ml-1 opacity-60 hover:opacity-100">
+                  <button type="button" onClick={(e) => { e.stopPropagation(); toggle(i.id); }} className="ml-1 opacity-60 hover:opacity-100">
                     <X size={10} />
                   </button>
                 )}
@@ -94,7 +94,7 @@ export default function Cart09() {
           </div>
         </div>
 
-        <button
+        <button type="button"
           onClick={handleAdd}
           className={`w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all duration-300 ${
             added ? "bg-emerald-500 text-white" : "bg-slate-900 hover:bg-slate-700 text-white"

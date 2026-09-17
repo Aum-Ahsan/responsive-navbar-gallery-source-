@@ -59,13 +59,13 @@ export default function Checkout46() {
           </div>
 
           <div className="flex gap-2 text-xs">
-            <button 
+            <button type="button" 
               onClick={() => setAmount(minPrice)}
               className="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 hover:border-slate-500 transition"
             >
               Minimum (${minPrice})
             </button>
-            <button 
+            <button type="button" 
               onClick={() => setAmount(avgPrice)}
               className="px-3 py-1.5 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30 hover:bg-rose-500/30 transition"
             >
@@ -79,7 +79,7 @@ export default function Checkout46() {
           <input placeholder="Card Number" className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-rose-500 text-white" />
         </div>
 
-        <button 
+        <button type="button" 
           onClick={() => setPlaced(true)}
           disabled={amount === "" || amount < minPrice}
           className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition relative z-10

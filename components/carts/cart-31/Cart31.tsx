@@ -31,8 +31,8 @@ export default function Cart31() {
           <div className="space-y-2 mb-6">
             <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Volume Pricing</p>
             {tiers.map((tier, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 className={`flex justify-between items-center p-3 rounded-xl border transition ${currentTier === tier ? "bg-emerald-50 border-emerald-200" : "bg-transparent border-slate-100"}`}
               >
                 <div className="flex flex-col">
@@ -54,28 +54,28 @@ export default function Cart31() {
 
           <div className="flex gap-4">
             <div className="w-24 bg-slate-100 rounded-2xl flex items-center justify-between p-1 border border-slate-200">
-              <button 
+              <button type="button"
                 onClick={() => setQty(Math.max(1, qty - 1))}
                 className="w-8 h-8 flex items-center justify-center text-slate-500 hover:text-slate-900 font-medium transition rounded-xl hover:bg-white"
               >
                 -
               </button>
               <span className="font-bold text-slate-900 text-sm">{qty}</span>
-              <button 
+              <button type="button"
                 onClick={() => setQty(qty + 1)}
                 className="w-8 h-8 flex items-center justify-center text-slate-500 hover:text-slate-900 font-medium transition rounded-xl hover:bg-white"
               >
                 +
               </button>
             </div>
-            
-            <button 
+
+            <button type="button"
               onClick={handleAdd}
               disabled={added}
               className={`flex-1 h-12 rounded-2xl font-bold flex items-center justify-center gap-2 transition ${added ? "bg-emerald-500 text-white" : "bg-slate-900 hover:bg-slate-800 text-white"}`}
             >
               {added ? <Check size={18} /> : <ShoppingBag size={18} />}
-              {added ? "Added!" : `Add - $${total}`}
+              {added ? "Added!" : `Add - ${total}`}
             </button>
           </div>
         </div>

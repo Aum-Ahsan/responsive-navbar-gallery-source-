@@ -25,7 +25,7 @@ export default function Checkout13() {
           </div>
           <h2 className="text-2xl font-bold text-slate-900 mb-2">Access Granted!</h2>
           <p className="text-slate-500 mb-5">Check {email} for your access link. Start learning immediately.</p>
-          <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition">
+          <button type="button" className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition">
             <Globe size={16} /> Open Course Dashboard
           </button>
         </div>

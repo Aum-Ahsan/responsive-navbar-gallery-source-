@@ -85,7 +85,7 @@ export default function Checkout40() {
             </div>
           </div>
 
-          <button 
+          <button type="button" 
             onClick={() => setPlaced(true)}
             className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white transition shadow-lg shadow-blue-500/20"
           >

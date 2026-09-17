@@ -1,64 +1,162 @@
 "use client";
-import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Mic, Check, X, ShieldCheck } from "lucide-react";
 
 export default function PaymentProcess97() {
+  const TOTAL_AMOUNT = 49.99;
+  
+  const [isListening, setIsListening] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  
+  const [transcript, setTranscript] = useState("Tap the microphone to authorize payment.");
+  
+  useEffect(() => {
+    if (!isListening) return;
 
-    const presets = [10, 25, 50, 100];
-    const [amount, setAmount] = useState<number>(50);
-    const [isCustom, setIsCustom] = useState(false);
-    const [isProcessing, setIsProcessing] = useState(false);
+    let timeout1: NodeJS.Timeout;
+    let timeout2: NodeJS.Timeout;
+    let timeout3: NodeJS.Timeout;
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
+    // Simulate speech recognition
+    timeout1 = setTimeout(() => {
+      setTranscript("Listening...");
+    }, 500);
+
+    timeout2 = setTimeout(() => {
+      setTranscript(`"Authorize payment of $${TOTAL_AMOUNT}..."`);
+    }, 2000);
+
+    timeout3 = setTimeout(() => {
+      setIsListening(false);
       setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
+      setTranscript("Voice print matched. Processing...");
+      
+      setTimeout(() => {
+        setIsProcessing(false);
+        setIsSuccess(true);
+        setTranscript("Payment successful.");
+      }, 2000);
+    }, 4000);
+
+    return () => {
+      clearTimeout(timeout1);
+      clearTimeout(timeout2);
+      clearTimeout(timeout3);
     };
+  }, [isListening, TOTAL_AMOUNT]);
 
-    return (
-      <div className="w-full min-h-[600px] bg-cyan-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-md w-full bg-white rounded-[2rem] md:rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 sm:h-2 bg-cyan-600" />
-          
-          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-cyan-50 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-            <Heart className="w-7 h-7 sm:w-8 sm:h-8 text-cyan-600" fill="currentColor" />
-          </div>
-          
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Medical Research Grant</h2>
-            <p className="text-gray-500 text-xs sm:text-sm">Your contribution makes a direct impact. Select an amount to give today.</p>
-          </div>
+  const handleMicClick = () => {
+    if (isListening || isProcessing || isSuccess) return;
+    setIsListening(true);
+  };
 
-          <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
-            {presets.map(a => (
-              <button key={a} onClick={() => { setAmount(a); setIsCustom(false); }} className={`py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg transition-all ${!isCustom && amount === a ? 'bg-cyan-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-                $${a}
-              </button>
-            ))}
-          </div>
-          
-          <button onClick={() => setIsCustom(true)} className={`w-full py-3 sm:py-4 rounded-xl font-bold mb-6 sm:mb-8 transition-all ${isCustom ? 'bg-cyan-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-            Custom Amount
-          </button>
+  const reset = () => {
+    setIsSuccess(false);
+    setTranscript("Tap the microphone to authorize payment.");
+  };
 
-          {isCustom && (
-            <div className="mb-6 sm:mb-8 relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-lg sm:text-xl">$</span>
-              <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full text-xl sm:text-2xl font-bold text-gray-900 pl-10 pr-4 py-3 sm:py-4 bg-gray-50 rounded-xl focus:outline-none focus:ring-cyan-600/20 focus:border-cyan-600" />
-            </div>
-          )}
+  return (
+    <div className="w-full min-h-[700px] bg-slate-950 flex flex-col items-center justify-center font-sans p-6 text-slate-100 overflow-hidden relative">
+      
+      {/* Background Blobs */}
+      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full blur-[100px] transition-all duration-1000 ${
+        isListening ? 'bg-indigo-600/40 scale-150 animate-pulse' : 
+        isProcessing ? 'bg-amber-500/40 scale-125 animate-spin' : 
+        isSuccess ? 'bg-emerald-500/40 scale-150' : 
+        'bg-blue-600/20 scale-100'
+      }`}></div>
 
-          <form onSubmit={handlePay} className="space-y-3 sm:space-y-4">
-            <input required type="email" placeholder="Email Address" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-cyan-600/20 focus:border-cyan-600" />
-            <input required type="text" placeholder="Card Number" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-cyan-600/20 focus:border-cyan-600" />
-            
-            <button type="submit" disabled={isProcessing} className="w-full bg-cyan-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 mt-4 transition-all hover:opacity-90 text-sm sm:text-base">
-              {isProcessing ? 'Processing...' : `Donate $${amount}`}
-              {!isProcessing && <Heart className="w-4 h-4 ml-1" />}
-            </button>
-          </form>
-        </div>
-      </div>
-    );
+      <div className="relative z-10 w-full max-w-md flex flex-col items-center text-center">
         
+        {/* Order Details (Minimalist) */}
+        {!isSuccess && (
+          <div className="mb-16 animate-in fade-in slide-in-from-top-4 duration-700">
+            <h2 className="text-xl text-slate-400 mb-2">Total Due</h2>
+            <div className="text-6xl font-black tracking-tighter">${TOTAL_AMOUNT.toFixed(2)}</div>
+            <div className="flex items-center justify-center gap-2 mt-4 text-sm text-slate-500">
+              <ShieldCheck className="w-4 h-4" /> Secure Voice ID Active
+            </div>
+          </div>
+        )}
+
+        {/* Audio Wave Visualizer (Simulated) */}
+        <div className="h-32 flex items-center justify-center gap-1 mb-12">
+          {isListening ? (
+            // Active waves
+            [...Array(15)].map((_, i) => (
+              <div 
+                key={i} 
+                className="w-1.5 bg-indigo-400 rounded-full animate-wave"
+                style={{ 
+                  height: `${Math.max(10, Math.random() * 100)}%`,
+                  animationDelay: `${i * 0.1}s`,
+                  animationDuration: `${0.5 + Math.random() * 0.5}s`
+                }}
+              ></div>
+            ))
+          ) : isProcessing ? (
+            // Processing spinner
+            <div className="w-16 h-16 border-4 border-amber-500/30 border-t-amber-500 rounded-full animate-spin"></div>
+          ) : isSuccess ? (
+            // Success Check
+            <div className="w-20 h-20 bg-emerald-500 rounded-full flex items-center justify-center animate-bounce shadow-[0_0_40px_rgba(16,185,129,0.5)]">
+              <Check className="w-10 h-10 text-white" strokeWidth={3} />
+            </div>
+          ) : (
+            // Idle state line
+            <div className="w-64 h-0.5 bg-slate-800 rounded-full"></div>
+          )}
+        </div>
+
+        {/* Transcript Text */}
+        <div className={`text-xl md:text-2xl font-light h-16 transition-all duration-500 ${isListening ? 'text-indigo-200' : isProcessing ? 'text-amber-200' : isSuccess ? 'text-emerald-400 font-bold' : 'text-slate-400'}`}>
+          {transcript}
+        </div>
+
+        {/* Mic Button */}
+        {!isSuccess && (
+          <div className="mt-16">
+            <button type="button" 
+              onClick={handleMicClick}
+              disabled={isListening || isProcessing}
+              className={`
+                w-24 h-24 rounded-full flex items-center justify-center transition-all duration-500 shadow-2xl
+                ${isListening 
+                  ? 'bg-indigo-600 scale-90 shadow-[0_0_50px_rgba(79,70,229,0.6)] cursor-not-allowed' 
+                  : isProcessing 
+                    ? 'bg-slate-800 scale-50 opacity-0' 
+                    : 'bg-blue-600 hover:bg-blue-500 hover:scale-105 active:scale-95 shadow-[0_10px_30px_rgba(37,99,235,0.4)]'
+                }
+              `}
+            >
+              <Mic className={`w-10 h-10 text-white ${isListening ? 'animate-pulse' : ''}`} />
+            </button>
+          </div>
+        )}
+
+        {isSuccess && (
+          <div className="mt-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <button type="button" 
+              onClick={reset}
+              className="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full transition-colors"
+            >
+              New Transaction
+            </button>
+          </div>
+        )}
+
+      </div>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes wave {
+          0%, 100% { transform: scaleY(0.2); opacity: 0.5; }
+          50% { transform: scaleY(1); opacity: 1; }
+        }
+        .animate-wave {
+          animation: wave ease-in-out infinite;
+        }
+      `}} />
+    </div>
+  );
 }

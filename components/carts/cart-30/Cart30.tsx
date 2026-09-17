@@ -24,7 +24,7 @@ export default function Cart30() {
   const minBid = currentBid + 50;
 
   const handleBid = () => {
-    if (bidAmount < minBid) { setError(`Minimum bid is $${minBid}`); return; }
+    if (bidAmount < minBid) { setError(`Minimum bid is ${minBid}`); return; }
     setError("");
     const oldBid = currentBid;
     setCurrentBid(bidAmount);
@@ -69,7 +69,7 @@ export default function Cart30() {
           <p className="text-amber-300/70 text-xs font-bold uppercase tracking-widest mb-2">Quick Bid</p>
           <div className="grid grid-cols-4 gap-2">
             {quickBids.map(b => (
-              <button
+              <button type="button"
                 key={b}
                 onClick={() => { setBidAmount(b); setError(""); }}
                 className={`py-2.5 rounded-xl text-sm font-bold border transition ${bidAmount === b ? "bg-amber-500 border-amber-400 text-white" : "border-amber-700/40 text-amber-300 hover:border-amber-500"}`}
@@ -97,16 +97,15 @@ export default function Cart30() {
           <p className="text-amber-300/50 text-xs mt-2">Minimum bid: ${minBid.toLocaleString()}</p>
         </div>
 
-        <button
+        <button type="button"
           onClick={handleBid}
           disabled={timeLeft === 0}
-          className={`w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 mb-6 transition-all duration-300 ${
-            timeLeft === 0
+          className={`w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 mb-6 transition-all duration-300 ${timeLeft === 0
               ? "bg-slate-700 text-slate-500 cursor-not-allowed"
               : bidPlaced
-              ? "bg-emerald-500 text-white"
-              : "bg-amber-500 hover:bg-amber-400 text-amber-950"
-          }`}
+                ? "bg-emerald-500 text-white"
+                : "bg-amber-500 hover:bg-amber-400 text-amber-950"
+            }`}
         >
           {bidPlaced ? <><Check size={20} /> Bid Placed — ${bidAmount.toLocaleString()}</> : timeLeft === 0 ? "Auction Ended" : <><Gavel size={20} /> Place Bid — ${bidAmount.toLocaleString()}</>}
         </button>

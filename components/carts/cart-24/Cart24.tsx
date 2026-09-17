@@ -45,7 +45,7 @@ export default function Cart24() {
             <h2 className="text-xl font-bold text-slate-900">Buy Again</h2>
             <p className="text-slate-500 text-sm mt-0.5">One click — uses your saved address & card.</p>
           </div>
-          <button
+          <button type="button"
             onClick={handleReorderAll}
             className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-bold transition-all ${
               allAdded ? "bg-emerald-500 text-white" : "bg-slate-900 hover:bg-slate-700 text-white"
@@ -65,7 +65,7 @@ export default function Cart24() {
               </div>
               <div className="flex items-center gap-3 shrink-0">
                 <span className="font-bold text-slate-900">${order.price}</span>
-                <button
+                <button type="button"
                   onClick={() => handleReorder(order.id)}
                   className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 ${
                     added[order.id]

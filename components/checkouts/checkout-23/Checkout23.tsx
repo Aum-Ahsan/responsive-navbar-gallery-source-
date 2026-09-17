@@ -51,10 +51,10 @@ export default function Checkout23() {
                   <p className="text-xs text-teal-700">Uploaded successfully</p>
                 </div>
               </div>
-              <button onClick={() => setRxUploaded(false)} className="text-xs font-bold text-teal-700 hover:underline">Remove</button>
+              <button type="button" onClick={() => setRxUploaded(false)} className="text-xs font-bold text-teal-700 hover:underline">Remove</button>
             </div>
           ) : (
-            <button 
+            <button type="button" 
               onClick={() => setRxUploaded(true)}
               className="w-full border-2 border-dashed border-slate-300 rounded-xl p-6 flex flex-col items-center justify-center hover:bg-slate-50 hover:border-teal-400 transition"
             >
@@ -85,13 +85,13 @@ export default function Checkout23() {
           <h3 className="font-bold text-slate-900 text-sm mb-4">Payment Method</h3>
           
           <div className="flex gap-2 mb-4 bg-slate-100 p-1 rounded-xl">
-            <button 
+            <button type="button" 
               onClick={() => setPayMethod("card")}
               className={`flex-1 py-2 text-sm font-bold rounded-lg transition ${payMethod === "card" ? "bg-white shadow text-slate-900" : "text-slate-500"}`}
             >
               Credit Card
             </button>
-            <button 
+            <button type="button" 
               onClick={() => setPayMethod("hsa")}
               className={`flex-1 py-2 text-sm font-bold rounded-lg transition ${payMethod === "hsa" ? "bg-white shadow text-slate-900" : "text-slate-500"}`}
             >
@@ -108,7 +108,7 @@ export default function Checkout23() {
           </div>
         </div>
 
-        <button 
+        <button type="button" 
           onClick={() => rxUploaded && setPlaced(true)} 
           disabled={!rxUploaded}
           className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition ${rxUploaded ? "bg-teal-700 hover:bg-teal-800 text-white" : "bg-slate-200 text-slate-400 cursor-not-allowed"}`}

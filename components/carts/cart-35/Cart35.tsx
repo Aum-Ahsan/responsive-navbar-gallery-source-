@@ -54,14 +54,14 @@ export default function Cart35() {
 
         <div className="flex items-center gap-4">
           <div className="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-2xl p-1 w-32">
-            <button 
+            <button type="button" 
               onClick={() => setQty(Math.max(1, qty - 1))}
               className="w-10 h-10 flex items-center justify-center text-slate-500 hover:text-slate-900 transition hover:bg-white rounded-xl shadow-sm"
             >
               <Minus size={16} />
             </button>
             <span className="font-bold text-sm">{qty}</span>
-            <button 
+            <button type="button" 
               onClick={() => setQty(qty + 1)}
               className="w-10 h-10 flex items-center justify-center text-slate-500 hover:text-slate-900 transition hover:bg-white rounded-xl shadow-sm"
             >
@@ -69,7 +69,7 @@ export default function Cart35() {
             </button>
           </div>
 
-          <button 
+          <button type="button" 
             onClick={handleAdd}
             disabled={added}
             className={`flex-1 h-12 rounded-2xl font-bold flex items-center justify-center gap-2 transition ${added ? "bg-emerald-500 text-white" : "bg-indigo-600 hover:bg-indigo-700 text-white"}`}

@@ -47,7 +47,7 @@ export default function Cart07() {
               {/* Dual Action Buttons */}
               <div className="flex gap-2">
                 {/* Wishlist Button */}
-                <button
+                <button type="button"
                   onClick={() => toggleWish(p.id)}
                   className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-sm font-semibold border transition-all duration-200 ${
                     wishlist[p.id]
@@ -63,7 +63,7 @@ export default function Cart07() {
                 </button>
 
                 {/* Add to Cart Button */}
-                <button
+                <button type="button"
                   onClick={() => p.inStock && addToCart(p.id)}
                   disabled={!p.inStock}
                   className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
@@ -93,7 +93,7 @@ export default function Cart07() {
             <Heart size={16} className="text-rose-400 fill-rose-400" />
             <span className="text-sm font-semibold">{Object.values(wishlist).filter(Boolean).length} item(s) saved to wishlist</span>
           </div>
-          <button className="text-xs text-slate-400 hover:text-white underline transition">View Wishlist →</button>
+          <button type="button" className="text-xs text-slate-400 hover:text-white underline transition">View Wishlist →</button>
         </div>
       )}
     </div>

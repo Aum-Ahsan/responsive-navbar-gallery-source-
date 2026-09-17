@@ -43,7 +43,7 @@ export default function Cart06() {
       {/* Header with mini-cart toggle */}
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-2xl font-bold text-stone-900">Kitchen Goods</h2>
-        <button
+        <button type="button"
           onClick={() => setMiniOpen(o => !o)}
           className="relative flex items-center gap-2 bg-white border border-stone-200 hover:border-stone-400 px-4 py-2.5 rounded-xl shadow-sm transition"
         >
@@ -62,7 +62,7 @@ export default function Cart06() {
         <div className="absolute top-16 right-6 sm:right-10 w-72 bg-white rounded-2xl shadow-xl border border-stone-100 z-30 overflow-hidden">
           <div className="flex items-center justify-between p-4 border-b border-stone-100">
             <p className="font-bold text-stone-900 text-sm">Cart ({itemCount})</p>
-            <button onClick={() => setMiniOpen(false)}><X size={16} className="text-stone-400" /></button>
+            <button type="button" onClick={() => setMiniOpen(false)}><X size={16} className="text-stone-400" /></button>
           </div>
 
           {cartItems.length === 0 ? (
@@ -81,9 +81,9 @@ export default function Cart06() {
                       <p className="text-xs text-stone-500">${item.price}</p>
                     </div>
                     <div className="flex items-center gap-1">
-                      <button onClick={() => changeQty(item.id, -1)} className="w-6 h-6 border border-stone-200 rounded-lg flex items-center justify-center text-xs hover:bg-stone-50">-</button>
+                      <button type="button" onClick={() => changeQty(item.id, -1)} className="w-6 h-6 border border-stone-200 rounded-lg flex items-center justify-center text-xs hover:bg-stone-50">-</button>
                       <span className="text-xs font-bold w-4 text-center">{item.qty}</span>
-                      <button onClick={() => changeQty(item.id, 1)} className="w-6 h-6 border border-stone-200 rounded-lg flex items-center justify-center text-xs hover:bg-stone-50">+</button>
+                      <button type="button" onClick={() => changeQty(item.id, 1)} className="w-6 h-6 border border-stone-200 rounded-lg flex items-center justify-center text-xs hover:bg-stone-50">+</button>
                     </div>
                   </div>
                 ))}
@@ -92,7 +92,7 @@ export default function Cart06() {
                 <div className="flex justify-between text-sm font-bold text-stone-900">
                   <span>Total</span><span>${total}</span>
                 </div>
-                <button className="w-full bg-stone-900 text-white text-sm font-bold py-3 rounded-xl hover:bg-stone-700 transition flex items-center justify-center gap-1">
+                <button type="button" className="w-full bg-stone-900 text-white text-sm font-bold py-3 rounded-xl hover:bg-stone-700 transition flex items-center justify-center gap-1">
                   Checkout <ChevronRight size={14} />
                 </button>
               </div>
@@ -110,7 +110,7 @@ export default function Cart06() {
               <p className="font-semibold text-stone-900 text-sm">{p.name}</p>
               <p className="text-stone-500 text-sm">${p.price}</p>
             </div>
-            <button
+            <button type="button"
               onClick={() => addToCart(p)}
               className="w-full bg-stone-900 hover:bg-stone-700 text-white text-sm font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-1.5"
             >

@@ -22,7 +22,7 @@ export default function Cart44() {
   return (
     <div className="w-full bg-slate-900 p-6 sm:p-10 font-sans flex justify-center text-white">
       <div className="w-full max-w-md bg-slate-800 rounded-3xl p-6 border border-slate-700 shadow-2xl relative overflow-hidden">
-        
+
         {/* Glow */}
         <div className="absolute -top-20 -right-20 w-64 h-64 bg-purple-500/20 blur-3xl rounded-full pointer-events-none" />
 
@@ -39,7 +39,7 @@ export default function Cart44() {
 
         <div className="space-y-3 mb-8 relative z-10">
           {boxes.map(box => (
-            <button
+            <button type="button"
               key={box.id}
               onClick={() => setSize(box.id)}
               className={`w-full flex items-center justify-between p-4 rounded-2xl border-2 transition text-left
@@ -47,7 +47,7 @@ export default function Cart44() {
             >
               <div>
                 <p className="font-bold text-white flex items-center gap-2">
-                  {box.name} 
+                  {box.name}
                   {size === box.id && <span className="px-2 py-0.5 rounded text-[10px] bg-purple-500 text-white font-bold tracking-widest">SELECTED</span>}
                 </p>
                 <p className="text-xs text-slate-400 mt-1 flex items-center gap-1.5">
@@ -59,13 +59,13 @@ export default function Cart44() {
           ))}
         </div>
 
-        <button 
+        <button type="button"
           onClick={handleAdd}
           disabled={added}
           className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition relative z-10 ${added ? "bg-emerald-500 text-white" : "bg-purple-600 hover:bg-purple-500 text-white shadow-lg shadow-purple-500/25"}`}
         >
           {added ? <Check size={18} /> : <Package size={18} />}
-          {added ? "Box Added!" : `Add ${currentBox.name} - $${currentBox.price}`}
+          {added ? "Box Added!" : `Add ${currentBox.name} - ${currentBox.price}`}
         </button>
 
       </div>

@@ -1,117 +1,166 @@
 "use client";
 import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import { CreditCard, ArrowRight, PackageOpen, HelpCircle, CheckCircle2, Star } from "lucide-react";
 
 export default function PaymentProcess59() {
+  const baseTotal = 75.00;
+  const MYSTERY_PRICE = 15.00;
+  
+  const [selectedBox, setSelectedBox] = useState<number | null>(null);
+  
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const [paymentMode, setPaymentMode] = useState<"upfront" | "split">("upfront");
-    const [splitMonths, setSplitMonths] = useState<number>(3);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
+  const finalTotal = baseTotal + (selectedBox !== null ? MYSTERY_PRICE : 0);
 
-    const totalAmount = 1200;
-    const splitAmount = Math.ceil((totalAmount * 1.05) / splitMonths);
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => {
-        setIsProcessing(false);
-        setIsSuccess(true);
-      }, 2000);
-    };
-
-    if (isSuccess) {
-      return (
-        <div className="w-full min-h-[600px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 text-center max-w-md w-full shadow-xl border border-gray-100">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Check className="w-8 h-8 sm:w-10 sm:h-10" />
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Payment Confirmed</h2>
-            <p className="text-sm sm:text-base text-gray-500 mb-8">Your payment has been processed successfully. A receipt has been sent to your email.</p>
-            <button onClick={() => setIsSuccess(false)} className="text-orange-600 font-semibold hover:opacity-80 transition-opacity text-sm sm:text-base">
-              Return to Dashboard
-            </button>
-          </div>
-        </div>
-      );
+  const handleBoxSelect = (id: number) => {
+    if (selectedBox === id) {
+      setSelectedBox(null);
+    } else {
+      setSelectedBox(id);
     }
+  };
 
-    return (
-      <div className="w-full min-h-[700px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
-          <div className="space-y-6 md:space-y-8">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-3 sm:mb-4">
-                <Zap className="w-3 h-3" /> Furniture Store Layaway
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 tracking-tight">Complete your purchase</h2>
-              <p className="text-sm sm:text-base md:text-lg text-gray-500 leading-relaxed">Choose how you want to pay. Pay upfront to save, or split it into manageable monthly payments.</p>
-            </div>
+  // Mock rewards for the success screen
+  const REWARDS = ["Wireless Earbuds", "Premium Coffee Blend", "Smart Home Plug"];
+  const reward = selectedBox !== null ? REWARDS[selectedBox - 1] : null;
 
-            <div className="bg-white rounded-3xl p-1.5 shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-1.5 sm:gap-0">
-              <button onClick={() => setPaymentMode("upfront")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "upfront" ? "bg-orange-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Pay in full</button>
-              <button onClick={() => setPaymentMode("split")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "split" ? "bg-orange-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Split payment</button>
-            </div>
-
-            <div className="bg-white rounded-3xl p-5 sm:p-6 md:p-8 border border-gray-100 shadow-sm transition-all">
-              {paymentMode === "upfront" ? (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Total Payment</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">One-time payment</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${totalAmount}</div>
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Monthly Split</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">Includes 5% fee</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${splitAmount}<span className="text-base sm:text-lg text-gray-400 font-normal">/mo</span></div>
-                  </div>
-                  <div className="pt-4 border-t border-gray-100">
-                    <input type="range" min="2" max="6" step="1" value={splitMonths} onChange={(e) => setSplitMonths(Number(e.target.value))} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
-                    <div className="flex justify-between text-[10px] sm:text-xs text-gray-400 mt-2 font-medium">
-                      <span>2 mos</span>
-                      <span>6 mos</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
+  return (
+    <div className="w-full min-h-[700px] bg-indigo-50 flex items-center justify-center font-sans p-6 text-slate-800 overflow-hidden relative">
+      
+      {!isSuccess ? (
+        <div className="max-w-md w-full bg-white rounded-3xl p-8 shadow-xl border border-indigo-100 relative z-10 animate-in fade-in duration-500">
+          
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-2xl font-black text-slate-900">Checkout</h2>
           </div>
 
-          <div className="bg-white rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
-            <form onSubmit={handlePay} className="space-y-4 sm:space-y-5 relative z-10">
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
-                <input required type="email" placeholder="you@example.com" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 text-sm sm:text-base text-gray-900 placeholder-gray-400 focus:outline-none transition-all focus:ring-orange-600/20 focus:border-orange-600" />
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Card Information</label>
-                <div className="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden transition-all focus-within:ring-2 focus-within:border-transparent">
-                  <input maxLength={16} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 16); }} required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-transparent px-4 py-3 sm:py-3.5 border-b border-gray-200 focus:outline-none font-mono text-sm sm:text-base" />
-                  <div className="flex">
-                    <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none border-r border-gray-200 font-mono text-sm sm:text-base" />
-                    <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none font-mono text-sm sm:text-base" />
+          <div className="bg-slate-50 rounded-2xl p-5 mb-8 border border-slate-100">
+             <div className="flex justify-between items-center text-sm mb-2">
+               <span className="font-medium text-slate-500">Subtotal</span>
+               <span className="font-bold text-slate-900">${baseTotal.toFixed(2)}</span>
+             </div>
+             
+             <div className={`flex justify-between items-center text-sm transition-all duration-300 overflow-hidden ${selectedBox !== null ? 'max-h-10 opacity-100 mb-2' : 'max-h-0 opacity-0 mb-0'}`}>
+               <span className="font-bold text-indigo-600 flex items-center gap-1"><PackageOpen className="w-4 h-4" /> Mystery Box</span>
+               <span className="font-bold text-indigo-600">${MYSTERY_PRICE.toFixed(2)}</span>
+             </div>
+
+             <div className="flex justify-between items-end pt-3 border-t border-slate-200">
+               <span className="font-bold text-slate-500">Total</span>
+               <span className="text-3xl font-black text-slate-900">${finalTotal.toFixed(2)}</span>
+             </div>
+          </div>
+
+          {/* Gamified Mystery Box Selection */}
+          <div className="mb-8">
+            <div className="flex items-center gap-2 mb-4">
+              <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
+              <h3 className="font-black text-slate-900">Add a Mystery Box</h3>
+            </div>
+            <p className="text-sm text-slate-500 mb-4 font-medium">Select a box for <span className="text-indigo-600 font-bold">$15</span>. Guaranteed value of $40+!</p>
+            
+            <div className="grid grid-cols-3 gap-3">
+              {[1, 2, 3].map(box => (
+                <button
+                  key={box}
+                  type="button"
+                  onClick={(e) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = () => handleBoxSelect(box);
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+      else if (typeof originalHandler === 'object' && originalHandler !== null) { /* ignore event objects */ }
+    }}
+                  className={`relative flex flex-col items-center justify-center p-4 rounded-2xl border-2 transition-all duration-300 ${
+                    selectedBox === box 
+                      ? 'border-indigo-500 bg-indigo-50 shadow-md scale-105' 
+                      : selectedBox !== null 
+                        ? 'border-slate-100 bg-slate-50 opacity-50 scale-95'
+                        : 'border-slate-200 hover:border-indigo-300 hover:bg-slate-50 hover:scale-105 shadow-sm'
+                  }`}
+                >
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 transition-colors ${selectedBox === box ? 'bg-indigo-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
+                    {selectedBox === box ? <CheckCircle2 className="w-6 h-6" /> : <HelpCircle className="w-6 h-6" />}
                   </div>
-                </div>
-              </div>
-              <div className="pt-2 sm:pt-4">
-                <button type="submit" disabled={isProcessing} className="w-full bg-orange-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed text-sm sm:text-base">
-                  {isProcessing ? 'Processing...' : `Pay $${paymentMode === "upfront" ? totalAmount : splitAmount} Now`}
+                  <span className={`text-xs font-bold ${selectedBox === box ? 'text-indigo-700' : 'text-slate-500'}`}>Box {box}</span>
                 </button>
-              </div>
-            </form>
+              ))}
+            </div>
           </div>
+
+          <form onSubmit={handlePay} className="space-y-4">
+            
+            <div className="relative">
+              <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+              <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-white border border-slate-200 rounded-xl pl-12 pr-4 py-4 text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors font-mono tracking-widest text-sm" />
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={isProcessing}
+              className="w-full py-5 mt-4 bg-slate-900 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-slate-800 transition-all shadow-[0_0_20px_rgba(15,23,42,0.15)] disabled:opacity-70 disabled:shadow-none"
+            >
+              {isProcessing ? (
+                <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+              ) : (
+                <>Pay ${finalTotal.toFixed(2)} <ArrowRight className="w-5 h-5" /></>
+              )}
+            </button>
+          </form>
+
         </div>
-      </div>
-    );
-        
+      ) : (
+        <div className="max-w-md w-full bg-white rounded-3xl p-12 shadow-xl border border-indigo-100 text-center relative z-10 animate-in zoom-in duration-500">
+           
+           {!reward ? (
+             <>
+               <div className="w-24 h-24 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                 <CheckCircle2 className="w-12 h-12 text-emerald-500" strokeWidth={3} />
+               </div>
+               <h2 className="text-3xl font-black text-slate-900 mb-2">Order Confirmed!</h2>
+               <p className="text-slate-500 mb-8 font-medium">Thank you for your purchase.</p>
+             </>
+           ) : (
+             <>
+               <div className="relative w-32 h-32 mx-auto mb-6">
+                 <div className="absolute inset-0 bg-indigo-500 rounded-full animate-ping opacity-20"></div>
+                 <div className="absolute inset-0 bg-indigo-100 rounded-full flex items-center justify-center border-4 border-white shadow-xl z-10">
+                   <PackageOpen className="w-16 h-16 text-indigo-500" />
+                 </div>
+               </div>
+               <h2 className="text-sm font-bold text-indigo-500 uppercase tracking-widest mb-2 animate-pulse">Mystery Box Revealed</h2>
+               <p className="text-2xl font-black text-slate-900 mb-2">{reward}</p>
+               <p className="text-slate-500 mb-8 font-medium">Enjoy your awesome surprise!</p>
+             </>
+           )}
+
+           <button type="button" 
+              onClick={() => { setIsSuccess(false); setSelectedBox(null); }}
+              className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-colors"
+            >
+              Done
+            </button>
+        </div>
+      )}
+
+    </div>
+  );
 }

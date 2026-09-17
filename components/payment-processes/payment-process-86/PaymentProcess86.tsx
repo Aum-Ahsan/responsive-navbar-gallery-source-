@@ -1,69 +1,192 @@
 "use client";
-import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { CreditCard, ArrowRight, CheckCircle2, Lock } from "lucide-react";
 
 export default function PaymentProcess86() {
+  const TOTAL_AMOUNT = 89.99;
+  
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [sliderValue, setSliderValue] = useState(0);
 
-    const [isProcessing, setIsProcessing] = useState(false);
+  // Trigger payment when slider reaches 100
+  useEffect(() => {
+    if (sliderValue >= 99 && !isProcessing && !isSuccess) {
+      triggerPayment();
+    }
+  }, [sliderValue]);
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
-    };
+  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = parseInt(e.target.value);
+    setSliderValue(val);
+  };
 
-    return (
-      <div className="w-full min-h-[600px] bg-neutral-900 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 rounded-[2rem] overflow-hidden shadow-2xl bg-white">
-          <div className="bg-teal-600 p-8 sm:p-10 flex flex-col justify-between text-white">
-            <div>
-              <FileText className="w-8 h-8 sm:w-10 sm:h-10 mb-6 sm:mb-8 opacity-80" />
-              <h2 className="text-2xl sm:text-3xl font-bold mb-2">Invoice Payment</h2>
-              <p className="opacity-80 mb-6 sm:mb-8 text-sm sm:text-base">Property Management Rent Pay</p>
-              
-              <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                <div className="flex justify-between text-xs sm:text-sm opacity-90 border-b border-white/20 pb-2">
-                  <span>Invoice #</span>
-                  <span className="font-mono">INV-2026</span>
-                </div>
-                <div className="flex justify-between text-xs sm:text-sm opacity-90 border-b border-white/20 pb-2">
-                  <span>Due Date</span>
-                  <span>Oct 1, 2026</span>
-                </div>
-              </div>
+  const handleSliderRelease = () => {
+    if (sliderValue < 99) {
+      // Snap back if not fully swiped
+      setSliderValue(0);
+    }
+  };
+
+  const triggerPayment = () => {
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+      setSliderValue(0); // reset
+    }, 2000);
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    triggerPayment();
+  };
+
+  return (
+    <div className="w-full min-h-[700px] bg-slate-100 flex items-center justify-center font-sans p-6 text-slate-800">
+      
+      {!isSuccess ? (
+        <div className="max-w-md w-full bg-white rounded-3xl p-8 shadow-xl border border-slate-200 relative z-10">
+          
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-2xl font-black text-slate-900">Checkout</h2>
+            <Lock className="w-5 h-5 text-slate-400" />
+          </div>
+
+          <div className="bg-blue-50 rounded-2xl p-5 mb-8 border border-blue-100">
+             <div className="flex justify-between items-center text-sm mb-2">
+               <span className="font-bold text-slate-500">Subtotal</span>
+               <span className="font-bold text-slate-700">${TOTAL_AMOUNT.toFixed(2)}</span>
+             </div>
+             
+             <div className="flex justify-between items-end pt-4 border-t border-blue-200">
+               <span className="font-black text-blue-500 uppercase tracking-widest text-xs">Total</span>
+               <span className="text-4xl font-black text-slate-900">${TOTAL_AMOUNT.toFixed(2)}</span>
+             </div>
+          </div>
+
+          <form onSubmit={handleFormSubmit} className="space-y-4">
+            
+            <div className="relative">
+              <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+              <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" 
+                required 
+                type="text" 
+                placeholder="Card Number" 
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-12 pr-4 py-4 focus:outline-none focus:border-blue-500 transition-colors font-mono tracking-widest text-sm" 
+              />
             </div>
             
-            <div className="mt-8 md:mt-0">
-              <p className="text-xs sm:text-sm opacity-80 mb-1">Amount Due</p>
-              <p className="text-4xl sm:text-5xl font-bold tracking-tight">$4,500.00</p>
+            <div className="flex gap-4">
+              <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" 
+                required 
+                type="text" 
+                placeholder="MM/YY" 
+                className="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 focus:outline-none focus:border-blue-500 transition-colors font-mono tracking-widest text-center text-sm" 
+              />
+              <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" 
+                required 
+                type="text" 
+                placeholder="CVV" 
+                className="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 focus:outline-none focus:border-blue-500 transition-colors font-mono tracking-widest text-center text-sm" 
+              />
             </div>
-          </div>
-          
-          <div className="p-8 sm:p-10 flex flex-col justify-center">
-            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-6">Payment Method</h3>
-            <form onSubmit={handlePay} className="space-y-4">
-              <div>
-                <label className="block text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Name on Card</label>
-                <input required type="text" className="w-full bg-gray-50 border-none rounded-xl px-4 py-3 sm:py-4 focus:ring-2 focus:ring-gray-200 transition-shadow text-sm sm:text-base" />
-              </div>
-              <div>
-                <label className="block text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Card Details</label>
-                <div className="bg-gray-50 rounded-xl overflow-hidden flex flex-col">
-                  <input required type="text" placeholder="Card Number" className="w-full bg-transparent px-4 py-3 sm:py-4 border-b border-gray-200 focus:outline-none text-sm sm:text-base" />
-                  <div className="flex">
-                    <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-4 border-r border-gray-200 focus:outline-none text-sm sm:text-base" />
-                    <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-4 focus:outline-none text-sm sm:text-base" />
-                  </div>
-                </div>
-              </div>
-              <button type="submit" disabled={isProcessing} className="w-full bg-gray-900 text-white font-bold py-3.5 sm:py-4 rounded-xl mt-4 sm:mt-6 hover:bg-black transition-colors flex items-center justify-center text-sm sm:text-base">
-                {isProcessing ? 'Processing...' : 'Pay Invoice'}
-                {!isProcessing && <ArrowRight className="w-4 h-4 ml-2" />}
+
+            <div className="pt-6">
+              
+              {/* DESKTOP: Click to Pay */}
+              <button 
+                type="submit" 
+                disabled={isProcessing}
+                className="hidden md:flex w-full py-5 bg-blue-600 text-white rounded-xl font-bold text-lg items-center justify-center gap-2 hover:bg-blue-700 transition-all shadow-lg disabled:opacity-70"
+              >
+                {isProcessing ? (
+                  <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+                ) : (
+                  <>Pay Now <ArrowRight className="w-5 h-5" /></>
+                )}
               </button>
-            </form>
-          </div>
+
+              {/* MOBILE: Swipe to Pay */}
+              <div className="md:hidden relative w-full h-16 bg-blue-50 rounded-full border border-blue-100 flex items-center overflow-hidden">
+                {isProcessing ? (
+                  <div className="w-full h-full flex items-center justify-center bg-blue-600 text-white font-bold gap-2">
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> Processing...
+                  </div>
+                ) : (
+                  <>
+                    {/* Background Text */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <span className="font-bold text-blue-300 text-sm tracking-widest uppercase ml-12">Swipe to Pay</span>
+                    </div>
+
+                    {/* Progress Fill */}
+                    <div 
+                      className="absolute left-0 top-0 bottom-0 bg-blue-100 transition-none"
+                      style={{ width: `${sliderValue}%` }}
+                    ></div>
+
+                    {/* The Range Input Overlay */}
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required 
+                      type="range" 
+                      min="0" 
+                      max="100" 
+                      value={sliderValue}
+                      onChange={handleSliderChange}
+                      onMouseUp={handleSliderRelease}
+                      onTouchEnd={handleSliderRelease}
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" />
+
+                    {/* The Visual Thumb */}
+                    <div 
+                      className="absolute left-1 top-1 bottom-1 w-14 bg-blue-600 rounded-full flex items-center justify-center text-white z-10 transition-none shadow-md pointer-events-none"
+                      style={{ transform: `translateX(calc(${sliderValue}vw * 0.7))` }} // Approximation for thumb movement, better to rely on flex/relative positioning if exact, but simple percent is ok.
+                    >
+                      <ArrowRight className="w-6 h-6" />
+                    </div>
+                  </>
+                )}
+              </div>
+
+            </div>
+          </form>
+
         </div>
-      </div>
-    );
-        
+      ) : (
+        <div className="max-w-md w-full bg-white rounded-3xl p-12 text-center shadow-xl border border-slate-200 animate-in zoom-in duration-500">
+           
+           <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+             <CheckCircle2 className="w-12 h-12 text-green-500" strokeWidth={3} />
+           </div>
+
+           <h2 className="text-3xl font-black text-slate-900 mb-2">Success</h2>
+           <p className="text-slate-500 mb-8 font-medium">Your payment has been processed.</p>
+           
+           <button type="button" 
+              onClick={() => { setIsSuccess(false); }}
+              className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-colors"
+            >
+              Done
+            </button>
+        </div>
+      )}
+
+      {/* Basic styles to align thumb tracking since calc() with vw is tricky in range without fixed width */}
+      <style dangerouslySetInnerHTML={{__html: `
+        input[type=range] {
+          -webkit-appearance: none;
+          width: 100%;
+          background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          height: 60px;
+          width: 60px;
+          border-radius: 50%;
+          background: transparent;
+          cursor: pointer;
+        }
+      `}} />
+    </div>
+  );
 }

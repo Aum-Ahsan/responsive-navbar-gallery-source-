@@ -54,14 +54,14 @@ export default function Checkout27() {
         </div>
 
         <div className="space-y-3">
-          <button 
+          <button type="button" 
             onClick={() => setAccepted(true)}
             className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-500/20 transition text-lg"
           >
             Yes, Add to My Order <ArrowRight size={18} />
           </button>
           
-          <button 
+          <button type="button" 
             onClick={() => setAccepted(false)}
             className="w-full py-3 rounded-xl font-medium text-sm text-slate-500 hover:text-slate-800 hover:bg-slate-50 transition"
           >

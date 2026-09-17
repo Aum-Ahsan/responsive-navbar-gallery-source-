@@ -45,7 +45,7 @@ export default function Checkout37() {
         </div>
 
         <div className="space-y-3 mb-6 relative z-10">
-          <button className="w-full p-4 rounded-xl border border-slate-600 bg-slate-700 hover:bg-slate-600 transition flex items-center gap-3">
+          <button type="button" className="w-full p-4 rounded-xl border border-slate-600 bg-slate-700 hover:bg-slate-600 transition flex items-center gap-3">
             <CreditCard size={18} className="text-slate-300" />
             <div className="text-left flex-1">
               <p className="text-sm font-bold text-white">Visa ending in 4242</p>
@@ -55,7 +55,7 @@ export default function Checkout37() {
             </div>
           </button>
           
-          <button className="w-full p-4 rounded-xl border border-slate-700 hover:border-slate-500 bg-slate-800/50 transition flex items-center gap-3">
+          <button type="button" className="w-full p-4 rounded-xl border border-slate-700 hover:border-slate-500 bg-slate-800/50 transition flex items-center gap-3">
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-4 opacity-50" />
             <div className="text-left flex-1">
               <p className="text-sm font-bold text-slate-400">PayPal</p>
@@ -63,7 +63,7 @@ export default function Checkout37() {
           </button>
         </div>
 
-        <button 
+        <button type="button" 
           onClick={() => setPlaced(true)}
           className="w-full py-4 rounded-2xl font-black italic tracking-widest flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white transition shadow-[0_0_20px_rgba(147,51,234,0.4)] relative z-10"
         >

@@ -56,7 +56,7 @@ export default function Cart32() {
           </p>
         </div>
 
-        <button 
+        <button type="button" 
           onClick={handleAdd}
           disabled={added}
           className={`w-full py-4 rounded-2xl font-bold text-sm transition flex items-center justify-center gap-2 ${added ? "bg-emerald-500 text-white" : "bg-rose-500 hover:bg-rose-600 text-white shadow-lg shadow-rose-500/20"}`}

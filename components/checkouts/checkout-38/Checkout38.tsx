@@ -67,7 +67,7 @@ export default function Checkout38() {
             Connect your bank account to initiate a secure ACH transfer for your earnest money deposit.
           </p>
 
-          <button className="w-full py-4 rounded-xl border-2 border-slate-200 bg-slate-50 hover:bg-slate-100 transition font-bold text-slate-900 mb-8 flex justify-center items-center gap-2">
+          <button type="button" className="w-full py-4 rounded-xl border-2 border-slate-200 bg-slate-50 hover:bg-slate-100 transition font-bold text-slate-900 mb-8 flex justify-center items-center gap-2">
             Link Bank Account via Plaid
           </button>
 
@@ -94,7 +94,7 @@ export default function Checkout38() {
             </div>
           </div>
 
-          <button 
+          <button type="button" 
             onClick={() => setPlaced(true)}
             className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white transition shadow-lg shadow-slate-900/20"
           >

@@ -1,64 +1,184 @@
 "use client";
 import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import { CreditCard, Tag, X, ArrowRight, CheckCircle2 } from "lucide-react";
+
+const PROMO_CODES: Record<string, { type: 'percent' | 'fixed', value: number }> = {
+  'SAVE20': { type: 'percent', value: 20 },
+  'MINUS10': { type: 'fixed', value: 10 },
+  'VIP50': { type: 'percent', value: 50 },
+};
 
 export default function PaymentProcess47() {
+  const baseTotal = 150.00;
+  
+  const [promoCode, setPromoCode] = useState("");
+  const [activePromo, setActivePromo] = useState<string | null>(null);
+  const [promoError, setPromoError] = useState("");
+  
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const presets = [10, 25, 50, 100];
-    const [amount, setAmount] = useState<number>(50);
-    const [isCustom, setIsCustom] = useState(false);
-    const [isProcessing, setIsProcessing] = useState(false);
+  let discount = 0;
+  if (activePromo && PROMO_CODES[activePromo]) {
+    const promo = PROMO_CODES[activePromo];
+    if (promo.type === 'percent') {
+      discount = baseTotal * (promo.value / 100);
+    } else {
+      discount = promo.value;
+    }
+  }
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
-    };
+  const finalTotal = Math.max(0, baseTotal - discount);
 
-    return (
-      <div className="w-full min-h-[600px] bg-cyan-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-md w-full bg-white rounded-[2rem] md:rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 sm:h-2 bg-cyan-600" />
+  const applyPromo = (e: React.FormEvent) => {
+    e.preventDefault();
+    setPromoError("");
+    
+    const code = promoCode.trim().toUpperCase();
+    if (!code) return;
+
+    if (PROMO_CODES[code]) {
+      setActivePromo(code);
+      setPromoCode("");
+    } else {
+      setPromoError("Invalid promo code");
+    }
+  };
+
+  const removePromo = () => {
+    setActivePromo(null);
+    setPromoCode("");
+    setPromoError("");
+  };
+
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
+
+  return (
+    <div className="w-full min-h-[700px] bg-emerald-950 flex items-center justify-center font-sans p-6 text-emerald-100">
+      
+      {!isSuccess ? (
+        <div className="max-w-md w-full bg-white rounded-[2rem] p-8 shadow-2xl border border-emerald-100 text-slate-800 animate-in fade-in duration-500">
           
-          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-cyan-50 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-            <Heart className="w-7 h-7 sm:w-8 sm:h-8 text-cyan-600" fill="currentColor" />
-          </div>
-          
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Medical Research Grant</h2>
-            <p className="text-gray-500 text-xs sm:text-sm">Your contribution makes a direct impact. Select an amount to give today.</p>
-          </div>
+          <h2 className="text-2xl font-black text-slate-900 mb-8">Order Summary</h2>
 
-          <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
-            {presets.map(a => (
-              <button key={a} onClick={() => { setAmount(a); setIsCustom(false); }} className={`py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg transition-all ${!isCustom && amount === a ? 'bg-cyan-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-                $${a}
-              </button>
-            ))}
-          </div>
-          
-          <button onClick={() => setIsCustom(true)} className={`w-full py-3 sm:py-4 rounded-xl font-bold mb-6 sm:mb-8 transition-all ${isCustom ? 'bg-cyan-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-            Custom Amount
-          </button>
-
-          {isCustom && (
-            <div className="mb-6 sm:mb-8 relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-lg sm:text-xl">$</span>
-              <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full text-xl sm:text-2xl font-bold text-gray-900 pl-10 pr-4 py-3 sm:py-4 bg-gray-50 rounded-xl focus:outline-none focus:ring-cyan-600/20 focus:border-cyan-600" />
+          {/* Pricing Box */}
+          <div className="bg-emerald-50 rounded-2xl p-6 mb-8 border border-emerald-100">
+            <div className="flex justify-between items-center mb-3">
+              <span className="font-bold text-slate-500">Subtotal</span>
+              <span className="font-black text-slate-900">${baseTotal.toFixed(2)}</span>
             </div>
-          )}
-
-          <form onSubmit={handlePay} className="space-y-3 sm:space-y-4">
-            <input required type="email" placeholder="Email Address" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-cyan-600/20 focus:border-cyan-600" />
-            <input required type="text" placeholder="Card Number" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-cyan-600/20 focus:border-cyan-600" />
             
-            <button type="submit" disabled={isProcessing} className="w-full bg-cyan-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 mt-4 transition-all hover:opacity-90 text-sm sm:text-base">
-              {isProcessing ? 'Processing...' : `Donate $${amount}`}
-              {!isProcessing && <Heart className="w-4 h-4 ml-1" />}
+            {/* Active Promo Line */}
+            <div className={`flex justify-between items-center overflow-hidden transition-all duration-300 ${activePromo ? 'max-h-12 mb-3 opacity-100' : 'max-h-0 opacity-0 mb-0'}`}>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-emerald-600">Discount</span>
+                <span className="text-xs font-bold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full flex items-center gap-1">
+                  {activePromo}
+                  <button type="button" onClick={(e) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = removePromo;
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+      else if (typeof originalHandler === 'object' && originalHandler !== null) { /* ignore event objects */ }
+    }} className="hover:text-emerald-900 ml-1">
+                    <X className="w-3 h-3" />
+                  </button>
+                </span>
+              </div>
+              <span className="font-black text-emerald-600">-${discount.toFixed(2)}</span>
+            </div>
+
+            <div className="flex justify-between items-end pt-4 border-t border-emerald-200/50 mt-1">
+              <span className="font-bold text-slate-500">Total</span>
+              <div className="text-right">
+                {activePromo && (
+                  <span className="text-sm line-through text-slate-400 mr-2">${baseTotal.toFixed(2)}</span>
+                )}
+                <span className="text-4xl font-black text-slate-900">${finalTotal.toFixed(2)}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Promo Input Area */}
+          <div className="mb-8">
+            <form onSubmit={applyPromo} className="flex gap-2">
+              <div className="relative flex-1">
+                <Tag className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <input required 
+                  type="text" 
+                  value={promoCode}
+                  onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
+                  disabled={activePromo !== null}
+                  placeholder="Promo code (e.g. SAVE20)" 
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-slate-900 focus:outline-none focus:border-emerald-500 transition-colors font-bold text-sm disabled:opacity-50 disabled:cursor-not-allowed" 
+                />
+              </div>
+              <button 
+                type="submit" 
+                disabled={activePromo !== null || !promoCode}
+                className="bg-slate-900 text-white px-6 rounded-xl font-bold text-sm hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Apply
+              </button>
+            </form>
+            {promoError && (
+              <p className="text-red-500 text-xs font-bold mt-2 ml-1 animate-in slide-in-from-top-1">{promoError}</p>
+            )}
+          </div>
+
+          {/* Payment Form */}
+          <form onSubmit={handlePay} className="space-y-4">
+            <div className="relative">
+              <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+              <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-white border border-slate-200 rounded-xl pl-12 pr-4 py-4 text-slate-900 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors font-mono tracking-widest text-sm" />
+            </div>
+            
+            <button 
+              type="submit" 
+              disabled={isProcessing}
+              className="w-full py-5 mt-4 bg-emerald-600 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-emerald-500 transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] disabled:opacity-70 disabled:shadow-none"
+            >
+              {isProcessing ? (
+                <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+              ) : (
+                <>Pay ${finalTotal.toFixed(2)} <ArrowRight className="w-5 h-5" /></>
+              )}
             </button>
           </form>
+
         </div>
-      </div>
-    );
-        
+      ) : (
+        <div className="max-w-md w-full bg-emerald-900/50 backdrop-blur-md rounded-[2rem] p-10 shadow-2xl border border-emerald-800 text-center animate-in zoom-in duration-500">
+           <div className="w-24 h-24 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+             <CheckCircle2 className="w-12 h-12 text-emerald-400" strokeWidth={3} />
+           </div>
+           <h2 className="text-3xl font-black text-white mb-2">Success!</h2>
+           <p className="text-emerald-200/80 mb-8 font-medium">Your payment of ${finalTotal.toFixed(2)} was processed.</p>
+           
+           <button type="button" 
+              onClick={() => { setIsSuccess(false); removePromo(); }}
+              className="w-full py-4 bg-emerald-800 hover:bg-emerald-700 text-white font-bold rounded-xl transition-colors"
+            >
+              Start Over
+            </button>
+        </div>
+      )}
+
+    </div>
+  );
 }

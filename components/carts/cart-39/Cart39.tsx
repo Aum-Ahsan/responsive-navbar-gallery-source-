@@ -24,7 +24,7 @@ export default function Cart39() {
   return (
     <div className="w-full bg-slate-50 p-6 sm:p-10 font-sans flex justify-center">
       <div className="w-full max-w-md bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
-        
+
         <div className="flex justify-between items-start mb-6">
           <div>
             <h2 className="text-xl font-bold text-slate-900">UltraBook Pro 14"</h2>
@@ -40,8 +40,8 @@ export default function Cart39() {
           </h3>
           <div className="space-y-2">
             {warranties.map(w => (
-              <label 
-                key={w.id} 
+              <label
+                key={w.id}
                 className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition ${warranty === w.id ? "bg-white border-blue-500 shadow-sm" : "border-slate-200 hover:border-slate-300"}`}
               >
                 <div className={`w-5 h-5 rounded-full border-2 mt-0.5 flex items-center justify-center shrink-0 ${warranty === w.id ? "border-blue-500 bg-blue-500" : "border-slate-300 bg-white"}`}>
@@ -59,13 +59,13 @@ export default function Cart39() {
           </div>
         </div>
 
-        <button 
+        <button type="button"
           onClick={handleAdd}
           disabled={added}
           className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition ${added ? "bg-emerald-500 text-white" : "bg-slate-900 hover:bg-slate-800 text-white shadow-lg shadow-slate-900/20"}`}
         >
           {added ? <Check size={18} /> : <ShoppingCart size={18} />}
-          {added ? "Added to Cart" : `Add to Cart - $${total}`}
+          {added ? "Added to Cart" : `Add to Cart - ${total}`}
         </button>
       </div>
     </div>

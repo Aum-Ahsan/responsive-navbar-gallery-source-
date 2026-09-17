@@ -32,7 +32,7 @@ export default function Cart42() {
   return (
     <div className="w-full bg-slate-900 p-6 sm:p-10 font-sans flex justify-center text-white">
       <div className="w-full max-w-md bg-slate-800 rounded-3xl p-6 border border-slate-700 shadow-xl">
-        
+
         <div className="text-center mb-8 border-b border-slate-700 pb-6">
           <p className="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-2">Live Concert</p>
           <h2 className="text-2xl font-bold">Symphony in Blue</h2>
@@ -54,16 +54,16 @@ export default function Cart42() {
                   const seatId = `${row}${i + 1}`;
                   const isBooked = booked.includes(seatId);
                   const isSelected = selectedSeats.includes(seatId);
-                  
+
                   return (
-                    <button
+                    <button type="button"
                       key={seatId}
                       onClick={() => toggleSeat(seatId)}
                       disabled={isBooked}
                       className={`w-8 h-8 sm:w-10 sm:h-10 rounded-t-lg rounded-b-sm flex items-center justify-center text-xs font-bold transition-all
-                        ${isBooked ? "bg-slate-700 text-slate-600 cursor-not-allowed" : 
-                          isSelected ? "bg-indigo-500 text-white shadow-lg shadow-indigo-500/50 -translate-y-1" : 
-                          "bg-slate-600 text-slate-300 hover:bg-slate-500"}`}
+                        ${isBooked ? "bg-slate-700 text-slate-600 cursor-not-allowed" :
+                          isSelected ? "bg-indigo-500 text-white shadow-lg shadow-indigo-500/50 -translate-y-1" :
+                            "bg-slate-600 text-slate-300 hover:bg-slate-500"}`}
                     >
                       {i + 1}
                     </button>
@@ -83,15 +83,15 @@ export default function Cart42() {
           </div>
         </div>
 
-        <button 
+        <button type="button"
           onClick={handleAdd}
           disabled={added || selectedSeats.length === 0}
           className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition 
-            ${selectedSeats.length === 0 ? "bg-slate-700 text-slate-500 cursor-not-allowed" : 
+            ${selectedSeats.length === 0 ? "bg-slate-700 text-slate-500 cursor-not-allowed" :
               added ? "bg-emerald-500 text-white" : "bg-indigo-600 hover:bg-indigo-500 text-white"}`}
         >
           {added ? <Check size={18} /> : <Ticket size={18} />}
-          {added ? "Tickets Added!" : selectedSeats.length === 0 ? "Select Seats" : `Add ${selectedSeats.length} Ticket${selectedSeats.length > 1 ? "s" : ""} - $${total}`}
+          {added ? "Tickets Added!" : selectedSeats.length === 0 ? "Select Seats" : `Add ${selectedSeats.length} Ticket${selectedSeats.length > 1 ? "s" : ""} - ${total}`}
         </button>
 
       </div>

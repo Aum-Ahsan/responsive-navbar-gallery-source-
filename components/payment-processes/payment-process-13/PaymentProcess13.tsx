@@ -1,117 +1,187 @@
 "use client";
-import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
+import { CreditCard, Lock, CheckCircle2, ShoppingBag, ArrowRight } from "lucide-react";
 
 export default function PaymentProcess13() {
+  const [isHolding, setIsHolding] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  
+  const holdTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const HOLD_DURATION = 1500; // 1.5 seconds
 
-    const [paymentMode, setPaymentMode] = useState<"upfront" | "split">("upfront");
-    const [splitMonths, setSplitMonths] = useState<number>(3);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
+  const startHold = (e: React.PointerEvent | React.TouchEvent) => {
+    if (isProcessing || isSuccess) return;
+    setIsHolding(true);
+    
+    // Clear any existing timeout just in case
+    if (holdTimeoutRef.current) clearTimeout(holdTimeoutRef.current);
+    
+    holdTimeoutRef.current = setTimeout(() => {
+      // Payment confirmed
+      setIsHolding(false);
+      processPayment();
+    }, HOLD_DURATION);
+  };
 
-    const totalAmount = 1200;
-    const splitAmount = Math.ceil((totalAmount * 1.05) / splitMonths);
-
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => {
-        setIsProcessing(false);
-        setIsSuccess(true);
-      }, 2000);
-    };
-
-    if (isSuccess) {
-      return (
-        <div className="w-full min-h-[600px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 text-center max-w-md w-full shadow-xl border border-gray-100">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Check className="w-8 h-8 sm:w-10 sm:h-10" />
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Payment Confirmed</h2>
-            <p className="text-sm sm:text-base text-gray-500 mb-8">Your payment has been processed successfully. A receipt has been sent to your email.</p>
-            <button onClick={() => setIsSuccess(false)} className="text-stone-600 font-semibold hover:opacity-80 transition-opacity text-sm sm:text-base">
-              Return to Dashboard
-            </button>
-          </div>
-        </div>
-      );
+  const endHold = () => {
+    if (isProcessing || isSuccess) return;
+    setIsHolding(false);
+    
+    if (holdTimeoutRef.current) {
+      clearTimeout(holdTimeoutRef.current);
+      holdTimeoutRef.current = null;
     }
+  };
 
-    return (
-      <div className="w-full min-h-[700px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
-          <div className="space-y-6 md:space-y-8">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-stone-50 text-stone-600 text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-3 sm:mb-4">
-                <Zap className="w-3 h-3" /> Car Loan Down Payment Simulator
+  const processPayment = () => {
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (holdTimeoutRef.current) clearTimeout(holdTimeoutRef.current);
+    };
+  }, []);
+
+  return (
+    <div className="w-full min-h-screen bg-slate-900 flex items-center justify-center font-sans p-6 text-slate-100 selection:bg-fuchsia-500/30">
+      
+      <div className="w-full max-w-lg bg-slate-800 p-8 md:p-12 rounded-[2.5rem] shadow-2xl border border-slate-700 relative overflow-hidden">
+        
+        {/* Background ambient glow */}
+        <div className="absolute -top-24 -right-24 w-64 h-64 bg-fuchsia-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-cyan-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div className="relative z-10 flex flex-col h-full">
+          
+          <header className="flex justify-between items-center mb-12">
+            <h1 className="font-bold tracking-wider text-slate-300 uppercase text-sm">Checkout</h1>
+            <div className="flex gap-2">
+              <span className="w-2 h-2 rounded-full bg-slate-600"></span>
+              <span className="w-2 h-2 rounded-full bg-slate-600"></span>
+              <span className="w-8 h-2 rounded-full bg-fuchsia-500"></span>
+            </div>
+          </header>
+
+          <div className="flex-1">
+            <div className="mb-10 text-center">
+              <div className="w-16 h-16 bg-slate-700/50 rounded-2xl flex items-center justify-center mx-auto mb-6 text-fuchsia-400">
+                <ShoppingBag className="w-8 h-8" />
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 tracking-tight">Complete your purchase</h2>
-              <p className="text-sm sm:text-base md:text-lg text-gray-500 leading-relaxed">Choose how you want to pay. Pay upfront to save, or split it into manageable monthly payments.</p>
+              <h2 className="text-3xl md:text-4xl font-light mb-2">Digital Subscription</h2>
+              <p className="text-slate-400">Annual Pro Plan</p>
+              
+              <div className="text-5xl md:text-6xl font-black mt-8 text-white tracking-tighter">
+                $199<span className="text-2xl text-slate-500 font-medium">.00</span>
+              </div>
             </div>
 
-            <div className="bg-white rounded-3xl p-1.5 shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-1.5 sm:gap-0">
-              <button onClick={() => setPaymentMode("upfront")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "upfront" ? "bg-stone-700 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Pay in full</button>
-              <button onClick={() => setPaymentMode("split")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "split" ? "bg-stone-700 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Split payment</button>
-            </div>
-
-            <div className="bg-white rounded-3xl p-5 sm:p-6 md:p-8 border border-gray-100 shadow-sm transition-all">
-              {paymentMode === "upfront" ? (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Total Payment</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">One-time payment</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${totalAmount}</div>
-                  </div>
+            <div className="bg-slate-900/50 rounded-2xl p-4 flex justify-between items-center border border-slate-700/50 mb-12">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center">
+                  <CreditCard className="w-5 h-5 text-slate-300" />
                 </div>
-              ) : (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Monthly Split</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">Includes 5% fee</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${splitAmount}<span className="text-base sm:text-lg text-gray-400 font-normal">/mo</span></div>
-                  </div>
-                  <div className="pt-4 border-t border-gray-100">
-                    <input type="range" min="2" max="6" step="1" value={splitMonths} onChange={(e) => setSplitMonths(Number(e.target.value))} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
-                    <div className="flex justify-between text-[10px] sm:text-xs text-gray-400 mt-2 font-medium">
-                      <span>2 mos</span>
-                      <span>6 mos</span>
-                    </div>
-                  </div>
+                <div>
+                  <div className="font-medium text-slate-200 text-sm">Mastercard</div>
+                  <div className="text-xs text-slate-500 font-mono">•••• 8439</div>
                 </div>
-              )}
+              </div>
+              <button type="button" className="text-sm font-semibold text-fuchsia-400 hover:text-fuchsia-300 transition-colors">Edit</button>
             </div>
           </div>
 
-          <div className="bg-white rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
-            <form onSubmit={handlePay} className="space-y-4 sm:space-y-5 relative z-10">
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
-                <input required type="email" placeholder="you@example.com" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 text-sm sm:text-base text-gray-900 placeholder-gray-400 focus:outline-none transition-all focus:ring-stone-700/20 focus:border-stone-700" />
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Card Information</label>
-                <div className="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden transition-all focus-within:ring-2 focus-within:border-transparent">
-                  <input maxLength={16} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 16); }} required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-transparent px-4 py-3 sm:py-3.5 border-b border-gray-200 focus:outline-none font-mono text-sm sm:text-base" />
-                  <div className="flex">
-                    <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none border-r border-gray-200 font-mono text-sm sm:text-base" />
-                    <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none font-mono text-sm sm:text-base" />
-                  </div>
+          <div className="mt-auto">
+            {!isSuccess ? (
+              <div className="relative flex justify-center">
+                
+                {/* Hold to Confirm Button */}
+                <button type="button"
+                  onPointerDown={startHold}
+                  onPointerUp={endHold}
+                  onPointerLeave={endHold}
+                  onPointerCancel={endHold}
+                  // Touch events for better mobile support
+                  onTouchStart={startHold}
+                  onTouchEnd={endHold}
+                  onTouchCancel={endHold}
+                  disabled={isProcessing}
+                  className={`w-40 h-40 rounded-full relative flex flex-col items-center justify-center transition-all duration-300 ${
+                    isHolding ? 'scale-95 shadow-[0_0_40px_rgba(217,70,239,0.5)]' : 'scale-100 shadow-xl shadow-black/50'
+                  } ${isProcessing ? 'bg-slate-700 cursor-not-allowed' : 'bg-slate-800 border-2 border-slate-600 hover:border-slate-500 select-none'}`}
+                >
+                  
+                  {/* Progress Ring */}
+                  {!isProcessing && (
+                    <svg className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none">
+                      <circle 
+                        cx="80" 
+                        cy="80" 
+                        r="76" 
+                        fill="none" 
+                        stroke="rgba(217, 70, 239, 0.2)" 
+                        strokeWidth="8" 
+                      />
+                      <circle 
+                        cx="80" 
+                        cy="80" 
+                        r="76" 
+                        fill="none" 
+                        stroke="#d946ef" // fuchsia-500
+                        strokeWidth="8"
+                        strokeLinecap="round"
+                        strokeDasharray="477.5" // 2 * pi * 76
+                        strokeDashoffset={isHolding ? "0" : "477.5"}
+                        className="transition-all ease-linear"
+                        style={{ transitionDuration: isHolding ? `${HOLD_DURATION}ms` : '300ms' }}
+                      />
+                    </svg>
+                  )}
+
+                  {isProcessing ? (
+                    <div className="flex flex-col items-center text-slate-400">
+                      <div className="w-8 h-8 border-4 border-slate-500 border-t-fuchsia-500 rounded-full animate-spin mb-2"></div>
+                      <span className="text-sm font-semibold">Processing...</span>
+                    </div>
+                  ) : (
+                    <>
+                      <Lock className={`w-8 h-8 mb-2 transition-colors ${isHolding ? 'text-fuchsia-400' : 'text-slate-400'}`} />
+                      <span className={`text-sm font-bold tracking-wider transition-colors ${isHolding ? 'text-fuchsia-400' : 'text-slate-400'}`}>
+                        HOLD
+                      </span>
+                    </>
+                  )}
+                </button>
+                
+                {/* Instruction Text */}
+                <div className={`absolute -bottom-8 text-center w-full text-xs font-medium tracking-wide transition-opacity duration-300 ${isHolding ? 'opacity-100 text-fuchsia-400' : 'opacity-50 text-slate-400'}`}>
+                  {isHolding ? 'Keep holding...' : 'Press and hold to confirm'}
                 </div>
               </div>
-              <div className="pt-2 sm:pt-4">
-                <button type="submit" disabled={isProcessing} className="w-full bg-stone-700 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed text-sm sm:text-base">
-                  {isProcessing ? 'Processing...' : `Pay $${paymentMode === "upfront" ? totalAmount : splitAmount} Now`}
+            ) : (
+              <div className="text-center animate-in zoom-in duration-500">
+                <div className="w-24 h-24 bg-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle2 className="w-12 h-12 text-cyan-400" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">Payment Successful</h3>
+                <p className="text-slate-400 mb-8">Your subscription is now active.</p>
+                <button type="button" 
+                  onClick={() => setIsSuccess(false)}
+                  className="px-8 py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-full transition-colors"
+                >
+                  Return to Dashboard
                 </button>
               </div>
-            </form>
+            )}
           </div>
+          
         </div>
       </div>
-    );
-        
+    </div>
+  );
 }

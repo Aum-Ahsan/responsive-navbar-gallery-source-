@@ -1,69 +1,197 @@
 "use client";
-import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
+import { CreditCard, CheckCircle2, ArrowRight, Lock } from "lucide-react";
 
 export default function PaymentProcess28() {
+  const [scrollY, setScrollY] = useState(0);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-    const [isProcessing, setIsProcessing] = useState(false);
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    setScrollY(e.currentTarget.scrollTop);
+  };
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
-    };
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
 
+  if (isSuccess) {
     return (
-      <div className="w-full min-h-[600px] bg-neutral-900 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 rounded-[2rem] overflow-hidden shadow-2xl bg-white">
-          <div className="bg-emerald-600 p-8 sm:p-10 flex flex-col justify-between text-white">
-            <div>
-              <FileText className="w-8 h-8 sm:w-10 sm:h-10 mb-6 sm:mb-8 opacity-80" />
-              <h2 className="text-2xl sm:text-3xl font-bold mb-2">Invoice Payment</h2>
-              <p className="opacity-80 mb-6 sm:mb-8 text-sm sm:text-base">Utility Bill Quick Pay</p>
-              
-              <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                <div className="flex justify-between text-xs sm:text-sm opacity-90 border-b border-white/20 pb-2">
-                  <span>Invoice #</span>
-                  <span className="font-mono">INV-2026</span>
-                </div>
-                <div className="flex justify-between text-xs sm:text-sm opacity-90 border-b border-white/20 pb-2">
-                  <span>Due Date</span>
-                  <span>Oct 1, 2026</span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="mt-8 md:mt-0">
-              <p className="text-xs sm:text-sm opacity-80 mb-1">Amount Due</p>
-              <p className="text-4xl sm:text-5xl font-bold tracking-tight">$4,500.00</p>
-            </div>
+      <div className="w-full min-h-[700px] bg-emerald-950 flex items-center justify-center font-sans p-6">
+        <div className="bg-white p-12 rounded-[2.5rem] shadow-2xl text-center max-w-sm w-full animate-in zoom-in-95 duration-500">
+          <div className="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-8">
+            <CheckCircle2 className="w-12 h-12 text-emerald-600" />
           </div>
-          
-          <div className="p-8 sm:p-10 flex flex-col justify-center">
-            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-6">Payment Method</h3>
-            <form onSubmit={handlePay} className="space-y-4">
-              <div>
-                <label className="block text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Name on Card</label>
-                <input required type="text" className="w-full bg-gray-50 border-none rounded-xl px-4 py-3 sm:py-4 focus:ring-2 focus:ring-gray-200 transition-shadow text-sm sm:text-base" />
-              </div>
-              <div>
-                <label className="block text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Card Details</label>
-                <div className="bg-gray-50 rounded-xl overflow-hidden flex flex-col">
-                  <input required type="text" placeholder="Card Number" className="w-full bg-transparent px-4 py-3 sm:py-4 border-b border-gray-200 focus:outline-none text-sm sm:text-base" />
-                  <div className="flex">
-                    <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-4 border-r border-gray-200 focus:outline-none text-sm sm:text-base" />
-                    <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-4 focus:outline-none text-sm sm:text-base" />
-                  </div>
-                </div>
-              </div>
-              <button type="submit" disabled={isProcessing} className="w-full bg-gray-900 text-white font-bold py-3.5 sm:py-4 rounded-xl mt-4 sm:mt-6 hover:bg-black transition-colors flex items-center justify-center text-sm sm:text-base">
-                {isProcessing ? 'Processing...' : 'Pay Invoice'}
-                {!isProcessing && <ArrowRight className="w-4 h-4 ml-2" />}
-              </button>
-            </form>
-          </div>
+          <h2 className="text-3xl font-black text-slate-900 mb-2">Order Confirmed</h2>
+          <p className="text-slate-500 font-medium mb-8">Your travel itinerary has been booked.</p>
+          <button type="button" onClick={() => { setIsSuccess(false); setScrollY(0); }} className="w-full py-4 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-700 transition-colors">
+            View Itinerary
+          </button>
         </div>
       </div>
     );
+  }
+
+  return (
+    <div className="w-full min-h-screen bg-slate-100 flex items-center justify-center font-sans overflow-hidden p-0 md:p-6">
+      
+      {/* Outer wrapper to constrain height */}
+      <div className="w-full max-w-5xl h-[100dvh] md:h-[800px] bg-white md:rounded-[2.5rem] shadow-2xl overflow-hidden relative border border-slate-200">
         
+        {/* Parallax Background Images */}
+        {/* Deepest layer - moves slowest */}
+        <div 
+          className="absolute inset-0 w-full h-[150%] bg-[url('https://images.unsplash.com/photo-1506905925275-224bd0ee31ea?w=1600&q=80')] bg-cover bg-center opacity-30 mix-blend-luminosity"
+          style={{ transform: `translateY(-${scrollY * 0.15}px)` }}
+        ></div>
+        
+        {/* Middle layer - moves medium speed */}
+        <div 
+          className="absolute inset-0 w-full h-[150%] pointer-events-none flex justify-end"
+          style={{ transform: `translateY(-${scrollY * 0.3}px)` }}
+        >
+          <div className="w-96 h-96 bg-emerald-500/20 rounded-full blur-[100px] mt-40 mr-20"></div>
+        </div>
+
+        {/* Foreground fast layer - decorative elements */}
+        <div 
+          className="absolute inset-0 w-full h-[200%] pointer-events-none"
+          style={{ transform: `translateY(-${scrollY * 0.6}px)` }}
+        >
+           <div className="absolute top-[20%] left-[10%] w-32 h-32 border border-slate-400/20 rounded-full"></div>
+           <div className="absolute top-[60%] right-[15%] w-64 h-64 border border-slate-400/20 rounded-full"></div>
+           <div className="absolute top-[80%] left-[20%] w-16 h-16 bg-emerald-500/10 rounded-full"></div>
+        </div>
+
+        {/* Scrollable Content Container */}
+        <div 
+          ref={containerRef}
+          onScroll={handleScroll}
+          className="absolute inset-0 w-full h-full overflow-y-auto custom-scrollbar relative z-10"
+        >
+          {/* Header area - transparent to show parallax */}
+          <div className="h-[40vh] flex flex-col justify-center px-8 md:px-16 text-slate-900">
+            <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-4 leading-none">
+              Your Alpine<br/>Retreat.
+            </h1>
+            <p className="text-xl font-medium text-slate-600 max-w-md">
+              Review your booking details and complete payment to secure your dates.
+            </p>
+          </div>
+
+          {/* Content area - opaque to readable form */}
+          <div className="bg-white/90 backdrop-blur-xl min-h-[60vh] rounded-t-[3rem] p-8 md:p-12 shadow-[0_-20px_40px_rgba(0,0,0,0.1)]">
+            
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+              
+              {/* Left Column: Itinerary */}
+              <div className="lg:col-span-3 space-y-8">
+                <div>
+                  <h2 className="text-2xl font-black text-slate-900 mb-6">Booking Details</h2>
+                  
+                  <div className="space-y-6">
+                    <div className="flex gap-6 p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+                      <div className="w-24 h-24 bg-slate-200 rounded-xl overflow-hidden shrink-0 shadow-inner">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=200&q=80" alt="Resort" className="w-full h-full object-cover" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-lg text-slate-900">Grand Alpine Resort & Spa</h3>
+                        <p className="text-sm text-slate-500 mt-1">4 Nights • Premium Mountain View Suite</p>
+                        <div className="mt-3 flex gap-4 text-sm font-semibold text-slate-900">
+                          <div><span className="text-slate-400 block text-xs">Check In</span> Oct 12</div>
+                          <div><span className="text-slate-400 block text-xs">Check Out</span> Oct 16</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-6 p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+                      <div className="w-24 h-24 bg-slate-200 rounded-xl overflow-hidden shrink-0 shadow-inner">
+                        <img src="https://images.unsplash.com/photo-1522793268875-103362145b0a?w=200&q=80" alt="Ski" className="w-full h-full object-cover" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-lg text-slate-900">Ski Pass & Equipment</h3>
+                        <p className="text-sm text-slate-500 mt-1">2 Adults • 3 Days access</p>
+                        <div className="mt-3 text-sm font-semibold text-slate-900">
+                          $450.00
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Extra spacer to demonstrate more scrolling */}
+                <div className="h-20 border-b border-slate-200"></div>
+                
+                <div>
+                  <h2 className="text-2xl font-black text-slate-900 mb-6">Guest Information</h2>
+                  <div className="grid grid-cols-2 gap-4">
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="First Name" defaultValue="John" className="bg-slate-50 border border-slate-200 p-4 rounded-xl focus:outline-none" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Last Name" defaultValue="Doe" className="bg-slate-50 border border-slate-200 p-4 rounded-xl focus:outline-none" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="email" placeholder="Email" defaultValue="john@example.com" className="col-span-2 bg-slate-50 border border-slate-200 p-4 rounded-xl focus:outline-none" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Sticky Checkout */}
+              <div className="lg:col-span-2">
+                
+                <div className="sticky top-8 bg-slate-900 text-white rounded-[2rem] p-8 shadow-2xl">
+                  <h3 className="text-xl font-bold mb-6">Price Summary</h3>
+                  
+                  <div className="space-y-3 mb-6 text-sm text-slate-300 font-medium">
+                    <div className="flex justify-between"><span>Room x 4 nights</span><span>$1,200.00</span></div>
+                    <div className="flex justify-between"><span>Ski Package</span><span>$450.00</span></div>
+                    <div className="flex justify-between"><span>Taxes & Fees</span><span>$148.50</span></div>
+                  </div>
+                  
+                  <div className="flex justify-between items-end pt-6 border-t border-slate-700 mb-8">
+                    <span className="font-bold text-slate-400">Total</span>
+                    <span className="text-4xl font-black tracking-tighter">$1,798.50</span>
+                  </div>
+
+                  <form onSubmit={handlePay}>
+                    <div className="space-y-4 mb-8">
+                      <div className="relative">
+                        <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-12 pr-4 py-4 focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-sm" />
+                      </div>
+                      <div className="flex gap-4">
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-slate-800 border border-slate-700 rounded-xl px-4 py-4 focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-sm text-center" />
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-slate-800 border border-slate-700 rounded-xl px-4 py-4 focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-sm text-center" />
+                      </div>
+                    </div>
+
+                    <button 
+                      type="submit" 
+                      disabled={isProcessing}
+                      className="w-full py-5 bg-emerald-500 text-emerald-950 rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-emerald-400 transition-colors shadow-[0_0_20px_rgba(16,185,129,0.3)] disabled:opacity-70 disabled:shadow-none"
+                    >
+                      {isProcessing ? (
+                        <div className="w-6 h-6 border-4 border-emerald-950/30 border-t-emerald-950 rounded-full animate-spin"></div>
+                      ) : (
+                        <>Confirm Booking <ArrowRight className="w-5 h-5" /></>
+                      )}
+                    </button>
+                    
+                    <div className="flex justify-center items-center gap-2 mt-6 text-xs text-slate-500 font-medium">
+                      <Lock className="w-3 h-3" /> Encrypted Checkout
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
 }

@@ -63,7 +63,7 @@ export default function Cart21() {
               </div>
               <span className="text-sm font-medium text-slate-600 whitespace-nowrap">${sku.price.toFixed(2)}</span>
               <div className="flex items-center gap-1 justify-center">
-                <button onClick={() => change(sku.id, -1)} className="w-7 h-7 border border-slate-200 rounded-lg flex items-center justify-center hover:bg-slate-50 text-slate-600 transition">
+                <button type="button" onClick={() => change(sku.id, -1)} className="w-7 h-7 border border-slate-200 rounded-lg flex items-center justify-center hover:bg-slate-50 text-slate-600 transition">
                   <Minus size={11} />
                 </button>
                 <input
@@ -73,7 +73,7 @@ export default function Cart21() {
                   onChange={e => setQuantities(q => ({ ...q, [sku.id]: Math.max(0, parseInt(e.target.value) || 0) }))}
                   className="w-12 text-center border border-slate-200 rounded-lg py-1 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-slate-900"
                 />
-                <button onClick={() => change(sku.id, 1)} className="w-7 h-7 border border-slate-200 rounded-lg flex items-center justify-center hover:bg-slate-50 text-slate-600 transition">
+                <button type="button" onClick={() => change(sku.id, 1)} className="w-7 h-7 border border-slate-200 rounded-lg flex items-center justify-center hover:bg-slate-50 text-slate-600 transition">
                   <Plus size={11} />
                 </button>
               </div>
@@ -89,7 +89,7 @@ export default function Cart21() {
             <Package size={16} />
             <span>{totalItems} unit{totalItems !== 1 ? "s" : ""} selected</span>
           </div>
-          <button
+          <button type="button"
             onClick={handleAdd}
             disabled={totalItems === 0}
             className={`flex-1 py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all duration-300 ${

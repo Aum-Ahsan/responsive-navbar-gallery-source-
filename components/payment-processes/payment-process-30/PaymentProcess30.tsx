@@ -1,102 +1,181 @@
 "use client";
-import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { ShoppingCart, Plus, CheckCircle, ArrowRight } from "lucide-react";
 
 export default function PaymentProcess30() {
+  const [cartCount, setCartCount] = useState(0);
+  const [bounce, setBounce] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const [billingMode, setBillingMode] = useState<"monthly" | "annually">("annually");
-    const [selectedTier, setSelectedTier] = useState<number>(1);
-    const [isProcessing, setIsProcessing] = useState(false);
+  const products = [
+    { id: 1, name: "Mechanical Keyboard", price: 129.99, color: "bg-blue-100", img: "https://images.unsplash.com/photo-1595225476474-87563907a212?w=150&q=80" },
+    { id: 2, name: "Wireless Mouse", price: 59.99, color: "bg-rose-100", img: "https://images.unsplash.com/photo-1527814050087-379381547330?w=150&q=80" },
+    { id: 3, name: "Desk Mat", price: 29.99, color: "bg-emerald-100", img: "https://images.unsplash.com/photo-1615563821034-71285bc0b2c1?w=150&q=80" },
+  ];
 
-    const tiers = [
-      { name: 'Starter', monthly: 15, annual: 12 },
-      { name: 'Professional', monthly: 49, annual: 39 },
-      { name: 'Enterprise', monthly: 99, annual: 79 },
-    ];
+  const addToCart = () => {
+    setCartCount(prev => prev + 1);
+    // Trigger spring bounce animation
+    setBounce(false);
+    setTimeout(() => setBounce(true), 10);
+  };
 
-    const currentPrice = billingMode === 'monthly' ? tiers[selectedTier].monthly : tiers[selectedTier].annual;
-    
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
-    };
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
 
-    return (
-      <div className="w-full min-h-[700px] bg-white flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 rounded-[2rem] md:rounded-3xl overflow-hidden border border-gray-200 shadow-2xl">
-          <div className="bg-gray-50 p-6 sm:p-8 md:p-12 border-b md:border-b-0 md:border-r border-gray-200 flex flex-col justify-between">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Cloud Storage Upgrade</h2>
-              <p className="text-sm sm:text-base text-gray-500 mb-6 md:mb-8">Upgrade your account to unlock premium features.</p>
-              
-              <div className="flex flex-col sm:flex-row bg-gray-200/50 rounded-xl p-1 mb-6 md:mb-8 w-full sm:w-fit gap-1 sm:gap-0">
-                <button onClick={() => setBillingMode("monthly")} className={`w-full sm:w-auto px-4 py-2.5 md:py-2 rounded-lg text-sm font-semibold ${billingMode === "monthly" ? 'bg-white shadow text-gray-900' : 'text-gray-500'}`}>Monthly</button>
-                <button onClick={() => setBillingMode("annually")} className={`w-full sm:w-auto px-4 py-2.5 md:py-2 rounded-lg text-sm font-semibold ${billingMode === "annually" ? 'bg-white shadow text-gray-900' : 'text-gray-500'}`}>Annually (Save 20%)</button>
-              </div>
+  return (
+    <div className="w-full min-h-[700px] bg-slate-50 flex items-center justify-center font-sans p-6 overflow-hidden">
+      
+      {/* Global Spring Animation Keyframes */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes spring-bounce {
+          0%   { transform: scale(1); }
+          15%  { transform: scale(1.4); }
+          30%  { transform: scale(0.85); }
+          45%  { transform: scale(1.15); }
+          60%  { transform: scale(0.92); }
+          75%  { transform: scale(1.05); }
+          90%  { transform: scale(0.98); }
+          100% { transform: scale(1); }
+        }
+        .animate-spring {
+          animation: spring-bounce 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+      `}} />
 
-              <div className="space-y-3 md:space-y-4">
-                {tiers.map((tier, i) => (
-                  <div key={i} onClick={() => setSelectedTier(i)} className={`cursor-pointer p-4 md:p-5 rounded-2xl border-2 transition-all ${selectedTier === i ? 'border-blue-200 bg-blue-50' : 'border-gray-200 bg-white hover:border-gray-300'}`}>
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="font-bold text-gray-900 text-sm md:text-base">{tier.name}</span>
-                      <div className="text-right">
-                        <span className="text-lg md:text-xl font-bold text-gray-900">$${billingMode === 'monthly' ? tier.monthly : tier.annual}</span>
-                        <span className="text-gray-500 text-xs md:text-sm">/mo</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div className="mt-8 md:mt-12 pt-6 border-t border-gray-200 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 sm:gap-0">
-              <span className="font-semibold text-gray-600 text-sm md:text-base">Total due today</span>
-              <span className="text-2xl md:text-3xl font-bold text-gray-900">$${billingMode === 'monthly' ? currentPrice : currentPrice * 12}</span>
-            </div>
+      <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+        
+        {/* Left Side: Products */}
+        <div className="bg-white rounded-[2rem] p-8 shadow-xl border border-slate-100">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-2xl font-black text-slate-900">Store</h2>
           </div>
-          
-          <div className="p-6 sm:p-8 md:p-12 bg-white">
-            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-6">Payment Details</h3>
-            <form onSubmit={handlePay} className="space-y-4 sm:space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">First Name</label>
-                  <input required type="text" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none text-sm sm:text-base focus:ring-blue-600/20 focus:border-blue-600" />
+
+          <div className="space-y-4">
+            {products.map(product => (
+              <div key={product.id} className="flex gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-indigo-200 transition-colors group">
+                <div className={`w-20 h-20 ${product.color} rounded-xl p-2 shrink-0 overflow-hidden`}>
+                   <img src={product.img} alt={product.name} className="w-full h-full object-cover mix-blend-multiply" />
                 </div>
-                <div>
-                  <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Last Name</label>
-                  <input required type="text" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none text-sm sm:text-base focus:ring-blue-600/20 focus:border-blue-600" />
+                <div className="flex-1 flex flex-col justify-center">
+                  <h3 className="font-bold text-slate-900">{product.name}</h3>
+                  <p className="text-indigo-600 font-bold mt-1">${product.price}</p>
+                </div>
+                <div className="flex items-center">
+                  <button type="button" 
+                    onClick={(e) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = addToCart;
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+      else if (typeof originalHandler === 'object' && originalHandler !== null) { /* ignore event objects */ }
+    }}
+                    className="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-600 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition-all shadow-sm group-hover:scale-110"
+                  >
+                    <Plus className="w-5 h-5" />
+                  </button>
                 </div>
               </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Name on Card</label>
-                <input required type="text" placeholder="John Doe" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none text-sm sm:text-base focus:ring-blue-600/20 focus:border-blue-600" />
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Card Number</label>
-                <div className="relative">
-                  <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
-                  <input maxLength={16} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 16); }} required type="text" placeholder="0000 0000 0000 0000" className="w-full pl-10 sm:pl-12 bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-blue-600/20 focus:border-blue-600" />
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Expiry</label>
-                  <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-blue-600/20 focus:border-blue-600" />
-                </div>
-                <div>
-                  <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">CVC</label>
-                  <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="123" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-blue-600/20 focus:border-blue-600" />
-                </div>
-              </div>
-              <button type="submit" disabled={isProcessing} className="w-full mt-4 sm:mt-6 bg-blue-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 text-sm sm:text-base hover:shadow-lg hover:-translate-y-0.5">
-                {isProcessing ? 'Processing...' : 'Subscribe Now'}
-              </button>
-            </form>
+            ))}
           </div>
         </div>
+
+        {/* Right Side: Checkout / Success */}
+        <div className="bg-slate-900 text-white rounded-[2rem] p-8 shadow-2xl relative flex flex-col">
+          
+          {!isSuccess ? (
+            <>
+              {/* Dynamic Spring Cart Icon */}
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="text-2xl font-black">Checkout</h2>
+                <div 
+                  className={`w-14 h-14 bg-indigo-500 rounded-2xl flex items-center justify-center relative shadow-[0_0_20px_rgba(99,102,241,0.4)] ${bounce ? 'animate-spring' : ''}`}
+                >
+                  <ShoppingCart className="w-6 h-6 text-white" />
+                  {cartCount > 0 && (
+                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-rose-500 text-white text-xs font-bold rounded-full flex items-center justify-center border-2 border-slate-900 shadow-md">
+                      {cartCount}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex-1">
+                {cartCount === 0 ? (
+                  <div className="h-full flex flex-col items-center justify-center text-slate-500">
+                    <ShoppingCart className="w-12 h-12 mb-4 opacity-20" />
+                    <p className="font-medium">Your cart is empty.</p>
+                    <p className="text-sm">Add some products to continue.</p>
+                  </div>
+                ) : (
+                  <div className="space-y-6 animate-in fade-in duration-500">
+                    <div className="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+                      <div className="flex justify-between text-slate-400 font-medium text-sm mb-2">
+                        <span>Items ({cartCount})</span>
+                        <span>${(cartCount * 85).toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between text-slate-400 font-medium text-sm mb-4">
+                        <span>Tax</span>
+                        <span>${(cartCount * 8.5).toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between items-end pt-4 border-t border-slate-700">
+                        <span className="font-bold">Total</span>
+                        <span className="text-3xl font-black text-white">${(cartCount * 93.5).toFixed(2)}</span>
+                      </div>
+                    </div>
+
+                    <form onSubmit={handlePay}>
+                      <button 
+                        type="submit" 
+                        disabled={isProcessing}
+                        className="w-full py-5 bg-white text-slate-900 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-slate-100 transition-colors disabled:opacity-70"
+                      >
+                        {isProcessing ? (
+                          <div className="w-5 h-5 border-2 border-slate-900/30 border-t-slate-900 rounded-full animate-spin"></div>
+                        ) : (
+                          <>Pay Now <ArrowRight className="w-5 h-5" /></>
+                        )}
+                      </button>
+                    </form>
+                  </div>
+                )}
+              </div>
+            </>
+          ) : (
+            <div className="h-full flex flex-col items-center justify-center text-center animate-in zoom-in-95 duration-500">
+              {/* Success state also uses spring bounce */}
+              <div className="w-24 h-24 bg-emerald-500/20 rounded-full flex items-center justify-center mb-6 animate-spring">
+                <CheckCircle className="w-12 h-12 text-emerald-500" strokeWidth={3} />
+              </div>
+              <h3 className="text-2xl font-black mb-2">Payment Successful!</h3>
+              <p className="text-slate-400 mb-8">Thank you for shopping with us.</p>
+              <button type="button" 
+                onClick={() => { setIsSuccess(false); setCartCount(0); }}
+                className="w-full py-4 bg-slate-800 text-white rounded-xl font-bold hover:bg-slate-700 transition-colors"
+              >
+                Start New Order
+              </button>
+            </div>
+          )}
+
+        </div>
+
       </div>
-    );
-        
+    </div>
+  );
 }

@@ -45,7 +45,7 @@ export default function Cart03() {
             <span className="text-sm text-stone-400 line-through">$220</span>
             <span className="text-xs bg-rose-100 text-rose-600 font-bold px-2 py-1 rounded-full">16% OFF</span>
           </div>
-          <button
+          <button type="button"
             onClick={addToCart}
             className="flex items-center gap-2 bg-stone-900 hover:bg-stone-700 text-white font-bold px-8 py-4 rounded-2xl transition-colors"
           >
@@ -73,7 +73,7 @@ export default function Cart03() {
             <ShoppingCart size={20} className="text-stone-700" />
             <h3 className="font-bold text-stone-900">Your Cart ({cartItems.reduce((s,i) => s+i.qty, 0)})</h3>
           </div>
-          <button onClick={() => setDrawerOpen(false)} className="p-2 hover:bg-stone-100 rounded-full transition">
+          <button type="button" onClick={() => setDrawerOpen(false)} className="p-2 hover:bg-stone-100 rounded-full transition">
             <X size={18} />
           </button>
         </div>
@@ -92,12 +92,12 @@ export default function Cart03() {
                   <p className="font-semibold text-stone-900 text-sm leading-tight">{item.name}</p>
                   <p className="text-stone-500 text-sm">${item.price}</p>
                   <div className="flex items-center gap-2 mt-2">
-                    <button onClick={() => changeQty(item.id, -1)} className="w-7 h-7 border border-stone-200 rounded-lg flex items-center justify-center hover:bg-stone-100"><Minus size={12} /></button>
+                    <button type="button" onClick={() => changeQty(item.id, -1)} className="w-7 h-7 border border-stone-200 rounded-lg flex items-center justify-center hover:bg-stone-100"><Minus size={12} /></button>
                     <span className="text-sm font-bold w-5 text-center">{item.qty}</span>
-                    <button onClick={() => changeQty(item.id, 1)} className="w-7 h-7 border border-stone-200 rounded-lg flex items-center justify-center hover:bg-stone-100"><Plus size={12} /></button>
+                    <button type="button" onClick={() => changeQty(item.id, 1)} className="w-7 h-7 border border-stone-200 rounded-lg flex items-center justify-center hover:bg-stone-100"><Plus size={12} /></button>
                   </div>
                 </div>
-                <button onClick={() => remove(item.id)} className="self-start p-1 text-stone-300 hover:text-rose-500 transition-colors"><X size={16} /></button>
+                <button type="button" onClick={() => remove(item.id)} className="self-start p-1 text-stone-300 hover:text-rose-500 transition-colors"><X size={16} /></button>
               </div>
             ))
           )}
@@ -109,7 +109,7 @@ export default function Cart03() {
               <span>Total</span>
               <span>${total}</span>
             </div>
-            <button className="w-full bg-stone-900 hover:bg-stone-700 text-white font-bold py-4 rounded-2xl transition flex items-center justify-center gap-2">
+            <button type="button" className="w-full bg-stone-900 hover:bg-stone-700 text-white font-bold py-4 rounded-2xl transition flex items-center justify-center gap-2">
               Checkout <ChevronRight size={16} />
             </button>
           </div>

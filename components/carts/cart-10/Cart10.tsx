@@ -42,7 +42,7 @@ export default function Cart10() {
 
         {/* Toggle */}
         <div className="grid grid-cols-2 bg-slate-100 rounded-2xl p-1 gap-1 mb-6">
-          <button
+          <button type="button"
             onClick={() => setMode("onetime")}
             className={`flex flex-col items-center py-3 rounded-xl text-sm font-semibold transition-all duration-200 ${
               mode === "onetime" ? "bg-white shadow-sm text-slate-900" : "text-slate-500 hover:text-slate-700"
@@ -52,7 +52,7 @@ export default function Cart10() {
             One-Time
             <span className="text-xs font-bold text-slate-900 mt-0.5">${basePrice}</span>
           </button>
-          <button
+          <button type="button"
             onClick={() => setMode("subscribe")}
             className={`flex flex-col items-center py-3 rounded-xl text-sm font-semibold transition-all duration-200 relative ${
               mode === "subscribe" ? "bg-violet-600 text-white shadow-sm" : "text-slate-500 hover:text-slate-700"
@@ -73,7 +73,7 @@ export default function Cart10() {
             <p className="text-sm font-semibold text-slate-700 mb-3">Delivery Frequency</p>
             <div className="grid grid-cols-2 gap-2">
               {frequencies.map(f => (
-                <button
+                <button type="button"
                   key={f.value}
                   onClick={() => setFrequency(f.value)}
                   className={`p-3 rounded-xl border-2 text-left transition-all ${
@@ -104,7 +104,7 @@ export default function Cart10() {
           </div>
         </div>
 
-        <button
+        <button type="button"
           onClick={handleAdd}
           className={`w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all duration-300 ${
             added

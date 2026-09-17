@@ -9,7 +9,7 @@ export default function Cart45() {
   const price = 120.00;
   const userPoints = 4500; // 100 points = $1
   const pointsValue = 45.00;
-  
+
   const finalPrice = usePoints ? price - pointsValue : price;
 
   const handleAdd = () => {
@@ -20,7 +20,7 @@ export default function Cart45() {
   return (
     <div className="w-full bg-slate-50 p-6 sm:p-10 font-sans flex justify-center">
       <div className="w-full max-w-sm bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
-        
+
         <div className="flex justify-between items-start mb-6">
           <div>
             <h2 className="text-xl font-bold text-slate-900">Noise-Canceling Pro</h2>
@@ -40,9 +40,9 @@ export default function Cart45() {
           </div>
 
           <label className="flex items-start gap-3 cursor-pointer">
-            <input 
-              type="checkbox" 
-              checked={usePoints} 
+            <input
+              type="checkbox"
+              checked={usePoints}
               onChange={() => setUsePoints(!usePoints)}
               className="mt-1 w-4 h-4 text-amber-600 rounded border-amber-300 focus:ring-amber-500"
             />
@@ -67,13 +67,13 @@ export default function Cart45() {
           </div>
         </div>
 
-        <button 
+        <button type="button"
           onClick={handleAdd}
           disabled={added}
           className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition ${added ? "bg-emerald-500 text-white" : "bg-slate-900 hover:bg-slate-800 text-white shadow-lg shadow-slate-900/20"}`}
         >
           {added ? <Check size={18} /> : <ShoppingCart size={18} />}
-          {added ? "Added to Cart" : `Add to Cart - $${finalPrice.toFixed(2)}`}
+          {added ? "Added to Cart" : `Add to Cart - ${finalPrice.toFixed(2)}`}
         </button>
 
       </div>

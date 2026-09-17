@@ -1,117 +1,171 @@
 "use client";
 import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import { CreditCard, CheckCircle2, ArrowRight } from "lucide-react";
+
+type CardType = 'visa' | 'mastercard' | 'amex' | 'discover' | 'unknown';
 
 export default function PaymentProcess33() {
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardType, setCardType] = useState<CardType>('unknown');
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const [paymentMode, setPaymentMode] = useState<"upfront" | "split">("upfront");
-    const [splitMonths, setSplitMonths] = useState<number>(3);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
+  const getCardType = (number: string): CardType => {
+    const cleanNum = number.replace(/\D/g, '');
+    if (cleanNum.match(/^4/)) return 'visa';
+    if (cleanNum.match(/^5[1-5]/)) return 'mastercard';
+    if (cleanNum.match(/^3[47]/)) return 'amex';
+    if (cleanNum.match(/^6(?:011|5)/)) return 'discover';
+    return 'unknown';
+  };
 
-    const totalAmount = 1200;
-    const splitAmount = Math.ceil((totalAmount * 1.05) / splitMonths);
-
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => {
-        setIsProcessing(false);
-        setIsSuccess(true);
-      }, 2000);
-    };
-
-    if (isSuccess) {
-      return (
-        <div className="w-full min-h-[600px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 text-center max-w-md w-full shadow-xl border border-gray-100">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Check className="w-8 h-8 sm:w-10 sm:h-10" />
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Payment Confirmed</h2>
-            <p className="text-sm sm:text-base text-gray-500 mb-8">Your payment has been processed successfully. A receipt has been sent to your email.</p>
-            <button onClick={() => setIsSuccess(false)} className="text-rose-600 font-semibold hover:opacity-80 transition-opacity text-sm sm:text-base">
-              Return to Dashboard
-            </button>
-          </div>
-        </div>
-      );
+  const formatCardNumber = (value: string, type: CardType) => {
+    const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+    let matches;
+    
+    if (type === 'amex') {
+      // Amex format: 4 6 5
+      matches = v.match(/^(\d{0,4})(\d{0,6})(\d{0,5})$/);
+      if (matches) {
+        return !matches[2] ? matches[1] : `${matches[1]} ${matches[2]}${matches[3] ? ` ${matches[3]}` : ''}`;
+      }
+    } else {
+      // Default format: 4 4 4 4
+      matches = v.match(/\d{4,16}/g);
+      const match = matches && matches[0] || '';
+      const parts = [];
+      for (let i = 0, len = match.length; i < len; i += 4) {
+        parts.push(match.substring(i, i + 4));
+      }
+      if (parts.length) {
+        return parts.join(' ');
+      }
     }
+    return value;
+  };
 
-    return (
-      <div className="w-full min-h-[700px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
-          <div className="space-y-6 md:space-y-8">
+  const handleCardChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawVal = e.target.value;
+    const type = getCardType(rawVal);
+    setCardType(type);
+    setCardNumber(formatCardNumber(rawVal, type));
+  };
+
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
+
+  return (
+    <div className="w-full min-h-[700px] bg-indigo-950 flex items-center justify-center font-sans p-6 text-indigo-100">
+      
+      {!isSuccess ? (
+        <div className="max-w-md w-full bg-white rounded-3xl p-8 shadow-2xl text-slate-800 animate-in fade-in duration-500">
+          
+          <h2 className="text-2xl font-black text-slate-900 mb-8">Payment Details</h2>
+
+          <form onSubmit={handlePay} className="space-y-6">
+            
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-rose-600 text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-3 sm:mb-4">
-                <Zap className="w-3 h-3" /> Jewelry Financing Plan
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 tracking-tight">Complete your purchase</h2>
-              <p className="text-sm sm:text-base md:text-lg text-gray-500 leading-relaxed">Choose how you want to pay. Pay upfront to save, or split it into manageable monthly payments.</p>
-            </div>
-
-            <div className="bg-white rounded-3xl p-1.5 shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-1.5 sm:gap-0">
-              <button onClick={() => setPaymentMode("upfront")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "upfront" ? "bg-rose-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Pay in full</button>
-              <button onClick={() => setPaymentMode("split")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "split" ? "bg-rose-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Split payment</button>
-            </div>
-
-            <div className="bg-white rounded-3xl p-5 sm:p-6 md:p-8 border border-gray-100 shadow-sm transition-all">
-              {paymentMode === "upfront" ? (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Total Payment</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">One-time payment</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${totalAmount}</div>
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Card Number</label>
+              
+              <div className="relative flex items-center bg-slate-50 border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500 transition-all">
+                
+                {/* Logo Morphing Container */}
+                <div className="absolute left-4 w-10 h-6 flex items-center justify-center">
+                  
+                  {/* Default Unknown */}
+                  <div className={`absolute transition-all duration-300 ${cardType === 'unknown' ? 'opacity-100 scale-100' : 'opacity-0 scale-50 rotate-90'}`}>
+                    <CreditCard className="w-5 h-5 text-slate-400" />
                   </div>
+
+                  {/* Visa */}
+                  <div className={`absolute transition-all duration-300 ${cardType === 'visa' ? 'opacity-100 scale-100' : 'opacity-0 scale-50 -rotate-90'}`}>
+                    <svg viewBox="0 0 38 12" className="h-4 w-auto fill-blue-600">
+                      <path d="M14.6,0.3L13.1,9.8H10l1.5-9.5H14.6z M27.8,0.5c-0.6-0.2-1.7-0.4-3.1-0.4c-3.3,0-5.7,1.8-5.7,4.3c0,1.9,1.7,2.9,3,3.6 c1.3,0.7,1.8,1.1,1.8,1.7c0,0.9-1.1,1.3-2.1,1.3c-1.4,0-2.2-0.2-3.4-0.8l-0.5-0.2l-0.5,2.9c0.8,0.4,2.3,0.7,3.9,0.7 c3.6,0,5.9-1.8,5.9-4.5c0-1.5-0.9-2.6-2.9-3.5c-1.2-0.6-1.9-1-1.9-1.6c0-0.5,0.6-1.1,2-1.1c1.2,0,2,0.2,2.7,0.5l0.3,0.1L27.8,0.5z M35.3,10.2L37.8,0.3h-2.5c-0.6,0-1,0.3-1.3,0.9l-4.7,8.9h3.2l0.6-1.7h3.9L35.3,10.2z M32,5.2l1.6-4.5l0.9,4.5H32z M10.4,0.3 L7.5,6.8L7.1,5.1C6.7,3.8,5.2,2.1,3.4,1.3l2.8,8.5H9.4L13.8,0.3H10.4z"/>
+                      <path d="M5.4,0.3H0.1L0,0.8C1,1.1,2.8,1.6,3.6,2.2c0.6,0.5,0.7,0.8,0.9,1.5l1.6,5.6l-2.2-8.9h2.3l1.8,4.7l0.2,0.6l-0.8-4.3C5.9,0.7,5.7,0.4,5.4,0.3z" className="fill-orange-400"/>
+                    </svg>
+                  </div>
+
+                  {/* Mastercard */}
+                  <div className={`absolute transition-all duration-300 flex items-center ${cardType === 'mastercard' ? 'opacity-100 scale-100' : 'opacity-0 scale-50 -rotate-90'}`}>
+                    <div className="w-5 h-5 rounded-full bg-red-500 mix-blend-multiply opacity-90 absolute left-0"></div>
+                    <div className="w-5 h-5 rounded-full bg-yellow-400 mix-blend-multiply opacity-90 absolute left-3"></div>
+                  </div>
+
+                  {/* Amex */}
+                  <div className={`absolute transition-all duration-300 ${cardType === 'amex' ? 'opacity-100 scale-100' : 'opacity-0 scale-50 -rotate-90'}`}>
+                    <div className="bg-blue-500 text-white font-black text-[8px] italic px-1 py-0.5 rounded-sm tracking-tighter">
+                      AMEX
+                    </div>
+                  </div>
+
+                  {/* Discover */}
+                  <div className={`absolute transition-all duration-300 ${cardType === 'discover' ? 'opacity-100 scale-100' : 'opacity-0 scale-50 -rotate-90'}`}>
+                     <div className="flex items-center gap-0.5 font-black text-[10px] italic tracking-tighter text-slate-800">
+                       DISC<span className="w-2 h-2 rounded-full bg-orange-500 block"></span>VER
+                     </div>
+                  </div>
+
                 </div>
+
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" 
+                  required 
+                  type="text" 
+                  value={cardNumber}
+                  onChange={handleCardChange}
+                 
+                  placeholder="0000 0000 0000 0000" 
+                  className="w-full bg-transparent pl-16 pr-4 py-4 text-slate-900 focus:outline-none font-mono tracking-widest text-sm" 
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="w-1/2">
+                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Expiry</label>
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-center text-sm" />
+              </div>
+              <div className="w-1/2">
+                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">CVV</label>
+                <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" maxLength={cardType === 'amex' ? 4 : 3} placeholder={cardType === 'amex' ? "1234" : "123"} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-center text-sm" />
+              </div>
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={isProcessing}
+              className="w-full py-5 bg-indigo-600 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/30 disabled:opacity-70 disabled:shadow-none"
+            >
+              {isProcessing ? (
+                <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
               ) : (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Monthly Split</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">Includes 5% fee</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${splitAmount}<span className="text-base sm:text-lg text-gray-400 font-normal">/mo</span></div>
-                  </div>
-                  <div className="pt-4 border-t border-gray-100">
-                    <input type="range" min="2" max="6" step="1" value={splitMonths} onChange={(e) => setSplitMonths(Number(e.target.value))} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
-                    <div className="flex justify-between text-[10px] sm:text-xs text-gray-400 mt-2 font-medium">
-                      <span>2 mos</span>
-                      <span>6 mos</span>
-                    </div>
-                  </div>
-                </div>
+                <>Pay Now <ArrowRight className="w-5 h-5" /></>
               )}
-            </div>
-          </div>
+            </button>
+          </form>
 
-          <div className="bg-white rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
-            <form onSubmit={handlePay} className="space-y-4 sm:space-y-5 relative z-10">
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
-                <input required type="email" placeholder="you@example.com" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 text-sm sm:text-base text-gray-900 placeholder-gray-400 focus:outline-none transition-all focus:ring-rose-600/20 focus:border-rose-600" />
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Card Information</label>
-                <div className="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden transition-all focus-within:ring-2 focus-within:border-transparent">
-                  <input maxLength={16} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 16); }} required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-transparent px-4 py-3 sm:py-3.5 border-b border-gray-200 focus:outline-none font-mono text-sm sm:text-base" />
-                  <div className="flex">
-                    <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none border-r border-gray-200 font-mono text-sm sm:text-base" />
-                    <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none font-mono text-sm sm:text-base" />
-                  </div>
-                </div>
-              </div>
-              <div className="pt-2 sm:pt-4">
-                <button type="submit" disabled={isProcessing} className="w-full bg-rose-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed text-sm sm:text-base">
-                  {isProcessing ? 'Processing...' : `Pay $${paymentMode === "upfront" ? totalAmount : splitAmount} Now`}
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
-      </div>
-    );
-        
+      ) : (
+        <div className="max-w-md w-full bg-indigo-900/50 backdrop-blur border border-indigo-700/50 rounded-3xl p-10 shadow-2xl text-center animate-in zoom-in duration-500">
+           <div className="w-24 h-24 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+             <CheckCircle2 className="w-12 h-12 text-emerald-400" />
+           </div>
+           <h2 className="text-3xl font-black text-white mb-2">Success</h2>
+           <p className="text-indigo-200 mb-8">Your {cardType !== 'unknown' ? cardType.charAt(0).toUpperCase() + cardType.slice(1) : 'card'} payment was processed.</p>
+           <button type="button" 
+              onClick={() => { setIsSuccess(false); setCardNumber(""); setCardType('unknown'); }}
+              className="px-8 py-3 bg-indigo-800 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors"
+            >
+              Start New Order
+            </button>
+        </div>
+      )}
+
+    </div>
+  );
 }

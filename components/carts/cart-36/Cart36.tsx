@@ -25,7 +25,7 @@ export default function Cart36() {
         </div>
 
         {/* Minimal Add Button */}
-        <button 
+        <button type="button" 
           onClick={handleAdd}
           disabled={added}
           className={`absolute bottom-4 right-4 w-10 h-10 rounded-full flex items-center justify-center transition-all ${added ? "bg-emerald-500 text-white" : "bg-slate-900 text-white hover:scale-110 shadow-md shadow-slate-900/20"}`}

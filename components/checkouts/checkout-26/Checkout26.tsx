@@ -26,7 +26,7 @@ export default function Checkout26() {
           </div>
           <h2 className="text-xl font-bold text-white">Payment Confirmed</h2>
           <p className="text-slate-400 text-sm mt-1">Transaction hash: 0x8a...4b2f</p>
-          <button className="mt-6 text-sm text-indigo-400 hover:text-indigo-300 flex items-center gap-1 mx-auto">
+          <button type="button" className="mt-6 text-sm text-indigo-400 hover:text-indigo-300 flex items-center gap-1 mx-auto">
             View on Etherscan <ExternalLink size={14} />
           </button>
         </div>
@@ -56,13 +56,13 @@ export default function Checkout26() {
 
         {!connected ? (
           <div className="space-y-3">
-            <button 
+            <button type="button" 
               onClick={() => setConnected(true)}
               className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-3 bg-indigo-600 hover:bg-indigo-500 transition"
             >
               <Wallet size={18} /> Connect MetaMask
             </button>
-            <button 
+            <button type="button" 
               onClick={() => setConnected(true)}
               className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-500 transition"
             >
@@ -75,13 +75,13 @@ export default function Checkout26() {
               <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Send exactly {priceETH} ETH to:</p>
               <div className="flex justify-between items-center bg-slate-900 p-3 rounded-lg">
                 <span className="font-mono text-sm text-indigo-300">{address}</span>
-                <button onClick={handleCopy} className="text-slate-400 hover:text-white transition p-1">
+                <button type="button" onClick={handleCopy} className="text-slate-400 hover:text-white transition p-1">
                   {copied ? <Check size={16} className="text-emerald-400" /> : <Copy size={16} />}
                 </button>
               </div>
             </div>
 
-            <button 
+            <button type="button" 
               onClick={() => setPaid(true)}
               className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 transition"
             >

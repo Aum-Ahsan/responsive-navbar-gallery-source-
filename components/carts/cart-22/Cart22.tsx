@@ -65,13 +65,12 @@ export default function Cart22() {
             <React.Fragment key={s.id}>
               <div
                 onClick={() => i <= step && setStep(i)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold cursor-pointer transition ${
-                  i === step
+                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold cursor-pointer transition ${i === step
                     ? "bg-stone-900 text-white"
                     : choices[s.id]
-                    ? "bg-stone-300 text-stone-700 hover:bg-stone-400"
-                    : "bg-stone-200 text-stone-400"
-                }`}
+                      ? "bg-stone-300 text-stone-700 hover:bg-stone-400"
+                      : "bg-stone-200 text-stone-400"
+                  }`}
               >
                 <span className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold bg-white/20">{i + 1}</span>
                 {s.label}
@@ -88,22 +87,21 @@ export default function Cart22() {
             <div
               key={opt.id}
               onClick={() => setChoices(c => ({ ...c, [currentStep.id]: opt.id }))}
-              className={`p-5 rounded-2xl border-2 cursor-pointer transition-all ${
-                choices[currentStep.id] === opt.id
+              className={`p-5 rounded-2xl border-2 cursor-pointer transition-all ${choices[currentStep.id] === opt.id
                   ? "border-stone-900 bg-white shadow-md"
                   : "border-stone-200 bg-white/60 hover:border-stone-400"
-              }`}
+                }`}
             >
               <div className="w-full h-12 rounded-xl mb-3" style={{ backgroundColor: opt.color, border: "1px solid rgba(0,0,0,0.1)" }} />
               <p className="font-semibold text-stone-900 text-sm">{opt.label}</p>
-              <p className="text-stone-500 text-xs mt-0.5">{opt.price === 0 ? "Included" : `+$${opt.price}`}</p>
+              <p className="text-stone-500 text-xs mt-0.5">{opt.price === 0 ? "Included" : `+${opt.price}`}</p>
             </div>
           ))}
         </div>
 
         {/* Nav buttons */}
         <div className="flex items-center justify-between mb-6">
-          <button
+          <button type="button"
             onClick={() => setStep(s => Math.max(0, s - 1))}
             disabled={step === 0}
             className="flex items-center gap-1.5 text-sm font-semibold text-stone-500 hover:text-stone-900 disabled:opacity-30 transition"
@@ -115,7 +113,7 @@ export default function Cart22() {
             <p className="text-xl font-bold text-stone-900">${totalPrice.toLocaleString()}</p>
           </div>
           {step < steps.length - 1 ? (
-            <button
+            <button type="button"
               onClick={() => setStep(s => s + 1)}
               disabled={!choices[currentStep.id]}
               className="flex items-center gap-1.5 bg-stone-900 hover:bg-stone-700 text-white text-sm font-bold px-5 py-2.5 rounded-xl disabled:opacity-30 transition"
@@ -123,12 +121,11 @@ export default function Cart22() {
               Next <ChevronRight size={16} />
             </button>
           ) : (
-            <button
+            <button type="button"
               onClick={handleAdd}
               disabled={!isComplete}
-              className={`flex items-center gap-1.5 px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 ${
-                added ? "bg-emerald-500 text-white" : isComplete ? "bg-stone-900 hover:bg-stone-700 text-white" : "bg-stone-300 text-stone-400 cursor-not-allowed"
-              }`}
+              className={`flex items-center gap-1.5 px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 ${added ? "bg-emerald-500 text-white" : isComplete ? "bg-stone-900 hover:bg-stone-700 text-white" : "bg-stone-300 text-stone-400 cursor-not-allowed"
+                }`}
             >
               {added ? <><Check size={15} /> Added!</> : <><ShoppingCart size={15} /> Add to Cart</>}
             </button>

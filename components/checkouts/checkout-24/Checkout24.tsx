@@ -62,7 +62,7 @@ export default function Checkout24() {
           
           <div className="grid grid-cols-4 gap-2 mb-4">
             {[15, 18, 20].map(pct => (
-              <button
+              <button type="button"
                 key={pct}
                 onClick={() => setTipPct(pct)}
                 className={`py-3 rounded-xl flex flex-col items-center justify-center border-2 transition ${tipPct === pct ? "border-amber-500 bg-amber-50 text-amber-900" : "border-slate-200 bg-white text-slate-600 hover:border-amber-300"}`}
@@ -71,7 +71,7 @@ export default function Checkout24() {
                 <span className="text-xs opacity-70">${((subtotal * pct) / 100).toFixed(2)}</span>
               </button>
             ))}
-            <button
+            <button type="button"
               onClick={() => setTipPct("custom")}
               className={`py-3 rounded-xl flex flex-col items-center justify-center border-2 transition ${tipPct === "custom" ? "border-amber-500 bg-amber-50 text-amber-900" : "border-slate-200 bg-white text-slate-600 hover:border-amber-300"}`}
             >
@@ -96,7 +96,7 @@ export default function Checkout24() {
             </div>
           )}
           
-          <button onClick={() => setTipPct("custom")} className="text-xs text-slate-400 hover:text-slate-600 underline">No tip</button>
+          <button type="button" onClick={() => setTipPct("custom")} className="text-xs text-slate-400 hover:text-slate-600 underline">No tip</button>
         </div>
 
         {/* Payment */}
@@ -108,7 +108,7 @@ export default function Checkout24() {
           </div>
         </div>
 
-        <button onClick={() => setPlaced(true)} className="w-full bg-slate-900 hover:bg-slate-700 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition shadow-lg shadow-slate-900/20">
+        <button type="button" onClick={() => setPlaced(true)} className="w-full bg-slate-900 hover:bg-slate-700 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition shadow-lg shadow-slate-900/20">
           Pay ${finalTotal.toFixed(2)}
         </button>
       </div>

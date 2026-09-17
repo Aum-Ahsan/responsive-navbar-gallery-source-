@@ -63,7 +63,7 @@ export default function Cart25() {
               <p className="font-bold text-white text-sm">Upgrade to Pro</p>
               <p className="text-violet-200 text-xs">Unlimited cart · Priority checkout · Free returns</p>
             </div>
-            <button
+            <button type="button"
               onClick={() => setUpgraded(true)}
               className="bg-white text-indigo-700 font-bold text-sm px-4 py-2.5 rounded-xl hover:bg-indigo-50 transition shrink-0"
             >
@@ -88,7 +88,7 @@ export default function Cart25() {
                 <p className="font-semibold text-slate-900 text-sm">{p.name}</p>
                 <p className="text-slate-500 text-sm">${p.price}</p>
               </div>
-              <button
+              <button type="button"
                 onClick={() => handleAdd(p.id)}
                 disabled={isFull && !upgraded}
                 className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${

@@ -37,7 +37,7 @@ export default function Cart11() {
 
         {/* Tab toggle */}
         <div className="flex gap-2 mb-6">
-          <button
+          <button type="button"
             onClick={() => setActiveTab("notify")}
             className={`flex-1 py-2.5 rounded-xl text-sm font-semibold transition ${
               activeTab === "notify" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-500 hover:bg-slate-200"
@@ -45,7 +45,7 @@ export default function Cart11() {
           >
             <Bell size={14} className="inline mr-1.5" />Notify Me
           </button>
-          <button
+          <button type="button"
             onClick={() => setActiveTab("preorder")}
             className={`flex-1 py-2.5 rounded-xl text-sm font-semibold transition ${
               activeTab === "preorder" ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-500 hover:bg-slate-200"
@@ -106,7 +106,7 @@ export default function Cart11() {
                   <li>✓ Free cancellation before dispatch</li>
                 </ul>
               </div>
-              <button
+              <button type="button"
                 onClick={handlePreorder}
                 className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-2xl transition flex items-center justify-center gap-2"
               >

@@ -50,12 +50,12 @@ export default function Cart29() {
           <p className="text-sm font-bold text-slate-700 mb-2">Size</p>
           <div className="flex gap-2">
             {sizes.map(s => (
-              <button
+              <button type="button"
                 key={s}
                 onClick={() => setSize(s)}
                 className={`flex-1 py-2.5 rounded-xl text-sm font-semibold border-2 transition ${size === s ? "bg-orange-500 border-orange-500 text-white" : "bg-white border-slate-200 text-slate-700 hover:border-orange-300"}`}
               >
-                {s} {sizeExtra[s] > 0 ? `+$${sizeExtra[s]}` : ""}
+                {s} {sizeExtra[s] > 0 ? `+${sizeExtra[s]}` : ""}
               </button>
             ))}
           </div>
@@ -89,7 +89,7 @@ export default function Cart29() {
           <p className="text-sm font-bold text-slate-700 mb-2">Sauce</p>
           <div className="flex flex-wrap gap-2">
             {sauces.map(s => (
-              <button
+              <button type="button"
                 key={s}
                 onClick={() => setSauce(s)}
                 className={`px-3 py-2 rounded-xl text-sm font-medium border transition ${sauce === s ? "bg-orange-500 border-orange-500 text-white" : "bg-white border-slate-200 text-slate-600 hover:border-orange-300"}`}
@@ -120,7 +120,7 @@ export default function Cart29() {
             <p className="text-xs text-slate-400">Order Total</p>
             <p className="text-2xl font-bold text-slate-900">${total.toFixed(2)}</p>
           </div>
-          <button
+          <button type="button"
             onClick={handleAdd}
             className={`flex-1 py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all duration-300 ${added ? "bg-emerald-500 text-white" : "bg-orange-500 hover:bg-orange-600 text-white"}`}
           >

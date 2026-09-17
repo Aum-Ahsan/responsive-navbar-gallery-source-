@@ -58,13 +58,13 @@ export default function Cart23() {
             <div className="flex items-center justify-between mb-4">
               <p className="text-sm font-semibold text-slate-700">Quantity</p>
               <div className="flex items-center border border-slate-200 rounded-xl overflow-hidden">
-                <button onClick={() => setQty(q => Math.max(1, q - 1))} className="w-8 h-8 flex items-center justify-center hover:bg-slate-50 text-slate-600 transition"><X size={12} className={qty > 1 ? "hidden" : ""} /><span className={qty <= 1 ? "hidden" : ""}>-</span></button>
+                <button type="button" onClick={() => setQty(q => Math.max(1, q - 1))} className="w-8 h-8 flex items-center justify-center hover:bg-slate-50 text-slate-600 transition"><X size={12} className={qty > 1 ? "hidden" : ""} /><span className={qty <= 1 ? "hidden" : ""}>-</span></button>
                 <span className="w-8 text-center text-sm font-bold">{qty}</span>
-                <button onClick={() => setQty(q => q + 1)} className="w-8 h-8 flex items-center justify-center hover:bg-slate-50 text-slate-600 transition"><Plus size={12} /></button>
+                <button type="button" onClick={() => setQty(q => q + 1)} className="w-8 h-8 flex items-center justify-center hover:bg-slate-50 text-slate-600 transition"><Plus size={12} /></button>
               </div>
             </div>
 
-            <button
+            <button type="button"
               onClick={handleAdd}
               className={`w-full py-3 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 transition-all ${
                 added ? "bg-emerald-500 text-white" : "bg-slate-900 hover:bg-slate-700 text-white"
@@ -76,7 +76,7 @@ export default function Cart23() {
         )}
 
         {/* FAB Button */}
-        <button
+        <button type="button"
           onClick={() => setFabExpanded(o => !o)}
           className={`w-16 h-16 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 ${
             fabExpanded ? "bg-slate-700 rotate-45" : "bg-indigo-600 hover:bg-indigo-500"

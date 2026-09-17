@@ -31,7 +31,7 @@ export default function Checkout03() {
 
         {mode === "choose" && (
           <div className="space-y-3">
-            <button
+            <button type="button"
               onClick={() => setMode("guest")}
               className="w-full flex items-center gap-4 p-5 bg-white rounded-2xl border-2 border-slate-200 hover:border-slate-400 transition text-left group"
             >
@@ -51,7 +51,7 @@ export default function Checkout03() {
               <div className="flex-1 h-px bg-slate-200" />
             </div>
 
-            <button
+            <button type="button"
               onClick={() => setMode("signin")}
               className="w-full flex items-center gap-4 p-5 bg-white rounded-2xl border-2 border-slate-200 hover:border-indigo-400 transition text-left group"
             >
@@ -65,7 +65,7 @@ export default function Checkout03() {
               <ChevronRight size={18} className="text-slate-400" />
             </button>
 
-            <button
+            <button type="button"
               onClick={() => setMode("register")}
               className="w-full flex items-center gap-4 p-5 bg-white rounded-2xl border-2 border-slate-200 hover:border-emerald-400 transition text-left group"
             >
@@ -83,7 +83,7 @@ export default function Checkout03() {
 
         {(mode === "guest" || mode === "signin" || mode === "register") && (
           <div className="bg-white rounded-2xl border border-slate-200 p-6 space-y-4">
-            <button onClick={() => setMode("choose")} className="text-sm text-slate-400 hover:text-slate-700 mb-2 transition">← Back</button>
+            <button type="button" onClick={() => setMode("choose")} className="text-sm text-slate-400 hover:text-slate-700 mb-2 transition">← Back</button>
             <h3 className="font-bold text-slate-900">{mode === "guest" ? "Guest Checkout" : mode === "signin" ? "Sign In" : "Create Account"}</h3>
             <div className="relative">
               <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -95,7 +95,7 @@ export default function Checkout03() {
                 <input type="password" placeholder="Password" className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 transition" />
               </div>
             )}
-            <button
+            <button type="button"
               onClick={() => setDone(true)}
               className="w-full bg-slate-900 hover:bg-slate-700 text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 text-sm transition"
             >

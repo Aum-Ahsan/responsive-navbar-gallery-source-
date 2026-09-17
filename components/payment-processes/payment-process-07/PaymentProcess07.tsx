@@ -1,64 +1,180 @@
 "use client";
 import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import { ArrowRight, Check, X, ShieldCheck } from "lucide-react";
 
 export default function PaymentProcess07() {
+  const [step, setStep] = useState(1);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const presets = [10, 25, 50, 100];
-    const [amount, setAmount] = useState<number>(50);
-    const [isCustom, setIsCustom] = useState(false);
-    const [isProcessing, setIsProcessing] = useState(false);
+  // Form State
+  const [email, setEmail] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [expiry, setExpiry] = useState("");
+  const [cvc, setCvc] = useState("");
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
-    };
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
 
+  if (isSuccess) {
     return (
-      <div className="w-full min-h-[600px] bg-sky-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-md w-full bg-white rounded-[2rem] md:rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 sm:h-2 bg-sky-600" />
-          
-          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-sky-50 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-            <Heart className="w-7 h-7 sm:w-8 sm:h-8 text-sky-600" fill="currentColor" />
+      <div className="w-full min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 font-sans">
+        <div className="animate-in slide-in-from-bottom-8 duration-700 ease-out flex flex-col items-center">
+          <div className="w-32 h-32 mb-8 rounded-full border border-white/20 flex items-center justify-center">
+            <Check className="w-12 h-12 text-white" />
           </div>
-          
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Political Campaign Donation</h2>
-            <p className="text-gray-500 text-xs sm:text-sm">Your contribution makes a direct impact. Select an amount to give today.</p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
-            {presets.map(a => (
-              <button key={a} onClick={() => { setAmount(a); setIsCustom(false); }} className={`py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg transition-all ${!isCustom && amount === a ? 'bg-sky-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-                $${a}
-              </button>
-            ))}
-          </div>
-          
-          <button onClick={() => setIsCustom(true)} className={`w-full py-3 sm:py-4 rounded-xl font-bold mb-6 sm:mb-8 transition-all ${isCustom ? 'bg-sky-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-            Custom Amount
+          <h1 className="text-5xl md:text-7xl font-light tracking-tighter mb-6">Payment Secured.</h1>
+          <p className="text-xl text-white/50 mb-12 max-w-lg text-center font-light leading-relaxed">
+            Your transaction was completed successfully. We have sent the details to {email || 'your email'}.
+          </p>
+          <button type="button" 
+            onClick={() => setIsSuccess(false)}
+            className="group flex items-center gap-4 text-xl font-light hover:text-white/70 transition-colors"
+          >
+            <span className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-white/50 transition-colors">
+              <X className="w-5 h-5" />
+            </span>
+            Close Checkout
           </button>
-
-          {isCustom && (
-            <div className="mb-6 sm:mb-8 relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-lg sm:text-xl">$</span>
-              <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full text-xl sm:text-2xl font-bold text-gray-900 pl-10 pr-4 py-3 sm:py-4 bg-gray-50 rounded-xl focus:outline-none focus:ring-sky-600/20 focus:border-sky-600" />
-            </div>
-          )}
-
-          <form onSubmit={handlePay} className="space-y-3 sm:space-y-4">
-            <input required type="email" placeholder="Email Address" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-sky-600/20 focus:border-sky-600" />
-            <input required type="text" placeholder="Card Number" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-sky-600/20 focus:border-sky-600" />
-            
-            <button type="submit" disabled={isProcessing} className="w-full bg-sky-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 mt-4 transition-all hover:opacity-90 text-sm sm:text-base">
-              {isProcessing ? 'Processing...' : `Donate $${amount}`}
-              {!isProcessing && <Heart className="w-4 h-4 ml-1" />}
-            </button>
-          </form>
         </div>
       </div>
     );
+  }
+
+  return (
+    <div className="w-full min-h-screen bg-white text-black flex flex-col font-sans selection:bg-black selection:text-white">
+      
+      {/* Immersive Header */}
+      <header className="p-8 md:p-12 flex justify-between items-start">
+        <div className="text-2xl font-bold tracking-tighter">MINIMAL.</div>
+        <div className="text-right">
+          <div className="text-sm font-semibold uppercase tracking-widest text-black/40 mb-1">Total Due</div>
+          <div className="text-3xl md:text-4xl font-light tracking-tighter">$840.00</div>
+        </div>
+      </header>
+
+      {/* Main Content Area */}
+      <main className="flex-1 flex flex-col items-center justify-center p-8 w-full max-w-3xl mx-auto">
         
+        <form onSubmit={handlePay} className="w-full relative min-h-[400px] flex flex-col justify-center">
+          
+          {/* Step Indicator */}
+          <div className="absolute top-0 left-0 w-full flex items-center gap-4 mb-16 opacity-30">
+            <div className={`h-1 flex-1 transition-all duration-700 ${step >= 1 ? 'bg-black' : 'bg-black/10'}`}></div>
+            <div className={`h-1 flex-1 transition-all duration-700 ${step >= 2 ? 'bg-black' : 'bg-black/10'}`}></div>
+          </div>
+
+          {/* Step 1: Identity */}
+          <div className={`transition-all duration-700 absolute w-full ${step === 1 ? 'opacity-100 translate-x-0 pointer-events-auto' : 'opacity-0 -translate-x-20 pointer-events-none'}`}>
+            <h2 className="text-4xl md:text-6xl font-light tracking-tighter mb-12">Who is completing this purchase?</h2>
+            
+            <div className="group">
+              <input 
+                type="email" 
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email address" 
+                className="w-full text-2xl md:text-4xl font-light py-4 bg-transparent border-b-2 border-black/10 focus:border-black outline-none placeholder-black/20 transition-colors"
+                autoFocus
+              />
+            </div>
+
+            <div className="mt-16 flex justify-end">
+              <button 
+                type="button"
+                onClick={() => { if(email) setStep(2) }}
+                className={`group flex items-center gap-4 text-xl font-light transition-all ${email ? 'text-black hover:opacity-70' : 'text-black/20 cursor-not-allowed'}`}
+                disabled={!email}
+              >
+                Next Step
+                <span className={`w-14 h-14 rounded-full border flex items-center justify-center transition-all ${email ? 'border-black group-hover:bg-black group-hover:text-white' : 'border-black/20'}`}>
+                  <ArrowRight className="w-6 h-6" />
+                </span>
+              </button>
+            </div>
+          </div>
+
+          {/* Step 2: Payment */}
+          <div className={`transition-all duration-700 absolute w-full ${step === 2 ? 'opacity-100 translate-x-0 pointer-events-auto' : 'opacity-0 translate-x-20 pointer-events-none'}`}>
+            <h2 className="text-4xl md:text-6xl font-light tracking-tighter mb-12">How would you like to pay?</h2>
+            
+            <div className="space-y-8">
+              <div>
+                <input 
+                  type="text" 
+                  required
+                  maxLength={19}
+                  value={cardNumber}
+                  onChange={(e) => setCardNumber(e.target.value)}
+                  placeholder="Card Number" 
+                  className="w-full text-2xl md:text-4xl font-light py-4 bg-transparent border-b-2 border-black/10 focus:border-black outline-none placeholder-black/20 transition-colors font-mono tracking-tight"
+                />
+              </div>
+              
+              <div className="flex gap-8">
+                <div className="flex-1">
+                  <input 
+                    type="text" 
+                    required
+                    maxLength={5}
+                    value={expiry}
+                    onChange={(e) => setExpiry(e.target.value)}
+                    placeholder="MM/YY" 
+                    className="w-full text-2xl md:text-4xl font-light py-4 bg-transparent border-b-2 border-black/10 focus:border-black outline-none placeholder-black/20 transition-colors font-mono tracking-tight"
+                  />
+                </div>
+                <div className="flex-1">
+                  <input 
+                    type="text" 
+                    required
+                    maxLength={4}
+                    value={cvc}
+                    onChange={(e) => setCvc(e.target.value)}
+                    placeholder="CVC" 
+                    className="w-full text-2xl md:text-4xl font-light py-4 bg-transparent border-b-2 border-black/10 focus:border-black outline-none placeholder-black/20 transition-colors font-mono tracking-tight"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-16 flex justify-between items-center">
+              <button 
+                type="button"
+                onClick={() => setStep(1)}
+                className="text-black/40 hover:text-black transition-colors font-semibold tracking-widest uppercase text-sm"
+              >
+                Go Back
+              </button>
+
+              <button 
+                type="submit"
+                disabled={isProcessing || !cardNumber || !expiry || !cvc}
+                className="group flex items-center gap-4 text-xl font-bold transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              >
+                {isProcessing ? 'Authorizing...' : 'Pay Now'}
+                {!isProcessing && (
+                  <span className="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Check className="w-6 h-6" />
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </main>
+
+      <footer className="p-8 flex justify-center text-black/30 items-center gap-2 text-sm font-semibold tracking-widest uppercase">
+        <ShieldCheck className="w-5 h-5" /> 256-bit Secure Connection
+      </footer>
+
+    </div>
+  );
 }

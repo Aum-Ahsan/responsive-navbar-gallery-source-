@@ -79,7 +79,7 @@ export default function Checkout19() {
           <span className="text-2xl font-bold text-slate-900">${dueNow}</span>
         </div>
 
-        <button onClick={() => setPlaced(true)} className="w-full bg-slate-900 hover:bg-slate-700 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition">
+        <button type="button" onClick={() => setPlaced(true)} className="w-full bg-slate-900 hover:bg-slate-700 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition">
           <Lock size={16} /> Pre-order now — Pay ${dueNow}
         </button>
       </div>

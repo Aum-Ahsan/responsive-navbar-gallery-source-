@@ -71,7 +71,7 @@ export default function Cart20() {
           <p className="text-sm font-semibold text-zinc-300 mb-2">Font Style</p>
           <div className="grid grid-cols-3 gap-2">
             {fonts.map(f => (
-              <button
+              <button type="button"
                 key={f.id}
                 onClick={() => setFont(f.id)}
                 className={`p-3 rounded-xl border-2 text-center transition ${font === f.id ? "border-amber-400 bg-amber-400/10" : "border-zinc-700 hover:border-zinc-500"}`}
@@ -88,7 +88,7 @@ export default function Cart20() {
           <p className="text-sm font-semibold text-zinc-300 mb-2">Engraving Position</p>
           <div className="flex gap-2">
             {positions.map(pos => (
-              <button
+              <button type="button"
                 key={pos}
                 onClick={() => setPosition(pos)}
                 className={`flex-1 py-2 rounded-xl text-sm font-medium capitalize border-2 transition ${position === pos ? "border-amber-400 bg-amber-400/10 text-amber-300" : "border-zinc-700 text-zinc-400 hover:border-zinc-500"}`}
@@ -103,7 +103,7 @@ export default function Cart20() {
           <p className="flex items-center gap-1.5 text-xs text-amber-400 mb-4"><AlertCircle size={13} /> Enter your initials to enable engraving (+${engravingFee})</p>
         )}
 
-        <button
+        <button type="button"
           onClick={handleAdd}
           disabled={!monogram}
           className={`w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all duration-300 ${

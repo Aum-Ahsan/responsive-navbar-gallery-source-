@@ -79,7 +79,7 @@ export default function Cart19() {
           <p className="text-2xl font-bold text-slate-900">${total}</p>
         </div>
 
-        <button
+        <button type="button"
           onClick={handleAdd}
           className={`w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all duration-300 ${
             added ? "bg-emerald-500 text-white" : "bg-slate-900 hover:bg-slate-700 text-white"

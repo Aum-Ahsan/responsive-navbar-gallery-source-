@@ -52,7 +52,7 @@ export default function Cart04() {
           >
             {product.emoji}
           </span>
-          <button
+          <button type="button"
             onClick={() => setWished(w => !w)}
             className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full shadow flex items-center justify-center"
           >
@@ -82,7 +82,7 @@ export default function Cart04() {
             <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Color</p>
             <div className="flex gap-2">
               {product.colors.map(c => (
-                <button 
+                <button type="button" 
                   key={c} 
                   onClick={() => setSelectedColor(c)}
                   className={`w-8 h-8 rounded-full border-2 border-white ring-2 transition ${selectedColor === c ? "ring-slate-900" : "ring-slate-200 hover:ring-slate-900"}`} 
@@ -97,7 +97,7 @@ export default function Cart04() {
             <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Size</p>
             <div className="flex flex-wrap gap-2">
               {product.sizes.map(s => (
-                <button 
+                <button type="button" 
                   key={s} 
                   onClick={() => setSelectedSize(s)}
                   className={`px-3 py-2 text-sm border rounded-xl transition font-medium ${selectedSize === s ? "border-slate-900 bg-slate-900 text-white" : "border-slate-200 hover:border-slate-900 hover:bg-slate-900 hover:text-white"}`}
@@ -115,11 +115,11 @@ export default function Cart04() {
         <div className="max-w-xl mx-auto flex items-center gap-4">
           {/* Qty Stepper */}
           <div className="flex items-center border border-slate-200 rounded-xl overflow-hidden">
-            <button onClick={() => setQty(q => Math.max(1, q - 1))} className="w-10 h-11 flex items-center justify-center hover:bg-slate-50 transition">
+            <button type="button" onClick={() => setQty(q => Math.max(1, q - 1))} className="w-10 h-11 flex items-center justify-center hover:bg-slate-50 transition">
               <Minus size={14} />
             </button>
             <span className="w-10 text-center font-bold text-slate-900">{qty}</span>
-            <button onClick={() => setQty(q => q + 1)} className="w-10 h-11 flex items-center justify-center hover:bg-slate-50 transition">
+            <button type="button" onClick={() => setQty(q => q + 1)} className="w-10 h-11 flex items-center justify-center hover:bg-slate-50 transition">
               <Plus size={14} />
             </button>
           </div>
@@ -128,7 +128,7 @@ export default function Cart04() {
           <span className="font-bold text-slate-900 text-lg shrink-0">${product.price * qty}</span>
 
           {/* Add Button */}
-          <button
+          <button type="button"
             onClick={handleAdd}
             className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold transition-all duration-300 ${
               added ? "bg-emerald-500 text-white" : "bg-slate-900 hover:bg-slate-700 text-white"
@@ -138,7 +138,7 @@ export default function Cart04() {
           </button>
 
           {/* Checkout shortcut */}
-          <button className="shrink-0 flex items-center gap-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-3 rounded-xl transition">
+          <button type="button" className="shrink-0 flex items-center gap-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-3 rounded-xl transition">
             Buy Now <ChevronRight size={16} />
           </button>
         </div>

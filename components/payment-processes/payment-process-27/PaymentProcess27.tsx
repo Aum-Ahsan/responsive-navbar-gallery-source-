@@ -1,64 +1,215 @@
 "use client";
-import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { CreditCard, MapPin, CheckCircle2, ArrowRight } from "lucide-react";
 
 export default function PaymentProcess27() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const presets = [10, 25, 50, 100];
-    const [amount, setAmount] = useState<number>(50);
-    const [isCustom, setIsCustom] = useState(false);
-    const [isProcessing, setIsProcessing] = useState(false);
+  useEffect(() => {
+    // Simulate initial data fetch (cart details, user profile)
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
-    };
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
 
+  if (isSuccess) {
     return (
-      <div className="w-full min-h-[600px] bg-purple-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-md w-full bg-white rounded-[2rem] md:rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 sm:h-2 bg-purple-600" />
-          
-          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-purple-50 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-            <Heart className="w-7 h-7 sm:w-8 sm:h-8 text-purple-600" fill="currentColor" />
+      <div className="w-full min-h-screen bg-slate-50 flex items-center justify-center p-6 font-sans">
+        <div className="bg-white p-12 rounded-[2rem] shadow-xl text-center max-w-sm w-full border border-slate-100 animate-in zoom-in-95 duration-500">
+          <div className="w-24 h-24 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <CheckCircle2 className="w-12 h-12 text-emerald-500" />
           </div>
-          
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Church Tithe & Offering</h2>
-            <p className="text-gray-500 text-xs sm:text-sm">Your contribution makes a direct impact. Select an amount to give today.</p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
-            {presets.map(a => (
-              <button key={a} onClick={() => { setAmount(a); setIsCustom(false); }} className={`py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg transition-all ${!isCustom && amount === a ? 'bg-purple-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-                $${a}
-              </button>
-            ))}
-          </div>
-          
-          <button onClick={() => setIsCustom(true)} className={`w-full py-3 sm:py-4 rounded-xl font-bold mb-6 sm:mb-8 transition-all ${isCustom ? 'bg-purple-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-            Custom Amount
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">Success!</h2>
+          <p className="text-slate-500 mb-8">Your payment was processed successfully.</p>
+          <button type="button" onClick={() => { setIsSuccess(false); setIsLoading(true); setTimeout(() => setIsLoading(false), 2500); }} className="w-full py-4 bg-slate-900 text-white rounded-xl font-bold hover:bg-slate-800 transition-colors">
+            Start New Checkout
           </button>
-
-          {isCustom && (
-            <div className="mb-6 sm:mb-8 relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-lg sm:text-xl">$</span>
-              <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full text-xl sm:text-2xl font-bold text-gray-900 pl-10 pr-4 py-3 sm:py-4 bg-gray-50 rounded-xl focus:outline-none focus:ring-purple-600/20 focus:border-purple-600" />
-            </div>
-          )}
-
-          <form onSubmit={handlePay} className="space-y-3 sm:space-y-4">
-            <input required type="email" placeholder="Email Address" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-purple-600/20 focus:border-purple-600" />
-            <input required type="text" placeholder="Card Number" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-purple-600/20 focus:border-purple-600" />
-            
-            <button type="submit" disabled={isProcessing} className="w-full bg-purple-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 mt-4 transition-all hover:opacity-90 text-sm sm:text-base">
-              {isProcessing ? 'Processing...' : `Donate $${amount}`}
-              {!isProcessing && <Heart className="w-4 h-4 ml-1" />}
-            </button>
-          </form>
         </div>
       </div>
     );
+  }
+
+  return (
+    <div className="w-full min-h-screen bg-slate-50 flex items-center justify-center font-sans p-6 overflow-hidden">
+      
+      <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 relative">
         
+        {/* Left Column: Order Summary */}
+        <div className="bg-white rounded-[2.5rem] p-8 shadow-xl border border-slate-100 relative overflow-hidden min-h-[500px]">
+          
+          {/* SKELETON LAYER */}
+          <div className={`absolute inset-0 p-8 bg-white z-20 transition-opacity duration-1000 pointer-events-none ${isLoading ? 'opacity-100' : 'opacity-0'}`}>
+            <div className="w-48 h-8 bg-slate-200 rounded-lg animate-pulse mb-10"></div>
+            
+            <div className="space-y-6 mb-12">
+              {[1, 2, 3].map(i => (
+                <div key={i} className="flex gap-4 items-center">
+                  <div className="w-16 h-16 bg-slate-200 rounded-xl animate-pulse shrink-0"></div>
+                  <div className="flex-1 space-y-3">
+                    <div className="w-3/4 h-4 bg-slate-200 rounded animate-pulse"></div>
+                    <div className="w-1/2 h-4 bg-slate-200 rounded animate-pulse"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="space-y-4 pt-6 border-t border-slate-100">
+              <div className="flex justify-between">
+                <div className="w-20 h-4 bg-slate-200 rounded animate-pulse"></div>
+                <div className="w-16 h-4 bg-slate-200 rounded animate-pulse"></div>
+              </div>
+              <div className="flex justify-between">
+                <div className="w-24 h-4 bg-slate-200 rounded animate-pulse"></div>
+                <div className="w-16 h-4 bg-slate-200 rounded animate-pulse"></div>
+              </div>
+              <div className="flex justify-between items-end pt-4">
+                <div className="w-16 h-6 bg-slate-200 rounded animate-pulse"></div>
+                <div className="w-32 h-8 bg-slate-200 rounded animate-pulse"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* ACTUAL CONTENT LAYER */}
+          <div className={`transition-opacity duration-1000 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+            <h2 className="text-2xl font-black text-slate-900 mb-8">Order Summary</h2>
+            
+            <div className="space-y-6 mb-12">
+              <div className="flex gap-4 items-center">
+                <div className="w-16 h-16 bg-slate-50 rounded-xl overflow-hidden shrink-0 p-2 border border-slate-100">
+                  <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=150&q=80" alt="Nike Air Max" className="w-full h-full object-contain mix-blend-multiply" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-slate-900">Nike Air Max 270</h3>
+                  <p className="text-xs font-medium text-slate-500 mt-1">Size 10 • Red</p>
+                </div>
+                <div className="font-bold text-slate-900">$150.00</div>
+              </div>
+              
+              <div className="flex gap-4 items-center">
+                <div className="w-16 h-16 bg-slate-50 rounded-xl overflow-hidden shrink-0 p-2 border border-slate-100">
+                  <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=150&q=80" alt="AirPods" className="w-full h-full object-contain mix-blend-multiply" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-slate-900">AirPods Pro</h3>
+                  <p className="text-xs font-medium text-slate-500 mt-1">White • With Case</p>
+                </div>
+                <div className="font-bold text-slate-900">$249.00</div>
+              </div>
+
+              <div className="flex gap-4 items-center">
+                <div className="w-16 h-16 bg-slate-50 rounded-xl overflow-hidden shrink-0 p-2 border border-slate-100">
+                  <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150&q=80" alt="Headphones" className="w-full h-full object-contain mix-blend-multiply" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-slate-900">Sony WH-1000XM4</h3>
+                  <p className="text-xs font-medium text-slate-500 mt-1">Black • Noise Cancelling</p>
+                </div>
+                <div className="font-bold text-slate-900">$348.00</div>
+              </div>
+            </div>
+
+            <div className="space-y-3 pt-6 border-t border-slate-100">
+              <div className="flex justify-between text-sm font-medium text-slate-500">
+                <span>Subtotal</span>
+                <span>$747.00</span>
+              </div>
+              <div className="flex justify-between text-sm font-medium text-slate-500">
+                <span>Shipping</span>
+                <span className="text-green-500 font-bold">Free</span>
+              </div>
+              <div className="flex justify-between items-end pt-3">
+                <span className="font-bold text-slate-900">Total</span>
+                <span className="text-3xl font-black text-slate-900">$747.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Payment Details */}
+        <div className="bg-slate-900 rounded-[2.5rem] p-8 shadow-2xl relative overflow-hidden text-white min-h-[500px]">
+          
+          {/* SKELETON LAYER */}
+          <div className={`absolute inset-0 p-8 bg-slate-900 z-20 transition-opacity duration-1000 pointer-events-none ${isLoading ? 'opacity-100' : 'opacity-0'}`}>
+            <div className="w-48 h-8 bg-slate-800 rounded-lg animate-pulse mb-10"></div>
+            
+            <div className="w-full h-16 bg-slate-800 rounded-xl animate-pulse mb-8"></div>
+            
+            <div className="w-32 h-4 bg-slate-800 rounded animate-pulse mb-4"></div>
+            <div className="w-full h-12 bg-slate-800 rounded-xl animate-pulse mb-4"></div>
+            
+            <div className="flex gap-4 mb-10">
+              <div className="w-1/2 h-12 bg-slate-800 rounded-xl animate-pulse"></div>
+              <div className="w-1/2 h-12 bg-slate-800 rounded-xl animate-pulse"></div>
+            </div>
+
+            <div className="w-full h-16 bg-slate-800 rounded-2xl animate-pulse"></div>
+          </div>
+
+          {/* ACTUAL CONTENT LAYER */}
+          <div className={`transition-opacity duration-1000 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+            <h2 className="text-2xl font-black mb-8">Payment Details</h2>
+
+            <div className="bg-slate-800 p-4 rounded-xl flex items-center gap-4 mb-8">
+              <div className="w-10 h-10 bg-slate-700 rounded-lg flex items-center justify-center">
+                <MapPin className="w-5 h-5 text-slate-300" />
+              </div>
+              <div>
+                <div className="font-bold text-sm">Shipping to</div>
+                <div className="text-xs text-slate-400">123 Market St, San Francisco, CA</div>
+              </div>
+            </div>
+
+            <form onSubmit={handlePay}>
+              <div className="space-y-4 mb-10">
+                <div>
+                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Card Number</label>
+                  <div className="relative">
+                    <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest" />
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="w-1/2">
+                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Expiry</label>
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-center" />
+                  </div>
+                  <div className="w-1/2">
+                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">CVV</label>
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9\s\-\,]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="123" className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-center" />
+                  </div>
+                </div>
+              </div>
+
+              <button 
+                type="submit" 
+                disabled={isProcessing || isLoading}
+                className="w-full py-5 bg-indigo-600 text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-600/30 disabled:opacity-70 disabled:shadow-none"
+              >
+                {isProcessing ? (
+                  <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+                ) : (
+                  <>Pay $747.00 <ArrowRight className="w-5 h-5" /></>
+                )}
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  );
 }

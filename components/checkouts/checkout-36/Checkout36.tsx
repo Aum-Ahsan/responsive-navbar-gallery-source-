@@ -91,7 +91,7 @@ export default function Checkout36() {
             <p className="text-xs text-slate-500">I have read and agree to the <a href="#" className="text-blue-600 hover:underline">Terms of Service</a> and <a href="#" className="text-blue-600 hover:underline">Insurance Fraud Warning</a>.</p>
           </div>
 
-          <button 
+          <button type="button" 
             onClick={() => setPlaced(true)}
             className="w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white transition shadow-lg shadow-blue-500/20"
           >

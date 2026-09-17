@@ -1,69 +1,221 @@
 "use client";
 import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import { CreditCard, ArrowRight, CheckCircle2, Truck, FileText } from "lucide-react";
+
+type Tab = 'shipping' | 'payment' | 'review';
 
 export default function PaymentProcess82() {
+  const TOTAL_AMOUNT = 345.00;
+  
+  const [activeTab, setActiveTab] = useState<Tab>('shipping');
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const [isProcessing, setIsProcessing] = useState(false);
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
-    };
-
-    return (
-      <div className="w-full min-h-[600px] bg-neutral-900 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 rounded-[2rem] overflow-hidden shadow-2xl bg-white">
-          <div className="bg-stone-700 p-8 sm:p-10 flex flex-col justify-between text-white">
-            <div>
-              <FileText className="w-8 h-8 sm:w-10 sm:h-10 mb-6 sm:mb-8 opacity-80" />
-              <h2 className="text-2xl sm:text-3xl font-bold mb-2">Invoice Payment</h2>
-              <p className="opacity-80 mb-6 sm:mb-8 text-sm sm:text-base">Tax Preparation Fee</p>
-              
-              <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                <div className="flex justify-between text-xs sm:text-sm opacity-90 border-b border-white/20 pb-2">
-                  <span>Invoice #</span>
-                  <span className="font-mono">INV-2026</span>
-                </div>
-                <div className="flex justify-between text-xs sm:text-sm opacity-90 border-b border-white/20 pb-2">
-                  <span>Due Date</span>
-                  <span>Oct 1, 2026</span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="mt-8 md:mt-0">
-              <p className="text-xs sm:text-sm opacity-80 mb-1">Amount Due</p>
-              <p className="text-4xl sm:text-5xl font-bold tracking-tight">$4,500.00</p>
-            </div>
-          </div>
+  return (
+    <div className="w-full min-h-[700px] bg-slate-50 font-sans text-slate-800 p-4 md:p-8 flex items-center justify-center">
+      
+      {!isSuccess ? (
+        <div className="w-full max-w-6xl flex flex-col h-full md:h-auto">
           
-          <div className="p-8 sm:p-10 flex flex-col justify-center">
-            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-6">Payment Method</h3>
-            <form onSubmit={handlePay} className="space-y-4">
-              <div>
-                <label className="block text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Name on Card</label>
-                <input required type="text" className="w-full bg-gray-50 border-none rounded-xl px-4 py-3 sm:py-4 focus:ring-2 focus:ring-gray-200 transition-shadow text-sm sm:text-base" />
+          <div className="mb-8 text-center md:text-left">
+            <h2 className="text-3xl font-black text-slate-900 mb-2">Secure Checkout</h2>
+            <p className="text-slate-500">Complete your order below.</p>
+          </div>
+
+          {/* Mobile Tabs Container */}
+          <div className="md:hidden flex bg-slate-200 rounded-xl p-1 mb-6">
+            <button type="button" 
+              onClick={(e) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = () => setActiveTab('shipping');
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+      else if (typeof originalHandler === 'object' && originalHandler !== null) { /* ignore event objects */ }
+    }}
+              className={`flex-1 py-2 text-sm font-bold rounded-lg flex items-center justify-center gap-2 transition-all ${activeTab === 'shipping' ? 'bg-white shadow-sm text-slate-900' : 'text-slate-500'}`}
+            >
+              <Truck className="w-4 h-4" /> Ship
+            </button>
+            <button type="button" 
+              onClick={() => setActiveTab('payment')}
+              className={`flex-1 py-2 text-sm font-bold rounded-lg flex items-center justify-center gap-2 transition-all ${activeTab === 'payment' ? 'bg-white shadow-sm text-slate-900' : 'text-slate-500'}`}
+            >
+              <CreditCard className="w-4 h-4" /> Pay
+            </button>
+            <button type="button" 
+              onClick={(e) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = () => setActiveTab('review');
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+      else if (typeof originalHandler === 'object' && originalHandler !== null) { /* ignore event objects */ }
+    }}
+              className={`flex-1 py-2 text-sm font-bold rounded-lg flex items-center justify-center gap-2 transition-all ${activeTab === 'review' ? 'bg-white shadow-sm text-slate-900' : 'text-slate-500'}`}
+            >
+              <FileText className="w-4 h-4" /> Review
+            </button>
+          </div>
+
+          {/* Form Container: Single column on mobile (tabbed), 3-col Grid on Desktop */}
+          <form onSubmit={handlePay} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 flex-1">
+            
+            {/* Section 1: Shipping */}
+            <div className={`${activeTab === 'shipping' ? 'block' : 'hidden'} md:block bg-white rounded-3xl p-6 md:p-8 shadow-xl shadow-slate-200/50 border border-slate-100 flex flex-col`}>
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                <div className="w-10 h-10 bg-indigo-50 text-indigo-500 rounded-full flex items-center justify-center">
+                  <Truck className="w-5 h-5" />
+                </div>
+                <h3 className="text-xl font-bold">1. Shipping</h3>
               </div>
-              <div>
-                <label className="block text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Card Details</label>
-                <div className="bg-gray-50 rounded-xl overflow-hidden flex flex-col">
-                  <input required type="text" placeholder="Card Number" className="w-full bg-transparent px-4 py-3 sm:py-4 border-b border-gray-200 focus:outline-none text-sm sm:text-base" />
-                  <div className="flex">
-                    <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-4 border-r border-gray-200 focus:outline-none text-sm sm:text-base" />
-                    <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-4 focus:outline-none text-sm sm:text-base" />
-                  </div>
+              
+              <div className="space-y-4 flex-1">
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z\s\-]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Full Name" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors text-sm" />
+                <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Address Line 1" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors text-sm" />
+                <div className="flex gap-4">
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z\s\-]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="City" className="w-2/3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors text-sm" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 5); }} pattern="\\d{5}" maxLength={5} title="5 digit zip code" required type="text" placeholder="ZIP" className="w-1/3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors text-sm" />
                 </div>
               </div>
-              <button type="submit" disabled={isProcessing} className="w-full bg-gray-900 text-white font-bold py-3.5 sm:py-4 rounded-xl mt-4 sm:mt-6 hover:bg-black transition-colors flex items-center justify-center text-sm sm:text-base">
-                {isProcessing ? 'Processing...' : 'Pay Invoice'}
-                {!isProcessing && <ArrowRight className="w-4 h-4 ml-2" />}
+
+              {/* Next button for mobile */}
+              <button type="button" onClick={(e) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = () => setActiveTab('payment');
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+    }} className="md:hidden w-full py-4 mt-6 bg-slate-900 text-white rounded-xl font-bold">
+                Continue to Payment
               </button>
-            </form>
-          </div>
+            </div>
+
+            {/* Section 2: Payment */}
+            <div className={`${activeTab === 'payment' ? 'block' : 'hidden'} md:block bg-white rounded-3xl p-6 md:p-8 shadow-xl shadow-slate-200/50 border border-slate-100 flex flex-col`}>
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                <div className="w-10 h-10 bg-indigo-50 text-indigo-500 rounded-full flex items-center justify-center">
+                  <CreditCard className="w-5 h-5" />
+                </div>
+                <h3 className="text-xl font-bold">2. Payment</h3>
+              </div>
+              
+              <div className="space-y-4 flex-1">
+                <div className="relative">
+                  <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-12 pr-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors font-mono text-sm" />
+                </div>
+                <div className="flex gap-4">
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors font-mono text-center text-sm" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors font-mono text-center text-sm" />
+                </div>
+              </div>
+
+              {/* Next button for mobile */}
+              <button type="button" onClick={(e) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = () => setActiveTab('review');
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+    }} className="md:hidden w-full py-4 mt-6 bg-slate-900 text-white rounded-xl font-bold">
+                Continue to Review
+              </button>
+            </div>
+
+            {/* Section 3: Review & Submit */}
+            <div className={`${activeTab === 'review' ? 'block' : 'hidden'} md:block bg-slate-900 rounded-3xl p-6 md:p-8 shadow-xl shadow-slate-900/20 flex flex-col text-white`}>
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-700">
+                <div className="w-10 h-10 bg-slate-800 text-indigo-400 rounded-full flex items-center justify-center">
+                  <FileText className="w-5 h-5" />
+                </div>
+                <h3 className="text-xl font-bold text-white">3. Review</h3>
+              </div>
+              
+              <div className="flex-1 space-y-4">
+                <div className="flex justify-between text-sm text-slate-400">
+                  <span>Subtotal</span>
+                  <span className="text-white">${TOTAL_AMOUNT.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-sm text-slate-400">
+                  <span>Shipping</span>
+                  <span className="text-white">Free</span>
+                </div>
+                <div className="flex justify-between items-end pt-4 border-t border-slate-700 mt-4">
+                  <span className="font-bold text-slate-300">Total</span>
+                  <span className="text-3xl font-black text-white">${TOTAL_AMOUNT.toFixed(2)}</span>
+                </div>
+              </div>
+
+              <button 
+                type="submit" 
+                disabled={isProcessing}
+                className="w-full py-5 mt-8 bg-indigo-500 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-indigo-600 transition-all shadow-[0_8px_20px_rgba(99,102,241,0.3)] disabled:opacity-70"
+              >
+                {isProcessing ? (
+                  <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+                ) : (
+                  <>Place Order <ArrowRight className="w-5 h-5" /></>
+                )}
+              </button>
+            </div>
+
+          </form>
+
         </div>
-      </div>
-    );
-        
+      ) : (
+        <div className="w-full max-w-md bg-white rounded-3xl p-12 text-center shadow-xl shadow-slate-200/50 border border-slate-100 animate-in zoom-in duration-500">
+           <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+             <CheckCircle2 className="w-12 h-12 text-green-500" strokeWidth={3} />
+           </div>
+           <h2 className="text-3xl font-black mb-2 text-slate-900">All Set!</h2>
+           <p className="text-slate-500 mb-8 font-medium">Your order has been placed and is being processed.</p>
+           <button type="button" 
+              onClick={() => { setIsSuccess(false); setActiveTab('shipping'); }}
+              className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-colors"
+            >
+              Done
+            </button>
+        </div>
+      )}
+
+    </div>
+  );
 }

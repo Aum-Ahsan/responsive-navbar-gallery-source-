@@ -20,7 +20,7 @@ export default function Checkout04() {
         <div className="text-center">
           <div className="text-5xl mb-4">🎉</div>
           <h2 className="text-2xl font-bold text-slate-900">Payment Successful!</h2>
-          <p className="text-slate-500 mt-2">Paid ${total} via {methods.find(m=>m.id===method)?.label}</p>
+          <p className="text-slate-500 mt-2">Paid ${total} via {methods.find(m => m.id === method)?.label}</p>
         </div>
       </div>
     );
@@ -52,12 +52,11 @@ export default function Checkout04() {
         {/* Payment methods */}
         <div className="space-y-3 mb-6">
           {methods.map(m => (
-            <button
+            <button type="button"
               key={m.id}
               onClick={() => setMethod(m.id)}
-              className={`w-full flex items-center gap-4 p-4 rounded-2xl border-2 transition-all duration-200 ${
-                method === m.id ? `border-indigo-500 ring-2 ring-indigo-200 ${m.color} ${m.text}` : `bg-white border-slate-200 hover:border-slate-400`
-              }`}
+              className={`w-full flex items-center gap-4 p-4 rounded-2xl border-2 transition-all duration-200 ${method === m.id ? `border-indigo-500 ring-2 ring-indigo-200 ${m.color} ${m.text}` : `bg-white border-slate-200 hover:border-slate-400`
+                }`}
             >
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg ${method === m.id ? "bg-white/20" : "bg-slate-50"}`}>
                 <span>{m.icon}</span>
@@ -71,17 +70,17 @@ export default function Checkout04() {
           ))}
         </div>
 
-        <button
+        <button type="button"
           onClick={() => method && setDone(true)}
           disabled={!method}
           className={`w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all ${method ? "bg-indigo-600 hover:bg-indigo-700 text-white" : "bg-slate-200 text-slate-400 cursor-not-allowed"}`}
         >
-          <Zap size={18} /> {method ? `Pay $${total} with ${methods.find(m=>m.id===method)?.label}` : "Select a payment method"}
+          <Zap size={18} /> {method ? `Pay ${total} with ${methods.find(m => m.id === method)?.label}` : "Select a payment method"}
         </button>
 
         <div className="mt-4 flex items-center justify-center gap-2 text-xs text-slate-400">
           <Globe size={12} />
-          <span>Or <button className="underline hover:text-slate-700">fill in card details manually</button></span>
+          <span>Or <button type="button" className="underline hover:text-slate-700">fill in card details manually</button></span>
         </div>
       </div>
     </div>

@@ -42,7 +42,7 @@ export default function Cart12() {
               <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
             </div>
             <span className="font-bold text-slate-900 w-14 text-right shrink-0">${p.price * quantities[p.id]}</span>
-            <button
+            <button type="button"
               onClick={() => addToCart(p.id)}
               className={`shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
                 added[p.id] ? "bg-emerald-500 text-white" : "bg-amber-500 hover:bg-amber-600 text-white"

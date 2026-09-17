@@ -26,7 +26,7 @@ export default function Cart34() {
   return (
     <div className="w-full bg-slate-50 p-6 sm:p-10 font-sans flex justify-center">
       <div className="w-full max-w-md bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8">
-        
+
         <div className="flex items-start gap-4 mb-8 pb-6 border-b border-slate-100">
           <div className="w-20 h-20 bg-orange-50 rounded-2xl flex items-center justify-center text-4xl shrink-0">
             🥗
@@ -44,7 +44,7 @@ export default function Cart34() {
 
         <div className="grid grid-cols-3 gap-2 mb-6">
           {dates.map(d => (
-            <button
+            <button type="button"
               key={d.id}
               onClick={() => { setDate(d.id); setTime(""); }}
               className={`p-3 rounded-xl border-2 transition flex flex-col items-center justify-center text-center ${date === d.id ? "border-orange-500 bg-orange-50" : "border-slate-100 hover:border-slate-200"}`}
@@ -52,7 +52,7 @@ export default function Cart34() {
               <span className={`text-sm font-bold ${date === d.id ? "text-orange-900" : "text-slate-700"}`}>{d.label}</span>
               <span className="text-[10px] text-slate-500 mt-1">{d.desc}</span>
               <span className={`text-xs font-semibold mt-1 ${date === d.id ? "text-orange-600" : "text-slate-400"}`}>
-                {d.price === 0 ? "Free" : `+$${d.price}`}
+                {d.price === 0 ? "Free" : `+${d.price}`}
               </span>
             </button>
           ))}
@@ -65,7 +65,7 @@ export default function Cart34() {
             </label>
             <div className="grid grid-cols-2 gap-2">
               {times.map(t => (
-                <button
+                <button type="button"
                   key={t}
                   onClick={() => setTime(t)}
                   className={`py-2 px-3 text-xs font-semibold rounded-lg border transition ${time === t ? "bg-orange-500 border-orange-500 text-white" : "bg-white border-slate-200 text-slate-700 hover:border-orange-300"}`}
@@ -77,13 +77,13 @@ export default function Cart34() {
           </div>
         )}
 
-        <button 
+        <button type="button"
           onClick={handleAdd}
           disabled={added || (date !== "later" && !time)}
           className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition ${added ? "bg-emerald-500 text-white" : date !== "later" && !time ? "bg-slate-100 text-slate-400 cursor-not-allowed" : "bg-slate-900 hover:bg-slate-800 text-white"}`}
         >
           {added ? <Check size={18} /> : null}
-          {added ? "Added with Delivery" : `Add to Cart - $${(89 + selectedDate.price).toFixed(2)}`}
+          {added ? "Added with Delivery" : `Add to Cart - ${(89 + selectedDate.price).toFixed(2)}`}
         </button>
       </div>
     </div>

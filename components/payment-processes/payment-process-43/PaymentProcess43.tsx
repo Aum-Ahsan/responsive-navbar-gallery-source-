@@ -1,64 +1,216 @@
 "use client";
-import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Trash2, RotateCcw, CreditCard, ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react";
+
+interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  img: string;
+  status: 'active' | 'removing';
+}
+
+const initialCart: CartItem[] = [
+  { id: "1", name: "Ergonomic Chair", price: 299.00, img: "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=150&q=80", status: 'active' },
+  { id: "2", name: "Mechanical Keyboard", price: 149.00, img: "https://images.unsplash.com/photo-1595225476474-87563907a212?w=150&q=80", status: 'active' },
+  { id: "3", name: "Wireless Mouse", price: 79.00, img: "https://images.unsplash.com/photo-1527814050087-379381547330?w=150&q=80", status: 'active' }
+];
 
 export default function PaymentProcess43() {
+  const [cart, setCart] = useState<CartItem[]>(initialCart);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const presets = [10, 25, 50, 100];
-    const [amount, setAmount] = useState<number>(50);
-    const [isCustom, setIsCustom] = useState(false);
-    const [isProcessing, setIsProcessing] = useState(false);
+  // Auto-remove items that have been in 'removing' state for 5 seconds
+  useEffect(() => {
+    const itemsToRemove = cart.filter(item => item.status === 'removing');
+    
+    if (itemsToRemove.length === 0) return;
 
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
-    };
+    const timers = itemsToRemove.map(item => 
+      setTimeout(() => {
+        setCart(prev => prev.filter(p => p.id !== item.id));
+      }, 5000)
+    );
 
-    return (
-      <div className="w-full min-h-[600px] bg-green-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-md w-full bg-white rounded-[2rem] md:rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 sm:h-2 bg-green-600" />
+    return () => timers.forEach(clearTimeout);
+  }, [cart]);
+
+  const handleRemove = (id: string) => {
+    setCart(prev => prev.map(item => 
+      item.id === id ? { ...item, status: 'removing' } : item
+    ));
+  };
+
+  const handleUndo = (id: string) => {
+    setCart(prev => prev.map(item => 
+      item.id === id ? { ...item, status: 'active' } : item
+    ));
+  };
+
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
+
+  const activeItems = cart.filter(item => item.status === 'active');
+  const total = activeItems.reduce((sum, item) => sum + item.price, 0);
+
+  return (
+    <div className="w-full min-h-[700px] bg-slate-900 flex items-center justify-center font-sans p-6 text-slate-100">
+      
+      <div className="max-w-5xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        {/* Left Side: Cart */}
+        <div className="lg:col-span-7 bg-slate-800 rounded-3xl p-8 shadow-2xl border border-slate-700">
+          <h2 className="text-2xl font-black text-white mb-6">Shopping Cart</h2>
           
-          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-            <Heart className="w-7 h-7 sm:w-8 sm:h-8 text-green-600" fill="currentColor" />
-          </div>
-          
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Tree Planting Initiative</h2>
-            <p className="text-gray-500 text-xs sm:text-sm">Your contribution makes a direct impact. Select an amount to give today.</p>
-          </div>
+          <div className="space-y-4">
+            {cart.map(item => (
+              <div key={item.id} className="relative overflow-hidden rounded-2xl bg-slate-900/50 border border-slate-700 h-28">
+                
+                {/* ACTIVE STATE */}
+                <div 
+                  className={`absolute inset-0 flex items-center p-4 gap-4 transition-all duration-300 ease-in-out
+                    ${item.status === 'active' ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0 pointer-events-none'}
+                  `}
+                >
+                  <img src={item.img} alt={item.name} className="w-20 h-20 rounded-xl object-cover" />
+                  <div className="flex-1">
+                    <h3 className="font-bold text-slate-200">{item.name}</h3>
+                    <p className="text-emerald-400 font-bold">${item.price.toFixed(2)}</p>
+                  </div>
+                  <button type="button" 
+                    onClick={(e) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = () => handleRemove(item.id);
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+      else if (typeof originalHandler === 'object' && originalHandler !== null) { /* ignore event objects */ }
+    }}
+                    className="p-3 text-slate-500 hover:text-red-400 hover:bg-red-400/10 rounded-xl transition-colors"
+                  >
+                    <Trash2 className="w-5 h-5" />
+                  </button>
+                </div>
 
-          <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
-            {presets.map(a => (
-              <button key={a} onClick={() => { setAmount(a); setIsCustom(false); }} className={`py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg transition-all ${!isCustom && amount === a ? 'bg-green-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-                $${a}
-              </button>
+                {/* REMOVING (UNDO) STATE */}
+                <div 
+                  className={`absolute inset-0 flex items-center justify-between p-6 transition-all duration-300 ease-in-out bg-slate-900
+                    ${item.status === 'removing' ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0 pointer-events-none'}
+                  `}
+                >
+                  <div className="flex items-center gap-3">
+                    <Trash2 className="w-5 h-5 text-red-400" />
+                    <div>
+                      <p className="text-slate-300 font-bold">{item.name} removed.</p>
+                      <p className="text-slate-500 text-sm">Item will be permanently deleted shortly.</p>
+                    </div>
+                  </div>
+                  <button type="button" 
+                    onClick={() => handleUndo(item.id)}
+                    className="flex items-center gap-2 px-4 py-2 bg-indigo-500/20 text-indigo-400 hover:bg-indigo-500 hover:text-white rounded-lg font-bold transition-colors"
+                  >
+                    <RotateCcw className="w-4 h-4" /> Undo
+                  </button>
+
+                  {/* Progress bar for auto-delete */}
+                  {item.status === 'removing' && (
+                    <div className="absolute bottom-0 left-0 h-1 bg-red-500/50 animate-[shrink_5s_linear_forwards]" style={{width: '100%'}}></div>
+                  )}
+                </div>
+
+              </div>
             ))}
-          </div>
-          
-          <button onClick={() => setIsCustom(true)} className={`w-full py-3 sm:py-4 rounded-xl font-bold mb-6 sm:mb-8 transition-all ${isCustom ? 'bg-green-600 text-white shadow-md' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>
-            Custom Amount
-          </button>
 
-          {isCustom && (
-            <div className="mb-6 sm:mb-8 relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-lg sm:text-xl">$</span>
-              <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full text-xl sm:text-2xl font-bold text-gray-900 pl-10 pr-4 py-3 sm:py-4 bg-gray-50 rounded-xl focus:outline-none focus:ring-green-600/20 focus:border-green-600" />
+            {cart.length === 0 && (
+              <div className="text-center py-12 text-slate-500">
+                Cart is empty.
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Right Side: Checkout */}
+        <div className="lg:col-span-5">
+          {!isSuccess ? (
+            <div className="bg-white text-slate-900 rounded-3xl p-8 shadow-xl h-full flex flex-col relative animate-in slide-in-from-right-8 duration-500 border border-slate-200">
+              
+              <h2 className="text-2xl font-black mb-8">Checkout</h2>
+
+              <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 mb-8">
+                <div className="flex justify-between items-end mb-2">
+                  <span className="font-bold text-slate-500">Total Due</span>
+                  <span className="text-4xl font-black text-slate-900">${total.toFixed(2)}</span>
+                </div>
+                <div className="text-sm font-medium text-slate-400 flex items-center justify-end gap-1">
+                  <ShieldCheck className="w-4 h-4 text-emerald-500" /> Secure Transaction
+                </div>
+              </div>
+
+              <form onSubmit={handlePay} className="mt-auto space-y-4">
+                
+                <div className="relative">
+                  <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-12 pr-4 py-4 text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-sm" />
+                </div>
+                
+                <div className="flex gap-4">
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-center text-sm" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-center text-sm" />
+                </div>
+
+                <button 
+                  type="submit" 
+                  disabled={isProcessing || activeItems.length === 0}
+                  className="w-full py-5 mt-4 bg-slate-900 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-slate-800 transition-all shadow-lg disabled:opacity-50 disabled:shadow-none"
+                >
+                  {isProcessing ? (
+                    <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  ) : (
+                    <>Pay Now <ArrowRight className="w-5 h-5" /></>
+                  )}
+                </button>
+              </form>
+            </div>
+          ) : (
+            <div className="bg-emerald-50 text-slate-900 rounded-3xl p-8 shadow-xl h-full flex flex-col items-center justify-center text-center animate-in zoom-in duration-500 border border-emerald-100">
+               <div className="w-24 h-24 bg-emerald-200 rounded-full flex items-center justify-center mb-6">
+                 <CheckCircle2 className="w-12 h-12 text-emerald-600" strokeWidth={3} />
+               </div>
+               <h3 className="text-3xl font-black mb-2">Order Complete</h3>
+               <p className="text-slate-500 mb-8 font-medium">Your receipt has been sent to your email.</p>
+               <button type="button" 
+                 onClick={() => { setIsSuccess(false); setCart(initialCart); }}
+                 className="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-colors w-full"
+               >
+                 Done
+               </button>
             </div>
           )}
-
-          <form onSubmit={handlePay} className="space-y-3 sm:space-y-4">
-            <input required type="email" placeholder="Email Address" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-green-600/20 focus:border-green-600" />
-            <input required type="text" placeholder="Card Number" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 focus:outline-none text-sm sm:text-base focus:ring-green-600/20 focus:border-green-600" />
-            
-            <button type="submit" disabled={isProcessing} className="w-full bg-green-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 mt-4 transition-all hover:opacity-90 text-sm sm:text-base">
-              {isProcessing ? 'Processing...' : `Donate $${amount}`}
-              {!isProcessing && <Heart className="w-4 h-4 ml-1" />}
-            </button>
-          </form>
         </div>
+
       </div>
-    );
-        
+
+      {/* Global styles for the progress bar animation */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes shrink {
+          0% { width: 100%; }
+          100% { width: 0%; }
+        }
+      `}} />
+    </div>
+  );
 }

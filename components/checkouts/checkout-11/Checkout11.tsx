@@ -53,12 +53,12 @@ export default function Checkout11() {
                     <div className="flex items-center gap-2">
                       <span className="text-xs text-slate-500">Qty:</span>
                       <div className="flex items-center border border-slate-200 rounded-lg overflow-hidden">
-                        <button onClick={() => changeQty(item.id, -1)} className="w-7 h-7 flex items-center justify-center hover:bg-slate-50 transition"><Minus size={11} /></button>
+                        <button type="button" onClick={() => changeQty(item.id, -1)} className="w-7 h-7 flex items-center justify-center hover:bg-slate-50 transition"><Minus size={11} /></button>
                         <span className="w-7 text-center text-sm font-bold">{item.qty}</span>
-                        <button onClick={() => changeQty(item.id, 1)} className="w-7 h-7 flex items-center justify-center hover:bg-slate-50 transition"><Plus size={11} /></button>
+                        <button type="button" onClick={() => changeQty(item.id, 1)} className="w-7 h-7 flex items-center justify-center hover:bg-slate-50 transition"><Plus size={11} /></button>
                       </div>
-                      <button onClick={() => setEditing(null)} className="text-xs text-indigo-600 font-semibold hover:underline">Done</button>
-                      <button onClick={() => { changeQty(item.id, -999); setEditing(null); }} className="text-xs text-rose-500 font-semibold hover:underline">Remove</button>
+                      <button type="button" onClick={() => setEditing(null)} className="text-xs text-indigo-600 font-semibold hover:underline">Done</button>
+                      <button type="button" onClick={() => { changeQty(item.id, -999); setEditing(null); }} className="text-xs text-rose-500 font-semibold hover:underline">Remove</button>
                     </div>
                   </div>
                 ) : (
@@ -71,7 +71,7 @@ export default function Checkout11() {
               <div className="flex flex-col items-end gap-2 shrink-0">
                 <span className="font-bold text-slate-900">${item.price * item.qty}</span>
                 {editing !== item.id && (
-                  <button onClick={() => setEditing(item.id)} className="flex items-center gap-1 text-xs text-slate-400 hover:text-slate-700 transition">
+                  <button type="button" onClick={() => setEditing(item.id)} className="flex items-center gap-1 text-xs text-slate-400 hover:text-slate-700 transition">
                     <Pencil size={10} /> Edit
                   </button>
                 )}
@@ -100,7 +100,7 @@ export default function Checkout11() {
           <p><span className="font-semibold">Payment:</span> Visa ending 4281</p>
         </div>
 
-        <button onClick={() => items.length > 0 && setPlaced(true)} disabled={items.length === 0} className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition ${items.length === 0 ? "bg-slate-200 text-slate-400 cursor-not-allowed" : "bg-slate-900 hover:bg-slate-700 text-white"}`}>
+        <button type="button" onClick={() => items.length > 0 && setPlaced(true)} disabled={items.length === 0} className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition ${items.length === 0 ? "bg-slate-200 text-slate-400 cursor-not-allowed" : "bg-slate-900 hover:bg-slate-700 text-white"}`}>
           <Lock size={16} /> Place Order — ${total}
         </button>
       </div>

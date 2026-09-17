@@ -1,102 +1,310 @@
 "use client";
-import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { CreditCard, ScanLine, Fingerprint, Lock, ShieldAlert, Cpu, Sparkles, CheckCircle2 } from "lucide-react";
 
 export default function PaymentProcess100() {
-
-  const [billingMode, setBillingMode] = useState<"monthly" | "annually">("annually");
-  const [selectedTier, setSelectedTier] = useState<number>(1);
+  const TOTAL_AMOUNT = 999.99;
+  
+  const [step, setStep] = useState(0); // 0: Start, 1: Enter Details, 2: Swipe/Auth, 3: Success
   const [isProcessing, setIsProcessing] = useState(false);
+  
+  const [cardNo, setCardNo] = useState("");
+  const [exp, setExp] = useState("");
+  const [cvv, setCvv] = useState("");
 
-  const tiers = [
-    { name: 'Starter', monthly: 15, annual: 12 },
-    { name: 'Professional', monthly: 49, annual: 39 },
-    { name: 'Enterprise', monthly: 99, annual: 79 },
-  ];
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [sliderValue, setSliderValue] = useState(0);
 
-  const currentPrice = billingMode === 'monthly' ? tiers[selectedTier].monthly : tiers[selectedTier].annual;
+  const [logs, setLogs] = useState<string[]>([]);
 
-  const handlePay = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsProcessing(true);
-    setTimeout(() => setIsProcessing(false), 2000);
+  const addLog = (msg: string) => {
+    setLogs(prev => [...prev, `[${new Date().toISOString().split('T')[1].slice(0,-1)}] ${msg}`].slice(-8));
   };
 
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      setMousePos({ x, y });
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener("mousemove", handleMouseMove);
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener("mousemove", handleMouseMove);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (step === 2 && sliderValue >= 99 && !isProcessing) {
+      setIsProcessing(true);
+      addLog("SWIPE DETECTED. AUTHORIZING...");
+      setTimeout(() => {
+        setIsProcessing(false);
+        setStep(3);
+        addLog("AUTHORIZATION COMPLETE. SUCCESS.");
+      }, 3000);
+    }
+  }, [sliderValue, step, isProcessing]);
+
+  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSliderValue(parseInt(e.target.value));
+  };
+
+  const handleSliderRelease = () => {
+    if (sliderValue < 99) setSliderValue(0);
+  };
+
+  const rotateY = (mousePos.x - 0.5) * 40; 
+  const rotateX = (0.5 - mousePos.y) * 40;
+
   return (
-    <div className="w-full min-h-[700px] bg-white flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 rounded-[2rem] md:rounded-3xl overflow-hidden border border-gray-200 shadow-2xl">
-        <div className="bg-gray-50 p-6 sm:p-8 md:p-12 border-b md:border-b-0 md:border-r border-gray-200 flex flex-col justify-between">
-          <div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">AI Tool Pro Plan</h2>
-            <p className="text-sm sm:text-base text-gray-500 mb-6 md:mb-8">Upgrade your account to unlock premium features.</p>
+    <div 
+      ref={containerRef}
+      className="w-full min-h-[800px] bg-black flex items-center justify-center font-sans p-4 md:p-8 text-white overflow-hidden relative perspective-[1200px]"
+    >
+      
+      {/* Universal Backgrounds */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,0,255,0.1)_0%,rgba(0,0,0,1)_70%)] pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px] opacity-20 pointer-events-none"></div>
 
-            <div className="flex flex-col sm:flex-row bg-gray-200/50 rounded-xl p-1 mb-6 md:mb-8 w-full sm:w-fit gap-1 sm:gap-0">
-              <button onClick={() => setBillingMode("monthly")} className={`w-full sm:w-auto px-4 py-2.5 md:py-2 rounded-lg text-sm font-semibold ${billingMode === "monthly" ? 'bg-white shadow text-gray-900' : 'text-gray-500'}`}>Monthly</button>
-              <button onClick={() => setBillingMode("annually")} className={`w-full sm:w-auto px-4 py-2.5 md:py-2 rounded-lg text-sm font-semibold ${billingMode === "annually" ? 'bg-white shadow text-gray-900' : 'text-gray-500'}`}>Annually (Save 20%)</button>
-            </div>
-
-            <div className="space-y-3 md:space-y-4">
-              {tiers.map((tier, i) => (
-                <div key={i} onClick={() => setSelectedTier(i)} className={`cursor-pointer p-4 md:p-5 rounded-2xl border-2 transition-all ${selectedTier === i ? 'border-purple-200 bg-purple-50' : 'border-gray-200 bg-white hover:border-gray-300'}`}>
-                  <div className="flex justify-between items-center mb-1">
-                    <span className="font-bold text-gray-900 text-sm md:text-base">{tier.name}</span>
-                    <div className="text-right">
-                      <span className="text-lg md:text-xl font-bold text-gray-900">$${billingMode === 'monthly' ? tier.monthly : tier.annual}</span>
-                      <span className="text-gray-500 text-xs md:text-sm">/mo</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-8 md:mt-12 pt-6 border-t border-gray-200 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 sm:gap-0">
-            <span className="font-semibold text-gray-600 text-sm md:text-base">Total due today</span>
-            <span className="text-2xl md:text-3xl font-bold text-gray-900">$${billingMode === 'monthly' ? currentPrice : currentPrice * 12}</span>
-          </div>
-        </div>
-
-        <div className="p-6 sm:p-8 md:p-12 bg-white">
-          <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-6">Payment Details</h3>
-          <form onSubmit={handlePay} className="space-y-4 sm:space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">First Name</label>
-                <input required type="text" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none text-sm sm:text-base focus:ring-purple-600/20 focus:border-purple-600" />
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Last Name</label>
-                <input required type="text" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none text-sm sm:text-base focus:ring-purple-600/20 focus:border-purple-600" />
-              </div>
-            </div>
-            <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Name on Card</label>
-                <input required type="text" placeholder="John Doe" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none text-sm sm:text-base focus:ring-purple-600/20 focus:border-purple-600" />
-              </div>
-              <div>
-              <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Card Number</label>
-              <div className="relative">
-                <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
-                <input maxLength={16} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 16); }} required type="text" placeholder="0000 0000 0000 0000" className="w-full pl-10 sm:pl-12 bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-purple-600/20 focus:border-purple-600" />
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Expiry</label>
-                <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-purple-600/20 focus:border-purple-600" />
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">CVC</label>
-                <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="123" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-purple-600/20 focus:border-purple-600" />
-              </div>
-            </div>
-            <button type="submit" disabled={isProcessing} className="w-full mt-4 sm:mt-6 bg-purple-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 text-sm sm:text-base hover:shadow-lg hover:-translate-y-0.5">
-              {isProcessing ? 'Processing...' : 'Subscribe Now'}
-            </button>
-          </form>
+      {/* Side Terminal Logs (Desktop Only) */}
+      <div className="absolute left-8 top-8 bottom-8 w-64 hidden xl:flex flex-col opacity-70">
+        <h3 className="text-fuchsia-500 font-mono text-xs font-bold tracking-[0.2em] mb-4 border-b border-fuchsia-500/30 pb-2">SYS_LOGS // PROTOCOL_100</h3>
+        <div className="flex-1 font-mono text-[10px] text-fuchsia-300/70 space-y-2 overflow-y-auto pr-2">
+          {logs.map((l, i) => <div key={i} className="animate-in fade-in">{l}</div>)}
         </div>
       </div>
+
+      {step === 0 && (
+        <div className="relative z-10 flex flex-col items-center animate-in zoom-in duration-700">
+          <div className="w-32 h-32 mb-8 relative flex items-center justify-center group cursor-pointer" 
+               onClick={() => { setStep(1); addLog("INITIATING CHECKOUT PROTOCOL."); }}>
+            <div className="absolute inset-0 bg-fuchsia-600 rounded-full blur-[30px] opacity-50 group-hover:opacity-100 group-hover:blur-[50px] transition-all duration-500 animate-pulse"></div>
+            <div className="w-24 h-24 bg-black border-2 border-fuchsia-500 rounded-full flex items-center justify-center relative z-10">
+              <Cpu className="w-10 h-10 text-fuchsia-400 group-hover:rotate-180 transition-transform duration-1000" />
+            </div>
+            {/* Orbital ring */}
+            <div className="absolute w-40 h-40 border border-fuchsia-500/30 rounded-full animate-[spin_4s_linear_infinite]">
+               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-fuchsia-400 rounded-full shadow-[0_0_10px_#d946ef]"></div>
+            </div>
+          </div>
+          <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-purple-600 mb-4 [text-shadow:0_0_20px_rgba(217,70,239,0.5)]">
+            ULTIMA PAY
+          </h1>
+          <p className="text-fuchsia-300/70 tracking-widest uppercase text-sm font-bold">Total: ${TOTAL_AMOUNT.toFixed(2)}</p>
+        </div>
+      )}
+
+      {step === 1 && (
+        <div className="w-full max-w-4xl grid md:grid-cols-2 gap-12 relative z-10 items-center">
+          
+          {/* Left: 3D Interactive Card */}
+          <div className="flex justify-center preserve-3d" style={{ transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)` }}>
+            <div className="w-[380px] h-[240px] rounded-2xl p-6 relative overflow-hidden bg-gradient-to-br from-black/80 to-fuchsia-950/80 border border-fuchsia-500/30 shadow-[0_0_50px_rgba(217,70,239,0.2)] backdrop-blur-xl group">
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000"></div>
+              
+              <div className="flex justify-between items-start mb-12">
+                <ScanLine className="w-8 h-8 text-fuchsia-400" />
+                <CreditCard className="w-6 h-6 text-fuchsia-600/50" />
+              </div>
+              
+              <div className="text-2xl font-mono tracking-[0.2em] text-white mb-6 [text-shadow:0_0_10px_#fff]">
+                {cardNo || '•••• •••• •••• ••••'}
+              </div>
+              
+              <div className="flex justify-between text-fuchsia-300 font-mono text-sm uppercase tracking-widest">
+                <div>
+                  <div className="text-[10px] text-fuchsia-600 mb-1">VALID THRU</div>
+                  {exp || 'MM/YY'}
+                </div>
+                <div>
+                  <div className="text-[10px] text-fuchsia-600 mb-1">CVC</div>
+                  {cvv || '•••'}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Form */}
+          <div className="bg-black/50 backdrop-blur-md border border-white/10 p-8 rounded-3xl relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-b from-fuchsia-500/5 to-transparent pointer-events-none"></div>
+            
+            <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
+              <ShieldAlert className="w-6 h-6 text-fuchsia-500" /> 
+              Enter Credentials
+            </h2>
+
+            <div className="space-y-6">
+              <div className="space-y-2 relative">
+                <label className="text-xs uppercase tracking-widest text-fuchsia-500/80">Card Number</label>
+                <input required 
+                  type="text" 
+                  value={cardNo}
+                  onChange={(e) => setCardNo(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 focus:outline-none focus:border-fuchsia-500 focus:bg-fuchsia-500/10 transition-all font-mono tracking-widest text-sm text-white" 
+                />
+              </div>
+              
+              <div className="flex gap-4">
+                <div className="space-y-2 relative w-1/2">
+                  <label className="text-xs uppercase tracking-widest text-fuchsia-500/80">Expiry</label>
+                  <input required 
+                    type="text" 
+                    value={exp}
+                    onChange={(e) => setExp(e.target.value)}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 focus:outline-none focus:border-fuchsia-500 focus:bg-fuchsia-500/10 transition-all font-mono tracking-widest text-center text-sm text-white" 
+                  />
+                </div>
+                <div className="space-y-2 relative w-1/2">
+                  <label className="text-xs uppercase tracking-widest text-fuchsia-500/80">CVC</label>
+                  <input required 
+                    type="text" 
+                    value={cvv}
+                    onChange={(e) => setCvv(e.target.value)}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 focus:outline-none focus:border-fuchsia-500 focus:bg-fuchsia-500/10 transition-all font-mono tracking-widest text-center text-sm text-white" 
+                  />
+                </div>
+              </div>
+
+              <div className="pt-4">
+                <button type="button" 
+                  onClick={(e) => {
+                    const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+                    let isValid = true;
+                    for (const input of inputs) {
+                      if (!input.checkValidity()) {
+                        input.reportValidity();
+                        isValid = false;
+                        break;
+                      }
+                    }
+                    if (!isValid) return;
+                    if (cardNo && exp && cvv) {
+                      setStep(2);
+                      addLog("CREDENTIALS ACCEPTED. PROCEEDING TO FINAL AUTH.");
+                    } else {
+                      addLog("ERROR: INCOMPLETE CREDENTIALS.");
+                    }
+                  }}
+                  className="w-full py-4 bg-white text-black rounded-xl font-black uppercase tracking-[0.2em] hover:bg-fuchsia-400 transition-colors"
+                >
+                  Confirm Identity
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {step === 2 && (
+        <div className="max-w-md w-full flex flex-col items-center relative z-10 animate-in fade-in zoom-in duration-500">
+          
+          <div className="mb-12 text-center">
+            <Fingerprint className="w-20 h-20 text-fuchsia-500 mx-auto mb-6 opacity-80" />
+            <h2 className="text-3xl font-black uppercase tracking-[0.2em] mb-2 [text-shadow:0_0_15px_rgba(217,70,239,0.5)]">Final Auth</h2>
+            <p className="text-fuchsia-200/60 font-mono text-sm">Swipe to authorize transfer of ${TOTAL_AMOUNT.toFixed(2)}</p>
+          </div>
+
+          <div className="relative w-full h-20 bg-white/5 rounded-full border border-white/10 overflow-hidden backdrop-blur-xl flex items-center p-2">
+            
+            {/* Background Text */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-30 font-bold uppercase tracking-[0.3em]">
+              {isProcessing ? 'Authorizing...' : 'Swipe to Pay'}
+            </div>
+            
+            {/* Progress Fill */}
+            <div className="absolute top-0 bottom-0 left-0 bg-fuchsia-600/30 transition-none" style={{ width: `${sliderValue}%` }}></div>
+
+            {!isProcessing ? (
+              <>
+                <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required 
+                  type="range" 
+                  min="0" max="100" 
+                  value={sliderValue}
+                  onChange={handleSliderChange}
+                  onMouseUp={handleSliderRelease}
+                  onTouchEnd={handleSliderRelease}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-grab active:cursor-grabbing z-20" />
+                
+                {/* Thumb */}
+                <div 
+                  className="absolute w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.5)] pointer-events-none z-10 transition-none"
+                  style={{ left: `calc(${sliderValue}% - ${sliderValue * 0.64}px)` }} // Complex calc to keep thumb inside bounds
+                >
+                  <Lock className="w-6 h-6 text-black" />
+                </div>
+              </>
+            ) : (
+              <div className="absolute inset-0 bg-fuchsia-600 flex items-center justify-center z-30">
+                <div className="flex gap-2 items-center">
+                  <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-white rounded-full animate-bounce delay-100"></div>
+                  <div className="w-2 h-2 bg-white rounded-full animate-bounce delay-200"></div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {step === 3 && (
+        <div className="absolute inset-0 flex items-center justify-center z-50 bg-fuchsia-600 animate-in fade-in duration-500">
+           
+           {/* Crazy confetti particles simulated via CSS */}
+           <div className="absolute inset-0 overflow-hidden pointer-events-none">
+             {[...Array(50)].map((_, i) => (
+               <div key={i} className="absolute w-2 h-2 bg-white rounded-full animate-confetti" 
+                    style={{ 
+                      left: `${Math.random() * 100}%`, 
+                      top: `-10px`,
+                      animationDelay: `${Math.random() * 3}s`,
+                      animationDuration: `${1 + Math.random() * 2}s` 
+                    }}></div>
+             ))}
+           </div>
+
+           <div className="text-center relative z-10 bg-black/20 p-12 rounded-3xl backdrop-blur-xl border border-white/20 shadow-2xl">
+             <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mx-auto mb-8 shadow-[0_0_50px_rgba(255,255,255,0.5)]">
+               <CheckCircle2 className="w-16 h-16 text-fuchsia-600" strokeWidth={3} />
+             </div>
+             
+             <h2 className="text-5xl font-black mb-4 uppercase tracking-[0.2em] [text-shadow:0_4px_20px_rgba(0,0,0,0.5)] flex items-center justify-center gap-4">
+               <Sparkles className="w-10 h-10" />
+               Masterpiece Complete
+               <Sparkles className="w-10 h-10" />
+             </h2>
+             <p className="text-xl font-bold opacity-90 tracking-widest uppercase">Thank you for witnessing the 100th Payment Process.</p>
+             
+             <button type="button" 
+                onClick={() => { setStep(0); setCardNo(""); setExp(""); setCvv(""); setSliderValue(0); setLogs([]); }}
+                className="mt-12 px-12 py-4 bg-black text-white font-black uppercase tracking-[0.3em] rounded-full hover:bg-white hover:text-black hover:shadow-[0_0_30px_rgba(255,255,255,0.8)] transition-all duration-300"
+              >
+                Start Over
+              </button>
+           </div>
+        </div>
+      )}
+
+      <style dangerouslySetInnerHTML={{__html: `
+        .perspective-\\[1200px\\] { perspective: 1200px; }
+        .preserve-3d { transform-style: preserve-3d; }
+        
+        @keyframes confetti {
+          0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+          100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        .animate-confetti {
+          animation: confetti linear infinite;
+        }
+      `}} />
     </div>
   );
-
 }

@@ -1,102 +1,208 @@
 "use client";
-import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
+import { ArrowDown, Loader2, CheckCircle2, ChevronLeft, ShoppingBag } from "lucide-react";
 
 export default function PaymentProcess18() {
+  const [startY, setStartY] = useState(0);
+  const [pullDistance, setPullDistance] = useState(0);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [discount, setDiscount] = useState(0);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  
+  const containerRef = useRef<HTMLDivElement>(null);
+  const maxPull = 120;
+  const refreshThreshold = 80;
 
-    const [billingMode, setBillingMode] = useState<"monthly" | "annually">("annually");
-    const [selectedTier, setSelectedTier] = useState<number>(1);
-    const [isProcessing, setIsProcessing] = useState(false);
-
-    const tiers = [
-      { name: 'Starter', monthly: 15, annual: 12 },
-      { name: 'Professional', monthly: 49, annual: 39 },
-      { name: 'Enterprise', monthly: 99, annual: 79 },
-    ];
-
-    const currentPrice = billingMode === 'monthly' ? tiers[selectedTier].monthly : tiers[selectedTier].annual;
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if (isRefreshing || isProcessing || isSuccess) return;
     
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => setIsProcessing(false), 2000);
-    };
+    // Only allow pull if we are at the top of the scroll container
+    if (containerRef.current && containerRef.current.scrollTop > 0) return;
+    
+    setStartY(e.clientY);
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
 
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (startY === 0 || isRefreshing) return;
+    
+    const deltaY = e.clientY - startY;
+    if (deltaY > 0) {
+      // Add resistance to the pull
+      const resistance = 0.5;
+      const pull = Math.min(deltaY * resistance, maxPull);
+      setPullDistance(pull);
+      
+      // Prevent actual scrolling while pulling
+      if (e.cancelable) e.preventDefault();
+    }
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (startY === 0) return;
+    setStartY(0);
+    e.currentTarget.releasePointerCapture(e.pointerId);
+
+    if (pullDistance >= refreshThreshold) {
+      setIsRefreshing(true);
+      setPullDistance(refreshThreshold); // Snap to loading position
+      
+      // Simulate network request
+      setTimeout(() => {
+        // Apply a random discount
+        const newDiscount = [5, 10, 15, 20][Math.floor(Math.random() * 4)];
+        setDiscount(newDiscount);
+        setIsRefreshing(false);
+        setPullDistance(0);
+      }, 1500);
+    } else {
+      setPullDistance(0);
+    }
+  };
+
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
+
+  const baseTotal = 150.00;
+  const finalTotal = baseTotal - discount;
+
+  if (isSuccess) {
     return (
-      <div className="w-full min-h-[700px] bg-white flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 rounded-[2rem] md:rounded-3xl overflow-hidden border border-gray-200 shadow-2xl">
-          <div className="bg-gray-50 p-6 sm:p-8 md:p-12 border-b md:border-b-0 md:border-r border-gray-200 flex flex-col justify-between">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">News Publisher Paywall</h2>
-              <p className="text-sm sm:text-base text-gray-500 mb-6 md:mb-8">Upgrade your account to unlock premium features.</p>
+      <div className="w-full min-h-[600px] bg-slate-100 flex items-center justify-center p-6 font-sans">
+        <div className="bg-white p-12 rounded-[2rem] shadow-xl text-center max-w-sm w-full animate-in fade-in zoom-in-95 duration-500">
+          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <CheckCircle2 className="w-10 h-10 text-green-500" />
+          </div>
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">Payment Complete</h2>
+          <p className="text-slate-500 mb-8">Thank you for your purchase.</p>
+          <button type="button" onClick={() => { setIsSuccess(false); setDiscount(0); }} className="w-full py-4 bg-slate-900 text-white rounded-xl font-bold hover:bg-slate-800 transition-colors">
+            Return Home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full min-h-screen bg-slate-100 flex items-center justify-center p-6 font-sans">
+      
+      <div className="max-w-[400px] w-full bg-white rounded-[2.5rem] shadow-2xl h-[800px] max-h-[90vh] overflow-hidden flex flex-col border-[8px] border-slate-800 relative">
+        
+        {/* App Header */}
+        <div className="px-6 py-5 flex items-center justify-between border-b border-slate-100 bg-white z-20 relative">
+          <button type="button" className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-900 hover:bg-slate-100 transition-colors">
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <h1 className="font-bold text-lg text-slate-900">Your Cart</h1>
+          <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-white relative">
+            <ShoppingBag className="w-5 h-5" />
+            <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] font-bold flex items-center justify-center border-2 border-white">2</span>
+          </div>
+        </div>
+
+        {/* Pull to Refresh Area */}
+        <div className="relative flex-1 overflow-hidden bg-slate-50 z-10">
+          
+          {/* Refresh Indicator (Hidden behind content, revealed when pulled) */}
+          <div 
+            className="absolute top-0 inset-x-0 flex flex-col items-center justify-center text-indigo-500 font-medium text-sm transition-opacity"
+            style={{ 
+              height: `${refreshThreshold}px`,
+              opacity: (pullDistance / refreshThreshold)
+            }}
+          >
+            {isRefreshing ? (
+              <Loader2 className="w-6 h-6 animate-spin mb-1" />
+            ) : pullDistance >= refreshThreshold ? (
+              <ArrowDown className="w-6 h-6 rotate-180 transition-transform mb-1" />
+            ) : (
+              <ArrowDown className="w-6 h-6 transition-transform mb-1" />
+            )}
+            {isRefreshing ? 'Checking for deals...' : pullDistance >= refreshThreshold ? 'Release to refresh' : 'Pull to refresh'}
+          </div>
+
+          {/* Scrollable Content that moves down */}
+          <div 
+            ref={containerRef}
+            className="h-full overflow-y-auto custom-scrollbar touch-pan-y relative z-10 bg-white shadow-[0_-10px_20px_rgba(0,0,0,0.05)] transition-transform ease-out"
+            style={{ 
+              transform: `translateY(${pullDistance}px)`,
+              transitionDuration: startY === 0 ? '300ms' : '0ms' // Snap back when released, follow pointer when dragging
+            }}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerUp}
+          >
+            <div className="p-6 space-y-6">
               
-              <div className="flex flex-col sm:flex-row bg-gray-200/50 rounded-xl p-1 mb-6 md:mb-8 w-full sm:w-fit gap-1 sm:gap-0">
-                <button onClick={() => setBillingMode("monthly")} className={`w-full sm:w-auto px-4 py-2.5 md:py-2 rounded-lg text-sm font-semibold ${billingMode === "monthly" ? 'bg-white shadow text-gray-900' : 'text-gray-500'}`}>Monthly</button>
-                <button onClick={() => setBillingMode("annually")} className={`w-full sm:w-auto px-4 py-2.5 md:py-2 rounded-lg text-sm font-semibold ${billingMode === "annually" ? 'bg-white shadow text-gray-900' : 'text-gray-500'}`}>Annually (Save 20%)</button>
+              <div className="bg-indigo-50 rounded-2xl p-4 text-center border border-indigo-100 text-indigo-700 text-sm font-medium">
+                Tip: Pull down to check for today's special deals!
               </div>
 
-              <div className="space-y-3 md:space-y-4">
-                {tiers.map((tier, i) => (
-                  <div key={i} onClick={() => setSelectedTier(i)} className={`cursor-pointer p-4 md:p-5 rounded-2xl border-2 transition-all ${selectedTier === i ? 'border-zinc-200 bg-zinc-50' : 'border-gray-200 bg-white hover:border-gray-300'}`}>
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="font-bold text-gray-900 text-sm md:text-base">{tier.name}</span>
-                      <div className="text-right">
-                        <span className="text-lg md:text-xl font-bold text-gray-900">$${billingMode === 'monthly' ? tier.monthly : tier.annual}</span>
-                        <span className="text-gray-500 text-xs md:text-sm">/mo</span>
-                      </div>
+              {/* Cart Items */}
+              <div className="space-y-4">
+                {[1, 2].map((item) => (
+                  <div key={item} className="flex gap-4">
+                    <div className="w-24 h-24 bg-slate-100 rounded-2xl p-2 shrink-0">
+                      <img src={`https://images.unsplash.com/photo-${item === 1 ? '1505740420928-5e560c06d30e' : '1542291026-7eec264c27ff'}?w=200&q=80`} alt="Product" className="w-full h-full object-cover mix-blend-multiply rounded-xl" />
+                    </div>
+                    <div className="flex-1 flex flex-col justify-center">
+                      <h3 className="font-bold text-slate-900">{item === 1 ? 'Sony WH-1000XM4' : 'Nike Air Max 270'}</h3>
+                      <p className="text-slate-500 text-sm mb-2">{item === 1 ? 'Electronics' : 'Shoes'}</p>
+                      <div className="font-bold text-slate-900">${item === 1 ? '75.00' : '75.00'}</div>
                     </div>
                   </div>
                 ))}
               </div>
+
+              <hr className="border-slate-100" />
+
+              {/* Order Summary */}
+              <div className="space-y-3">
+                <div className="flex justify-between text-slate-500 font-medium">
+                  <span>Subtotal</span>
+                  <span>${baseTotal.toFixed(2)}</span>
+                </div>
+                
+                {discount > 0 && (
+                  <div className="flex justify-between text-indigo-600 font-bold animate-in slide-in-from-right fade-in">
+                    <span>Special Discount!</span>
+                    <span>-${discount.toFixed(2)}</span>
+                  </div>
+                )}
+              </div>
+
             </div>
-            
-            <div className="mt-8 md:mt-12 pt-6 border-t border-gray-200 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 sm:gap-0">
-              <span className="font-semibold text-gray-600 text-sm md:text-base">Total due today</span>
-              <span className="text-2xl md:text-3xl font-bold text-gray-900">$${billingMode === 'monthly' ? currentPrice : currentPrice * 12}</span>
-            </div>
-          </div>
-          
-          <div className="p-6 sm:p-8 md:p-12 bg-white">
-            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-6">Payment Details</h3>
-            <form onSubmit={handlePay} className="space-y-4 sm:space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">First Name</label>
-                  <input required type="text" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none text-sm sm:text-base focus:ring-zinc-800/20 focus:border-zinc-800" />
-                </div>
-                <div>
-                  <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Last Name</label>
-                  <input required type="text" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none text-sm sm:text-base focus:ring-zinc-800/20 focus:border-zinc-800" />
-                </div>
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Name on Card</label>
-                <input required type="text" placeholder="John Doe" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none text-sm sm:text-base focus:ring-zinc-800/20 focus:border-zinc-800" />
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Card Number</label>
-                <div className="relative">
-                  <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
-                  <input maxLength={16} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 16); }} required type="text" placeholder="0000 0000 0000 0000" className="w-full pl-10 sm:pl-12 bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-zinc-800/20 focus:border-zinc-800" />
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Expiry</label>
-                  <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-zinc-800/20 focus:border-zinc-800" />
-                </div>
-                <div>
-                  <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">CVC</label>
-                  <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="123" className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 focus:outline-none font-mono text-sm sm:text-base focus:ring-zinc-800/20 focus:border-zinc-800" />
-                </div>
-              </div>
-              <button type="submit" disabled={isProcessing} className="w-full mt-4 sm:mt-6 bg-zinc-800 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 text-sm sm:text-base hover:shadow-lg hover:-translate-y-0.5">
-                {isProcessing ? 'Processing...' : 'Subscribe Now'}
-              </button>
-            </form>
           </div>
         </div>
+
+        {/* Footer Checkout */}
+        <div className="bg-white p-6 pb-8 border-t border-slate-100 z-20 relative">
+          <div className="flex justify-between items-end mb-6">
+            <span className="font-bold text-slate-500">Total</span>
+            <span className="text-3xl font-black text-slate-900">${finalTotal.toFixed(2)}</span>
+          </div>
+
+          <form onSubmit={handlePay}>
+            <button 
+              type="submit" 
+              disabled={isProcessing || isRefreshing}
+              className="w-full py-4 bg-indigo-600 text-white rounded-2xl font-bold text-lg hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-600/30 flex items-center justify-center disabled:opacity-70 disabled:shadow-none"
+            >
+              {isProcessing ? 'Processing...' : 'Place Order'}
+            </button>
+          </form>
+        </div>
+
       </div>
-    );
-        
+    </div>
+  );
 }

@@ -42,7 +42,7 @@ export default function Cart27() {
         {/* Preset amounts */}
         <div className="grid grid-cols-4 gap-2 mb-4">
           {presets.map(p => (
-            <button
+            <button type="button"
               key={p}
               onClick={() => { setAmount(p); setIsCustom(false); setCustom(""); }}
               className={`py-3 rounded-xl font-bold text-sm transition-all ${
@@ -94,7 +94,7 @@ export default function Cart27() {
           </div>
         </div>
 
-        <button
+        <button type="button"
           onClick={handleDonate}
           disabled={finalAmount <= 0}
           className={`w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all duration-300 ${

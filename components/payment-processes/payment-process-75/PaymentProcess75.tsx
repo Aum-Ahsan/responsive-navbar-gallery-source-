@@ -1,117 +1,138 @@
 "use client";
 import React, { useState } from "react";
-import { Check, CreditCard, Shield, Zap, Lock, ChevronRight, Apple, Heart, FileText, ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 export default function PaymentProcess75() {
+  const TOTAL_AMOUNT = 50.00;
+  
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const [paymentMode, setPaymentMode] = useState<"upfront" | "split">("upfront");
-    const [splitMonths, setSplitMonths] = useState<number>(3);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
+  };
 
-    const totalAmount = 1200;
-    const splitAmount = Math.ceil((totalAmount * 1.05) / splitMonths);
-
-    const handlePay = (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsProcessing(true);
-      setTimeout(() => {
-        setIsProcessing(false);
-        setIsSuccess(true);
-      }, 2000);
-    };
-
-    if (isSuccess) {
-      return (
-        <div className="w-full min-h-[600px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 text-center max-w-md w-full shadow-xl border border-gray-100">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Check className="w-8 h-8 sm:w-10 sm:h-10" />
+  return (
+    <div className="w-full min-h-[700px] bg-[#4b0082] flex items-center justify-center p-6 text-black" style={{ fontFamily: '"Courier New", Courier, monospace', imageRendering: 'pixelated' }}>
+      
+      {!isSuccess ? (
+        <div 
+          className="max-w-md w-full bg-[#c0c0c0] p-8 relative z-10"
+          style={{
+            border: '4px solid #000',
+            boxShadow: '8px 8px 0 #000'
+          }}
+        >
+          
+          <div className="flex justify-between items-center mb-6 border-b-4 border-black pb-4">
+            <h2 className="text-2xl font-black uppercase">Item Shop</h2>
+            <div className="bg-yellow-400 border-4 border-black px-2 py-1 font-bold shadow-[4px_4px_0_#000]">
+              $ {TOTAL_AMOUNT.toFixed(2)}
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Payment Confirmed</h2>
-            <p className="text-sm sm:text-base text-gray-500 mb-8">Your payment has been processed successfully. A receipt has been sent to your email.</p>
-            <button onClick={() => setIsSuccess(false)} className="text-sky-600 font-semibold hover:opacity-80 transition-opacity text-sm sm:text-base">
-              Return to Dashboard
-            </button>
           </div>
-        </div>
-      );
-    }
 
-    return (
-      <div className="w-full min-h-[700px] bg-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
-        <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-start">
-          <div className="space-y-6 md:space-y-8">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-sky-600 text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-3 sm:mb-4">
-                <Zap className="w-3 h-3" /> Travel Booking Deposit
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 tracking-tight">Complete your purchase</h2>
-              <p className="text-sm sm:text-base md:text-lg text-gray-500 leading-relaxed">Choose how you want to pay. Pay upfront to save, or split it into manageable monthly payments.</p>
-            </div>
-
-            <div className="bg-white rounded-3xl p-1.5 shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-1.5 sm:gap-0">
-              <button onClick={() => setPaymentMode("upfront")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "upfront" ? "bg-sky-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Pay in full</button>
-              <button onClick={() => setPaymentMode("split")} className={`flex-1 py-3 px-6 rounded-2xl text-xs sm:text-sm font-semibold transition-all ${paymentMode === "split" ? "bg-sky-600 text-white shadow-md" : "text-gray-500 hover:bg-gray-50"}`}>Split payment</button>
-            </div>
-
-            <div className="bg-white rounded-3xl p-5 sm:p-6 md:p-8 border border-gray-100 shadow-sm transition-all">
-              {paymentMode === "upfront" ? (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Total Payment</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">One-time payment</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${totalAmount}</div>
-                  </div>
+          <div className="bg-white border-4 border-black p-4 mb-8 shadow-[4px_4px_0_#000]">
+             <div className="flex items-center gap-4">
+                <div className="w-16 h-16 bg-[#ff00ff] border-4 border-black shadow-[4px_4px_0_#000] flex items-center justify-center font-bold text-white text-xl">
+                  +1
                 </div>
+                <div>
+                  <h3 className="font-bold uppercase">Health Potion</h3>
+                  <p className="text-xs uppercase font-bold text-gray-600">Restores 100 HP</p>
+                </div>
+             </div>
+          </div>
+
+          <form onSubmit={handlePay} className="space-y-6">
+            
+            <div className="space-y-2">
+              <label className="text-sm font-bold uppercase">Card Number</label>
+              <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" 
+                required 
+                type="text" 
+                placeholder="XXXX-XXXX-XXXX-XXXX" 
+                className="w-full bg-white border-4 border-black px-4 py-3 text-black focus:outline-none focus:bg-yellow-200 transition-none font-bold placeholder:text-gray-400 shadow-[4px_4px_0_#000] active:translate-y-1 active:translate-x-1 active:shadow-[0_0_0_#000]" 
+              />
+            </div>
+            
+            <div className="flex gap-4">
+              <div className="w-1/2 space-y-2">
+                <label className="text-sm font-bold uppercase">Exp</label>
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" 
+                  required 
+                  type="text" 
+                  placeholder="MM/YY" 
+                  className="w-full bg-white border-4 border-black px-4 py-3 text-black focus:outline-none focus:bg-yellow-200 transition-none font-bold text-center placeholder:text-gray-400 shadow-[4px_4px_0_#000] active:translate-y-1 active:translate-x-1 active:shadow-[0_0_0_#000]" 
+                />
+              </div>
+              <div className="w-1/2 space-y-2">
+                <label className="text-sm font-bold uppercase">CVV</label>
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9\s\-\,]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" 
+                  required 
+                  type="text" 
+                  placeholder="123" 
+                  className="w-full bg-white border-4 border-black px-4 py-3 text-black focus:outline-none focus:bg-yellow-200 transition-none font-bold text-center placeholder:text-gray-400 shadow-[4px_4px_0_#000] active:translate-y-1 active:translate-x-1 active:shadow-[0_0_0_#000]" 
+                />
+              </div>
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={isProcessing}
+              className="w-full py-4 mt-4 bg-[#00ff00] text-black border-4 border-black font-black text-xl uppercase flex items-center justify-center gap-2 hover:bg-yellow-400 transition-none shadow-[4px_4px_0_#000] active:translate-y-1 active:translate-x-1 active:shadow-[0_0_0_#000] disabled:opacity-50"
+            >
+              {isProcessing ? (
+                'LOADING...'
               ) : (
-                <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">Monthly Split</h3>
-                      <p className="text-gray-500 text-xs sm:text-sm mt-1">Includes 5% fee</p>
-                    </div>
-                    <div className="text-3xl sm:text-4xl font-bold text-gray-900">${splitAmount}<span className="text-base sm:text-lg text-gray-400 font-normal">/mo</span></div>
-                  </div>
-                  <div className="pt-4 border-t border-gray-100">
-                    <input type="range" min="2" max="6" step="1" value={splitMonths} onChange={(e) => setSplitMonths(Number(e.target.value))} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
-                    <div className="flex justify-between text-[10px] sm:text-xs text-gray-400 mt-2 font-medium">
-                      <span>2 mos</span>
-                      <span>6 mos</span>
-                    </div>
-                  </div>
-                </div>
+                <>BUY ITEM <ArrowRight className="w-6 h-6" strokeWidth={3} /></>
               )}
-            </div>
-          </div>
+            </button>
+          </form>
 
-          <div className="bg-white rounded-[2rem] p-6 sm:p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
-            <form onSubmit={handlePay} className="space-y-4 sm:space-y-5 relative z-10">
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
-                <input required type="email" placeholder="you@example.com" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 text-sm sm:text-base text-gray-900 placeholder-gray-400 focus:outline-none transition-all focus:ring-sky-600/20 focus:border-sky-600" />
-              </div>
-              <div>
-                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">Card Information</label>
-                <div className="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden transition-all focus-within:ring-2 focus-within:border-transparent">
-                  <input maxLength={16} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 16); }} required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-transparent px-4 py-3 sm:py-3.5 border-b border-gray-200 focus:outline-none font-mono text-sm sm:text-base" />
-                  <div className="flex">
-                    <input maxLength={5} onInput={(e) => { let v = e.currentTarget.value.replace(/\D/g, ''); if (v.length > 4) v = v.substring(0, 4); if (v.length >= 3) v = `${v.substring(0, 2)}/${v.substring(2)}`; e.currentTarget.value = v; }} required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none border-r border-gray-200 font-mono text-sm sm:text-base" />
-                    <input maxLength={3} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '').substring(0, 3); }} required type="text" placeholder="CVC" className="w-1/2 bg-transparent px-4 py-3 sm:py-3.5 focus:outline-none font-mono text-sm sm:text-base" />
-                  </div>
-                </div>
-              </div>
-              <div className="pt-2 sm:pt-4">
-                <button type="submit" disabled={isProcessing} className="w-full bg-sky-600 text-white font-bold py-3.5 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed text-sm sm:text-base">
-                  {isProcessing ? 'Processing...' : `Pay $${paymentMode === "upfront" ? totalAmount : splitAmount} Now`}
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
-      </div>
-    );
-        
+      ) : (
+        <div 
+          className="max-w-sm w-full bg-[#c0c0c0] p-8 text-center"
+          style={{
+            border: '4px solid #000',
+            boxShadow: '8px 8px 0 #000'
+          }}
+        >
+           
+           <div className="w-20 h-20 bg-yellow-400 border-4 border-black flex items-center justify-center mx-auto mb-6 shadow-[4px_4px_0_#000]">
+             <Check className="w-12 h-12 text-black" strokeWidth={4} />
+           </div>
+
+           <h2 className="text-2xl font-black uppercase mb-4 text-[#ff00ff]">Level Up!</h2>
+           <p className="text-black font-bold uppercase mb-8">Purchase Successful.</p>
+           
+           <button type="button" 
+              onClick={(e) => {
+      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      let isValid = true;
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          isValid = false;
+          break;
+        }
+      }
+      if (!isValid) return;
+      const originalHandler = () => { setIsSuccess(false); ;
+      if (typeof originalHandler === 'function') (originalHandler as any)(e);
+    }}}
+              className="w-full py-4 bg-white border-4 border-black text-black font-black text-xl uppercase hover:bg-yellow-400 shadow-[4px_4px_0_#000] active:translate-y-1 active:translate-x-1 active:shadow-[0_0_0_#000]"
+            >
+              CONTINUE
+            </button>
+        </div>
+      )}
+
+    </div>
+  );
 }

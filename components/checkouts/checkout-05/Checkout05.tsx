@@ -54,7 +54,7 @@ export default function Checkout05() {
               <input placeholder="CVV" className="border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900" />
             </div>
           </div>
-          <button onClick={() => setPlaced(true)} className="w-full bg-slate-900 hover:bg-slate-700 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition">
+          <button type="button" onClick={() => setPlaced(true)} className="w-full bg-slate-900 hover:bg-slate-700 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 transition">
             <Lock size={16} /> Place Order — ${total}
           </button>
         </div>
@@ -82,7 +82,7 @@ export default function Checkout05() {
                 <Tag size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                 <input value={promo} onChange={e=>setPromo(e.target.value)} placeholder="Promo code" className="w-full pl-8 pr-3 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-slate-900" />
               </div>
-              <button onClick={applyPromo} className={`px-3 py-2 rounded-xl text-sm font-bold transition ${promoApplied ? "bg-emerald-500 text-white" : "bg-slate-900 text-white hover:bg-slate-700"}`}>
+              <button type="button" onClick={applyPromo} className={`px-3 py-2 rounded-xl text-sm font-bold transition ${promoApplied ? "bg-emerald-500 text-white" : "bg-slate-900 text-white hover:bg-slate-700"}`}>
                 {promoApplied ? <Check size={14} /> : "Apply"}
               </button>
             </div>

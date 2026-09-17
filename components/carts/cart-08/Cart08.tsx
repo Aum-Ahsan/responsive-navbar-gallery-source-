@@ -41,7 +41,7 @@ export default function Cart08() {
               {/* Color swatches on hover */}
               <div className="flex gap-2 mb-3">
                 {p.colors.map(c => (
-                  <button
+                  <button type="button"
                     key={c}
                     onMouseEnter={() => setHoveredColor(h => ({ ...h, [p.id]: c }))}
                     onMouseLeave={() => setHoveredColor(h => ({ ...h, [p.id]: "" }))}
@@ -53,7 +53,7 @@ export default function Cart08() {
 
               {/* Action buttons */}
               <div className="flex gap-2">
-                <button
+                <button type="button"
                   onClick={() => addToCart(p.id)}
                   className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 ${
                     added[p.id] ? "bg-emerald-500 text-white" : "bg-white text-slate-900 hover:bg-slate-100"
@@ -61,7 +61,7 @@ export default function Cart08() {
                 >
                   {added[p.id] ? <><Check size={14} /> Added</> : <><ShoppingCart size={14} /> Add to Cart</>}
                 </button>
-                <button className="w-10 h-10 bg-white/20 hover:bg-white/40 text-white rounded-xl flex items-center justify-center transition">
+                <button type="button" className="w-10 h-10 bg-white/20 hover:bg-white/40 text-white rounded-xl flex items-center justify-center transition">
                   <Eye size={16} />
                 </button>
               </div>

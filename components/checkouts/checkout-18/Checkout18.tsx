@@ -94,7 +94,7 @@ export default function Checkout18() {
           </div>
         </div>
 
-        <button onClick={() => isMinMet && setPlaced(true)} disabled={!isMinMet} className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition ${isMinMet ? "bg-indigo-600 hover:bg-indigo-700 text-white" : "bg-slate-200 text-slate-400 cursor-not-allowed"}`}>
+        <button type="button" onClick={() => isMinMet && setPlaced(true)} disabled={!isMinMet} className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition ${isMinMet ? "bg-indigo-600 hover:bg-indigo-700 text-white" : "bg-slate-200 text-slate-400 cursor-not-allowed"}`}>
           Submit Wholesale Order
         </button>
       </div>

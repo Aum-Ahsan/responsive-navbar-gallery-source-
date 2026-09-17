@@ -52,7 +52,7 @@ export default function Checkout51() {
               <span className="font-mono text-neutral-300">TXN-{Math.floor(Math.random()*1000000)}</span>
             </div>
           </div>
-          <button onClick={() => { setStep(1); setIsSuccess(false); setForm({...form, email: '', name: '', cardNumber: '', expiry: '', cvc: '', cardName: ''}) }} className="w-full py-4 bg-white text-black font-semibold rounded-xl hover:bg-neutral-200 transition-colors">
+          <button type="button" onClick={() => { setStep(1); setIsSuccess(false); setForm({...form, email: '', name: '', cardNumber: '', expiry: '', cvc: '', cardName: ''}) }} className="w-full py-4 bg-white text-black font-semibold rounded-xl hover:bg-neutral-200 transition-colors">
             Return to Dashboard
           </button>
         </div>

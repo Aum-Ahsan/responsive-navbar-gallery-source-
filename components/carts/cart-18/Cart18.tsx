@@ -57,7 +57,7 @@ export default function Cart18() {
                 </div>
               </div>
 
-              <button
+              <button type="button"
                 onClick={() => addToCart(p.id)}
                 className={`w-full py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-1.5 transition-all duration-300 ${
                   added[p.id] ? "bg-emerald-500 text-white" : "bg-teal-700 hover:bg-teal-800 text-white"

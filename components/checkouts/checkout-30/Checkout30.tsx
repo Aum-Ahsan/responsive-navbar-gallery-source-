@@ -47,7 +47,7 @@ export default function Checkout30() {
           </label>
           <div className="flex bg-slate-50 border border-slate-200 rounded-xl p-1">
             {[2, 3, 4, 5].map(n => (
-              <button
+              <button type="button"
                 key={n}
                 onClick={() => setSplitCount(n)}
                 className={`flex-1 py-2 text-sm font-bold rounded-lg transition ${splitCount === n ? "bg-white shadow text-indigo-600" : "text-slate-500 hover:bg-slate-100"}`}
@@ -72,7 +72,7 @@ export default function Checkout30() {
           </div>
         </div>
 
-        <button 
+        <button type="button" 
           onClick={() => setPlaced(true)}
           className="w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white transition shadow-lg shadow-indigo-500/20"
         >

@@ -48,7 +48,7 @@ export default function PaymentProcess36() {
           onFocus={() => setActiveTooltip(id)}
           onBlur={() => setActiveTooltip(null)}
           className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all font-medium"
-        />
+         minLength={2} maxLength={50} />
 
         {/* Tooltip Overlay */}
         <div 
@@ -113,7 +113,7 @@ export default function PaymentProcess36() {
                   onFocus={() => setActiveTooltip('cardNumber')}
                   onBlur={() => setActiveTooltip(null)}
                   className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-12 pr-4 py-4 text-slate-900 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all font-mono tracking-widest text-sm" 
-                />
+                 minLength={16} />
               </div>
 
               {/* Tooltip Overlay */}
@@ -151,7 +151,7 @@ export default function PaymentProcess36() {
                   onFocus={() => setActiveTooltip('expiry')}
                   onBlur={() => setActiveTooltip(null)}
                   className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all font-mono tracking-widest text-center text-sm" 
-                />
+                 minLength={5} />
 
                 <div 
                   className={`absolute z-20 left-1/2 -translate-x-1/2 -top-12 px-3 py-2 bg-slate-800 text-white text-xs font-medium rounded-lg shadow-xl whitespace-nowrap transition-all duration-300 pointer-events-none ${
@@ -186,7 +186,7 @@ export default function PaymentProcess36() {
                   onFocus={() => setActiveTooltip('cvv')}
                   onBlur={() => setActiveTooltip(null)}
                   className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all font-mono tracking-widest text-center text-sm" 
-                />
+                 minLength={3} />
 
                 <div 
                   className={`absolute z-20 right-0 -top-12 px-3 py-2 bg-slate-800 text-white text-xs font-medium rounded-lg shadow-xl whitespace-nowrap transition-all duration-300 pointer-events-none ${

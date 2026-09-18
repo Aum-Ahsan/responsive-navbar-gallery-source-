@@ -109,17 +109,17 @@ export default function PaymentProcess25() {
             <form onSubmit={handlePay} className="space-y-5">
               <div>
                 <label className="block text-xs font-bold text-indigo-200 uppercase tracking-wider mb-2 ml-1">Card Number</label>
-                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-indigo-700/50 border border-indigo-500 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all font-mono tracking-widest placeholder-indigo-400" />
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-indigo-700/50 border border-indigo-500 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all font-mono tracking-widest placeholder-indigo-400"  minLength={16} />
               </div>
               
               <div className="flex gap-4">
                 <div className="w-1/2">
                   <label className="block text-xs font-bold text-indigo-200 uppercase tracking-wider mb-2 ml-1">Expiry</label>
-                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-full bg-indigo-700/50 border border-indigo-500 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all font-mono tracking-widest placeholder-indigo-400" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-full bg-indigo-700/50 border border-indigo-500 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all font-mono tracking-widest placeholder-indigo-400"  minLength={5} />
                 </div>
                 <div className="w-1/2">
                   <label className="block text-xs font-bold text-indigo-200 uppercase tracking-wider mb-2 ml-1">CVV</label>
-                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9\s\-\,]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="123" className="w-full bg-indigo-700/50 border border-indigo-500 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all font-mono tracking-widest placeholder-indigo-400" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9\s\-\,]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="123" className="w-full bg-indigo-700/50 border border-indigo-500 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all font-mono tracking-widest placeholder-indigo-400"  minLength={2} maxLength={50} />
                 </div>
               </div>
 
@@ -144,7 +144,7 @@ export default function PaymentProcess25() {
             <p className="text-slate-500 font-medium mb-10">Thank you for your purchase.</p>
             <button type="button" 
               onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {

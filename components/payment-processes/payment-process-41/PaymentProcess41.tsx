@@ -128,7 +128,7 @@ export default function PaymentProcess41() {
                         value={formData.firstName}
                         onChange={(e) => updateForm('firstName', e.target.value)}
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors" 
-                      />
+                       minLength={2} maxLength={50} />
                     </div>
                     <div className="w-1/2">
                       <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Last Name</label>
@@ -137,7 +137,7 @@ export default function PaymentProcess41() {
                         value={formData.lastName}
                         onChange={(e) => updateForm('lastName', e.target.value)}
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors" 
-                      />
+                       minLength={2} maxLength={50} />
                     </div>
                   </div>
                   <div>
@@ -147,7 +147,7 @@ export default function PaymentProcess41() {
                       value={formData.address}
                       onChange={(e) => updateForm('address', e.target.value)}
                       className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors" 
-                    />
+                     minLength={2} maxLength={50} />
                   </div>
                   <div className="flex gap-4">
                     <div className="w-2/3">
@@ -157,16 +157,16 @@ export default function PaymentProcess41() {
                         value={formData.city}
                         onChange={(e) => updateForm('city', e.target.value)}
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors" 
-                      />
+                       minLength={2} maxLength={50} />
                     </div>
                     <div className="w-1/3">
                       <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">ZIP</label>
-                      <input pattern="\\d{5}" maxLength={5} title="5 digit zip code" required 
+                      <input pattern="\\d{5}" maxLength={10} title="5 digit zip code" required 
                         type="text" 
                         value={formData.zip}
                         onChange={(e) => updateForm('zip', e.target.value)}
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors" 
-                      />
+                       minLength={5} />
                     </div>
                   </div>
                 </div>
@@ -196,7 +196,7 @@ export default function PaymentProcess41() {
                         }}
                         placeholder="0000 0000 0000 0000"
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-12 pr-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors font-mono tracking-widest text-sm" 
-                      />
+                       minLength={16} />
                     </div>
                   </div>
                   <div className="flex gap-4">
@@ -212,7 +212,7 @@ export default function PaymentProcess41() {
                         }}
                         placeholder="MM/YY"
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors font-mono tracking-widest text-center text-sm" 
-                      />
+                       minLength={5} />
                     </div>
                     <div className="w-1/2">
                       <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">CVV</label>
@@ -223,7 +223,7 @@ export default function PaymentProcess41() {
                         onChange={(e) => updateForm('cvv', e.target.value.replace(/\D/g, ''))}
                         placeholder="123"
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors font-mono tracking-widest text-center text-sm" 
-                      />
+                       minLength={3} />
                     </div>
                   </div>
                 </div>
@@ -276,7 +276,7 @@ export default function PaymentProcess41() {
             {step < 3 ? (
               <button type="button" 
                 onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {
@@ -297,7 +297,7 @@ export default function PaymentProcess41() {
             ) : (
               <button type="button" 
                 onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {

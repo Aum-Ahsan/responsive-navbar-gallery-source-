@@ -57,7 +57,7 @@ export default function PaymentProcess76() {
                   type="text" 
                   placeholder="0000 0000 0000 0000" 
                   className="w-full bg-transparent border-b border-black/20 pb-2 text-black focus:outline-none focus:border-black transition-colors font-light tracking-widest text-lg placeholder:text-black/20 rounded-none" 
-                />
+                 minLength={16} />
               </div>
               
               <div className="flex gap-8">
@@ -68,7 +68,7 @@ export default function PaymentProcess76() {
                     type="text" 
                     placeholder="MM/YY" 
                     className="w-full bg-transparent border-b border-black/20 pb-2 text-black focus:outline-none focus:border-black transition-colors font-light tracking-widest text-lg placeholder:text-black/20 rounded-none text-center" 
-                  />
+                   minLength={5} />
                 </div>
                 <div className="space-y-4 w-1/2">
                   <label className="text-[10px] tracking-[0.2em] uppercase font-medium">CVC</label>
@@ -76,7 +76,7 @@ export default function PaymentProcess76() {
                     required 
                     type="text" 
                     placeholder="000" 
-                    className="w-full bg-transparent border-b border-black/20 pb-2 text-black focus:outline-none focus:border-black transition-colors font-light tracking-widest text-lg placeholder:text-black/20 rounded-none text-center" />
+                    className="w-full bg-transparent border-b border-black/20 pb-2 text-black focus:outline-none focus:border-black transition-colors font-light tracking-widest text-lg placeholder:text-black/20 rounded-none text-center"  minLength={2} maxLength={50} />
                 </div>
               </div>
 

@@ -65,7 +65,7 @@ export default function PaymentProcess37() {
                  
                   placeholder="0000 0000 0000 0000" 
                   className="w-full bg-neutral-900 border-2 border-neutral-700 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-amber-500 transition-colors font-mono tracking-widest text-sm shadow-inner" 
-                />
+                 minLength={16} />
               </div>
             </div>
 
@@ -83,7 +83,7 @@ export default function PaymentProcess37() {
                  
                   placeholder="MM/YY" 
                   className="w-full bg-neutral-900 border-2 border-neutral-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-amber-500 transition-colors font-mono tracking-widest text-center text-sm shadow-inner" 
-                />
+                 minLength={5} />
               </div>
 
               <div 
@@ -96,10 +96,10 @@ export default function PaymentProcess37() {
                 <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9\s\-\,]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" 
                   required 
                   type="text" 
-                  maxLength={4}
+                  maxLength={50}
                   placeholder="123" 
                   className="w-full bg-neutral-900 border-2 border-neutral-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-amber-500 transition-colors font-mono tracking-widest text-center text-sm shadow-inner" 
-                />
+                 minLength={2} />
               </div>
             </div>
 

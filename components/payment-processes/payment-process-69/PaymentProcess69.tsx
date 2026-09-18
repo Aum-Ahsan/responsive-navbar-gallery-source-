@@ -81,21 +81,7 @@ export default function PaymentProcess69() {
             <div className="flex bg-stone-100 p-1 rounded-xl mb-8">
               <button
                 type="button"
-                onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
-      let isValid = true;
-      for (const input of inputs) {
-        if (!input.checkValidity()) {
-          input.reportValidity();
-          isValid = false;
-          break;
-        }
-      }
-      if (!isValid) return;
-      const originalHandler = () => setIsRecurring(false);
-      if (typeof originalHandler === 'function') (originalHandler as any)(e);
-      else if (typeof originalHandler === 'object' && originalHandler !== null) { /* ignore event objects */ }
-    }}
+                onClick={() => setIsRecurring(false)}
                 className={`flex-1 py-3 text-sm font-bold rounded-lg transition-all ${!isRecurring ? 'bg-white text-stone-900 shadow-sm' : 'text-stone-500 hover:text-stone-700'}`}
               >
                 Give Once
@@ -138,7 +124,7 @@ export default function PaymentProcess69() {
                       ? 'border-emerald-600 bg-emerald-50 text-emerald-700' 
                       : 'border-stone-200 text-stone-600 focus:border-emerald-400'
                   }`}
-                />
+                 min={1} />
               </div>
             </div>
 
@@ -149,7 +135,7 @@ export default function PaymentProcess69() {
                 checked={coverFees}
                 onChange={(e) => setCoverFees(e.target.checked)}
                 className="mt-1 w-4 h-4 text-emerald-600 rounded border-stone-300 focus:ring-emerald-500"
-              />
+               minLength={2} maxLength={50} />
               <div className="flex-1">
                 <p className="text-sm font-bold text-stone-900">Cover processing fees</p>
                 <p className="text-xs text-stone-500 mt-1">Add ${processingFee.toFixed(2)} so 100% of your donation goes to our mission.</p>
@@ -160,12 +146,12 @@ export default function PaymentProcess69() {
               
               <div className="relative">
                 <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400" />
-                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-white border border-stone-300 rounded-xl pl-12 pr-4 py-4 text-stone-900 focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-sm shadow-sm" />
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-white border border-stone-300 rounded-xl pl-12 pr-4 py-4 text-stone-900 focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-sm shadow-sm"  minLength={16} />
               </div>
               
               <div className="flex gap-4">
-                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-white border border-stone-300 rounded-xl px-4 py-4 text-stone-900 focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-center text-sm shadow-sm" />
-                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-white border border-stone-300 rounded-xl px-4 py-4 text-stone-900 focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-center text-sm shadow-sm" />
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-white border border-stone-300 rounded-xl px-4 py-4 text-stone-900 focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-center text-sm shadow-sm"  minLength={5} />
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-white border border-stone-300 rounded-xl px-4 py-4 text-stone-900 focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-center text-sm shadow-sm"  minLength={3} />
               </div>
 
               <button 

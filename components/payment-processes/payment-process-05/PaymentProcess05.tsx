@@ -116,7 +116,7 @@ export default function PaymentProcess05() {
                   </button>
                   <button type="button" 
                     onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {
@@ -162,26 +162,26 @@ export default function PaymentProcess05() {
                     <form className="space-y-4 animate-in slide-in-from-right-8 duration-300">
                       <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-1.5">Card Number</label>
-                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 font-mono text-sm" />
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="0000 0000 0000 0000" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 font-mono text-sm"  minLength={16} />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
                           <label className="block text-sm font-semibold text-gray-700 mb-1.5">Expiry Date</label>
-                          <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 font-mono text-sm" />
+                          <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 font-mono text-sm"  minLength={5} />
                         </div>
                         <div>
                           <label className="block text-sm font-semibold text-gray-700 mb-1.5">Security Code</label>
-                          <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="password" placeholder="•••" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 font-mono text-sm" />
+                          <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="password" placeholder="•••" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 font-mono text-sm"  minLength={3} />
                         </div>
                       </div>
                       <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-1.5">Cardholder Name</label>
-                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z\s\-]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Full Name" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 text-sm" />
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z\s\-]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Full Name" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 text-sm"  minLength={2} maxLength={50} />
                       </div>
                       
                       <div className="pt-4">
                          <button type="button" onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {

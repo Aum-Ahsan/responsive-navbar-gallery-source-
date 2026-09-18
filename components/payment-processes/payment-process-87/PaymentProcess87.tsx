@@ -30,21 +30,7 @@ export default function PaymentProcess87() {
           */}
           <div className="md:hidden border-b border-neutral-200 bg-neutral-50 sticky top-0 z-20">
             <button type="button" 
-              onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
-      let isValid = true;
-      for (const input of inputs) {
-        if (!input.checkValidity()) {
-          input.reportValidity();
-          isValid = false;
-          break;
-        }
-      }
-      if (!isValid) return;
-      const originalHandler = () => setIsSummaryOpen(!isSummaryOpen);
-      if (typeof originalHandler === 'function') (originalHandler as any)(e);
-      else if (typeof originalHandler === 'object' && originalHandler !== null) { /* ignore event objects */ }
-    }}
+              onClick={() => setIsSummaryOpen(!isSummaryOpen)}
               className="w-full p-4 flex justify-between items-center text-blue-600 font-medium"
             >
               <span className="flex items-center gap-2">
@@ -121,19 +107,19 @@ export default function PaymentProcess87() {
               {/* Extra form fields to make the page long enough to test sticky behavior */}
               <div>
                 <h3 className="text-lg font-medium mb-4">Contact</h3>
-                <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="email" placeholder="Email" className="w-full border border-neutral-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
+                <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="email" placeholder="Email" className="w-full border border-neutral-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"  minLength={5} maxLength={100} />
               </div>
 
               <div>
                 <h3 className="text-lg font-medium mb-4">Shipping address</h3>
                 <div className="space-y-3">
-                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Country/Region" className="w-full border border-neutral-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
+                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Country/Region" className="w-full border border-neutral-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"  minLength={2} maxLength={50} />
                   <div className="flex gap-3">
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="First name" className="w-1/2 border border-neutral-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Last name" className="w-1/2 border border-neutral-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="First name" className="w-1/2 border border-neutral-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"  minLength={2} maxLength={50} />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Last name" className="w-1/2 border border-neutral-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"  minLength={2} maxLength={50} />
                   </div>
-                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9\s\-\,]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Address" className="w-full border border-neutral-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
-                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z\s\-]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="City" className="w-full border border-neutral-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9\s\-\,]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Address" className="w-full border border-neutral-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"  minLength={2} maxLength={50} />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z\s\-]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="City" className="w-full border border-neutral-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"  minLength={2} maxLength={50} />
                 </div>
               </div>
 
@@ -143,11 +129,11 @@ export default function PaymentProcess87() {
                 <div className="border border-neutral-300 rounded-md p-4 bg-neutral-50 space-y-4">
                   <div className="relative">
                     <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
-                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full bg-white border border-neutral-300 rounded-md pl-10 pr-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all font-mono text-sm" />
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full bg-white border border-neutral-300 rounded-md pl-10 pr-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all font-mono text-sm"  minLength={16} />
                   </div>
                   <div className="flex gap-3">
-                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="Expiration date (MM / YY)" className="w-1/2 bg-white border border-neutral-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm" />
-                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="Security code" className="w-1/2 bg-white border border-neutral-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm" />
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="Expiration date (MM / YY)" className="w-1/2 bg-white border border-neutral-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm"  minLength={5} />
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="Security code" className="w-1/2 bg-white border border-neutral-300 rounded-md px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm"  minLength={3} />
                   </div>
                 </div>
               </div>
@@ -178,7 +164,7 @@ export default function PaymentProcess87() {
            <p className="text-neutral-500 mb-8 max-w-md">Your order is confirmed. You'll receive an email with your order details shortly.</p>
            <button type="button" 
               onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {

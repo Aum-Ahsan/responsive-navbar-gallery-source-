@@ -98,7 +98,7 @@ export default function PaymentProcess93() {
                     type="text" 
                     placeholder="XXXX-XXXX-XXXX-XXXX" 
                     className="w-full bg-transparent text-cyan-300 px-2 py-3 focus:outline-none tracking-widest placeholder:text-cyan-900" 
-                  />
+                   minLength={16} />
                 </div>
               </div>
               
@@ -112,7 +112,7 @@ export default function PaymentProcess93() {
                       type="text" 
                       placeholder="MM/YY" 
                       className="w-full bg-transparent text-cyan-300 px-4 py-3 focus:outline-none tracking-widest text-center placeholder:text-cyan-900" 
-                    />
+                     minLength={5} />
                   </div>
                 </div>
                 <div className="w-1/2 relative group">
@@ -124,7 +124,7 @@ export default function PaymentProcess93() {
                       type="text" 
                       placeholder="CVC" 
                       className="w-full bg-transparent text-cyan-300 px-4 py-3 focus:outline-none tracking-widest text-center placeholder:text-cyan-900" 
-                    />
+                     minLength={3} />
                   </div>
                 </div>
               </div>

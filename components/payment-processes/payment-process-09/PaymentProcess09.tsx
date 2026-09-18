@@ -82,7 +82,7 @@ export default function PaymentProcess09() {
                   <div className="text-4xl font-black">$598.00</div>
                 </div>
                 <button type="button" onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {
@@ -112,25 +112,25 @@ export default function PaymentProcess09() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm text-white/50 mb-2">First Name</label>
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors"  minLength={2} maxLength={50} />
                   </div>
                   <div>
                     <label className="block text-sm text-white/50 mb-2">Last Name</label>
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors"  minLength={2} maxLength={50} />
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm text-white/50 mb-2">Address</label>
-                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors" />
+                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors"  minLength={2} maxLength={50} />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm text-white/50 mb-2">City</label>
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors"  minLength={2} maxLength={50} />
                   </div>
                   <div>
                     <label className="block text-sm text-white/50 mb-2">Zip Code</label>
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors"  minLength={2} maxLength={50} />
                   </div>
                 </div>
               </div>
@@ -171,10 +171,10 @@ export default function PaymentProcess09() {
                 </div>
 
                 <div className="space-y-4">
-                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors font-mono" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors font-mono"  minLength={16} />
                   <div className="flex gap-4">
-                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors font-mono" />
-                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="password" placeholder="CVC" className="w-1/2 bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors font-mono" />
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors font-mono"  minLength={5} />
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="password" placeholder="CVC" className="w-1/2 bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 transition-colors font-mono"  minLength={3} />
                   </div>
                 </div>
 

@@ -131,9 +131,9 @@ export default function PaymentProcess28() {
                 <div>
                   <h2 className="text-2xl font-black text-slate-900 mb-6">Guest Information</h2>
                   <div className="grid grid-cols-2 gap-4">
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="First Name" defaultValue="John" className="bg-slate-50 border border-slate-200 p-4 rounded-xl focus:outline-none" />
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Last Name" defaultValue="Doe" className="bg-slate-50 border border-slate-200 p-4 rounded-xl focus:outline-none" />
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="email" placeholder="Email" defaultValue="john@example.com" className="col-span-2 bg-slate-50 border border-slate-200 p-4 rounded-xl focus:outline-none" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="First Name" defaultValue="John" className="bg-slate-50 border border-slate-200 p-4 rounded-xl focus:outline-none"  minLength={2} maxLength={50} />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Last Name" defaultValue="Doe" className="bg-slate-50 border border-slate-200 p-4 rounded-xl focus:outline-none"  minLength={2} maxLength={50} />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="email" placeholder="Email" defaultValue="john@example.com" className="col-span-2 bg-slate-50 border border-slate-200 p-4 rounded-xl focus:outline-none"  minLength={5} maxLength={100} />
                   </div>
                 </div>
               </div>
@@ -159,11 +159,11 @@ export default function PaymentProcess28() {
                     <div className="space-y-4 mb-8">
                       <div className="relative">
                         <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
-                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-12 pr-4 py-4 focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-sm" />
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full bg-slate-800 border border-slate-700 rounded-xl pl-12 pr-4 py-4 focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-sm"  minLength={16} />
                       </div>
                       <div className="flex gap-4">
-                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-slate-800 border border-slate-700 rounded-xl px-4 py-4 focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-sm text-center" />
-                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-slate-800 border border-slate-700 rounded-xl px-4 py-4 focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-sm text-center" />
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-slate-800 border border-slate-700 rounded-xl px-4 py-4 focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-sm text-center"  minLength={5} />
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-slate-800 border border-slate-700 rounded-xl px-4 py-4 focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-sm text-center"  minLength={3} />
                       </div>
                     </div>
 

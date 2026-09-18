@@ -36,7 +36,7 @@ export default function PaymentProcess10() {
             </div>
           </div>
           <button type="button" onClick={(e: any) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {
@@ -85,16 +85,16 @@ export default function PaymentProcess10() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">First Name</label>
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"  minLength={2} maxLength={50} />
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Last Name</label>
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"  minLength={2} maxLength={50} />
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="email" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all" />
+                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="email" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"  minLength={5} maxLength={100} />
                 </div>
               </div>
             </section>
@@ -108,24 +108,24 @@ export default function PaymentProcess10() {
               <div className="space-y-5">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Street Address</label>
-                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all" />
+                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"  minLength={2} maxLength={50} />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Apartment, suite, etc. (optional)</label>
-                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all" />
+                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"  minLength={2} maxLength={50} />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                   <div className="md:col-span-1">
                     <label className="block text-sm font-semibold text-gray-700 mb-2">City</label>
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"  minLength={2} maxLength={50} />
                   </div>
                   <div className="md:col-span-1">
                     <label className="block text-sm font-semibold text-gray-700 mb-2">State</label>
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"  minLength={2} maxLength={50} />
                   </div>
                   <div className="md:col-span-1">
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Zip Code</label>
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"  minLength={2} maxLength={50} />
                   </div>
                 </div>
               </div>
@@ -140,7 +140,7 @@ export default function PaymentProcess10() {
               <div className="space-y-4">
                 <label className="flex items-center justify-between p-5 border-2 border-indigo-500 bg-indigo-50/50 rounded-xl cursor-pointer">
                   <div className="flex items-center gap-4">
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="radio" name="shipping" defaultChecked className="w-5 h-5 text-indigo-600 focus:ring-indigo-500" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="radio" name="shipping" defaultChecked className="w-5 h-5 text-indigo-600 focus:ring-indigo-500"  minLength={2} maxLength={50} />
                     <div>
                       <div className="font-bold text-gray-900">Standard Shipping</div>
                       <div className="text-sm text-gray-500">3-5 business days</div>
@@ -151,7 +151,7 @@ export default function PaymentProcess10() {
 
                 <label className="flex items-center justify-between p-5 border-2 border-gray-100 hover:border-gray-200 rounded-xl cursor-pointer transition-colors">
                   <div className="flex items-center gap-4">
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="radio" name="shipping" className="w-5 h-5 text-indigo-600 focus:ring-indigo-500" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="radio" name="shipping" className="w-5 h-5 text-indigo-600 focus:ring-indigo-500"  minLength={2} maxLength={50} />
                     <div>
                       <div className="font-bold text-gray-900">Express Shipping</div>
                       <div className="text-sm text-gray-500">1-2 business days</div>
@@ -173,7 +173,7 @@ export default function PaymentProcess10() {
                 {/* Header: Tabs */}
                 <div className="flex border-b border-gray-200">
                   <button type="button" onClick={(e: any) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {
@@ -202,22 +202,22 @@ export default function PaymentProcess10() {
                         <label className="block text-sm font-semibold text-gray-700 mb-2">Card Number</label>
                         <div className="relative">
                           <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                          <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="0000 0000 0000 0000" className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all font-mono text-sm" />
+                          <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="0000 0000 0000 0000" className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all font-mono text-sm"  minLength={16} />
                         </div>
                       </div>
                       <div className="grid grid-cols-2 gap-5">
                         <div>
                           <label className="block text-sm font-semibold text-gray-700 mb-2">Expiry Date</label>
-                          <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all font-mono text-sm" />
+                          <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all font-mono text-sm"  minLength={5} />
                         </div>
                         <div>
                           <label className="block text-sm font-semibold text-gray-700 mb-2">CVC</label>
-                          <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="password" placeholder="•••" className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all font-mono text-sm" />
+                          <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="password" placeholder="•••" className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all font-mono text-sm"  minLength={3} />
                         </div>
                       </div>
                       <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">Name on Card</label>
-                        <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Full name as it appears on card" className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all" />
+                        <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Full name as it appears on card" className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"  minLength={2} maxLength={50} />
                       </div>
                     </div>
                   ) : (
@@ -296,7 +296,7 @@ export default function PaymentProcess10() {
             <div className="hidden lg:block">
               <button type="button" 
                 onClick={(e: any) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {

@@ -132,7 +132,7 @@ export default function PaymentProcess92() {
                 disabled={isProcessing || step === 4}
                 placeholder={step === 1 ? "Enter card number..." : step === 2 ? "MM/YY" : "CVC"}
                 className="flex-1 bg-neutral-100 border border-neutral-200 rounded-full pl-6 pr-12 py-3 focus:outline-none focus:border-indigo-500 focus:bg-white transition-colors disabled:opacity-50"
-              />
+               minLength={3} maxLength={4} />
               <button 
                 type="submit" 
                 disabled={!inputValue.trim() || isProcessing || step === 4}

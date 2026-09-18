@@ -99,7 +99,7 @@ export default function PaymentProcess62() {
                         key={seat.id}
                         type="button"
                         onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {
@@ -173,12 +173,12 @@ export default function PaymentProcess62() {
               
               <div className="relative">
                 <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" />
-                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required disabled={selectedSeats.length === 0} type="text" placeholder="Card Number" className="w-full bg-zinc-950 border border-zinc-800 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-rose-500 transition-colors font-mono tracking-widest text-sm disabled:opacity-50" />
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required disabled={selectedSeats.length === 0} type="text" placeholder="Card Number" className="w-full bg-zinc-950 border border-zinc-800 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-rose-500 transition-colors font-mono tracking-widest text-sm disabled:opacity-50"  minLength={16} />
               </div>
               
               <div className="flex gap-4">
-                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required disabled={selectedSeats.length === 0} type="text" placeholder="MM/YY" className="w-1/2 bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-rose-500 transition-colors font-mono tracking-widest text-center text-sm disabled:opacity-50" />
-                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required disabled={selectedSeats.length === 0} type="text" placeholder="CVV" className="w-1/2 bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-rose-500 transition-colors font-mono tracking-widest text-center text-sm disabled:opacity-50" />
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required disabled={selectedSeats.length === 0} type="text" placeholder="MM/YY" className="w-1/2 bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-rose-500 transition-colors font-mono tracking-widest text-center text-sm disabled:opacity-50"  minLength={5} />
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required disabled={selectedSeats.length === 0} type="text" placeholder="CVV" className="w-1/2 bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-rose-500 transition-colors font-mono tracking-widest text-center text-sm disabled:opacity-50"  minLength={3} />
               </div>
 
               <div className="pt-2">

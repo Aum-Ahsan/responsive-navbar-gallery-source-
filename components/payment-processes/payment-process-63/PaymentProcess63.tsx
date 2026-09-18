@@ -79,7 +79,7 @@ export default function PaymentProcess63() {
                     value={checkIn}
                     onChange={(e) => setCheckIn(e.target.value)}
                     className="w-full bg-stone-50 border border-stone-200 rounded-xl pl-10 pr-4 py-3 text-stone-900 focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600 transition-colors text-sm font-medium"
-                  />
+                   minLength={2} maxLength={50} />
                 </div>
               </div>
               <div>
@@ -91,7 +91,7 @@ export default function PaymentProcess63() {
                     value={checkOut}
                     onChange={(e) => setCheckOut(e.target.value)}
                     className="w-full bg-stone-50 border border-stone-200 rounded-xl pl-10 pr-4 py-3 text-stone-900 focus:outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600 transition-colors text-sm font-medium"
-                  />
+                   minLength={2} maxLength={50} />
                 </div>
               </div>
             </div>
@@ -142,21 +142,21 @@ export default function PaymentProcess63() {
               
               <div className="space-y-4">
                 <div className="flex gap-4">
-                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="First Name" className="w-1/2 bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-stone-900 focus:outline-none focus:border-teal-600 transition-colors text-sm font-medium" />
-                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Last Name" className="w-1/2 bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-stone-900 focus:outline-none focus:border-teal-600 transition-colors text-sm font-medium" />
+                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="First Name" className="w-1/2 bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-stone-900 focus:outline-none focus:border-teal-600 transition-colors text-sm font-medium"  minLength={2} maxLength={50} />
+                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Last Name" className="w-1/2 bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-stone-900 focus:outline-none focus:border-teal-600 transition-colors text-sm font-medium"  minLength={2} maxLength={50} />
                 </div>
-                <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="email" placeholder="Email Address (for confirmation)" className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-stone-900 focus:outline-none focus:border-teal-600 transition-colors text-sm font-medium" />
+                <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="email" placeholder="Email Address (for confirmation)" className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-stone-900 focus:outline-none focus:border-teal-600 transition-colors text-sm font-medium"  minLength={5} maxLength={100} />
               </div>
 
               <div className="space-y-4 pt-4 border-t border-stone-100">
                 <div className="relative">
                   <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400" />
-                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-stone-50 border border-stone-200 rounded-xl pl-12 pr-4 py-4 text-stone-900 focus:outline-none focus:border-teal-600 transition-colors font-mono tracking-widest text-sm" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-stone-50 border border-stone-200 rounded-xl pl-12 pr-4 py-4 text-stone-900 focus:outline-none focus:border-teal-600 transition-colors font-mono tracking-widest text-sm"  minLength={16} />
                 </div>
                 
                 <div className="flex gap-4">
-                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-stone-50 border border-stone-200 rounded-xl px-4 py-4 text-stone-900 focus:outline-none focus:border-teal-600 transition-colors font-mono tracking-widest text-center text-sm" />
-                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-stone-50 border border-stone-200 rounded-xl px-4 py-4 text-stone-900 focus:outline-none focus:border-teal-600 transition-colors font-mono tracking-widest text-center text-sm" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-stone-50 border border-stone-200 rounded-xl px-4 py-4 text-stone-900 focus:outline-none focus:border-teal-600 transition-colors font-mono tracking-widest text-center text-sm"  minLength={5} />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-stone-50 border border-stone-200 rounded-xl px-4 py-4 text-stone-900 focus:outline-none focus:border-teal-600 transition-colors font-mono tracking-widest text-center text-sm"  minLength={3} />
                 </div>
               </div>
 

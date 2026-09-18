@@ -110,7 +110,7 @@ export default function PaymentProcess03() {
             </button>
             <button type="button" 
               onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {
@@ -138,17 +138,17 @@ export default function PaymentProcess03() {
                 <div>
                   <label className="block text-sm font-bold text-slate-700 mb-2">Card Information</label>
                   <div className="border border-slate-200 rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-rose-500 focus-within:border-transparent transition-all shadow-sm">
-                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full p-4 border-b border-slate-200 focus:outline-none font-mono" />
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full p-4 border-b border-slate-200 focus:outline-none font-mono"  minLength={16} />
                     <div className="flex">
-                      <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM / YY" className="w-1/2 p-4 border-r border-slate-200 focus:outline-none font-mono" />
-                      <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVC" className="w-1/2 p-4 focus:outline-none font-mono" />
+                      <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM / YY" className="w-1/2 p-4 border-r border-slate-200 focus:outline-none font-mono"  minLength={5} />
+                      <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVC" className="w-1/2 p-4 focus:outline-none font-mono"  minLength={3} />
                     </div>
                   </div>
                 </div>
                 
                 <div>
                   <label className="block text-sm font-bold text-slate-700 mb-2">Name on Card</label>
-                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Name on card" className="w-full p-4 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all shadow-sm" />
+                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Name on card" className="w-full p-4 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all shadow-sm"  minLength={2} maxLength={50} />
                 </div>
               </>
             ) : (

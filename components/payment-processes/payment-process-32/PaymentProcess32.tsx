@@ -47,7 +47,7 @@ export default function PaymentProcess32() {
             <div className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Email Address</label>
-                <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="email" placeholder="you@example.com" className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors" />
+                <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="email" placeholder="you@example.com" className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors"  minLength={5} maxLength={100} />
               </div>
               
               <div>
@@ -55,11 +55,11 @@ export default function PaymentProcess32() {
                 <div className="bg-slate-900 border border-slate-700 rounded-xl overflow-hidden focus-within:border-indigo-500 transition-colors">
                   <div className="relative border-b border-slate-700">
                     <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
-                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full bg-transparent pl-11 pr-4 py-3 text-white focus:outline-none font-mono" />
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full bg-transparent pl-11 pr-4 py-3 text-white focus:outline-none font-mono"  minLength={16} />
                   </div>
                   <div className="flex">
-                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 border-r border-slate-700 focus:outline-none font-mono text-center" />
-                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-transparent px-4 py-3 focus:outline-none font-mono text-center" />
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-transparent px-4 py-3 border-r border-slate-700 focus:outline-none font-mono text-center"  minLength={5} />
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-transparent px-4 py-3 focus:outline-none font-mono text-center"  minLength={3} />
                   </div>
                 </div>
               </div>
@@ -73,7 +73,7 @@ export default function PaymentProcess32() {
                     checked={createAccount}
                     onChange={(e) => setCreateAccount(e.target.checked)}
                     className="sr-only" 
-                  />
+                   minLength={2} maxLength={50} />
                   <div className={`w-6 h-6 rounded border-2 transition-colors flex items-center justify-center ${createAccount ? 'bg-indigo-500 border-indigo-500' : 'border-slate-500 group-hover:border-slate-400'}`}>
                     {createAccount && <Check className="w-4 h-4 text-white" />}
                   </div>
@@ -97,24 +97,10 @@ export default function PaymentProcess32() {
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter a secure password" 
                       className="w-full bg-slate-800 border border-slate-600 rounded-xl pl-4 pr-12 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors"
-                    />
+                     minLength={2} maxLength={50} />
                     <button 
                       type="button"
-                      onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
-      let isValid = true;
-      for (const input of inputs) {
-        if (!input.checkValidity()) {
-          input.reportValidity();
-          isValid = false;
-          break;
-        }
-      }
-      if (!isValid) return;
-      const originalHandler = () => setShowPassword(!showPassword);
-      if (typeof originalHandler === 'function') (originalHandler as any)(e);
-      else if (typeof originalHandler === 'object' && originalHandler !== null) { /* ignore event objects */ }
-    }}
+                      onClick={() => setShowPassword(!showPassword)}
                       className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white transition-colors p-1"
                     >
                       {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}

@@ -83,7 +83,7 @@ export default function PaymentProcess07() {
                 placeholder="Enter your email address" 
                 className="w-full text-2xl md:text-4xl font-light py-4 bg-transparent border-b-2 border-black/10 focus:border-black outline-none placeholder-black/20 transition-colors"
                 autoFocus
-              />
+               minLength={5} maxLength={100} />
             </div>
 
             <div className="mt-16 flex justify-end">
@@ -115,7 +115,7 @@ export default function PaymentProcess07() {
                   onChange={(e) => setCardNumber(e.target.value)}
                   placeholder="Card Number" 
                   className="w-full text-2xl md:text-4xl font-light py-4 bg-transparent border-b-2 border-black/10 focus:border-black outline-none placeholder-black/20 transition-colors font-mono tracking-tight"
-                />
+                 minLength={16} />
               </div>
               
               <div className="flex gap-8">
@@ -128,7 +128,7 @@ export default function PaymentProcess07() {
                     onChange={(e) => setExpiry(e.target.value)}
                     placeholder="MM/YY" 
                     className="w-full text-2xl md:text-4xl font-light py-4 bg-transparent border-b-2 border-black/10 focus:border-black outline-none placeholder-black/20 transition-colors font-mono tracking-tight"
-                  />
+                   minLength={5} />
                 </div>
                 <div className="flex-1">
                   <input 
@@ -139,7 +139,7 @@ export default function PaymentProcess07() {
                     onChange={(e) => setCvc(e.target.value)}
                     placeholder="CVC" 
                     className="w-full text-2xl md:text-4xl font-light py-4 bg-transparent border-b-2 border-black/10 focus:border-black outline-none placeholder-black/20 transition-colors font-mono tracking-tight"
-                  />
+                   minLength={3} />
                 </div>
               </div>
             </div>

@@ -54,21 +54,7 @@ export default function PaymentProcess85() {
           {/* Mobile FAB to open form */}
           {!showMobileForm && (
             <button type="button" 
-              onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
-      let isValid = true;
-      for (const input of inputs) {
-        if (!input.checkValidity()) {
-          input.reportValidity();
-          isValid = false;
-          break;
-        }
-      }
-      if (!isValid) return;
-      const originalHandler = () => setShowMobileForm(true);
-      if (typeof originalHandler === 'function') (originalHandler as any)(e);
-      else if (typeof originalHandler === 'object' && originalHandler !== null) { /* ignore event objects */ }
-    }}
+              onClick={() => setShowMobileForm(true)}
               className="md:hidden absolute bottom-6 right-6 w-16 h-16 bg-blue-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-105 active:scale-95 transition-transform z-20"
             >
               <CreditCard className="w-7 h-7" />
@@ -106,12 +92,12 @@ export default function PaymentProcess85() {
                 
                 <div className="relative">
                   <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-slate-50 md:bg-slate-800 border border-slate-200 md:border-slate-700 rounded-xl pl-12 pr-4 py-4 md:text-white focus:outline-none focus:border-blue-500 transition-colors font-mono tracking-widest text-sm" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-slate-50 md:bg-slate-800 border border-slate-200 md:border-slate-700 rounded-xl pl-12 pr-4 py-4 md:text-white focus:outline-none focus:border-blue-500 transition-colors font-mono tracking-widest text-sm"  minLength={16} />
                 </div>
                 
                 <div className="flex gap-4">
-                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-slate-50 md:bg-slate-800 border border-slate-200 md:border-slate-700 rounded-xl px-4 py-4 md:text-white focus:outline-none focus:border-blue-500 transition-colors font-mono tracking-widest text-center text-sm" />
-                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-slate-50 md:bg-slate-800 border border-slate-200 md:border-slate-700 rounded-xl px-4 py-4 md:text-white focus:outline-none focus:border-blue-500 transition-colors font-mono tracking-widest text-center text-sm" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-slate-50 md:bg-slate-800 border border-slate-200 md:border-slate-700 rounded-xl px-4 py-4 md:text-white focus:outline-none focus:border-blue-500 transition-colors font-mono tracking-widest text-center text-sm"  minLength={5} />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-slate-50 md:bg-slate-800 border border-slate-200 md:border-slate-700 rounded-xl px-4 py-4 md:text-white focus:outline-none focus:border-blue-500 transition-colors font-mono tracking-widest text-center text-sm"  minLength={3} />
                 </div>
 
                 <div className="pt-4">

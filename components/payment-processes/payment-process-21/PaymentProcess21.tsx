@@ -137,7 +137,7 @@ export default function PaymentProcess21() {
               onFocus={() => setIsFlipped(false)}
               className="w-full bg-slate-900/50 border border-slate-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors font-mono tracking-wider" 
               placeholder="0000 0000 0000 0000"
-            />
+             minLength={16} />
           </div>
           
           <div>
@@ -150,7 +150,7 @@ export default function PaymentProcess21() {
               onFocus={() => setIsFlipped(false)}
               className="w-full bg-slate-900/50 border border-slate-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors uppercase tracking-wider" 
               placeholder="JOHN DOE"
-            />
+             minLength={2} maxLength={50} />
           </div>
 
           <div className="flex gap-5">
@@ -172,7 +172,7 @@ export default function PaymentProcess21() {
                 onFocus={() => setIsFlipped(false)}
                 className="w-full bg-slate-900/50 border border-slate-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors font-mono tracking-wider" 
                 placeholder="MM/YY"
-              />
+               minLength={5} />
             </div>
             
             <div className="w-1/2">
@@ -187,7 +187,7 @@ export default function PaymentProcess21() {
                 onBlur={() => setIsFlipped(false)}
                 className="w-full bg-slate-900/50 border border-slate-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors font-mono tracking-wider" 
                 placeholder="123"
-              />
+               minLength={3} />
             </div>
           </div>
 

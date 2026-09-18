@@ -79,7 +79,7 @@ export default function PaymentProcess88() {
                         type="text" 
                         placeholder="Card Number" 
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-12 pr-4 py-4 focus:outline-none focus:border-indigo-500 transition-colors font-mono tracking-widest text-sm" 
-                      />
+                       minLength={16} />
                     </div>
                     
                     <div className="flex gap-4">
@@ -88,13 +88,13 @@ export default function PaymentProcess88() {
                         type="text" 
                         placeholder="MM/YY" 
                         className="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 focus:outline-none focus:border-indigo-500 transition-colors font-mono tracking-widest text-center text-sm" 
-                      />
+                       minLength={5} />
                       <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" 
                         required 
                         type="text" 
                         placeholder="CVV" 
                         className="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 focus:outline-none focus:border-indigo-500 transition-colors font-mono tracking-widest text-center text-sm" 
-                      />
+                       minLength={3} />
                     </div>
 
                     <div className="pt-6">

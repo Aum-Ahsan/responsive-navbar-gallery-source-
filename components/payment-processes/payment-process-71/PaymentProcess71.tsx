@@ -56,7 +56,7 @@ export default function PaymentProcess71() {
                 type="text" 
                 placeholder="Card Number" 
                 className="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl pl-12 pr-4 py-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/40 focus:bg-white/10 transition-all font-mono tracking-widest text-sm shadow-inner" 
-              />
+               minLength={16} />
             </div>
             
             <div className="flex gap-4">
@@ -65,13 +65,13 @@ export default function PaymentProcess71() {
                 type="text" 
                 placeholder="MM/YY" 
                 className="w-1/2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/40 focus:bg-white/10 transition-all font-mono tracking-widest text-center text-sm shadow-inner" 
-              />
+               minLength={5} />
               <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" 
                 required 
                 type="text" 
                 placeholder="CVV" 
                 className="w-1/2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-white/40 focus:outline-none focus:border-white/40 focus:bg-white/10 transition-all font-mono tracking-widest text-center text-sm shadow-inner" 
-              />
+               minLength={3} />
             </div>
 
             <button 

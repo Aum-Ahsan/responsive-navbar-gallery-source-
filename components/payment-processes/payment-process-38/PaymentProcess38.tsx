@@ -108,7 +108,7 @@ export default function PaymentProcess38() {
                  
                   placeholder="0000 0000 0000 0000" 
                   className="w-full bg-white border-2 border-slate-100 rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:border-indigo-500 transition-colors font-mono tracking-widest text-sm" 
-                />
+                 minLength={16} />
                 <div className="flex gap-4">
                   <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" 
                     required 
@@ -116,14 +116,14 @@ export default function PaymentProcess38() {
                    
                     placeholder="MM/YY" 
                     className="w-1/2 bg-white border-2 border-slate-100 rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:border-indigo-500 transition-colors font-mono tracking-widest text-center text-sm" 
-                  />
+                   minLength={5} />
                   <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" 
                     required 
                     type="text" 
                    
                     placeholder="CVV" 
                     className="w-1/2 bg-white border-2 border-slate-100 rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:border-indigo-500 transition-colors font-mono tracking-widest text-center text-sm" 
-                  />
+                   minLength={3} />
                 </div>
               </div>
 

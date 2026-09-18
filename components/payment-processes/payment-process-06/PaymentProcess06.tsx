@@ -109,7 +109,7 @@ export default function PaymentProcess06() {
                   
                   <div>
                     <label className="block text-xs font-semibold text-stone-600 mb-1">Email Address</label>
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="email" placeholder="you@example.com" className="w-full bg-white border border-stone-200 rounded-sm px-4 py-3 text-sm focus:outline-none focus:border-stone-900 transition-colors placeholder-stone-400" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="email" placeholder="you@example.com" className="w-full bg-white border border-stone-200 rounded-sm px-4 py-3 text-sm focus:outline-none focus:border-stone-900 transition-colors placeholder-stone-400"  minLength={5} maxLength={100} />
                   </div>
 
                   <div>
@@ -117,18 +117,18 @@ export default function PaymentProcess06() {
                     <div className="border border-stone-200 rounded-sm overflow-hidden focus-within:border-stone-900 transition-colors">
                       <div className="relative border-b border-stone-200">
                         <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
-                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full pl-10 pr-4 py-3 focus:outline-none text-sm font-mono placeholder-stone-400" />
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full pl-10 pr-4 py-3 focus:outline-none text-sm font-mono placeholder-stone-400"  minLength={16} />
                       </div>
                       <div className="flex">
-                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 px-4 py-3 border-r border-stone-200 focus:outline-none text-sm font-mono placeholder-stone-400" />
-                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVC" className="w-1/2 px-4 py-3 focus:outline-none text-sm font-mono placeholder-stone-400" />
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 px-4 py-3 border-r border-stone-200 focus:outline-none text-sm font-mono placeholder-stone-400"  minLength={5} />
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVC" className="w-1/2 px-4 py-3 focus:outline-none text-sm font-mono placeholder-stone-400"  minLength={3} />
                       </div>
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-xs font-semibold text-stone-600 mb-1">Name on Card</label>
-                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z\s\-]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Full name" className="w-full bg-white border border-stone-200 rounded-sm px-4 py-3 text-sm focus:outline-none focus:border-stone-900 transition-colors placeholder-stone-400" />
+                    <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z\s\-]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Full name" className="w-full bg-white border border-stone-200 rounded-sm px-4 py-3 text-sm focus:outline-none focus:border-stone-900 transition-colors placeholder-stone-400"  minLength={2} maxLength={50} />
                   </div>
 
                   <button 
@@ -156,7 +156,7 @@ export default function PaymentProcess06() {
               <p className="text-stone-500 mb-8 max-w-[250px]">Your order has been placed successfully. A receipt has been sent to your email.</p>
               <button type="button" 
                 onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {

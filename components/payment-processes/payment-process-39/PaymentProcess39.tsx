@@ -77,7 +77,7 @@ export default function PaymentProcess39() {
                
                 placeholder="0000 0000 0000 0000" 
                 className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-sm" 
-              />
+               minLength={16} />
             </div>
             
             <div className="flex gap-4">
@@ -89,17 +89,17 @@ export default function PaymentProcess39() {
                  
                   placeholder="MM/YY" 
                   className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-center text-sm" 
-                />
+                 minLength={5} />
               </div>
               <div className="w-1/2">
                 <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">CVV</label>
                 <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z0-9\s\-\,]/g, ""); }} pattern="[a-zA-Z\\s\\-]+" title="Letters only" 
                   required 
                   type="text" 
-                  maxLength={4}
+                  maxLength={50}
                   placeholder="123" 
                   className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-center text-sm" 
-                />
+                 minLength={2} />
               </div>
             </div>
 

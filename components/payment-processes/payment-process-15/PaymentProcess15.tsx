@@ -173,7 +173,7 @@ export default function PaymentProcess15() {
                   <div className="w-10 h-8 bg-gray-100 rounded flex items-center justify-center shrink-0">
                     <CreditCard className="w-5 h-5 text-gray-500" />
                   </div>
-                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full focus:outline-none text-sm font-medium font-mono text-gray-900 placeholder-gray-400" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full focus:outline-none text-sm font-medium font-mono text-gray-900 placeholder-gray-400"  minLength={16} />
                 </div>
               </div>
             </div>

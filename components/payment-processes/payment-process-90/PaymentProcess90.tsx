@@ -78,12 +78,12 @@ export default function PaymentProcess90() {
                   <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" 
                     required 
                     type="text" 
-                    className="w-full bg-white border border-emerald-200 md:border-emerald-300 rounded-2xl md:rounded-lg px-5 py-4 md:py-2.5 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 transition-all text-lg md:text-sm" />
+                    className="w-full bg-white border border-emerald-200 md:border-emerald-300 rounded-2xl md:rounded-lg px-5 py-4 md:py-2.5 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 transition-all text-lg md:text-sm"  minLength={2} maxLength={50} />
                   {/* Mobile Voice Button */}
                   <button 
                     type="button" 
                     onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {
@@ -114,7 +114,7 @@ export default function PaymentProcess90() {
                       type="text" 
                       placeholder="0000 0000 0000 0000"
                       className="w-full bg-white border border-emerald-200 md:border-emerald-300 rounded-2xl md:rounded-lg pl-12 md:pl-10 pr-5 md:pr-3 py-4 md:py-2.5 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 transition-all text-lg md:text-sm font-mono" 
-                    />
+                     minLength={16} />
                   </div>
                   {/* Mobile Voice Button */}
                   <button 
@@ -136,7 +136,7 @@ export default function PaymentProcess90() {
                       type="text" 
                       placeholder="MM/YY"
                       className="w-full bg-white border border-emerald-200 md:border-emerald-300 rounded-2xl md:rounded-lg px-5 md:px-3 py-4 md:py-2.5 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 transition-all text-lg md:text-sm font-mono text-center md:text-left" 
-                    />
+                     minLength={5} />
                     {/* Mobile Voice Button */}
                     <button 
                       type="button" 
@@ -156,7 +156,7 @@ export default function PaymentProcess90() {
                       type="text" 
                       placeholder="CVC"
                       className="w-full bg-white border border-emerald-200 md:border-emerald-300 rounded-2xl md:rounded-lg px-5 md:px-3 py-4 md:py-2.5 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 transition-all text-lg md:text-sm font-mono text-center md:text-left" 
-                    />
+                     minLength={3} />
                     {/* Mobile Voice Button */}
                     <button 
                       type="button" 

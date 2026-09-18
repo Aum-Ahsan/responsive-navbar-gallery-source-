@@ -150,7 +150,7 @@ export default function PaymentProcess100() {
                   value={cardNo}
                   onChange={(e) => setCardNo(e.target.value)}
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 focus:outline-none focus:border-fuchsia-500 focus:bg-fuchsia-500/10 transition-all font-mono tracking-widest text-sm text-white" 
-                />
+                 minLength={2} maxLength={50} />
               </div>
               
               <div className="flex gap-4">
@@ -161,7 +161,7 @@ export default function PaymentProcess100() {
                     value={exp}
                     onChange={(e) => setExp(e.target.value)}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 focus:outline-none focus:border-fuchsia-500 focus:bg-fuchsia-500/10 transition-all font-mono tracking-widest text-center text-sm text-white" 
-                  />
+                   minLength={2} maxLength={50} />
                 </div>
                 <div className="space-y-2 relative w-1/2">
                   <label className="text-xs uppercase tracking-widest text-fuchsia-500/80">CVC</label>
@@ -170,14 +170,14 @@ export default function PaymentProcess100() {
                     value={cvv}
                     onChange={(e) => setCvv(e.target.value)}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 focus:outline-none focus:border-fuchsia-500 focus:bg-fuchsia-500/10 transition-all font-mono tracking-widest text-center text-sm text-white" 
-                  />
+                   minLength={3} maxLength={4} />
                 </div>
               </div>
 
               <div className="pt-4">
                 <button type="button" 
                   onClick={(e) => {
-                    const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+                    const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
                     let isValid = true;
                     for (const input of inputs) {
                       if (!input.checkValidity()) {
@@ -232,7 +232,7 @@ export default function PaymentProcess100() {
                   onChange={handleSliderChange}
                   onMouseUp={handleSliderRelease}
                   onTouchEnd={handleSliderRelease}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-grab active:cursor-grabbing z-20" />
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-grab active:cursor-grabbing z-20"  minLength={2} maxLength={50} />
                 
                 {/* Thumb */}
                 <div 

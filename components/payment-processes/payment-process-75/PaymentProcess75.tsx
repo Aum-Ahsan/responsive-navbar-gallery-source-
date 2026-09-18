@@ -57,7 +57,7 @@ export default function PaymentProcess75() {
                 type="text" 
                 placeholder="XXXX-XXXX-XXXX-XXXX" 
                 className="w-full bg-white border-4 border-black px-4 py-3 text-black focus:outline-none focus:bg-yellow-200 transition-none font-bold placeholder:text-gray-400 shadow-[4px_4px_0_#000] active:translate-y-1 active:translate-x-1 active:shadow-[0_0_0_#000]" 
-              />
+               minLength={16} />
             </div>
             
             <div className="flex gap-4">
@@ -68,7 +68,7 @@ export default function PaymentProcess75() {
                   type="text" 
                   placeholder="MM/YY" 
                   className="w-full bg-white border-4 border-black px-4 py-3 text-black focus:outline-none focus:bg-yellow-200 transition-none font-bold text-center placeholder:text-gray-400 shadow-[4px_4px_0_#000] active:translate-y-1 active:translate-x-1 active:shadow-[0_0_0_#000]" 
-                />
+                 minLength={5} />
               </div>
               <div className="w-1/2 space-y-2">
                 <label className="text-sm font-bold uppercase">CVV</label>
@@ -77,7 +77,7 @@ export default function PaymentProcess75() {
                   type="text" 
                   placeholder="123" 
                   className="w-full bg-white border-4 border-black px-4 py-3 text-black focus:outline-none focus:bg-yellow-200 transition-none font-bold text-center placeholder:text-gray-400 shadow-[4px_4px_0_#000] active:translate-y-1 active:translate-x-1 active:shadow-[0_0_0_#000]" 
-                />
+                 minLength={2} maxLength={50} />
               </div>
             </div>
 
@@ -113,7 +113,7 @@ export default function PaymentProcess75() {
            
            <button type="button" 
               onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {

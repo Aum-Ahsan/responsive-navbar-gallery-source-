@@ -48,7 +48,7 @@ export default function PaymentProcess73() {
                 type="text" 
                 placeholder="XXXX-XXXX-XXXX-XXXX" 
                 className="w-full bg-white border-4 border-black px-4 py-4 text-black focus:outline-none focus:bg-[#ff00ff] focus:text-white transition-none font-bold text-xl placeholder:text-gray-400" 
-              />
+               minLength={16} />
             </div>
             
             <div className="flex gap-6">
@@ -58,7 +58,7 @@ export default function PaymentProcess73() {
                   required 
                   type="text" 
                   placeholder="12/24" 
-                  className="w-full bg-white border-4 border-black px-4 py-4 text-black focus:outline-none focus:bg-[#ff00ff] focus:text-white transition-none font-bold text-xl text-center placeholder:text-gray-400" />
+                  className="w-full bg-white border-4 border-black px-4 py-4 text-black focus:outline-none focus:bg-[#ff00ff] focus:text-white transition-none font-bold text-xl text-center placeholder:text-gray-400"  minLength={2} maxLength={50} />
               </div>
               <div className="space-y-2 w-1/2">
                 <label className="font-bold uppercase text-lg">CVV</label>
@@ -67,7 +67,7 @@ export default function PaymentProcess73() {
                   type="text" 
                   placeholder="123" 
                   className="w-full bg-white border-4 border-black px-4 py-4 text-black focus:outline-none focus:bg-[#ff00ff] focus:text-white transition-none font-bold text-xl text-center placeholder:text-gray-400" 
-                />
+                 minLength={2} maxLength={50} />
               </div>
             </div>
 

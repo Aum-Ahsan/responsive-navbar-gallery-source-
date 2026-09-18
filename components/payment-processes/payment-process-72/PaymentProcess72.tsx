@@ -64,7 +64,7 @@ export default function PaymentProcess72() {
                   backgroundColor: '#e0e5ec',
                   boxShadow: 'inset 6px 6px 12px #bec3c9, inset -6px -6px 12px #ffffff'
                 }}
-              />
+               minLength={16} />
             </div>
             
             <div className="flex gap-6">
@@ -77,7 +77,7 @@ export default function PaymentProcess72() {
                   backgroundColor: '#e0e5ec',
                   boxShadow: 'inset 6px 6px 12px #bec3c9, inset -6px -6px 12px #ffffff'
                 }}
-              />
+               minLength={5} />
               <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" 
                 required 
                 type="text" 
@@ -87,7 +87,7 @@ export default function PaymentProcess72() {
                   backgroundColor: '#e0e5ec',
                   boxShadow: 'inset 6px 6px 12px #bec3c9, inset -6px -6px 12px #ffffff'
                 }}
-              />
+               minLength={3} />
             </div>
 
             <button 

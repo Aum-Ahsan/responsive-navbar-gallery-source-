@@ -54,7 +54,7 @@ export default function PaymentProcess77() {
                   type="text" 
                   placeholder="0000 0000 0000 0000" 
                   className="w-full bg-white border-4 border-pink-100 rounded-full pl-14 pr-5 py-4 text-slate-600 focus:outline-none focus:border-pink-300 transition-colors font-bold text-sm placeholder:text-pink-200 shadow-sm" 
-                />
+                 minLength={16} />
               </div>
             </div>
             
@@ -66,7 +66,7 @@ export default function PaymentProcess77() {
                   type="text" 
                   placeholder="MM/YY" 
                   className="w-full bg-white border-4 border-purple-100 rounded-full px-5 py-4 text-slate-600 focus:outline-none focus:border-purple-300 transition-colors font-bold text-center text-sm placeholder:text-purple-200 shadow-sm" 
-                />
+                 minLength={5} />
               </div>
               <div className="w-1/2 space-y-2">
                 <label className="text-xs font-black text-green-300 uppercase tracking-widest pl-4">CVC</label>
@@ -74,7 +74,7 @@ export default function PaymentProcess77() {
                   required 
                   type="text" 
                   placeholder="000" 
-                  className="w-full bg-white border-4 border-green-100 rounded-full px-5 py-4 text-slate-600 focus:outline-none focus:border-green-300 transition-colors font-bold text-center text-sm placeholder:text-green-200 shadow-sm" />
+                  className="w-full bg-white border-4 border-green-100 rounded-full px-5 py-4 text-slate-600 focus:outline-none focus:border-green-300 transition-colors font-bold text-center text-sm placeholder:text-green-200 shadow-sm"  minLength={2} maxLength={50} />
               </div>
             </div>
 

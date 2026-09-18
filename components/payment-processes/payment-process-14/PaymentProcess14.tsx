@@ -119,13 +119,13 @@ export default function PaymentProcess14() {
                 ></div>
 
                 <input required 
-                  type="range" 
+                  type="number" 
                   min={MIN_AMOUNT} 
                   max={MAX_AMOUNT} 
                   value={amount}
                   onChange={(e) => setAmount(Number(e.target.value))}
                   className="w-full absolute z-10 opacity-0 cursor-ew-resize h-full"
-                />
+                 min={1} />
 
                 {/* Custom Thumb */}
                 <div 

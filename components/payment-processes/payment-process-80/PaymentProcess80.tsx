@@ -31,7 +31,7 @@ export default function PaymentProcess80() {
             className={`w-full bg-[#eef1f1] rounded-t-lg border-b-2 px-4 pt-6 pb-2 text-[#191c1d] focus:outline-none transition-colors ${
               focused ? 'border-[#006874] bg-[#e3e8e8]' : 'border-[#6f797a]'
             }`} 
-          />
+           minLength={2} maxLength={50} />
         </div>
       </div>
     );
@@ -114,7 +114,7 @@ export default function PaymentProcess80() {
            
            <button type="button" 
               onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {

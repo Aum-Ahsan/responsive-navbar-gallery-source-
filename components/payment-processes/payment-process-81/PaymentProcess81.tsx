@@ -49,21 +49,7 @@ export default function PaymentProcess81() {
               {/* Mobile FAB to open bottom sheet */}
               <div className="md:hidden fixed bottom-6 left-6 right-6 z-20">
                  <button type="button" 
-                   onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
-      let isValid = true;
-      for (const input of inputs) {
-        if (!input.checkValidity()) {
-          input.reportValidity();
-          isValid = false;
-          break;
-        }
-      }
-      if (!isValid) return;
-      const originalHandler = () => setIsMobileSheetOpen(true);
-      if (typeof originalHandler === 'function') (originalHandler as any)(e);
-      else if (typeof originalHandler === 'object' && originalHandler !== null) { /* ignore event objects */ }
-    }}
+                   onClick={() => setIsMobileSheetOpen(true)}
                    className="w-full bg-black text-white py-4 rounded-full font-bold flex items-center justify-center gap-2 shadow-xl"
                  >
                    Checkout (${TOTAL_AMOUNT.toFixed(2)}) <ChevronUp className="w-5 h-5" />
@@ -116,12 +102,12 @@ export default function PaymentProcess81() {
                 
                 <div className="relative">
                   <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
-                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-white border border-neutral-300 rounded-xl pl-12 pr-4 py-4 focus:outline-none focus:border-black transition-colors font-mono tracking-widest text-sm" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-white border border-neutral-300 rounded-xl pl-12 pr-4 py-4 focus:outline-none focus:border-black transition-colors font-mono tracking-widest text-sm"  minLength={16} />
                 </div>
                 
                 <div className="flex gap-4">
-                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-white border border-neutral-300 rounded-xl px-4 py-4 focus:outline-none focus:border-black transition-colors font-mono tracking-widest text-center text-sm" />
-                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-white border border-neutral-300 rounded-xl px-4 py-4 focus:outline-none focus:border-black transition-colors font-mono tracking-widest text-center text-sm" />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-white border border-neutral-300 rounded-xl px-4 py-4 focus:outline-none focus:border-black transition-colors font-mono tracking-widest text-center text-sm"  minLength={5} />
+                  <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-white border border-neutral-300 rounded-xl px-4 py-4 focus:outline-none focus:border-black transition-colors font-mono tracking-widest text-center text-sm"  minLength={3} />
                 </div>
 
                 <div className="pt-4">
@@ -151,7 +137,7 @@ export default function PaymentProcess81() {
              <p className="text-neutral-500 mb-8 font-medium">Your receipt has been sent to your email address.</p>
              <button type="button" 
                 onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {

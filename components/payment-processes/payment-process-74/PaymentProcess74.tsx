@@ -68,7 +68,7 @@ export default function PaymentProcess74() {
                   placeholder="XXXX-XXXX-XXXX-XXXX" 
                   className="w-full bg-zinc-950 border border-cyan-800 focus:border-cyan-400 pl-12 pr-4 py-3 text-cyan-100 focus:outline-none transition-colors font-mono tracking-widest text-sm placeholder:text-cyan-900 focus:[box-shadow:0_0_15px_rgba(0,255,255,0.3)]" 
                   style={{ clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%)' }}
-                />
+                 minLength={16} />
               </div>
             </div>
             
@@ -80,7 +80,7 @@ export default function PaymentProcess74() {
                   placeholder="MM/YY" 
                   className="w-full bg-zinc-950 border border-cyan-800 focus:border-cyan-400 px-4 py-3 text-cyan-100 focus:outline-none transition-colors font-mono tracking-widest text-center text-sm placeholder:text-cyan-900 focus:[box-shadow:0_0_15px_rgba(0,255,255,0.3)]" 
                   style={{ clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%)' }}
-                />
+                 minLength={5} />
               </div>
               <div className="w-1/2 relative">
                 <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" 
@@ -89,7 +89,7 @@ export default function PaymentProcess74() {
                   placeholder="CVV" 
                   className="w-full bg-zinc-950 border border-cyan-800 focus:border-cyan-400 px-4 py-3 text-cyan-100 focus:outline-none transition-colors font-mono tracking-widest text-center text-sm placeholder:text-cyan-900 focus:[box-shadow:0_0_15px_rgba(0,255,255,0.3)]" 
                   style={{ clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%)' }}
-                />
+                 minLength={3} />
               </div>
             </div>
 

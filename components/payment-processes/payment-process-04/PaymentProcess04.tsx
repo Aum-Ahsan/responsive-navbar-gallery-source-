@@ -95,18 +95,18 @@ export default function PaymentProcess04() {
                   <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition-all">
                     <div className="relative border-b border-slate-200">
                       <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                      <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full pl-11 pr-4 py-3.5 focus:outline-none text-sm font-medium placeholder-slate-400" />
+                      <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full pl-11 pr-4 py-3.5 focus:outline-none text-sm font-medium placeholder-slate-400"  minLength={16} />
                     </div>
                     <div className="flex">
-                      <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM / YY" className="w-1/2 px-4 py-3.5 border-r border-slate-200 focus:outline-none text-sm font-medium placeholder-slate-400" />
-                      <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVC" className="w-1/2 px-4 py-3.5 focus:outline-none text-sm font-medium placeholder-slate-400" />
+                      <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM / YY" className="w-1/2 px-4 py-3.5 border-r border-slate-200 focus:outline-none text-sm font-medium placeholder-slate-400"  minLength={5} />
+                      <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVC" className="w-1/2 px-4 py-3.5 focus:outline-none text-sm font-medium placeholder-slate-400"  minLength={3} />
                     </div>
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Cardholder Name</label>
-                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Full name on card" className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all shadow-sm text-sm font-medium placeholder-slate-400" />
+                  <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Full name on card" className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all shadow-sm text-sm font-medium placeholder-slate-400"  minLength={2} maxLength={50} />
                 </div>
 
                 <div className="bg-blue-50/50 border border-blue-100 rounded-lg p-3 flex gap-3 items-start">

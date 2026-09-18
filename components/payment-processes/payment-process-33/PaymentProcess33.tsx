@@ -121,18 +121,18 @@ export default function PaymentProcess33() {
                  
                   placeholder="0000 0000 0000 0000" 
                   className="w-full bg-transparent pl-16 pr-4 py-4 text-slate-900 focus:outline-none font-mono tracking-widest text-sm" 
-                />
+                 minLength={16} />
               </div>
             </div>
 
             <div className="flex gap-4">
               <div className="w-1/2">
                 <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Expiry</label>
-                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-center text-sm" />
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-center text-sm"  minLength={5} />
               </div>
               <div className="w-1/2">
                 <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">CVV</label>
-                <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" maxLength={cardType === 'amex' ? 4 : 3} placeholder={cardType === 'amex' ? "1234" : "123"} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-center text-sm" />
+                <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" maxLength={cardType === 'amex' ? 4 : 3} placeholder={cardType === 'amex' ? "1234" : "123"} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all font-mono tracking-widest text-center text-sm"  minLength={2} maxLength={50} />
               </div>
             </div>
 

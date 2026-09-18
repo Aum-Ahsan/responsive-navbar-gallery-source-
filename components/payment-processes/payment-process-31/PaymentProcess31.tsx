@@ -111,7 +111,7 @@ export default function PaymentProcess31() {
                     className={`w-full bg-slate-50 border rounded-xl pl-12 pr-10 py-4 focus:outline-none transition-all font-mono tracking-widest text-sm
                       ${errors.cardNumber ? 'border-red-500 text-red-600 bg-red-50 animate-shake focus:ring-1 focus:ring-red-500' : 'border-slate-200 text-slate-900 focus:border-rose-500 focus:ring-1 focus:ring-rose-500'}
                     `} 
-                  />
+                   minLength={16} />
                   {errors.cardNumber && <AlertCircle className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-red-500 animate-in fade-in" />}
                 </div>
                 {errors.cardNumber && <p className="text-red-500 text-xs font-medium mt-2 ml-1 animate-in slide-in-from-top-1">Please enter a valid 16-digit card number.</p>}
@@ -132,7 +132,7 @@ export default function PaymentProcess31() {
                       className={`w-full bg-slate-50 border rounded-xl px-4 py-4 focus:outline-none transition-all font-mono tracking-widest text-center text-sm
                         ${errors.expiry ? 'border-red-500 text-red-600 bg-red-50 animate-shake focus:ring-1 focus:ring-red-500' : 'border-slate-200 text-slate-900 focus:border-rose-500 focus:ring-1 focus:ring-rose-500'}
                       `} 
-                    />
+                     minLength={5} />
                     {errors.expiry && <AlertCircle className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-red-500 animate-in fade-in" />}
                   </div>
                 </div>
@@ -151,7 +151,7 @@ export default function PaymentProcess31() {
                       className={`w-full bg-slate-50 border rounded-xl px-4 py-4 focus:outline-none transition-all font-mono tracking-widest text-center text-sm
                         ${errors.cvv ? 'border-red-500 text-red-600 bg-red-50 animate-shake focus:ring-1 focus:ring-red-500' : 'border-slate-200 text-slate-900 focus:border-rose-500 focus:ring-1 focus:ring-rose-500'}
                       `} 
-                    />
+                     minLength={3} />
                     {errors.cvv && <AlertCircle className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-red-500 animate-in fade-in" />}
                   </div>
                 </div>

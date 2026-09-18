@@ -80,7 +80,7 @@ export default function PaymentProcess19() {
               <ShoppingCart className="w-5 h-5 text-violet-600" /> Checkout
             </h2>
             <button type="button" onClick={(e: any) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {
@@ -119,18 +119,18 @@ export default function PaymentProcess19() {
                     <div className="bg-white border border-slate-200 rounded-xl overflow-hidden focus-within:border-violet-500 focus-within:ring-1 focus-within:ring-violet-500 transition-all shadow-sm">
                       <div className="relative border-b border-slate-200">
                         <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full pl-11 pr-4 py-3 focus:outline-none text-sm font-medium" />
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card number" className="w-full pl-11 pr-4 py-3 focus:outline-none text-sm font-medium"  minLength={16} />
                       </div>
                       <div className="flex">
-                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 px-4 py-3 border-r border-slate-200 focus:outline-none text-sm font-medium" />
-                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVC" className="w-1/2 px-4 py-3 focus:outline-none text-sm font-medium" />
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 px-4 py-3 border-r border-slate-200 focus:outline-none text-sm font-medium"  minLength={5} />
+                        <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVC" className="w-1/2 px-4 py-3 focus:outline-none text-sm font-medium"  minLength={3} />
                       </div>
                     </div>
                   </div>
                   
                   <div>
                     <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Cardholder Name</label>
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Name on card" className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl shadow-sm focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-all text-sm font-medium" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Name on card" className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl shadow-sm focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-all text-sm font-medium"  minLength={2} maxLength={50} />
                   </div>
 
                   <div className="pt-4 mt-8 border-t border-slate-100 flex justify-between items-end mb-6">
@@ -159,7 +159,7 @@ export default function PaymentProcess19() {
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Order Successful!</h3>
                 <p className="text-slate-500 mb-8 px-4">Your order has been placed and is being processed.</p>
                 <button type="button" onClick={(e: any) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {

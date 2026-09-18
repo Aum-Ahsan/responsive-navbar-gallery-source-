@@ -66,7 +66,7 @@ export default function PaymentProcess79() {
                 placeholder="xxxx xxxx xxxx xxxx" 
                 className="w-full bg-white border-2 border-slate-700 px-4 py-3 text-slate-800 focus:outline-none focus:bg-blue-50 transition-none font-bold text-lg placeholder:text-slate-400" 
                 style={{ borderRadius: sketchyBorder }}
-              />
+               minLength={16} />
             </div>
             
             <div className="flex gap-4">
@@ -78,7 +78,7 @@ export default function PaymentProcess79() {
                   placeholder="mm/yy" 
                   className="w-full bg-white border-2 border-slate-700 px-4 py-3 text-slate-800 focus:outline-none focus:bg-blue-50 transition-none font-bold text-center text-lg placeholder:text-slate-400" 
                   style={{ borderRadius: sketchyBorderAlt }}
-                />
+                 minLength={5} />
               </div>
               <div className="space-y-2 w-1/2">
                 <label className="font-bold text-lg inline-block -rotate-2">CVC</label>
@@ -88,7 +88,7 @@ export default function PaymentProcess79() {
                   placeholder="***" 
                   className="w-full bg-white border-2 border-slate-700 px-4 py-3 text-slate-800 focus:outline-none focus:bg-blue-50 transition-none font-bold text-center text-lg placeholder:text-slate-400" 
                   style={{ borderRadius: sketchyBorder }}
-                />
+                 minLength={3} />
               </div>
             </div>
 

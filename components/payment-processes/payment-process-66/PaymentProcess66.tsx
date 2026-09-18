@@ -98,7 +98,7 @@ export default function PaymentProcess66() {
                         checked={isSelected}
                         onChange={(e) => setSelectedTier(tierKey)}
                         className="sr-only"
-                      />
+                       minLength={2} maxLength={50} />
                       <div className="flex items-start gap-4">
                         <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${isSelected ? t.bg + ' ' + t.color : 'bg-stone-800 text-stone-500'}`}>
                           <Icon className="w-5 h-5" />
@@ -124,7 +124,7 @@ export default function PaymentProcess66() {
                                 onChange={(e) => setCustomPledge(e.target.value)}
                                 className="bg-stone-900 border border-stone-600 rounded-md px-3 py-1 text-white focus:outline-none focus:border-white w-24 text-sm font-bold"
                                 onClick={(e) => e.stopPropagation()}
-                              />
+                               min={1} />
                             </div>
                           )}
                         </div>
@@ -158,12 +158,12 @@ export default function PaymentProcess66() {
               
               <div className="relative">
                 <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-500" />
-                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-stone-900 border border-stone-700 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-sm" />
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-stone-900 border border-stone-700 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-sm"  minLength={16} />
               </div>
               
               <div className="flex gap-4">
-                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-stone-900 border border-stone-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-center text-sm" />
-                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-stone-900 border border-stone-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-center text-sm" />
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-stone-900 border border-stone-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-center text-sm"  minLength={5} />
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-stone-900 border border-stone-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-center text-sm"  minLength={3} />
               </div>
 
               <button 

@@ -100,7 +100,7 @@ export default function PaymentProcess34() {
                 ? 'border-emerald-400 focus:border-emerald-500 bg-emerald-50/30'
                 : 'border-slate-200 focus:border-blue-500 hover:border-slate-300'
           }`} 
-        />
+         minLength={2} maxLength={50} />
         
         {/* Status Icons */}
         <div className="absolute right-4 flex items-center">

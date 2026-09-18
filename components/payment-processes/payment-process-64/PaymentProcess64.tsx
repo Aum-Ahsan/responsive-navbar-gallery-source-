@@ -69,7 +69,7 @@ export default function PaymentProcess64() {
                     <h3 className="font-bold text-slate-700 text-sm">Passenger {index + 1}</h3>
                     {passengers.length > 1 && (
                       <button type="button" onClick={(e) => {
-      const inputs = Array.from(document.querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {
@@ -88,8 +88,8 @@ export default function PaymentProcess64() {
                     )}
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Full Legal Name" className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-slate-900 focus:outline-none focus:border-sky-500 text-sm" />
-                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Passport Number" className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-slate-900 focus:outline-none focus:border-sky-500 text-sm" />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Full Legal Name" className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-slate-900 focus:outline-none focus:border-sky-500 text-sm"  minLength={2} maxLength={50} />
+                    <input pattern="[a-zA-Z\\s\\-]+" title="Letters only" required type="text" placeholder="Passport Number" className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-slate-900 focus:outline-none focus:border-sky-500 text-sm"  minLength={2} maxLength={50} />
                   </div>
                 </div>
               ))}
@@ -134,12 +134,12 @@ export default function PaymentProcess64() {
               
               <div className="relative">
                 <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-3 py-3 text-slate-900 focus:outline-none focus:border-sky-500 transition-colors font-mono tracking-widest text-xs" />
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\s]/g, "").substring(0, 19); }} pattern="[\\d\\s]{16,19}" maxLength={19} title="16 digit card number" required type="text" placeholder="Card Number" className="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-3 py-3 text-slate-900 focus:outline-none focus:border-sky-500 transition-colors font-mono tracking-widest text-xs"  minLength={16} />
               </div>
               
               <div className="flex gap-3">
-                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-white border border-slate-200 rounded-xl px-3 py-3 text-slate-900 focus:outline-none focus:border-sky-500 transition-colors font-mono tracking-widest text-center text-xs" />
-                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-white border border-slate-200 rounded-xl px-3 py-3 text-slate-900 focus:outline-none focus:border-sky-500 transition-colors font-mono tracking-widest text-center text-xs" />
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-white border border-slate-200 rounded-xl px-3 py-3 text-slate-900 focus:outline-none focus:border-sky-500 transition-colors font-mono tracking-widest text-center text-xs"  minLength={5} />
+                <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-white border border-slate-200 rounded-xl px-3 py-3 text-slate-900 focus:outline-none focus:border-sky-500 transition-colors font-mono tracking-widest text-center text-xs"  minLength={3} />
               </div>
 
               <button 

@@ -99,7 +99,7 @@ export default function PaymentProcess78() {
                   type="text" 
                   placeholder="XXXX XXXX XXXX XXXX" 
                   className="w-full bg-transparent border-b border-green-900 text-green-500 focus:outline-none focus:border-green-400 transition-colors font-mono placeholder:text-green-900" 
-                />
+                 minLength={16} />
               </div>
             </div>
             
@@ -113,7 +113,7 @@ export default function PaymentProcess78() {
                     type="text" 
                     placeholder="MM/YY" 
                     className="w-full bg-transparent border-b border-green-900 text-green-500 focus:outline-none focus:border-green-400 transition-colors font-mono placeholder:text-green-900" 
-                  />
+                   minLength={5} />
                 </div>
               </div>
               <div className="space-y-1 w-1/2">
@@ -125,7 +125,7 @@ export default function PaymentProcess78() {
                     type="text" 
                     placeholder="***" 
                     className="w-full bg-transparent border-b border-green-900 text-green-500 focus:outline-none focus:border-green-400 transition-colors font-mono placeholder:text-green-900" 
-                  />
+                   minLength={3} />
                 </div>
               </div>
             </div>

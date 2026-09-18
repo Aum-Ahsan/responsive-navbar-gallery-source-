@@ -6,6 +6,7 @@ export default function PaymentProcess86() {
   const TOTAL_AMOUNT = 89.99;
   
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const [sliderValue, setSliderValue] = useState(0);
 
@@ -95,7 +96,12 @@ export default function PaymentProcess86() {
             <div className="pt-6">
               
               {/* DESKTOP: Click to Pay */}
-              <button 
+              {serverError && (
+              <div className="text-red-500 text-sm font-semibold mb-4 text-center bg-red-50 p-3 rounded-xl border border-red-200 animate-in fade-in zoom-in duration-300">
+                {serverError}
+              </div>
+            )}
+            <button 
                 type="submit" 
                 disabled={isProcessing}
                 className="hidden md:flex w-full py-5 bg-blue-600 text-white rounded-xl font-bold text-lg items-center justify-center gap-2 hover:bg-blue-700 transition-all shadow-lg disabled:opacity-70"

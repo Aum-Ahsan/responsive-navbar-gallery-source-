@@ -5,6 +5,7 @@ export default function PaymentProcess78() {
   const TOTAL_AMOUNT = 1337.00;
   
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const [log, setLog] = useState<string[]>([]);
   const [booted, setBooted] = useState(false);
@@ -33,7 +34,26 @@ export default function PaymentProcess78() {
 
   const handlePay = (e: React.FormEvent) => {
     e.preventDefault();
+    const container = e.currentTarget.closest('.w-full') || document;
+    const inputs = Array.from(container.querySelectorAll('input')).filter((i: any) => i.offsetParent !== null);
+    let isValid = true;
+    for (const input of inputs) {
+      if (!input.value.trim() && input.hasAttribute('required')) {
+        alert("Please fill all columns");
+        input.focus();
+        isValid = false;
+        break;
+      }
+      if (!input.checkValidity()) {
+        input.reportValidity();
+        isValid = false;
+        break;
+      }
+    }
+    if (!isValid) return;
+
     setIsProcessing(true);
+    setServerError(null);
     
     const processingSequence = [
       "> ./execute_payment.sh",

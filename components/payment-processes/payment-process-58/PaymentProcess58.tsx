@@ -1,91 +1,51 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { CreditCard, ArrowRight, CheckCircle2, ShoppingBag, X } from "lucide-react";
-
-const SOCIAL_PROOFS = [
-  { name: "Sarah J.", location: "New York, NY", time: "2 mins ago" },
-  { name: "Michael T.", location: "London, UK", time: "5 mins ago" },
-  { name: "Jessica R.", location: "Austin, TX", time: "just now" },
-  { name: "David L.", location: "Sydney, AU", time: "12 mins ago" },
-];
+import React, { useState } from "react";
+import { CreditCard, ArrowRight, CheckCircle2 } from "lucide-react";
 
 export default function PaymentProcess58() {
   const TOTAL_AMOUNT = 89.99;
   
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
-  
-  const [currentProofIndex, setCurrentProofIndex] = useState(-1);
-  const [showProof, setShowProof] = useState(false);
-
-  // Social Proof Logic
-  useEffect(() => {
-    if (isSuccess || isProcessing) {
-      setShowProof(false);
-      return;
-    }
-
-    const interval = setInterval(() => {
-      // Pick a random proof
-      const randIdx = Math.floor(Math.random() * SOCIAL_PROOFS.length);
-      setCurrentProofIndex(randIdx);
-      setShowProof(true);
-      
-      // Hide after 4 seconds
-      setTimeout(() => {
-        setShowProof(false);
-      }, 4000);
-      
-    }, 8000); // Trigger every 8 seconds
-
-    // Initial trigger after 2 seconds
-    const initial = setTimeout(() => {
-      setCurrentProofIndex(0);
-      setShowProof(true);
-      setTimeout(() => setShowProof(false), 4000);
-    }, 2000);
-
-    return () => {
-      clearInterval(interval);
-      clearTimeout(initial);
-    };
-  }, [isSuccess, isProcessing]);
 
   const handlePay = (e: React.FormEvent) => {
     e.preventDefault();
+    const container = e.currentTarget.closest('.w-full') || document;
+    const inputs = Array.from(container.querySelectorAll('input')).filter((i: any) => i.offsetParent !== null);
+    let isValid = true;
+    for (const input of inputs) {
+      if (!input.value.trim() && input.hasAttribute('required')) {
+        alert("Please fill all columns");
+        input.focus();
+        isValid = false;
+        break;
+      }
+      if (!input.checkValidity()) {
+        input.reportValidity();
+        isValid = false;
+        break;
+      }
+    }
+    if (!isValid) return;
+
     setIsProcessing(true);
+    setServerError(null);
     setTimeout(() => {
+      // Simulate server-side validation rejection
+      if (Math.random() < 0.3) {
+        setServerError("Payment declined by the server. Please check your details and try again.");
+        setIsProcessing(false);
+        return;
+      }
       setIsProcessing(false);
       setIsSuccess(true);
     }, 2000);
   };
 
-  const proof = currentProofIndex >= 0 ? SOCIAL_PROOFS[currentProofIndex] : null;
-
   return (
     <div className="w-full min-h-[700px] bg-sky-950 flex items-center justify-center font-sans p-6 text-slate-100 overflow-hidden relative">
       
-      {/* Social Proof Toast (Bottom Left Fixed) */}
-      <div className={`fixed bottom-6 left-6 z-50 transition-all duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] ${
-        showProof && proof ? 'translate-x-0 opacity-100' : '-translate-x-[120%] opacity-0'
-      }`}>
-        <div className="bg-white text-slate-900 rounded-2xl shadow-2xl p-4 pr-10 border border-slate-200 flex items-center gap-4 relative">
-          <button type="button" onClick={() => setShowProof(false)} className="absolute top-2 right-2 text-slate-400 hover:text-slate-600">
-            <X className="w-4 h-4" />
-          </button>
-          
-          <div className="w-12 h-12 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center shrink-0">
-            <ShoppingBag className="w-6 h-6" />
-          </div>
-          <div>
-            <p className="text-sm">
-              <span className="font-bold text-slate-900">{proof?.name}</span> from <span className="font-medium text-slate-700">{proof?.location}</span>
-            </p>
-            <p className="text-xs text-sky-600 font-bold mt-0.5">Purchased this item {proof?.time}</p>
-          </div>
-        </div>
-      </div>
-
       {!isSuccess ? (
         <div className="max-w-md w-full bg-slate-900 rounded-3xl p-8 shadow-2xl border border-slate-800 relative z-10 animate-in fade-in duration-500">
           
@@ -126,6 +86,11 @@ export default function PaymentProcess58() {
               <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-slate-950 border border-slate-800 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors font-mono tracking-widest text-center text-sm"  minLength={3} />
             </div>
 
+            {serverError && (
+              <div className="text-red-500 text-sm font-semibold mb-4 text-center bg-red-50 p-3 rounded-xl border border-red-200 animate-in fade-in zoom-in duration-300">
+                {serverError}
+              </div>
+            )}
             <button 
               type="submit" 
               disabled={isProcessing}
@@ -151,7 +116,7 @@ export default function PaymentProcess58() {
            <p className="text-slate-400 mb-8 font-medium">You got it just in time.</p>
            
            <button type="button" 
-              onClick={() => { setIsSuccess(false); setShowProof(false); }}
+              onClick={() => { setIsSuccess(false); }}
               className="w-full py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl transition-colors"
             >
               Back to Store

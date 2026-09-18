@@ -11,6 +11,7 @@ export default function PaymentProcess83() {
   const [completedSteps, setCompletedSteps] = useState<Step[]>([]);
   
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const nextStep = (step: Step) => {
@@ -20,8 +21,33 @@ export default function PaymentProcess83() {
 
   const handlePay = (e: React.FormEvent) => {
     e.preventDefault();
+    const container = e.currentTarget.closest('.w-full') || document;
+    const inputs = Array.from(container.querySelectorAll('input')).filter((i: any) => i.offsetParent !== null);
+    let isValid = true;
+    for (const input of inputs) {
+      if (!input.value.trim() && input.hasAttribute('required')) {
+        alert("Please fill all columns");
+        input.focus();
+        isValid = false;
+        break;
+      }
+      if (!input.checkValidity()) {
+        input.reportValidity();
+        isValid = false;
+        break;
+      }
+    }
+    if (!isValid) return;
+
     setIsProcessing(true);
+    setServerError(null);
     setTimeout(() => {
+      // Simulate server-side validation rejection
+      if (Math.random() < 0.3) {
+        setServerError("Payment declined by the server. Please check your details and try again.");
+        setIsProcessing(false);
+        return;
+      }
       setIsProcessing(false);
       setIsSuccess(true);
     }, 2000);
@@ -229,7 +255,12 @@ export default function PaymentProcess83() {
                     <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\/]/g, "").substring(0, 5); }} pattern="(0[1-9]|1[0-2])\\/?([0-9]{2})" maxLength={5} title="Format: MM/YY" required type="text" placeholder="MM/YY" className="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 focus:outline-none focus:border-blue-500 transition-colors font-mono tracking-widest text-center text-sm"  minLength={5} />
                     <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 focus:outline-none focus:border-blue-500 transition-colors font-mono tracking-widest text-center text-sm"  minLength={3} />
                   </div>
-                  <button 
+                  {serverError && (
+              <div className="text-red-500 text-sm font-semibold mb-4 text-center bg-red-50 p-3 rounded-xl border border-red-200 animate-in fade-in zoom-in duration-300">
+                {serverError}
+              </div>
+            )}
+            <button 
                     type="submit" 
                     disabled={isProcessing}
                     className="w-full py-5 mt-4 bg-slate-900 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-slate-800 transition-all shadow-lg disabled:opacity-70"

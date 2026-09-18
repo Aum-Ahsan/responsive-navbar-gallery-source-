@@ -7,6 +7,7 @@ export default function PaymentProcess97() {
   
   const [isListening, setIsListening] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   
   const [transcript, setTranscript] = useState("Tap the microphone to authorize payment.");

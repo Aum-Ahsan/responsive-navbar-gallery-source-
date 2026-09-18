@@ -9,6 +9,7 @@ export default function PaymentProcess45() {
   const [splitAmount, setSplitAmount] = useState(TOTAL_AMOUNT / 2); // Amount for Card 1
   
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const amount1 = isSplit ? splitAmount : TOTAL_AMOUNT;
@@ -16,8 +17,33 @@ export default function PaymentProcess45() {
 
   const handlePay = (e: React.FormEvent) => {
     e.preventDefault();
+    const container = e.currentTarget.closest('.w-full') || document;
+    const inputs = Array.from(container.querySelectorAll('input')).filter((i: any) => i.offsetParent !== null);
+    let isValid = true;
+    for (const input of inputs) {
+      if (!input.value.trim() && input.hasAttribute('required')) {
+        alert("Please fill all columns");
+        input.focus();
+        isValid = false;
+        break;
+      }
+      if (!input.checkValidity()) {
+        input.reportValidity();
+        isValid = false;
+        break;
+      }
+    }
+    if (!isValid) return;
+
     setIsProcessing(true);
+    setServerError(null);
     setTimeout(() => {
+      // Simulate server-side validation rejection
+      if (Math.random() < 0.3) {
+        setServerError("Payment declined by the server. Please check your details and try again.");
+        setIsProcessing(false);
+        return;
+      }
       setIsProcessing(false);
       setIsSuccess(true);
     }, 2000);
@@ -60,7 +86,7 @@ export default function PaymentProcess45() {
                     setIsSplit(e.target.checked);
                     if (e.target.checked) setSplitAmount(TOTAL_AMOUNT / 2);
                   }}
-                 min={1} />
+                 />
                 <div className="w-14 h-7 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-emerald-500 shadow-inner"></div>
               </label>
             </div>
@@ -80,7 +106,7 @@ export default function PaymentProcess45() {
                   value={splitAmount}
                   onChange={(e) => setSplitAmount(Number(e.target.value))}
                   className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-500"
-                 min={1} />
+                 />
               </div>
             </div>
 
@@ -117,6 +143,11 @@ export default function PaymentProcess45() {
 
             </div>
 
+            {serverError && (
+              <div className="text-red-500 text-sm font-semibold mb-4 text-center bg-red-50 p-3 rounded-xl border border-red-200 animate-in fade-in zoom-in duration-300">
+                {serverError}
+              </div>
+            )}
             <button 
               type="submit" 
               disabled={isProcessing}

@@ -9,6 +9,7 @@ export default function PaymentProcess95() {
   
   const [isPlaying, setIsPlaying] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   
   const [score, setScore] = useState(0);
@@ -73,7 +74,14 @@ export default function PaymentProcess95() {
   const handlePay = () => {
     if (!allHit) return;
     setIsProcessing(true);
+    setServerError(null);
     setTimeout(() => {
+      // Simulate server-side validation rejection
+      if (Math.random() < 0.3) {
+        setServerError("Payment declined by the server. Please check your details and try again.");
+        setIsProcessing(false);
+        return;
+      }
       setIsProcessing(false);
       setIsSuccess(true);
     }, 2000);

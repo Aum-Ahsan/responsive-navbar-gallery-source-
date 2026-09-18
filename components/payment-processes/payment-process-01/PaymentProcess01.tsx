@@ -5,6 +5,7 @@ import { Check, CreditCard, User, MapPin, Shield, ChevronRight, ChevronLeft } fr
 export default function PaymentProcess01() {
   const [step, setStep] = useState(1);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
 
   // Form State
@@ -23,7 +24,14 @@ export default function PaymentProcess01() {
 
   const handlePay = () => {
     setIsProcessing(true);
+    setServerError(null);
     setTimeout(() => {
+      // Simulate server-side validation rejection
+      if (Math.random() < 0.3) {
+        setServerError("Payment declined by the server. Please check your details and try again.");
+        setIsProcessing(false);
+        return;
+      }
       setIsProcessing(false);
       setIsSuccess(true);
     }, 2000);

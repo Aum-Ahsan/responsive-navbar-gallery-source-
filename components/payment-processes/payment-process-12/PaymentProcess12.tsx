@@ -6,6 +6,7 @@ export default function PaymentProcess12() {
   const [swipeProgress, setSwipeProgress] = useState(0); // 0 to 1
   const [isSwiping, setIsSwiping] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const thumbRef = useRef<HTMLDivElement>(null);
@@ -56,6 +57,12 @@ export default function PaymentProcess12() {
   const processPayment = () => {
     setIsProcessing(true);
     setTimeout(() => {
+      // Simulate server-side validation rejection
+      if (Math.random() < 0.3) {
+        setServerError("Payment declined by the server. Please check your details and try again.");
+        setIsProcessing(false);
+        return;
+      }
       setIsProcessing(false);
       setIsSuccess(true);
     }, 2000);

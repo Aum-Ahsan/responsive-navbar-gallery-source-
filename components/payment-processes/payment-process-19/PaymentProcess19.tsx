@@ -5,12 +5,38 @@ import { ShoppingCart, X, CreditCard, ChevronRight, Check } from "lucide-react";
 export default function PaymentProcess19() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const handlePay = (e: React.FormEvent) => {
     e.preventDefault();
+    const container = e.currentTarget.closest('.w-full') || document;
+    const inputs = Array.from(container.querySelectorAll('input')).filter((i: any) => i.offsetParent !== null);
+    let isValid = true;
+    for (const input of inputs) {
+      if (!input.value.trim() && input.hasAttribute('required')) {
+        alert("Please fill all columns");
+        input.focus();
+        isValid = false;
+        break;
+      }
+      if (!input.checkValidity()) {
+        input.reportValidity();
+        isValid = false;
+        break;
+      }
+    }
+    if (!isValid) return;
+
     setIsProcessing(true);
+    setServerError(null);
     setTimeout(() => {
+      // Simulate server-side validation rejection
+      if (Math.random() < 0.3) {
+        setServerError("Payment declined by the server. Please check your details and try again.");
+        setIsProcessing(false);
+        return;
+      }
       setIsProcessing(false);
       setIsSuccess(true);
     }, 2000);
@@ -80,7 +106,7 @@ export default function PaymentProcess19() {
               <ShoppingCart className="w-5 h-5 text-violet-600" /> Checkout
             </h2>
             <button type="button" onClick={(e: any) => {
-      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from<HTMLInputElement>((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {
@@ -138,7 +164,12 @@ export default function PaymentProcess19() {
                     <span className="text-3xl font-black text-slate-900">$299.00</span>
                   </div>
 
-                  <button 
+                  {serverError && (
+              <div className="text-red-500 text-sm font-semibold mb-4 text-center bg-red-50 p-3 rounded-xl border border-red-200 animate-in fade-in zoom-in duration-300">
+                {serverError}
+              </div>
+            )}
+            <button 
                     type="submit" 
                     disabled={isProcessing}
                     className="w-full py-4 bg-violet-600 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-violet-700 transition-all shadow-lg shadow-violet-600/30 disabled:opacity-70 disabled:shadow-none"
@@ -159,7 +190,7 @@ export default function PaymentProcess19() {
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Order Successful!</h3>
                 <p className="text-slate-500 mb-8 px-4">Your order has been placed and is being processed.</p>
                 <button type="button" onClick={(e: any) => {
-      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from<HTMLInputElement>((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {

@@ -19,6 +19,7 @@ export default function PaymentProcess92() {
   const [inputValue, setInputValue] = useState("");
   const [step, setStep] = useState(1); // 1 = card, 2 = exp, 3 = cvv, 4 = done
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);

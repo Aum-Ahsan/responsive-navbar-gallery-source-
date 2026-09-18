@@ -5,6 +5,7 @@ import { ArrowRight, ShoppingBag, Trash2, CheckCircle2 } from "lucide-react";
 export default function PaymentProcess24() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const [items, setItems] = useState([
     { id: 1, name: "Minimalist Desk Lamp", price: 89.00, qty: 1, img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=150&q=80" },
@@ -21,7 +22,14 @@ export default function PaymentProcess24() {
 
   const handlePay = () => {
     setIsProcessing(true);
+    setServerError(null);
     setTimeout(() => {
+      // Simulate server-side validation rejection
+      if (Math.random() < 0.3) {
+        setServerError("Payment declined by the server. Please check your details and try again.");
+        setIsProcessing(false);
+        return;
+      }
       setIsProcessing(false);
       setIsSuccess(true);
     }, 2000);
@@ -122,7 +130,12 @@ export default function PaymentProcess24() {
                 </div>
               </div>
 
-              <button type="button" 
+              {serverError && (
+              <div className="text-red-500 text-sm font-semibold mb-4 text-center bg-red-50 p-3 rounded-xl border border-red-200 animate-in fade-in zoom-in duration-300">
+                {serverError}
+              </div>
+            )}
+            <button type="button" 
                 onClick={handlePay}
                 disabled={isProcessing}
                 className="w-full py-5 bg-neutral-900 text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-neutral-800 hover:shadow-xl transition-all hover:-translate-y-1 disabled:opacity-70 disabled:hover:translate-y-0 disabled:hover:shadow-none"

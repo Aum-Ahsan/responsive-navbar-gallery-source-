@@ -12,13 +12,14 @@ export default function PaymentProcess66() {
   const [customPledge, setCustomPledge] = useState<string>('');
   
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const tiers = {
     none: { name: 'Pledge without a reward', min: 1, icon: HeartHandshake, color: 'text-slate-500', bg: 'bg-slate-100', border: 'border-slate-200' },
-    backer: { name: 'Early Backer', min: 25, desc: 'Get the product at 50% off MSRP.', icon: Rocket, color: 'text-emerald-500', bg: 'bg-emerald-50', border: 'border-emerald-200' },
-    super: { name: 'Super Backer', min: 75, desc: 'Product + Exclusive T-Shirt & Stickers.', icon: Zap, color: 'text-violet-500', bg: 'bg-violet-50', border: 'border-violet-200' },
-    vip: { name: 'VIP Founder', min: 250, desc: 'All rewards + Name in credits + Beta Access.', icon: Crown, color: 'text-amber-500', bg: 'bg-amber-50', border: 'border-amber-200' },
+    backer: { name: 'Early Backer', min:1 , desc: 'Get the product at 50% off MSRP.', icon: Rocket, color: 'text-emerald-500', bg: 'bg-emerald-50', border: 'border-emerald-200' },
+    super: { name: 'Super Backer', min: 1, desc: 'Product + Exclusive T-Shirt & Stickers.', icon: Zap, color: 'text-violet-500', bg: 'bg-violet-50', border: 'border-violet-200' },
+    vip: { name: 'VIP Founder', min:1 , desc: 'All rewards + Name in credits + Beta Access.', icon: Crown, color: 'text-amber-500', bg: 'bg-amber-50', border: 'border-amber-200' },
   };
 
   let pledgeAmount = 0;
@@ -30,12 +31,37 @@ export default function PaymentProcess66() {
 
   const handlePay = (e: React.FormEvent) => {
     e.preventDefault();
+    const container = e.currentTarget.closest('.w-full') || document;
+    const inputs = Array.from(container.querySelectorAll('input')).filter((i: any) => i.offsetParent !== null);
+    let isValid = true;
+    for (const input of inputs) {
+      if (!input.value.trim() && input.hasAttribute('required')) {
+        alert("Please fill all columns");
+        input.focus();
+        isValid = false;
+        break;
+      }
+      if (!input.checkValidity()) {
+        input.reportValidity();
+        isValid = false;
+        break;
+      }
+    }
+    if (!isValid) return;
+
     if (pledgeAmount < 1) {
       alert("Please pledge at least $1");
       return;
     }
     setIsProcessing(true);
+    setServerError(null);
     setTimeout(() => {
+      // Simulate server-side validation rejection
+      if (Math.random() < 0.3) {
+        setServerError("Payment declined by the server. Please check your details and try again.");
+        setIsProcessing(false);
+        return;
+      }
       setIsProcessing(false);
       setIsSuccess(true);
     }, 2000);
@@ -110,7 +136,7 @@ export default function PaymentProcess66() {
                               {tierKey === 'none' ? 'Custom' : `$${t.min}+`}
                             </span>
                           </div>
-                          {t.desc && <p className="text-xs text-stone-400">{t.desc}</p>}
+                          {t.name && <p className="text-xs text-stone-400">{t.name}</p>}
                           
                           {/* Custom Input for 'none' */}
                           {tierKey === 'none' && isSelected && (
@@ -124,7 +150,7 @@ export default function PaymentProcess66() {
                                 onChange={(e) => setCustomPledge(e.target.value)}
                                 className="bg-stone-900 border border-stone-600 rounded-md px-3 py-1 text-white focus:outline-none focus:border-white w-24 text-sm font-bold"
                                 onClick={(e) => e.stopPropagation()}
-                               min={1} />
+                               />
                             </div>
                           )}
                         </div>
@@ -166,7 +192,12 @@ export default function PaymentProcess66() {
                 <input onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "").substring(0, 4); }} pattern="\\d{3,4}" maxLength={4} title="3 or 4 digit CVV/CVC" required type="text" placeholder="CVV" className="w-1/2 bg-stone-900 border border-stone-700 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-emerald-500 transition-colors font-mono tracking-widest text-center text-sm"  minLength={3} />
               </div>
 
-              <button 
+              {serverError && (
+              <div className="text-red-500 text-sm font-semibold mb-4 text-center bg-red-50 p-3 rounded-xl border border-red-200 animate-in fade-in zoom-in duration-300">
+                {serverError}
+              </div>
+            )}
+            <button 
                 type="submit" 
                 disabled={isProcessing || pledgeAmount < 1}
                 className="w-full py-5 mt-4 bg-emerald-600 text-white rounded-xl font-black text-lg flex items-center justify-center gap-2 hover:bg-emerald-500 transition-all shadow-[0_10px_20px_rgba(16,185,129,0.2)] disabled:opacity-70 disabled:shadow-none uppercase tracking-wider"

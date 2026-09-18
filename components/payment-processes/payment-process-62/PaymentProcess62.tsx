@@ -35,6 +35,7 @@ export default function PaymentProcess62() {
   const [selectedSeats, setSelectedSeats] = useState<Seat[]>([]);
   
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const toggleSeat = (seat: Seat) => {
@@ -53,8 +54,33 @@ export default function PaymentProcess62() {
 
   const handlePay = (e: React.FormEvent) => {
     e.preventDefault();
+    const container = e.currentTarget.closest('.w-full') || document;
+    const inputs = Array.from(container.querySelectorAll('input')).filter((i: any) => i.offsetParent !== null);
+    let isValid = true;
+    for (const input of inputs) {
+      if (!input.value.trim() && input.hasAttribute('required')) {
+        alert("Please fill all columns");
+        input.focus();
+        isValid = false;
+        break;
+      }
+      if (!input.checkValidity()) {
+        input.reportValidity();
+        isValid = false;
+        break;
+      }
+    }
+    if (!isValid) return;
+
     setIsProcessing(true);
+    setServerError(null);
     setTimeout(() => {
+      // Simulate server-side validation rejection
+      if (Math.random() < 0.3) {
+        setServerError("Payment declined by the server. Please check your details and try again.");
+        setIsProcessing(false);
+        return;
+      }
       setIsProcessing(false);
       setIsSuccess(true);
     }, 2000);
@@ -182,7 +208,12 @@ export default function PaymentProcess62() {
               </div>
 
               <div className="pt-2">
-                <button 
+                {serverError && (
+              <div className="text-red-500 text-sm font-semibold mb-4 text-center bg-red-50 p-3 rounded-xl border border-red-200 animate-in fade-in zoom-in duration-300">
+                {serverError}
+              </div>
+            )}
+            <button 
                   type="submit" 
                   disabled={isProcessing || selectedSeats.length === 0}
                   className="w-full py-5 bg-rose-600 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-rose-500 transition-colors shadow-[0_0_20px_rgba(225,29,72,0.3)] disabled:opacity-50 disabled:shadow-none"

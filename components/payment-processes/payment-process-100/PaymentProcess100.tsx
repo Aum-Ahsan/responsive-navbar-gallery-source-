@@ -7,6 +7,7 @@ export default function PaymentProcess100() {
   
   const [step, setStep] = useState(0); // 0: Start, 1: Enter Details, 2: Swipe/Auth, 3: Success
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   
   const [cardNo, setCardNo] = useState("");
   const [exp, setExp] = useState("");

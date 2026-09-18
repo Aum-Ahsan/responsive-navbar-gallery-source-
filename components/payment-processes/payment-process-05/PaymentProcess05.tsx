@@ -5,6 +5,7 @@ import { ChevronDown, ShoppingCart, CreditCard, Apple, Check, Fingerprint } from
 export default function PaymentProcess05() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const [activeTab, setActiveTab] = useState<'card' | 'apple'>('apple');
 
@@ -12,7 +13,14 @@ export default function PaymentProcess05() {
 
   const handlePay = () => {
     setIsProcessing(true);
+    setServerError(null);
     setTimeout(() => {
+      // Simulate server-side validation rejection
+      if (Math.random() < 0.3) {
+        setServerError("Payment declined by the server. Please check your details and try again.");
+        setIsProcessing(false);
+        return;
+      }
       setIsProcessing(false);
       setIsSuccess(true);
     }, 2000);

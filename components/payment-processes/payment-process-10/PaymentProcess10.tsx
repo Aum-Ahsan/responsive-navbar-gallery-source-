@@ -4,13 +4,39 @@ import { CheckCircle, ShieldCheck, Truck, Lock, User, MapPin, CreditCard, Apple 
 
 export default function PaymentProcess10() {
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'apple'>('card');
 
   const handlePay = (e: React.FormEvent) => {
     e.preventDefault();
+    const container = e.currentTarget.closest('.w-full') || document;
+    const inputs = Array.from(container.querySelectorAll('input')).filter((i: any) => i.offsetParent !== null);
+    let isValid = true;
+    for (const input of inputs) {
+      if (!input.value.trim() && input.hasAttribute('required')) {
+        alert("Please fill all columns");
+        input.focus();
+        isValid = false;
+        break;
+      }
+      if (!input.checkValidity()) {
+        input.reportValidity();
+        isValid = false;
+        break;
+      }
+    }
+    if (!isValid) return;
+
     setIsProcessing(true);
+    setServerError(null);
     setTimeout(() => {
+      // Simulate server-side validation rejection
+      if (Math.random() < 0.3) {
+        setServerError("Payment declined by the server. Please check your details and try again.");
+        setIsProcessing(false);
+        return;
+      }
       setIsProcessing(false);
       setIsSuccess(true);
     }, 2000);
@@ -36,7 +62,7 @@ export default function PaymentProcess10() {
             </div>
           </div>
           <button type="button" onClick={(e: any) => {
-      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from<HTMLInputElement>((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {
@@ -173,7 +199,7 @@ export default function PaymentProcess10() {
                 {/* Header: Tabs */}
                 <div className="flex border-b border-gray-200">
                   <button type="button" onClick={(e: any) => {
-      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from<HTMLInputElement>((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {
@@ -232,7 +258,12 @@ export default function PaymentProcess10() {
 
             {/* Mobile Submit Button (hidden on desktop) */}
             <div className="block lg:hidden mt-8">
-              <button type="submit" disabled={isProcessing} className="w-full py-5 bg-indigo-600 text-white rounded-2xl font-bold text-xl flex items-center justify-center gap-3 shadow-xl shadow-indigo-600/30 hover:-translate-y-1 transition-all disabled:opacity-70 disabled:hover:translate-y-0">
+              {serverError && (
+              <div className="text-red-500 text-sm font-semibold mb-4 text-center bg-red-50 p-3 rounded-xl border border-red-200 animate-in fade-in zoom-in duration-300">
+                {serverError}
+              </div>
+            )}
+            <button type="submit" disabled={isProcessing} className="w-full py-5 bg-indigo-600 text-white rounded-2xl font-bold text-xl flex items-center justify-center gap-3 shadow-xl shadow-indigo-600/30 hover:-translate-y-1 transition-all disabled:opacity-70 disabled:hover:translate-y-0">
                 {isProcessing ? 'Processing...' : 'Pay $215.00'} <Lock className="w-5 h-5" />
               </button>
             </div>
@@ -296,7 +327,7 @@ export default function PaymentProcess10() {
             <div className="hidden lg:block">
               <button type="button" 
                 onClick={(e: any) => {
-      const inputs = Array.from((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
+      const inputs = Array.from<HTMLInputElement>((e.currentTarget.closest('.w-full') || document).querySelectorAll('input')).filter(i => i.offsetParent !== null);
       let isValid = true;
       for (const input of inputs) {
         if (!input.checkValidity()) {

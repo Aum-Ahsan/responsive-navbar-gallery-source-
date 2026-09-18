@@ -6,6 +6,7 @@ export default function PaymentProcess91() {
   const TOTAL_AMOUNT = 150.00;
   
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -30,9 +31,15 @@ export default function PaymentProcess91() {
     if (data === "payment_token") {
       setIsProcessing(true);
       setTimeout(() => {
+      // Simulate server-side validation rejection
+      if (Math.random() < 0.3) {
+        setServerError("Payment declined by the server. Please check your details and try again.");
         setIsProcessing(false);
-        setIsSuccess(true);
-      }, 2000);
+        return;
+      }
+      setIsProcessing(false);
+      setIsSuccess(true);
+    }, 2000);
     }
   };
 

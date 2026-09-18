@@ -5,6 +5,7 @@ import { CreditCard, Lock, CheckCircle2, ShoppingBag, ArrowRight } from "lucide-
 export default function PaymentProcess13() {
   const [isHolding, setIsHolding] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   
   const holdTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -37,6 +38,12 @@ export default function PaymentProcess13() {
   const processPayment = () => {
     setIsProcessing(true);
     setTimeout(() => {
+      // Simulate server-side validation rejection
+      if (Math.random() < 0.3) {
+        setServerError("Payment declined by the server. Please check your details and try again.");
+        setIsProcessing(false);
+        return;
+      }
       setIsProcessing(false);
       setIsSuccess(true);
     }, 2000);
@@ -101,7 +108,12 @@ export default function PaymentProcess13() {
               <div className="relative flex justify-center">
                 
                 {/* Hold to Confirm Button */}
-                <button type="button"
+                {serverError && (
+              <div className="text-red-500 text-sm font-semibold mb-4 text-center bg-red-50 p-3 rounded-xl border border-red-200 animate-in fade-in zoom-in duration-300">
+                {serverError}
+              </div>
+            )}
+            <button type="button"
                   onPointerDown={startHold}
                   onPointerUp={endHold}
                   onPointerLeave={endHold}

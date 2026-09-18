@@ -5,6 +5,7 @@ import { ChevronRight, ChevronLeft, CheckCircle2, ShoppingBag, MapPin, CreditCar
 export default function PaymentProcess09() {
   const [slide, setSlide] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const totalSlides = 3; // 0: Cart, 1: Shipping, 2: Payment
@@ -19,7 +20,26 @@ export default function PaymentProcess09() {
 
   const handlePay = (e: React.FormEvent) => {
     e.preventDefault();
+    const container = e.currentTarget.closest('.w-full') || document;
+    const inputs = Array.from(container.querySelectorAll('input')).filter((i: any) => i.offsetParent !== null);
+    let isValid = true;
+    for (const input of inputs) {
+      if (!input.value.trim() && input.hasAttribute('required')) {
+        alert("Please fill all columns");
+        input.focus();
+        isValid = false;
+        break;
+      }
+      if (!input.checkValidity()) {
+        input.reportValidity();
+        isValid = false;
+        break;
+      }
+    }
+    if (!isValid) return;
+
     setIsProcessing(true);
+    setServerError(null);
     setTimeout(() => {
       setIsProcessing(false);
       setIsSuccess(true);
@@ -182,7 +202,12 @@ export default function PaymentProcess09() {
                   <button type="button" onClick={prevSlide} className="px-6 py-4 text-white/50 hover:text-white font-bold flex items-center gap-2 transition-colors">
                     <ChevronLeft className="w-5 h-5" /> Back
                   </button>
-                  <button type="submit" disabled={isProcessing} className="px-10 py-4 bg-indigo-500 text-white rounded-full font-bold flex items-center gap-2 hover:scale-105 transition-transform shadow-lg shadow-indigo-500/20 disabled:opacity-50 disabled:scale-100">
+                  {serverError && (
+              <div className="text-red-500 text-sm font-semibold mb-4 text-center bg-red-50 p-3 rounded-xl border border-red-200 animate-in fade-in zoom-in duration-300">
+                {serverError}
+              </div>
+            )}
+            <button type="submit" disabled={isProcessing} className="px-10 py-4 bg-indigo-500 text-white rounded-full font-bold flex items-center gap-2 hover:scale-105 transition-transform shadow-lg shadow-indigo-500/20 disabled:opacity-50 disabled:scale-100">
                     {isProcessing ? 'Processing...' : 'Pay $598.00'}
                   </button>
                 </div>
